@@ -8,19 +8,12 @@ import GlobalStyle from './components/GlobalStyle';
 import Home from './components/Home';
 import Nav from './components/Nav';
 import Pokemon from './components/Pokemon';
-// Images
-import screenshotBackground from './screenshot.jpg';
 
 const App = () => {
   return (
     <StyledApp>
       <GlobalStyle />
       <Nav />
-      <img
-        className="background-image"
-        src={screenshotBackground}
-        alt="background"
-      />
       <Switch>
         <Route path="/" exact>
           <Home />
@@ -36,18 +29,6 @@ const App = () => {
 // Styled components
 const StyledApp = styled.div`
   position: relative;
-
-  .background-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    filter: brightness(0.8);
-    z-index: -1;
-    min-height: 90vh;
-    object-fit: cover;
-  }
 `;
 
 export default App;
