@@ -6,9 +6,7 @@ const Home = () => {
   return (
     <StyledHome>
       <div className="content-container">
-        <p>
-          A preconfigured React environment, with the following ready to go:
-        </p>
+        <p>A modern take on the classic generation 1 pokedex.</p>
         <ul>
           <li>Babel, Webpack</li>
           <li>ES Linting (Airbnb)</li>
@@ -32,7 +30,7 @@ const StyledHome = styled.div`
 
   .content-container {
     width: 40%;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.9);
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;

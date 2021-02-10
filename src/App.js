@@ -7,22 +7,26 @@ import styled from 'styled-components';
 import GlobalStyle from './components/GlobalStyle';
 import Home from './components/Home';
 import Nav from './components/Nav';
-import ReduxDemo from './components/ReduxDemo';
+import Pokemon from './components/Pokemon';
 // Images
-import demo from './demo.jpg';
+import screenshotBackground from './screenshot.jpg';
 
 const App = () => {
   return (
     <StyledApp>
       <GlobalStyle />
       <Nav />
-      <img src={demo} alt="background" />
+      <img
+        className="background-image"
+        src={screenshotBackground}
+        alt="background"
+      />
       <Switch>
         <Route path="/" exact>
           <Home />
         </Route>
-        <Route path="/redux-demo" exact>
-          <ReduxDemo />
+        <Route path="/pokemon" exact>
+          <Pokemon />
         </Route>
       </Switch>
     </StyledApp>
@@ -33,7 +37,7 @@ const App = () => {
 const StyledApp = styled.div`
   position: relative;
 
-  img {
+  .background-image {
     position: absolute;
     top: 0;
     left: 0;

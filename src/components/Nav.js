@@ -1,6 +1,6 @@
 import React from 'react';
 // React Router
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // Styled components
 import styled from 'styled-components';
 
@@ -8,13 +8,13 @@ const Nav = () => {
   return (
     <StyledNav>
       <nav>
-        <h1>Ready to React</h1>
+        <h1>Modern Pokedex</h1>
         <ul>
           <li>
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/redux-demo">Redux Demo</Link>
+            <Link to="/pokemon">Pokemon</Link>
           </li>
         </ul>
       </nav>
@@ -24,7 +24,7 @@ const Nav = () => {
 
 // Styled components
 const StyledNav = styled.div`
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 1);
   width: 100%;
   font-size: 1rem;
   letter-spacing: 0.5rem;
