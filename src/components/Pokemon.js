@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 // Styled components
 import styled from 'styled-components';
 // Redux
@@ -8,6 +8,9 @@ import { loadGen1Data } from '../redux/pokemonReducer';
 const Pokemon = () => {
   const dispatch = useDispatch();
   const gen1Pokemon = useSelector((state) => state.pokemon.generation1);
+  const [isDreamWorldSelected, setIsDreamWorldSelected] = useState(false);
+  const [isOfficialSelected, setIsOfficalSelected] = useState(false);
+  const [isDefaultSelected, setIsDefaultSelected] = useState(true);
 
   useEffect(() => {
     dispatch(loadGen1Data());
@@ -18,26 +21,67 @@ const Pokemon = () => {
   //     debugger;
   //   }, [gen1Pokemon]);
 
+  const spriteSelectionHandler = (type) => {
+    if (type === 'dream world') {
+      setIsDreamWorldSelected(true);
+      setIsOfficalSelected(false);
+      setIsDefaultSelected(false);
+    } else if (type === 'official') {
+      setIsDreamWorldSelected(false);
+      setIsOfficalSelected(true);
+      setIsDefaultSelected(false);
+    } else if (type === 'default') {
+      setIsDreamWorldSelected(false);
+      setIsOfficalSelected(false);
+      setIsDefaultSelected(true);
+    }
+  };
   return (
-    <StyledPokemon className="pokemon-cards-container">
-      {gen1Pokemon &&
-        gen1Pokemon.map((pokemon) => (
-          <div key={pokemon.name} className="pokemon-card">
-            <h2 className="pokemon-card-title">{pokemon.name}</h2>
-            <img
-              className="pokemon-card-image-dream-world"
-              src={pokemon.sprites.other.dream_world.front_default}
-              //   src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/80.svg"
-              alt={pokemon.name}
-            />
-            <img
-              className="pokemon-card-image-official"
-              src={Object.values(pokemon.sprites.other)[1].front_default}
-              //   src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/80.svg"
-              alt={pokemon.name}
-            />
-          </div>
-        ))}
+    <StyledPokemon>
+      <button
+        type="button"
+        onClick={() => spriteSelectionHandler('dream world')}
+      >
+        Toggle Dream World Sprite
+      </button>
+      <button type="button" onClick={() => spriteSelectionHandler('official')}>
+        Toggle Official Sprite
+      </button>
+      <button type="button" onClick={() => spriteSelectionHandler('default')}>
+        Default
+      </button>
+      <div className="pokemon-card-container">
+        {gen1Pokemon &&
+          gen1Pokemon.map((pokemon) => (
+            <div key={pokemon.name} className="pokemon-card">
+              <h2 className="pokemon-card-title">{pokemon.name}</h2>
+              {isDreamWorldSelected && (
+                <img
+                  className="pokemon-card-image-dream-world"
+                  src={pokemon.sprites.other.dream_world.front_default}
+                  //   src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/80.svg"
+                  alt={pokemon.name}
+                />
+              )}
+              {isOfficialSelected && (
+                <img
+                  className="pokemon-card-image-official"
+                  src={Object.values(pokemon.sprites.other)[1].front_default}
+                  //   src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/80.svg"
+                  alt={pokemon.name}
+                />
+              )}
+              {isDefaultSelected && (
+                <img
+                  className="pokemon-card-image-official"
+                  src={pokemon.sprites.front_default}
+                  //   src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/80.svg"
+                  alt={pokemon.name}
+                />
+              )}
+            </div>
+          ))}
+      </div>
     </StyledPokemon>
   );
 };
@@ -46,25 +90,33 @@ const Pokemon = () => {
 
 // Styled components
 const StyledPokemon = styled.div`
-  width: 80%;
-  border: 2px solid red;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
+  .pokemon-card-container {
+    border: 2px solid red;
+    display: grid;
+    grid-column-gap: 1.5rem;
+    grid-row-gap: 1.5rem;
+    margin: 4rem 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    .pokemon-card {
+      margin: 1rem;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+      background: #d7d7d7;
+      border-radius: 1rem;
 
-  .pokemon-card {
-    margin: 1rem;
+      .pokemon-card-title {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
 
-    .pokemon-card-title {
-      text-align: center;
-    }
-
-    .pokemon-card-image-dream-world,
-    .pokemon-card-image-official {
-      height: 100px;
-      width: 100px;
+      .pokemon-card-image-dream-world,
+      .pokemon-card-image-official {
+        height: 100px;
+        width: 100px;
+      }
     }
   }
 `;

@@ -1,18 +1,25 @@
 import React from 'react';
 // Styled components
 import styled from 'styled-components';
+// Images
+import screenshotBackground from '../screenshot.jpg';
 
 const Home = () => {
   return (
     <StyledHome>
+      <img
+        className="background-image"
+        src={screenshotBackground}
+        alt="background"
+      />
       <div className="content-container">
         <p>A modern take on the classic generation 1 pokedex.</p>
         <ul>
-          <li>Babel, Webpack</li>
-          <li>ES Linting (Airbnb)</li>
-          <li>Styled Components</li>
-          <li>Redux and Redux Dev Tools</li>
-          <li>React Router</li>
+          <li>Dynamic calls to pokeapi</li>
+          <li>Custom sprite styles</li>
+          <li>Detailed info in card form</li>
+          {/* <li>Redux and Redux Dev Tools</li>
+          <li>React Router</li> */}
         </ul>
       </div>
     </StyledHome>
@@ -27,6 +34,18 @@ const StyledHome = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   min-height: 90vh;
+
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: brightness(0.8);
+    z-index: -1;
+    min-height: 90vh;
+    object-fit: cover;
+  }
 
   .content-container {
     width: 40%;
@@ -51,6 +70,7 @@ const StyledHome = styled.div`
     font-size: 5rem;
     width: 80vw;
     color: white;
+    text-shadow: 0px 5px 30px rgb(0 0 0);
 
     @media (max-width: 800px) {
       font-size: 3rem;
