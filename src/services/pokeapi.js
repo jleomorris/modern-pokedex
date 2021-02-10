@@ -5,8 +5,11 @@ const baseUrl = 'https://pokeapi.co/api/v2/';
 
 // All generation 1 pokemon
 const firstGenPokemon = `generation/1/`;
+const individualPokemon = 'pokemon/';
 
 // Formed URLs combining base url and endpoint
 
 export const firstGenPokemonUrl = () => `${baseUrl}${firstGenPokemon}`;
-export const testquote = 'hi';
+// pokeapi.co/api/v2/pokemon/${i}/
+export const individualPokemonUrl = (id) =>
+  `${baseUrl}${individualPokemon}${id}/`;
