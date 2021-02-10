@@ -1,9 +1,9 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import listingsReducer from './listingsReducer';
+import pokemonReducer from './pokemonReducer';
 
 const reducer = combineReducers({
-  listings: listingsReducer,
+  pokemon: pokemonReducer,
 });
 
 // Combine thunk and dev tools

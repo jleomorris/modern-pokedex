@@ -1,5 +1,6 @@
 import listingsService from '../services/listingsService';
 
+// Reducer
 const listingsReducer = (state = [], action) => {
   switch (action.type) {
     case 'INIT_LISTINGS':
@@ -24,6 +25,8 @@ const listingsReducer = (state = [], action) => {
 //     });
 //   };
 // };
+
+// Actions
 
 export const initListings = () => async (dispatch) => {
   const listings = await listingsService.getAll();
