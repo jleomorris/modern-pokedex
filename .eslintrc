@@ -18,6 +18,8 @@
     "object-shorthand": "off",
     "class-methods-use-this": "off",
     "arrow-body-style": "off",
+    "import/prefer-default-export": "off",
+    "react/self-closing-comp": "warn",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "prettier/prettier": [
       "warn",
