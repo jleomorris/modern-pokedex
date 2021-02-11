@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadGen1Data } from '../redux/pokemonReducer';
 // Images
 import bulbasaurDefault from '../img/bulbasaur_default.png';
+import lunatoneOfficial from '../img/lunatone_official.png';
+import solrockOfficial from '../img/solrock_official.png';
 // Util
 import { convertToTypeImage, convertToTypeBackground } from '../util';
 
@@ -14,10 +16,11 @@ const Pokemon = () => {
   const dispatch = useDispatch();
   const gen1Pokemon = useSelector((state) => state.pokemon.generation1);
   // State
-  const [isDefaultSelected, setIsDefaultSelected] = useState(true);
-  const [isOfficialSelected, setIsOfficalSelected] = useState(false);
+  const [isDefaultSelected, setIsDefaultSelected] = useState(false);
+  const [isOfficialSelected, setIsOfficalSelected] = useState(true);
   const [isDreamWorldSelected, setIsDreamWorldSelected] = useState(false);
-  const [spriteIndex, setSpriteIndex] = useState(0);
+  const [spriteIndex, setSpriteIndex] = useState(2);
+  const [isDarkModeActive, setIsDarkModeActive] = useState(false);
 
   useEffect(() => {
     dispatch(loadGen1Data());
@@ -48,16 +51,10 @@ const Pokemon = () => {
   };
 
   return (
-    <StyledPokemon>
+    <StyledPokemon className={`pokemon ${isDarkModeActive ? 'dark-mode' : ''}`}>
       <div className="custom-buttons">
         <div className="custom-button-container">
-          {spriteIndex === 0 && (
-            <img
-              //   src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
-              src={bulbasaurDefault}
-              alt="sprite"
-            />
-          )}
+          {spriteIndex === 0 && <img src={bulbasaurDefault} alt="sprite" />}
           {spriteIndex === 1 && (
             <img
               src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg"
@@ -77,21 +74,33 @@ const Pokemon = () => {
             {spriteIndex === 2 && 'Official'}
           </button>
         </div>
+        <div className="custom-button-container">
+          <img
+            src={isDarkModeActive ? lunatoneOfficial : solrockOfficial}
+            alt="sprite"
+          />
+          <button
+            type="button"
+            onClick={() => setIsDarkModeActive(!isDarkModeActive)}
+          >
+            <p>Dark Mode</p>
+            {isDarkModeActive ? 'Off' : 'On'}
+          </button>
+        </div>
       </div>
       <div className="pokemon-card-container">
         {gen1Pokemon &&
           gen1Pokemon.map((pokemon) => (
             <div key={pokemon.name} className="pokemon-card">
-              <div className="background-circle"></div>
+              <div className="background-circle" />
               <div className="background-image-container">
-                {/* <p>{pokemon.types[0].type.name}</p> */}
+                {convertToTypeBackground(pokemon.types[0].type.name)}
               </div>
               {/* {convertToTypeBackground(
                 pokemon.types[1].type.name === undefined
                   ? pokemon.types[0].type.name
                   : pokemon.types[1].type.name
               )} */}
-              {convertToTypeBackground(pokemon.types[0].type.name)}
               <p className="attack">{pokemon.stats[1].base_stat}</p>
               <div className="type-container">
                 {pokemon.types.map((type) => (
@@ -139,16 +148,19 @@ const Pokemon = () => {
 
 // Styled components
 const StyledPokemon = styled.div`
+  padding: 6rem 0rem;
+
   .custom-buttons {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 4rem 0rem;
+    margin-bottom: 4rem;
 
     .custom-button-container {
-      border: 1px solid blue;
+      /* border: 1px solid blue; */
       position: relative;
+      margin: 0rem 2rem;
 
       img {
         position: absolute;
@@ -167,7 +179,7 @@ const StyledPokemon = styled.div`
         font-size: 2rem;
         letter-spacing: 0.25rem;
         cursor: pointer;
-        transition: all 5s ease;
+        /* transition: all 5s ease; */
 
         p {
           font-size: 1.5rem;
@@ -177,7 +189,7 @@ const StyledPokemon = styled.div`
   }
 
   .pokemon-card-container {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: grid;
     grid-column-gap: 1.5rem;
     grid-row-gap: 1.5rem;
@@ -186,7 +198,7 @@ const StyledPokemon = styled.div`
 
     .pokemon-card {
       height: 300px;
-      margin: 1rem;
+      margin: 2rem 1rem;
       display: flex;
       justify-content: start;
       flex-direction: column;
@@ -204,7 +216,7 @@ const StyledPokemon = styled.div`
         width: 150px;
         background: #ffffffa3;
         border-radius: 50%;
-        z-index: -1;
+        z-index: 1;
       }
 
       .background-image-container {
@@ -214,7 +226,7 @@ const StyledPokemon = styled.div`
         left: 0;
         height: 100%;
         width: 100%;
-        z-index: -2;
+        /* z-index: -2; */
       }
 
       .background-image {
@@ -225,7 +237,7 @@ const StyledPokemon = styled.div`
         width: 100%;
         object-fit: cover;
         border-radius: 1rem;
-        z-index: -2;
+        /* z-index: -2; */
       }
 
       .attack {
@@ -286,6 +298,7 @@ const StyledPokemon = styled.div`
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        z-index: 1;
       }
 
       .id {
