@@ -40,7 +40,7 @@ const pokemonReducer = (state = initialState, action) => {
 export const loadGen1Data = () => async (dispatch) => {
   const allGen1 = [];
 
-  for (let i = 1; i < 151; i += 1) {
+  for (let i = 1; i < 152; i += 1) {
     const pokemonData = await axios.get(individualPokemonUrl(i));
     allGen1.push(pokemonData.data);
   }
