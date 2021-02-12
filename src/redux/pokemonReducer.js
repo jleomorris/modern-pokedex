@@ -1,57 +1,45 @@
 import axios from 'axios';
-import { individualPokemonUrl } from '../services/pokeapi';
+import { pokemonDetailsUrl, pokemonDetailsUrl2 } from '../services/pokeapi';
 
 const initialState = {
-  generation1: [],
+  pokemonData: [],
+  pokemonData2: [],
 };
 
 // Reducer
-
 const pokemonReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'FETCH_GEN1':
       return {
         ...state,
-        generation1: action.payload.generation1,
+        pokemonData: action.payload.pokemonData,
+        pokemonData2: action.payload.pokemonData2,
       };
-    // case 'ADD_LISTING':
-    //   return [...state, action.data];
-    // case 'DELETE_LISTING':
-    //   return state.filter((listing) => listing.name !== action.data);
     default:
       return { ...state };
   }
 };
 
 // Actions
-
-// export const loadGen1Data = () => async (dispatch) => {
-//   // Fetch axios
-//   const gen1PokemonData = await axios.get(firstGenPokemonUrl());
-
-//   dispatch({
-//     type: 'FETCH_GEN1',
-//     payload: {
-//       generation1: gen1PokemonData.data.pokemon_species,
-//     },
-//   });
-// };
-
 export const loadGen1Data = () => async (dispatch) => {
-  const allGen1 = [];
+  const allPokemonData = [];
+  const allPokemonData2 = [];
 
-  for (let i = 1; i < 152; i += 1) {
-    const pokemonData = await axios.get(individualPokemonUrl(i));
-    allGen1.push(pokemonData.data);
+  for (let i = 1; i < 10; i += 1) {
+    const pokemonData = await axios.get(pokemonDetailsUrl(i));
+    const pokemonData2 = await axios.get(pokemonDetailsUrl2(i));
+    allPokemonData.push(pokemonData.data);
+    allPokemonData2.push(pokemonData2.data);
   }
 
-  await Promise.all(allGen1).then(() => {
-    console.log('allgen1', allGen1);
+  await Promise.all(allPokemonData).then(() => {
+    console.log('allPokemonData', allPokemonData);
 
     dispatch({
       type: 'FETCH_GEN1',
       payload: {
-        generation1: allGen1,
+        pokemonData: allPokemonData,
+        pokemonData2: allPokemonData2,
       },
     });
   });
