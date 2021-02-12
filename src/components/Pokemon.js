@@ -18,7 +18,7 @@ import PokemonDetails from './PokemonDetails';
 const Pokemon = () => {
   // Redux
   const dispatch = useDispatch();
-  const gen1Pokemon = useSelector((state) => state.pokemon.generation1);
+  const pokemonData = useSelector((state) => state.pokemon.pokemonData);
   // State
   const [isDefaultSelected, setIsDefaultSelected] = useState(false);
   const [isOfficialSelected, setIsOfficalSelected] = useState(true);
@@ -36,12 +36,12 @@ const Pokemon = () => {
 
   useEffect(() => {
     dispatch(loadGen1Data());
-    console.log(gen1Pokemon);
+    console.log(pokemonData);
   }, [dispatch]);
 
   //   useEffect(() => {
   //     debugger;
-  //   }, [gen1Pokemon]);
+  //   }, [pokemonData]);
 
   const spriteSelectionHandler = () => {
     if (spriteIndex === 0) {
@@ -103,8 +103,8 @@ const Pokemon = () => {
         </div>
       </div>
       <div className="pokemon-card-container">
-        {gen1Pokemon &&
-          gen1Pokemon.map((pokemon) => (
+        {pokemonData &&
+          pokemonData.map((pokemon) => (
             <div key={pokemon.name} className="pokemon-card">
               <div className="background-circle" />
               <div className="background-image-container">
