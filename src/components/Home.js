@@ -2,7 +2,7 @@ import React from 'react';
 // Styled components
 import styled from 'styled-components';
 // Images
-import screenshotBackground from '../screenshot.jpg';
+import screenshotBackground from '../img/screenshot.jpg';
 
 const Home = () => {
   return (
