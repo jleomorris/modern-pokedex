@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 // Styled components
 import styled from 'styled-components';
+// React Router
+import { useLocation, Link } from 'react-router-dom';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { loadGen1Data } from '../redux/pokemonReducer';
@@ -10,6 +12,8 @@ import lunatoneOfficial from '../img/lunatone_official.png';
 import solrockOfficial from '../img/solrock_official.png';
 // Util
 import { convertToTypeImage, convertToTypeBackground } from '../util';
+// Components
+import PokemonDetails from './PokemonDetails';
 
 const Pokemon = () => {
   // Redux
@@ -21,6 +25,14 @@ const Pokemon = () => {
   const [isDreamWorldSelected, setIsDreamWorldSelected] = useState(false);
   const [spriteIndex, setSpriteIndex] = useState(2);
   const [isDarkModeActive, setIsDarkModeActive] = useState(false);
+  // Router
+  const location = useLocation();
+  const pathId = location.pathname.split('/')[2];
+  console.log('pathId', pathId);
+
+  useEffect(() => {
+    console.log('location', location);
+  }, [location]);
 
   useEffect(() => {
     dispatch(loadGen1Data());
@@ -52,6 +64,7 @@ const Pokemon = () => {
 
   return (
     <StyledPokemon className={`pokemon ${isDarkModeActive ? 'dark-mode' : ''}`}>
+      {pathId && <PokemonDetails pokemonId={pathId} />}
       <div className="custom-buttons">
         <div className="custom-button-container">
           {spriteIndex === 0 && <img src={bulbasaurDefault} alt="sprite" />}
@@ -78,6 +91,7 @@ const Pokemon = () => {
           <img
             src={isDarkModeActive ? lunatoneOfficial : solrockOfficial}
             alt="sprite"
+            className="dark-mode-sprite"
           />
           <button
             type="button"
@@ -96,15 +110,9 @@ const Pokemon = () => {
               <div className="background-image-container">
                 {convertToTypeBackground(pokemon.types[0].type.name)}
               </div>
-              {/* {convertToTypeBackground(
-                pokemon.types[1].type.name === undefined
-                  ? pokemon.types[0].type.name
-                  : pokemon.types[1].type.name
-              )} */}
               <p className="attack">{pokemon.stats[1].base_stat}</p>
               <div className="type-container">
                 {pokemon.types.map((type) => (
-                  // <p>{type.type.name}</p>
                   <>{convertToTypeImage(type.type.name)}</>
                 ))}
               </div>
@@ -112,30 +120,29 @@ const Pokemon = () => {
                 <h2 className="pokemon-card-title">{pokemon.name}</h2>
                 <p className="hp">{pokemon.stats[0].base_stat} HP</p>
               </div>
-              {isDreamWorldSelected && (
-                <img
-                  className="pokemon-card-image-dream-world"
-                  src={pokemon.sprites.other.dream_world.front_default}
-                  //   src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/80.svg"
-                  alt={pokemon.name}
-                />
-              )}
-              {isOfficialSelected && (
-                <img
-                  className="pokemon-card-image-official"
-                  src={Object.values(pokemon.sprites.other)[1].front_default}
-                  //   src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/80.svg"
-                  alt={pokemon.name}
-                />
-              )}
-              {isDefaultSelected && (
-                <img
-                  className="pokemon-card-image-default"
-                  src={pokemon.sprites.front_default}
-                  //   src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/80.svg"
-                  alt={pokemon.name}
-                />
-              )}
+              <Link to={`/pokemon/${pokemon.id}`}>
+                {isDreamWorldSelected && (
+                  <img
+                    className="pokemon-card-image-dream-world"
+                    src={pokemon.sprites.other.dream_world.front_default}
+                    alt={pokemon.name}
+                  />
+                )}
+                {isOfficialSelected && (
+                  <img
+                    className="pokemon-card-image-official"
+                    src={Object.values(pokemon.sprites.other)[1].front_default}
+                    alt={pokemon.name}
+                  />
+                )}
+                {isDefaultSelected && (
+                  <img
+                    className="pokemon-card-image-default"
+                    src={pokemon.sprites.front_default}
+                    alt={pokemon.name}
+                  />
+                )}
+              </Link>
               <p className="id">#{pokemon.id}</p>
             </div>
           ))}
@@ -149,6 +156,8 @@ const Pokemon = () => {
 // Styled components
 const StyledPokemon = styled.div`
   padding: 6rem 0rem;
+  min-height: 100vh;
+  position: relative;
 
   .custom-buttons {
     /* border: 2px solid red; */
@@ -167,6 +176,11 @@ const StyledPokemon = styled.div`
         top: -50px;
         height: 100px;
         left: -60px;
+      }
+
+      .dark-mode-sprite {
+        top: -50px;
+        left: -30px;
       }
 
       button {
@@ -206,6 +220,11 @@ const StyledPokemon = styled.div`
       border-radius: 1rem;
       position: relative;
       box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
+
+      a {
+        /* width: 100%;
+        height: 100%; */
+      }
 
       .background-circle {
         position: absolute;

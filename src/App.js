@@ -18,7 +18,7 @@ const App = () => {
         <Route path="/" exact>
           <Home />
         </Route>
-        <Route path="/pokemon" exact>
+        <Route path={['/pokemon/:id', '/pokemon']}>
           <Pokemon />
         </Route>
       </Switch>
