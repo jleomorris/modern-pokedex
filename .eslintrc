@@ -22,6 +22,7 @@
     "react/self-closing-comp": "warn",
     "no-await-in-loop": "warn",
     "no-debugger": "warn",
+    "react/prop-types": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "prettier/prettier": [
       "warn",
