@@ -12,6 +12,10 @@ const GlobalStyle = createGlobalStyle`
   .dark-mode {
       background: rgba(0,0,0,0.9);
   }
+
+ .enable-blur >* {
+  filter: blur(3px);
+}
   
   // Media Queries
 
