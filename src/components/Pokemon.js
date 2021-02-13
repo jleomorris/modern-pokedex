@@ -25,6 +25,7 @@ const Pokemon = () => {
   const [isDreamWorldSelected, setIsDreamWorldSelected] = useState(false);
   const [spriteIndex, setSpriteIndex] = useState(2);
   const [isDarkModeActive, setIsDarkModeActive] = useState(false);
+  const [isBlurActive, setIsBlurActive] = useState(false);
   // Router
   const location = useLocation();
   const pathId = location.pathname.split('/')[2];
@@ -32,16 +33,17 @@ const Pokemon = () => {
 
   useEffect(() => {
     console.log('location', location);
+    if (location.pathname !== '/pokemon') {
+      setIsBlurActive(true);
+    } else {
+      setIsBlurActive(false);
+    }
   }, [location]);
 
   useEffect(() => {
     dispatch(loadGen1Data());
     console.log(pokemonData);
   }, [dispatch]);
-
-  //   useEffect(() => {
-  //     debugger;
-  //   }, [pokemonData]);
 
   const spriteSelectionHandler = () => {
     if (spriteIndex === 0) {
@@ -63,7 +65,11 @@ const Pokemon = () => {
   };
 
   return (
-    <StyledPokemon className={`pokemon ${isDarkModeActive ? 'dark-mode' : ''}`}>
+    <StyledPokemon
+      className={`pokemon ${isBlurActive ? 'enable-blur' : ''} ${
+        isDarkModeActive ? 'dark-mode' : ''
+      }`}
+    >
       {pathId && <PokemonDetails pokemonId={pathId} />}
       <div className="custom-buttons">
         <div className="custom-button-container">
