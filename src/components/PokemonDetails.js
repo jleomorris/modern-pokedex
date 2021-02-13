@@ -3,33 +3,28 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 // Redux
 import { useSelector } from 'react-redux';
+// Components
+import PokemonCard from './PokemonCard';
+// Util
+// import { convertToTypeImage, convertToTypeBackground } from '../util';
 
-const PokemonDetails = (pokemonId) => {
+const PokemonDetails = ({ pokemonId }) => {
   // Redux
-  const gen1Pokemon = useSelector((state) => state.pokemon.generation1);
+  const pokemonData = useSelector((state) => state.pokemon.pokemonData);
+  const pokemonData2 = useSelector((state) => state.pokemon.pokemonData2);
   // State
   const [selectedPokemon, setSelectedPokemon] = useState(
-    gen1Pokemon.filter(
-      (pokemon) => pokemon.id.toString() === pokemonId.pokemonId
-    )
+    pokemonData.filter((pokemon) => pokemon.id.toString() === pokemonId)
+  );
+  const [selectedPokemon2, setSelectedPokemon2] = useState(
+    pokemonData2.filter((pokemon) => pokemon.id.toString() === pokemonId)
   );
 
   return (
     <StyledPokemonDetails className="pokemon-details">
-      <div className="details-container">
-        {selectedPokemon && (
-          <>
-            <p>{selectedPokemon[0].name}</p>
-            <img
-              className="pokemon-card-image-official"
-              src={
-                Object.values(selectedPokemon[0].sprites.other)[1].front_default
-              }
-              alt={selectedPokemon[0].name}
-            />
-          </>
-        )}
-      </div>
+      {selectedPokemon && selectedPokemon2 && (
+        <PokemonCard pokemonId={pokemonId} />
+      )}
     </StyledPokemonDetails>
   );
 };
@@ -38,7 +33,7 @@ const PokemonDetails = (pokemonId) => {
 const StyledPokemonDetails = styled.div`
   background: rgba(0, 0, 0, 0.9);
   height: 100%;
-  width: 40%;
+  width: 80%;
   position: absolute;
   top: 0;
   right: 0;
@@ -47,12 +42,8 @@ const StyledPokemonDetails = styled.div`
   justify-content: start;
   align-items: start;
 
-  .details-container {
-    width: 75%;
-    height: 65%;
-    border-radius: 2rem;
-    background: rgba(256, 256, 256, 1);
-    margin: 2rem -4rem;
+  @media (max-width: 1000px) {
+    width: 80%;
   }
 `;
 
