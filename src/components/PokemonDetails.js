@@ -59,6 +59,7 @@ const DetailsShadow = styled.div`
   top: 0;
   left: 0;
   z-index: 5;
+  filter: blur(0px);
 
   &::-webkit-scrollbar {
     width: 0.5rem;
