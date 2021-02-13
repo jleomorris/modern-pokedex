@@ -28,6 +28,9 @@ const StyledNav = styled.div`
   width: 100%;
   font-size: 1rem;
   letter-spacing: 0.5rem;
+  position: sticky;
+  top: 0px;
+  z-index: 999;
 
   nav {
     width: 100%;
