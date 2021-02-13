@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 // Styled components
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 // Redux
 import { useSelector } from 'react-redux';
 // Util
-import { convertToTypeImage, convertToTypeBackground } from '../util';
+import {
+  convertToTypeImage,
+  convertToTypeBackground,
+  convertTypeToColor,
+} from '../util';
 
 const PokemonCard = ({ pokemonId }) => {
   // Redux
@@ -17,75 +21,86 @@ const PokemonCard = ({ pokemonId }) => {
   const [selectedPokemon2, setSelectedPokemon2] = useState(
     pokemonData2.filter((pokemon) => pokemon.id.toString() === pokemonId)
   );
-  console.log('PokemonCard.selectedPokemon', selectedPokemon);
-  console.log('PokemonCard.selectedPokemon2', selectedPokemon2);
+
+  // Styled component variables
+  const theme = {
+    background: convertTypeToColor(selectedPokemon[0].types[0].type.name),
+  };
 
   return (
-    <StyledPokemonCard className="pokemon-card">
-      <div className="detailed-pokemon-card">
-        <div className="inner-content">
-          <div className="title-health-type-container">
-            <h2 className="pokemon-card-title">{selectedPokemon[0].name}</h2>
-            <div className="health-type-container">
-              <p className="hp">{selectedPokemon[0].stats[0].base_stat} HP</p>
-              {selectedPokemon[0].types.map((type) => (
-                <>{convertToTypeImage(type.type.name)}</>
-              ))}
-            </div>
-          </div>
-          <div className="card-upper">
-            <div className="background-image-container">
-              {convertToTypeBackground(selectedPokemon[0].types[0].type.name)}
-              <img
-                className="pokemon-card-image-official"
-                src={
-                  Object.values(selectedPokemon[0].sprites.other)[1]
-                    .front_default
-                }
-                alt={selectedPokemon[0].name}
-              />
-              <div className="genus-height-weight-container">
-                <p>{`${selectedPokemon2[0].genera[7].genus},`}</p>
-                {/* Height and weight are the wrong way around in the api data */}
-                <p>{`Height: ${selectedPokemon[0].weight}cm,`}</p>
-                <p>{`Weight: ${selectedPokemon[0].height}kgs`}</p>
+    <ThemeProvider theme={theme}>
+      <StyledPokemonCard
+        // type={selectedPokemon[0].types[0].type.name}
+        className="pokemon-card"
+      >
+        <div className="detailed-pokemon-card">
+          <div className="inner-content">
+            <div className="title-health-type-container">
+              <h2 className="pokemon-card-title">{selectedPokemon[0].name}</h2>
+              <div className="health-type-container">
+                <p className="hp">{selectedPokemon[0].stats[0].base_stat} HP</p>
+                {selectedPokemon[0].types.map((type) => (
+                  <>{convertToTypeImage(type.type.name)}</>
+                ))}
               </div>
             </div>
-          </div>
-          <div className="card-lower">
-            <div className="move-container">
-              <>
-                <div className="move">
-                  <p className="move-title">
-                    {selectedPokemon[0].moves[0].move.name}
-                  </p>
-                  <br />
+            <div className="card-upper">
+              <div className="background-image-container">
+                {convertToTypeBackground(selectedPokemon[0].types[0].type.name)}
+                <img
+                  className="pokemon-card-image-official"
+                  src={
+                    Object.values(selectedPokemon[0].sprites.other)[1]
+                      .front_default
+                  }
+                  alt={selectedPokemon[0].name}
+                />
+                <div className="genus-height-weight-container">
+                  <p>{`${selectedPokemon2[0].genera[7].genus},`}</p>
+                  {/* Height and weight are the wrong way around in the api data */}
+                  <p>{`Height: ${selectedPokemon[0].weight}cm,`}</p>
+                  <p>{`Weight: ${selectedPokemon[0].height}kgs`}</p>
                 </div>
-                <div className="move">
-                  <p className="move-title">
-                    {selectedPokemon[0].moves[1].move.name}
-                  </p>
-                  <br />
-                </div>
-              </>
-              {/* {selectedPokemon[0].moves.map((move) => (
+              </div>
+            </div>
+            <div className="card-lower">
+              <div className="move-container">
+                <>
+                  <div className="move">
+                    <p className="move-title">
+                      {selectedPokemon[0].moves[0].move.name}
+                    </p>
+                  </div>
+                  <div className="move">
+                    <p className="move-title">
+                      {selectedPokemon[0].moves[1].move.name}
+                    </p>
+                  </div>
+                  <div className="move">
+                    <p className="move-title">
+                      {selectedPokemon[0].moves[2].move.name}
+                    </p>
+                  </div>
+                </>
+                {/* {selectedPokemon[0].moves.map((move) => (
                 <div className="move">
                   <p className="move-title">{move.move.name}</p>
                   <br />
                 </div>
               ))} */}
+              </div>
+              <div className="description">
+                <p>{selectedPokemon2[0].flavor_text_entries[0].flavor_text}</p>
+              </div>
             </div>
-            <div className="description">
-              <p>{selectedPokemon2[0].flavor_text_entries[0].flavor_text}</p>
+            <div className="id-container">
+              <p className="id">{selectedPokemon[0].id}/151</p>
+              <d className="circle" />
             </div>
-          </div>
-          <div className="id-container">
-            <p className="id">{selectedPokemon[0].id}/151</p>
-            <d className="circle" />
           </div>
         </div>
-      </div>
-    </StyledPokemonCard>
+      </StyledPokemonCard>
+    </ThemeProvider>
   );
 };
 
@@ -113,7 +128,8 @@ const StyledPokemonCard = styled.div`
     background: #ffff7a;
 
     .inner-content {
-      background: #86d786;
+      // Conditional background styling based on pokemon type
+      background: ${(props) => (props ? props.theme.background : 'white')};
       margin: 1.5rem;
       padding: 0.5rem 0rem;
       height: 94%;
@@ -274,7 +290,7 @@ const StyledPokemonCard = styled.div`
     height: 270px;
     overflow: hidden;
     margin: 2rem;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -297,6 +313,7 @@ const StyledPokemonCard = styled.div`
           font-size: 1.5rem;
           text-transform: capitalize;
           font-weight: bolder;
+          padding: 1rem 0rem;
         }
       }
     }
