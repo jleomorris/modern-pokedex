@@ -107,8 +107,8 @@ const PokemonCard = ({ pokemonId }) => {
 // Styled components
 const StyledPokemonCard = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 100px;
+  left: 0px;
   z-index: 3;
   display: flex;
   justify-content: start;
@@ -297,14 +297,12 @@ const StyledPokemonCard = styled.div`
 
     .move-container {
       display: flex;
-      justify-content: center;
+      justify-content: start;
       align-items: center;
-      /* height: 87%; */
       flex-direction: column;
       overflow: hidden;
 
       .move {
-        margin: 1rem;
         width: 100%;
         text-align: center;
         border-bottom: 2px solid black;
