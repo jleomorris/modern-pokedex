@@ -20,6 +20,7 @@ const Pokemon = () => {
   const dispatch = useDispatch();
   const pokemonData = useSelector((state) => state.pokemon.pokemonData);
   // State
+  const [filteredData, setFilteredData] = useState();
   const [isDefaultSelected, setIsDefaultSelected] = useState(false);
   const [isOfficialSelected, setIsOfficalSelected] = useState(true);
   const [isDreamWorldSelected, setIsDreamWorldSelected] = useState(false);
@@ -45,6 +46,10 @@ const Pokemon = () => {
     console.log(pokemonData);
   }, [dispatch]);
 
+  useEffect(() => {
+    setFilteredData(pokemonData);
+  }, [pokemonData]);
+
   const spriteSelectionHandler = () => {
     if (spriteIndex === 0) {
       setIsDreamWorldSelected(true);
@@ -62,6 +67,18 @@ const Pokemon = () => {
 
     if (spriteIndex === 2) setSpriteIndex(0);
     if (spriteIndex !== 2) setSpriteIndex((prev) => prev + 1);
+  };
+
+  const filterPokemonHandler = (e) => {
+    console.log(e.target.value);
+
+    const allPokemon = pokemonData;
+    const userInput = e.target.value;
+    const targetData = allPokemon.filter((pokemon) =>
+      pokemon.name.includes(userInput)
+    );
+
+    setFilteredData(targetData);
   };
 
   return (
@@ -107,10 +124,18 @@ const Pokemon = () => {
             {isDarkModeActive ? 'Off' : 'On'}
           </button>
         </div>
+        <div className="search-container">
+          <p>Filter via search:</p>
+          <input
+            type="text"
+            className="search-pokemon"
+            onChange={filterPokemonHandler}
+          />
+        </div>
       </div>
       <div className="pokemon-card-container">
-        {pokemonData &&
-          pokemonData.map((pokemon) => (
+        {filteredData &&
+          filteredData.map((pokemon) => (
             <div key={pokemon.name} className="pokemon-card">
               <div className="background-circle" />
               <div className="background-image-container">
@@ -204,6 +229,21 @@ const StyledPokemon = styled.div`
         p {
           font-size: 1.5rem;
         }
+      }
+    }
+
+    .search-container {
+      p {
+        font-family: 'Bebas Neue', cursive;
+        font-size: 1.5rem;
+        font-weight: 900;
+      }
+
+      input {
+        font-size: 1.5rem;
+        padding: 1rem;
+        outline: none;
+        border-radius: 1rem;
       }
     }
   }
