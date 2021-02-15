@@ -27,6 +27,8 @@ const PokemonDetails = ({ pokemonId }) => {
     pokemonData2.filter((pokemon) => pokemon.id.toString() === pokemonId)
   );
   const [isFlipped, setisFlipped] = useState(false);
+  const [ownMoves, setOwnMoves] = useState();
+  const [learnableMoves, setLearnableMoves] = useState();
 
   // Styled component variables
   const theme = {
@@ -42,6 +44,19 @@ const PokemonDetails = ({ pokemonId }) => {
       setisFlipped((prev) => !prev);
     }, 1000);
   }, []);
+
+  useEffect(() => {
+    const allMoves = selectedPokemon[0].moves.map((move) => move);
+    const filteredOwnMoves = allMoves.filter(
+      (move) => move.version_group_details[0].level_learned_at !== 0
+    );
+    const filteredLearnableMoves = allMoves.filter(
+      (move) => move.version_group_details[0].level_learned_at === 0
+    );
+
+    setOwnMoves(filteredOwnMoves);
+    setLearnableMoves(filteredLearnableMoves);
+  }, [selectedPokemon]);
 
   const exitDetailHandler = (e) => {
     const element = e.target;
@@ -114,16 +129,25 @@ const PokemonDetails = ({ pokemonId }) => {
               </p>
             </div>
             <div className="move-container">
-              <h3>Moves & level learned</h3>
-              {selectedPokemon[0].moves.map((move) => (
-                <div className="move">
-                  <p className="move-title">{move.move.name}</p>
-                  <p className="level-learned">
-                    Lvl.{move.version_group_details[0].level_learned_at}
-                  </p>
-                  <br />
-                </div>
-              ))}
+              <h3>Own moves & level learned</h3>
+              {ownMoves &&
+                ownMoves.map((move) => (
+                  <div className="move">
+                    <p className="move-title">{move.move.name}</p>
+                    <p className="level-learned">
+                      Lvl.
+                      {move.version_group_details[0].level_learned_at}
+                    </p>
+                    <br />
+                  </div>
+                ))}
+              <h3>Can learn</h3>
+              {learnableMoves &&
+                learnableMoves.map((move) => (
+                  <div className="move">
+                    <p className="move-title">{move.move.name}</p>
+                  </div>
+                ))}
             </div>
           </InnerDetails>
         </StyledPokemonDetails>
@@ -137,7 +161,6 @@ const DetailsShadow = styled.div`
   width: 100%;
   min-height: 100vh;
   overflow-y: scroll;
-  /* background: rgba(0, 0, 0, 0.7); */
   position: fixed;
   top: 0;
   left: 0;
@@ -164,8 +187,6 @@ const StyledPokemonDetails = styled.div`
   height: 120vh;
   width: 80%;
   position: relative;
-  /* top: 0; */
-  /* right: 0; */
   z-index: 3;
 
   @media (max-width: 1000px) {
@@ -258,6 +279,7 @@ const InnerDetails = styled.div`
       width: 100%;
       text-transform: uppercase;
       margin: 1rem 0rem;
+      margin: 2rem 0rem;
     }
 
     .move {
