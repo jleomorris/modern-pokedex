@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // Styled components
 import styled, { ThemeProvider } from 'styled-components';
 // Redux
@@ -10,7 +10,7 @@ import {
   convertTypeToColor,
 } from '../util';
 
-const PokemonCard = ({ pokemonId }) => {
+const PokemonCard = ({ pokemonId, cardFlipHandler }) => {
   // Redux
   const pokemonData = useSelector((state) => state.pokemon.pokemonData);
   const pokemonData2 = useSelector((state) => state.pokemon.pokemonData2);
@@ -27,13 +27,23 @@ const PokemonCard = ({ pokemonId }) => {
     background: convertTypeToColor(selectedPokemon[0].types[0].type.name),
   };
 
+  //   useEffect(() => {
+  //     debugger;
+  //   });
+
   return (
     <ThemeProvider theme={theme}>
       <StyledPokemonCard
         // type={selectedPokemon[0].types[0].type.name}
         className="pokemon-card"
       >
-        <div className="detailed-pokemon-card">
+        <div
+          className="detailed-pokemon-card"
+          onClick={cardFlipHandler}
+          onKeyPress={cardFlipHandler}
+          role="button"
+          tabIndex="0"
+        >
           <div className="inner-content">
             <div className="title-health-type-container">
               <h2 className="pokemon-card-title">{selectedPokemon[0].name}</h2>
@@ -90,7 +100,12 @@ const PokemonCard = ({ pokemonId }) => {
               ))} */}
               </div>
               <div className="description">
-                <p>{selectedPokemon2[0].flavor_text_entries[0].flavor_text}</p>
+                <p>
+                  {selectedPokemon2[0].flavor_text_entries[0].flavor_text}
+                  {/* {JSON.parse(
+                    selectedPokemon2[0].flavor_text_entries[0].flavor_text
+                  )} */}
+                </p>
               </div>
             </div>
             <div className="id-container">
@@ -126,6 +141,7 @@ const StyledPokemonCard = styled.div`
     margin: 2rem -4rem;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.4);
     background: #ffff7a;
+    outline: none;
 
     .inner-content {
       // Conditional background styling based on pokemon type
@@ -312,6 +328,10 @@ const StyledPokemonCard = styled.div`
           text-transform: capitalize;
           font-weight: bolder;
           padding: 1rem 0rem;
+
+          @media (max-width: 1700px) {
+            margin: 1rem;
+          }
         }
       }
     }

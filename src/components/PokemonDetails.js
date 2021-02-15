@@ -32,7 +32,7 @@ const PokemonDetails = ({ pokemonId }) => {
     document.body.style.overflow = 'hidden';
     setTimeout(() => {
       setisFlipped((prev) => !prev);
-    }, 1500);
+    }, 1750);
     setTimeout(() => {
       setisFlipped((prev) => !prev);
     }, 1000);
@@ -48,6 +48,11 @@ const PokemonDetails = ({ pokemonId }) => {
     }
   };
 
+  const cardFlipHandler = (e) => {
+    e.preventDefault();
+    setisFlipped((prev) => !prev);
+  };
+
   return (
     <DetailsShadow className="details-shadow" onClick={exitDetailHandler}>
       <StyledPokemonDetails className="pokemon-details">
@@ -60,8 +65,19 @@ const PokemonDetails = ({ pokemonId }) => {
             flipSpeedBackToFront="0.5"
             flipSpeedFrontToBack="0.5"
           >
-            <PokemonCard key="front" pokemonId={pokemonId} />
-            <div className="card-back" key="back">
+            <PokemonCard
+              key="front"
+              pokemonId={pokemonId}
+              cardFlipHandler={cardFlipHandler}
+            />
+            <div
+              className="card-back"
+              key="back"
+              onClick={cardFlipHandler}
+              onKeyPress={cardFlipHandler}
+              role="button"
+              tabIndex="0"
+            >
               <img src={cardBack} alt="card-back" />
             </div>
           </ReactCardFlip>
@@ -72,6 +88,7 @@ const PokemonDetails = ({ pokemonId }) => {
             {selectedPokemon2[0].genera[8].genus}
           </h2>
           <h2 className="pokemon-card-title">{selectedPokemon[0].name}</h2>
+          <div className="type"></div>
           <div className="description">
             <p>
               {selectedPokemon2[0].flavor_text_entries[0].flavor_text}
@@ -142,13 +159,14 @@ const StyledPokemonDetails = styled.div`
     position: absolute;
     top: 100px;
     left: 0px;
-    z-index: 3;
+    z-index: 3 !important;
   }
 
   .card-back {
     position: absolute;
     top: 100px;
     left: 0px;
+    outline: none;
 
     img {
       width: 575px;
