@@ -6,9 +6,12 @@ import { useHistory } from 'react-router-dom';
 // Redux
 import { useSelector } from 'react-redux';
 // Components
+import ReactCardFlip from 'react-card-flip';
 import PokemonCard from './PokemonCard';
 // Util
 // import { convertToTypeImage, convertToTypeBackground } from '../util';
+// Images
+import cardBack from '../img/card_back.png';
 
 const PokemonDetails = ({ pokemonId }) => {
   // React Router
@@ -23,10 +26,17 @@ const PokemonDetails = ({ pokemonId }) => {
   const [selectedPokemon2, setSelectedPokemon2] = useState(
     pokemonData2.filter((pokemon) => pokemon.id.toString() === pokemonId)
   );
+  const [isFlipped, setisFlipped] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
-  });
+    setTimeout(() => {
+      setisFlipped((prev) => !prev);
+    }, 1500);
+    setTimeout(() => {
+      setisFlipped((prev) => !prev);
+    }, 1000);
+  }, []);
 
   const exitDetailHandler = (e) => {
     const element = e.target;
@@ -42,7 +52,19 @@ const PokemonDetails = ({ pokemonId }) => {
     <DetailsShadow className="details-shadow" onClick={exitDetailHandler}>
       <StyledPokemonDetails className="pokemon-details">
         {selectedPokemon && selectedPokemon2 && (
-          <PokemonCard pokemonId={pokemonId} />
+          <ReactCardFlip
+            className="react-card-flip"
+            isFlipped={isFlipped}
+            flipDirection="horizontal"
+            infinite
+            flipSpeedBackToFront="0.5"
+            flipSpeedFrontToBack="0.5"
+          >
+            <PokemonCard key="front" pokemonId={pokemonId} />
+            <div className="card-back" key="back">
+              <img src={cardBack} alt="card-back" />
+            </div>
+          </ReactCardFlip>
         )}
         <InnerDetails className="inner-details">
           {/* <h2 className="feature-title">{selectedPokemon[0].name}</h2> */}
@@ -105,7 +127,7 @@ const DetailsShadow = styled.div`
 
 const StyledPokemonDetails = styled.div`
   background: rgba(0, 0, 0, 1);
-  height: 100%;
+  height: 120vh;
   width: 80%;
   position: relative;
   /* top: 0; */
@@ -114,6 +136,26 @@ const StyledPokemonDetails = styled.div`
 
   @media (max-width: 1000px) {
     width: 80%;
+  }
+
+  .react-card-flip {
+    position: absolute;
+    top: 100px;
+    left: 0px;
+    z-index: 3;
+  }
+
+  .card-back {
+    position: absolute;
+    top: 100px;
+    left: 0px;
+
+    img {
+      width: 575px;
+      height: 800px;
+      object-fit: cover;
+      margin: 2rem -4rem;
+    }
   }
 `;
 
@@ -124,6 +166,20 @@ const InnerDetails = styled.div`
   align-items: flex-end;
   padding-top: 7rem;
   padding-right: 1rem;
+  height: 100vh;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: black;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: white;
+  }
 
   h2 {
     color: white;
