@@ -27,10 +27,6 @@ const PokemonCard = ({ pokemonId, cardFlipHandler }) => {
     background: convertTypeToColor(selectedPokemon[0].types[0].type.name),
   };
 
-  //   useEffect(() => {
-  //     debugger;
-  //   });
-
   return (
     <ThemeProvider theme={theme}>
       <StyledPokemonCard
@@ -136,7 +132,7 @@ const StyledPokemonCard = styled.div`
   .detailed-pokemon-card {
     width: 575px;
     height: 800px;
-    border-radius: 2rem;
+    border-radius: 1.55rem;
     background: rgba(256, 256, 256, 1);
     margin: 2rem -4rem;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.4);
@@ -246,8 +242,9 @@ const StyledPokemonCard = styled.div`
         font-style: italic;
         position: absolute;
         bottom: -40px;
-        left: 12.5px;
-        width: 95%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
       }
     }
 
