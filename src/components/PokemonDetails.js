@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // Styled components
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 // React Router
 import { useHistory } from 'react-router-dom';
 // Redux
@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import ReactCardFlip from 'react-card-flip';
 import PokemonCard from './PokemonCard';
 // Util
-// import { convertToTypeImage, convertToTypeBackground } from '../util';
+import { convertTypeToColor } from '../util';
 // Images
 import cardBack from '../img/card_back.png';
 
@@ -27,6 +27,11 @@ const PokemonDetails = ({ pokemonId }) => {
     pokemonData2.filter((pokemon) => pokemon.id.toString() === pokemonId)
   );
   const [isFlipped, setisFlipped] = useState(false);
+
+  // Styled component variables
+  const theme = {
+    background: convertTypeToColor(selectedPokemon[0].types[0].type.name),
+  };
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -54,64 +59,76 @@ const PokemonDetails = ({ pokemonId }) => {
   };
 
   return (
-    <DetailsShadow className="details-shadow" onClick={exitDetailHandler}>
-      <StyledPokemonDetails className="pokemon-details">
-        {selectedPokemon && selectedPokemon2 && (
-          <ReactCardFlip
-            className="react-card-flip"
-            isFlipped={isFlipped}
-            flipDirection="horizontal"
-            infinite
-            flipSpeedBackToFront="0.5"
-            flipSpeedFrontToBack="0.5"
-          >
-            <PokemonCard
-              key="front"
-              pokemonId={pokemonId}
-              cardFlipHandler={cardFlipHandler}
-            />
-            <div
-              className="card-back"
-              key="back"
-              onClick={cardFlipHandler}
-              onKeyPress={cardFlipHandler}
-              role="button"
-              tabIndex="0"
+    <ThemeProvider theme={theme}>
+      <DetailsShadow className="details-shadow" onClick={exitDetailHandler}>
+        <StyledPokemonDetails className="pokemon-details">
+          {selectedPokemon && selectedPokemon2 && (
+            <ReactCardFlip
+              className="react-card-flip"
+              isFlipped={isFlipped}
+              flipDirection="horizontal"
+              infinite
+              flipSpeedBackToFront="0.5"
+              flipSpeedFrontToBack="0.5"
             >
-              <img src={cardBack} alt="card-back" />
+              <PokemonCard
+                key="front"
+                pokemonId={pokemonId}
+                cardFlipHandler={cardFlipHandler}
+              />
+              <div
+                className="card-back"
+                key="back"
+                onClick={cardFlipHandler}
+                onKeyPress={cardFlipHandler}
+                role="button"
+                tabIndex="0"
+              >
+                <img src={cardBack} alt="card-back" />
+              </div>
+            </ReactCardFlip>
+          )}
+          <InnerDetails className="inner-details">
+            {/* <h2 className="feature-title">{selectedPokemon[0].name}</h2> */}
+            <h2 className="feature-title">
+              {selectedPokemon2[0].genera[8].genus}
+            </h2>
+            <h2 className="pokemon-card-title">{selectedPokemon[0].name}</h2>
+            <div className="type">
+              {selectedPokemon[0].types.map((type) => (
+                <p
+                  style={{
+                    background: convertTypeToColor(type.type.name),
+                  }}
+                >
+                  {type.type.name}
+                </p>
+              ))}
             </div>
-          </ReactCardFlip>
-        )}
-        <InnerDetails className="inner-details">
-          {/* <h2 className="feature-title">{selectedPokemon[0].name}</h2> */}
-          <h2 className="feature-title">
-            {selectedPokemon2[0].genera[8].genus}
-          </h2>
-          <h2 className="pokemon-card-title">{selectedPokemon[0].name}</h2>
-          <div className="type"></div>
-          <div className="description">
-            <p>
-              {selectedPokemon2[0].flavor_text_entries[0].flavor_text}
-              {/* {JSON.parse(
+            <div className="description">
+              <p>
+                {selectedPokemon2[0].flavor_text_entries[0].flavor_text}
+                {/* {JSON.parse(
                     selectedPokemon2[0].flavor_text_entries[0].flavor_text
                   )} */}
-            </p>
-          </div>
-          <div className="move-container">
-            <h3>Moves & level learned</h3>
-            {selectedPokemon[0].moves.map((move) => (
-              <div className="move">
-                <p className="move-title">{move.move.name}</p>
-                <p className="level-learned">
-                  Lvl.{move.version_group_details[0].level_learned_at}
-                </p>
-                <br />
-              </div>
-            ))}
-          </div>
-        </InnerDetails>
-      </StyledPokemonDetails>
-    </DetailsShadow>
+              </p>
+            </div>
+            <div className="move-container">
+              <h3>Moves & level learned</h3>
+              {selectedPokemon[0].moves.map((move) => (
+                <div className="move">
+                  <p className="move-title">{move.move.name}</p>
+                  <p className="level-learned">
+                    Lvl.{move.version_group_details[0].level_learned_at}
+                  </p>
+                  <br />
+                </div>
+              ))}
+            </div>
+          </InnerDetails>
+        </StyledPokemonDetails>
+      </DetailsShadow>
+    </ThemeProvider>
   );
 };
 
@@ -203,11 +220,20 @@ const InnerDetails = styled.div`
     color: white;
     font-size: 6rem;
     text-transform: capitalize;
-    margin: 2rem 0rem;
   }
 
   p {
     color: white;
+  }
+
+  .type {
+    display: flex;
+    p {
+      border-radius: 1rem;
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      color: black;
+    }
   }
 
   .feature-title {
@@ -218,6 +244,7 @@ const InnerDetails = styled.div`
     opacity: 0.2;
     text-transform: uppercase;
     letter-spacing: 0.5rem;
+    margin: 2rem 0rem;
   }
 
   .move-container {

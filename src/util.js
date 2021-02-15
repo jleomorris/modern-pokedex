@@ -165,37 +165,37 @@ export const convertTypeToColor = (type) => {
     case 'dark':
       return 'linear-gradient(to right, #ffc0cb, #800080)';
     case 'dragon':
-      return 'linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);';
+      return 'linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea)';
     case 'electric':
-      return 'linear-gradient(to right, #fffee4, #c5ca7d);';
+      return 'linear-gradient(to right, #fffee4, #c5ca7d)';
     case 'fairy':
-      return 'linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);';
+      return 'linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea)';
     case 'fighting':
-      return 'linear-gradient(to right, #fff0d1, #ceac5d, #ae9018);';
+      return 'linear-gradient(to right, #fff0d1, #ceac5d, #ae9018)';
     case 'fire':
-      return 'linear-gradient(to right, #ed4264, #ffedbc);';
+      return 'linear-gradient(to right, #ed4264, #ffedbc)';
     case 'flying':
-      return 'linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);';
+      return 'linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea)';
     case 'ghost':
       return 'linear-gradient(to right, #ffc0cb, #800080)';
     case 'grass':
-      return 'linear-gradient(to right, #56ab2f, #a8e063);';
+      return 'linear-gradient(to right, #56ab2f, #a8e063)';
     case 'ground':
-      return 'linear-gradient(to right, #fff0d1, #ceac5d, #ae9018);';
+      return 'linear-gradient(to right, #fff0d1, #ceac5d, #ae9018)';
     case 'ice':
       return 'linear-gradient(to right, #2980b9, #6dd5fa, #d5e0f8)';
     case 'normal':
-      return 'linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);';
+      return 'linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea)';
     case 'poison':
-      return 'linear-gradient(to right, #56ab2f, #a8e063);';
+      return 'linear-gradient(to right, #56ab2f, #a8e063)';
     case 'psychic':
       return 'linear-gradient(to right, #f4c4f3, #fc67fa)';
     case 'rock':
-      return 'linear-gradient(to right, #fff0d1, #ceac5d, #ae9018);';
+      return 'linear-gradient(to right, #fff0d1, #ceac5d, #ae9018)';
     case 'steel':
-      return 'linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);';
+      return 'linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea)';
     case 'water':
-      return 'linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);';
+      return 'linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4)';
     default:
       return '#dde4ea';
   }
