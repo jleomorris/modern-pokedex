@@ -46,7 +46,7 @@ const PokemonCard = ({ pokemonId, cardFlipHandler }) => {
               <div className="health-type-container">
                 <p className="hp">{selectedPokemon[0].stats[0].base_stat} HP</p>
                 {selectedPokemon[0].types.map((type) => (
-                  <>{convertToTypeImage(type.type.name)}</>
+                  <div key={type}>{convertToTypeImage(type.type.name)}</div>
                 ))}
               </div>
             </div>
@@ -118,16 +118,12 @@ const PokemonCard = ({ pokemonId, cardFlipHandler }) => {
 // Styled components
 const StyledPokemonCard = styled.div`
   position: absolute;
-  top: 100px;
+  top: 0px;
   left: 0px;
   z-index: 3;
   display: flex;
   justify-content: start;
   align-items: start;
-
-  @media (max-width: 1000px) {
-    width: 80%;
-  }
 
   .detailed-pokemon-card {
     width: 575px;
@@ -138,6 +134,11 @@ const StyledPokemonCard = styled.div`
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.4);
     background: #ffff7a;
     outline: none;
+
+    @media (max-width: 1500px) {
+      width: 500px;
+      height: 696px;
+    }
 
     .inner-content {
       // Conditional background styling based on pokemon type
@@ -212,6 +213,10 @@ const StyledPokemonCard = styled.div`
     border-radius: 1rem;
     position: relative;
     box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 1500px) {
+      height: 304px;
+    }
 
     .background-circle {
       position: absolute;
@@ -296,6 +301,10 @@ const StyledPokemonCard = styled.div`
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: 1;
+
+      @media (max-width: 1500px) {
+        height: 304px;
+      }
     }
   }
 
@@ -307,6 +316,10 @@ const StyledPokemonCard = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    @media (max-width: 1500px) {
+      height: 234.8px;
+    }
 
     .move-container {
       display: flex;
