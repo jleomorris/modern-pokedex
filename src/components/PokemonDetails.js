@@ -20,6 +20,7 @@ const PokemonDetails = ({ pokemonId }) => {
   const pokemonData = useSelector((state) => state.pokemon.pokemonData);
   const pokemonData2 = useSelector((state) => state.pokemon.pokemonData2);
   // State
+  // SelectedPokemon 1 and 2 are based off 2 separate stores of data, from 2 different API calls
   const [selectedPokemon, setSelectedPokemon] = useState(
     pokemonData.filter((pokemon) => pokemon.id.toString() === pokemonId)
   );
@@ -35,6 +36,7 @@ const PokemonDetails = ({ pokemonId }) => {
     background: convertTypeToColor(selectedPokemon[0].types[0].type.name),
   };
 
+  // Automate card flip
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     setTimeout(() => {
@@ -45,6 +47,7 @@ const PokemonDetails = ({ pokemonId }) => {
     }, 1000);
   }, []);
 
+  // Set up own moves and learnable moves
   useEffect(() => {
     const allMoves = selectedPokemon[0].moves.map((move) => move);
     const filteredOwnMoves = allMoves.filter(
@@ -108,6 +111,9 @@ const PokemonDetails = ({ pokemonId }) => {
             <h2 className="feature-title">
               {selectedPokemon2[0].genera[8].genus}
             </h2>
+            <p className="legendary-tag">
+              {selectedPokemon2[0].is_legendary ? 'Legendary' : ''}
+            </p>
             <h2 className="pokemon-card-title">{selectedPokemon[0].name}</h2>
             <div className="type">
               {selectedPokemon[0].types.map((type) => (
@@ -132,7 +138,7 @@ const PokemonDetails = ({ pokemonId }) => {
               <h3>Own moves & level learned</h3>
               {ownMoves &&
                 ownMoves.map((move) => (
-                  <div className="move">
+                  <div className="move" key={move.move.name}>
                     <p className="move-title">{move.move.name}</p>
                     <p className="level-learned">
                       Lvl.
@@ -144,7 +150,7 @@ const PokemonDetails = ({ pokemonId }) => {
               <h3>Can learn</h3>
               {learnableMoves &&
                 learnableMoves.map((move) => (
-                  <div className="move">
+                  <div className="move" key={move.move.name}>
                     <p className="move-title">{move.move.name}</p>
                   </div>
                 ))}
@@ -202,7 +208,7 @@ const StyledPokemonDetails = styled.div`
 
   .card-back {
     position: absolute;
-    top: 100px;
+    top: 0px;
     left: 0px;
     outline: none;
 
@@ -211,6 +217,11 @@ const StyledPokemonDetails = styled.div`
       height: 800px;
       object-fit: cover;
       margin: 2rem -4rem;
+
+      @media (max-width: 1500px) {
+        width: 500px;
+        height: 696px;
+      }
     }
   }
 `;
@@ -266,13 +277,25 @@ const InnerDetails = styled.div`
     text-transform: uppercase;
     letter-spacing: 0.5rem;
     margin: 2rem 0rem;
+    z-index: -1;
+  }
+
+  .legendary-tag {
+    letter-spacing: 0.5rem;
+    text-transform: uppercase;
+    color: gold;
+    font-weight: 900;
   }
 
   .move-container {
-    width: 65%;
+    width: 55%;
     display: flex;
     flex-wrap: wrap;
     margin: 2rem 0rem;
+
+    @media (max-width: 1700px) {
+      width: 50%;
+    }
 
     h3 {
       color: white;
