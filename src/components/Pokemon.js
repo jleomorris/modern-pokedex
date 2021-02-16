@@ -11,7 +11,11 @@ import bulbasaurDefault from '../img/bulbasaur_default.png';
 import lunatoneOfficial from '../img/lunatone_official.png';
 import solrockOfficial from '../img/solrock_official.png';
 // Util
-import { convertToTypeImage, convertToTypeBackground } from '../util';
+import {
+  typeImages,
+  convertToTypeImage,
+  convertToTypeBackground,
+} from '../util';
 // Components
 import PokemonDetails from './PokemonDetails';
 
@@ -32,6 +36,7 @@ const Pokemon = () => {
   const pathId = location.pathname.split('/')[2];
   console.log('pathId', pathId);
 
+  // Set blur if a card is being viewed
   useEffect(() => {
     console.log('location', location);
     if (location.pathname !== '/pokemon') {
@@ -41,15 +46,18 @@ const Pokemon = () => {
     }
   }, [location]);
 
+  // Check that all data is loading
   useEffect(() => {
     dispatch(loadGen1Data());
     console.log(pokemonData);
   }, [dispatch]);
 
+  // Set filtered data when all intial data is loaded
   useEffect(() => {
     setFilteredData(pokemonData);
   }, [pokemonData]);
 
+  // Set sprite type based on index
   const spriteSelectionHandler = () => {
     if (spriteIndex === 0) {
       setIsDreamWorldSelected(true);
@@ -69,16 +77,45 @@ const Pokemon = () => {
     if (spriteIndex !== 2) setSpriteIndex((prev) => prev + 1);
   };
 
-  const filterPokemonHandler = (e) => {
+  // Filter pokemon by user search
+  const filterPokemonBySearchHandler = (e) => {
     console.log(e.target.value);
 
     const allPokemon = pokemonData;
     const userInput = e.target.value;
-    const targetData = allPokemon.filter((pokemon) =>
+    const filteredByInput = allPokemon.filter((pokemon) =>
       pokemon.name.includes(userInput)
     );
 
-    setFilteredData(targetData);
+    setFilteredData(filteredByInput);
+  };
+
+  // Filter pokemon by type
+  const filterPokemonByType = (typeToFilter) => {
+    const allPokemon = pokemonData;
+    const filteredByType = [];
+
+    // Check if each pokemons type matches the type to filter
+    for (let i = 0; i < allPokemon.length; i += 1) {
+      // 1 type
+      if (allPokemon[i].types.length === 1) {
+        if (allPokemon[i].types[0].type.name === typeToFilter) {
+          filteredByType.push(allPokemon[i]);
+        }
+      }
+
+      // 2 types
+      if (allPokemon[i].types.length === 2) {
+        if (
+          allPokemon[i].types[0].type.name === typeToFilter ||
+          allPokemon[i].types[1].type.name === typeToFilter
+        ) {
+          filteredByType.push(allPokemon[i]);
+        }
+      }
+    }
+
+    setFilteredData(filteredByType);
   };
 
   return (
@@ -125,12 +162,24 @@ const Pokemon = () => {
           </button>
         </div>
         <div className="search-container">
-          <p>Filter via search:</p>
+          <p>Filter by search:</p>
           <input
             type="text"
             className="search-pokemon"
-            onChange={filterPokemonHandler}
+            onChange={filterPokemonBySearchHandler}
           />
+        </div>
+        <div className="type-filter-container">
+          <p>Filter by element</p>
+          {typeImages.map((type) => (
+            <div
+              onClick={() => filterPokemonByType(type.type)}
+              onKeyPress={filterPokemonByType}
+              role="presentation"
+            >
+              <img src={type.image} alt={`${type.type} logo`} />
+            </div>
+          ))}
         </div>
       </div>
       <div className="pokemon-card-container">
@@ -191,11 +240,12 @@ const StyledPokemon = styled.div`
   position: relative;
 
   .custom-buttons {
-    /* border: 2px solid red; */
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 4rem;
+    width: 80%;
+    margin: 0 auto;
 
     .custom-button-container {
       /* border: 1px solid blue; */
@@ -244,6 +294,27 @@ const StyledPokemon = styled.div`
         padding: 1rem;
         outline: none;
         border-radius: 1rem;
+      }
+    }
+
+    .type-filter-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 2rem;
+
+      p {
+        font-family: 'Bebas Neue', cursive;
+        font-size: 1.5rem;
+        font-weight: 900;
+        width: 100%;
+      }
+
+      img {
+        height: 40px;
+        width: 40px;
+        cursor: pointer;
       }
     }
   }
