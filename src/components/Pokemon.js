@@ -124,7 +124,15 @@ const Pokemon = () => {
         isDarkModeActive ? 'dark-mode' : ''
       }`}
     >
-      {pathId && <PokemonDetails pokemonId={pathId} />}
+      {pathId && (
+        <PokemonDetails
+          pokemonId={pathId}
+          isDreamWorldSelected={isDreamWorldSelected}
+          isDefaultSelected={isDefaultSelected}
+          isOfficialSelected={isOfficialSelected}
+        />
+      )}
+      {/* MOVE TO ANOTHER COMPONENT */}
       <div className="custom-buttons">
         <div className="custom-button-container">
           {spriteIndex === 0 && <img src={bulbasaurDefault} alt="sprite" />}
@@ -185,6 +193,7 @@ const Pokemon = () => {
       <div className="pokemon-card-container">
         {filteredData &&
           filteredData.map((pokemon) => (
+            // MOVE TO ANOTHER COMPONENT
             <div key={pokemon.name} className="pokemon-card">
               <div className="background-circle" />
               <div className="background-image-container">

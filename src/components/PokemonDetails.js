@@ -13,7 +13,12 @@ import { convertTypeToColor } from '../util';
 // Images
 import cardBack from '../img/card_back.png';
 
-const PokemonDetails = ({ pokemonId }) => {
+const PokemonDetails = ({
+  pokemonId,
+  isOfficialSelected,
+  isDreamWorldSelected,
+  isDefaultSelected,
+}) => {
   // React Router
   const history = useHistory();
   // Redux
@@ -93,6 +98,9 @@ const PokemonDetails = ({ pokemonId }) => {
                 key="front"
                 pokemonId={pokemonId}
                 cardFlipHandler={cardFlipHandler}
+                isDefaultSelected={isDefaultSelected}
+                isDreamWorldSelected={isDreamWorldSelected}
+                isOfficialSelected={isOfficialSelected}
               />
               <div
                 className="card-back"

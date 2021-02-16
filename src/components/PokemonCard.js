@@ -10,7 +10,13 @@ import {
   convertTypeToColor,
 } from '../util';
 
-const PokemonCard = ({ pokemonId, cardFlipHandler }) => {
+const PokemonCard = ({
+  pokemonId,
+  cardFlipHandler,
+  isDreamWorldSelected,
+  isDefaultSelected,
+  isOfficialSelected,
+}) => {
   // Redux
   const pokemonData = useSelector((state) => state.pokemon.pokemonData);
   const pokemonData2 = useSelector((state) => state.pokemon.pokemonData2);
@@ -21,11 +27,16 @@ const PokemonCard = ({ pokemonId, cardFlipHandler }) => {
   const [selectedPokemon2, setSelectedPokemon2] = useState(
     pokemonData2.filter((pokemon) => pokemon.id.toString() === pokemonId)
   );
-
   // Styled component variables
   const theme = {
     background: convertTypeToColor(selectedPokemon[0].types[0].type.name),
   };
+
+  useEffect(() => {
+    console.log('isDefaultSelected', isDefaultSelected);
+    console.log('isDreamWorldSelected', isDreamWorldSelected);
+    console.log('isOfficialSelected', isOfficialSelected);
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -53,14 +64,32 @@ const PokemonCard = ({ pokemonId, cardFlipHandler }) => {
             <div className="card-upper">
               <div className="background-image-container">
                 {convertToTypeBackground(selectedPokemon[0].types[0].type.name)}
-                <img
-                  className="pokemon-card-image-official"
-                  src={
-                    Object.values(selectedPokemon[0].sprites.other)[1]
-                      .front_default
-                  }
-                  alt={selectedPokemon[0].name}
-                />
+                {isDreamWorldSelected && (
+                  <img
+                    className="pokemon-card-image-dream-world"
+                    src={
+                      selectedPokemon[0].sprites.other.dream_world.front_default
+                    }
+                    alt={selectedPokemon[0].name}
+                  />
+                )}
+                {isOfficialSelected && (
+                  <img
+                    className="pokemon-card-image-official"
+                    src={
+                      Object.values(selectedPokemon[0].sprites.other)[1]
+                        .front_default
+                    }
+                    alt={selectedPokemon[0].name}
+                  />
+                )}
+                {isDefaultSelected && (
+                  <img
+                    className="pokemon-card-image-default"
+                    src={selectedPokemon[0].sprites.front_default}
+                    alt={selectedPokemon[0].name}
+                  />
+                )}
                 <div className="genus-height-weight-container">
                   <p>{`${selectedPokemon2[0].genera[7].genus},`}</p>
                   {/* Height and weight are the wrong way around in the api data */}
@@ -216,18 +245,6 @@ const StyledPokemonCard = styled.div`
 
     @media (max-width: 1500px) {
       height: 304px;
-    }
-
-    .background-circle {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      height: 150px;
-      width: 150px;
-      background: #ffffffa3;
-      border-radius: 50%;
-      z-index: 1;
     }
 
     .background-image-container {
