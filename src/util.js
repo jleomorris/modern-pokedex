@@ -37,6 +37,27 @@ import rockBackground from './img/card_backgrounds/rock.jpeg';
 import steelBackground from './img/card_backgrounds/steel.jpeg';
 import waterBackground from './img/card_backgrounds/water.jpeg';
 
+export const typeImages = [
+  { type: 'fire', image: fireType },
+  { type: 'bug', image: bugType },
+  { type: 'dark', image: darkType },
+  { type: 'dragon', image: dragonType },
+  { type: 'electric', image: electricType },
+  { type: 'fairy', image: fairyType },
+  { type: 'fighting', image: fightingType },
+  { type: 'flying', image: flyingType },
+  { type: 'ghost', image: ghostType },
+  { type: 'grass', image: grassType },
+  { type: 'ground', image: groundType },
+  { type: 'ice', image: iceType },
+  { type: 'normal', image: normalType },
+  { type: 'poison', image: poisonType },
+  { type: 'psychic', image: psychicType },
+  { type: 'rock', image: rockType },
+  { type: 'steel', image: steelType },
+  { type: 'water', image: waterType },
+];
+
 export const convertToTypeImage = (type) => {
   switch (type) {
     case 'fire':
