@@ -15,11 +15,11 @@ const Home = () => {
       <div className="content-container">
         <p>A modern take on the classic generation 1 pokedex.</p>
         <ul>
-          <li>Dynamic calls to pokeapi</li>
+          <li>All data from pokeapi</li>
           <li>Custom sprite styles</li>
-          <li>Detailed info in card form</li>
-          {/* <li>Redux and Redux Dev Tools</li>
-          <li>React Router</li> */}
+          <li>View Pokemon card and extensive data</li>
+          <li>Dark mode</li>
+          <li>Filter by search and type</li>
         </ul>
       </div>
     </StyledHome>
@@ -57,7 +57,7 @@ const StyledHome = styled.div`
     justify-content: flex-start;
     flex-direction: column;
     align-items: end;
-    padding: 4rem;
+    padding: 2rem;
     height: 90vh;
     position: relative;
 
