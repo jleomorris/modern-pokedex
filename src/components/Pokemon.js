@@ -164,7 +164,7 @@ const Pokemon = () => {
 
   return (
     <StyledPokemon
-      className={`pokemon ${isBlurActive ? 'enable-blur' : ''} ${
+      className={`pokemon ${isBlurActive ? 'enable-blur enable-cursor' : ''} ${
         isDarkModeActive ? 'dark-mode' : ''
       }`}
     >
@@ -175,6 +175,11 @@ const Pokemon = () => {
           isDefaultSelected={isDefaultSelected}
           isOfficialSelected={isOfficialSelected}
         />
+      )}
+      {pathId && (
+        <div className="exit-message">
+          <p>Click here to exit</p>
+        </div>
       )}
       {/* MOVE TO ANOTHER COMPONENT */}
       <div className="custom-buttons">
@@ -295,6 +300,29 @@ const StyledPokemon = styled.div`
   padding: 6rem 0rem;
   min-height: 100vh;
   position: relative;
+
+  .exit-message {
+    filter: blur(0);
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    background: black;
+    height: 150px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: 2rem;
+    cursor: pointer;
+
+    p {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 2rem;
+      text-align: center;
+      color: white;
+    }
+  }
 
   .custom-buttons {
     display: flex;
@@ -487,6 +515,7 @@ const StyledPokemon = styled.div`
       .pokemon-card-image-official,
       .pokemon-card-image-default {
         height: 190px;
+        width: 190px;
         padding: 1rem;
         position: absolute;
         top: 50%;
