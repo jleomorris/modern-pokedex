@@ -13,13 +13,17 @@ const GlobalStyle = createGlobalStyle`
       background: rgba(0,0,0,0.9);
   }
 
- .enable-blur >* {
-  filter: blur(3px);
-}
+  .enable-blur >* {
+   filter: blur(3px);
+  }
 
-.enable-cursor {
+  .enable-cursor {
     cursor: pointer;
-}
+  }
+
+  .mt-1{
+      margin-top: 1rem;
+  }
   
   // Media Queries
 

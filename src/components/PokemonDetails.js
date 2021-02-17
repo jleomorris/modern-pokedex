@@ -135,9 +135,6 @@ const PokemonDetails = ({
             <h2 className="feature-title">
               {selectedPokemon2[0].genera[8].genus}
             </h2>
-            <p className="legendary-tag">
-              {selectedPokemon2[0].is_legendary ? 'Legendary' : ''}
-            </p>
             {/* Icons courtesy of icons8 */}
             <div className="forward-back-button-container">
               <button
@@ -160,8 +157,15 @@ const PokemonDetails = ({
             <div className="title-id-container">
               <h2 className="pokemon-card-id">#{selectedPokemon[0].id}</h2>
               <h2 className="pokemon-card-title">{selectedPokemon[0].name}</h2>
+              <p className="legendary-tag">
+                {selectedPokemon2[0].is_legendary ? 'Legendary' : ''}
+              </p>
             </div>
-            <div className="type">
+            <div
+              className={`type ${
+                selectedPokemon2[0].is_legendary ? 'mt-1' : ''
+              }`}
+            >
               {selectedPokemon[0].types.map((type) => (
                 <p
                   style={{
@@ -332,6 +336,7 @@ const InnerDetails = styled.div`
   .title-id-container {
     display: flex;
     align-items: baseline;
+    position: relative;
 
     .pokemon-card-id {
       font-size: 2rem;
@@ -339,10 +344,22 @@ const InnerDetails = styled.div`
       font-weight: 100;
       opacity: 0.8;
     }
+
+    .legendary-tag {
+      position: absolute;
+      bottom: -15px;
+      right: -30px;
+      color: gold;
+      font-weight: 900;
+      font-size: 2rem;
+      letter-spacing: 0.5rem;
+      text-transform: uppercase;
+    }
   }
 
   .type {
     display: flex;
+
     p {
       border-radius: 1rem;
       margin: 0.5rem;
@@ -361,13 +378,6 @@ const InnerDetails = styled.div`
     letter-spacing: 0.5rem;
     margin: 2rem 0rem;
     z-index: -1;
-  }
-
-  .legendary-tag {
-    letter-spacing: 0.5rem;
-    text-transform: uppercase;
-    color: gold;
-    font-weight: 900;
   }
 
   .forward-back-button-container {
