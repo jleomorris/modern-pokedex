@@ -237,6 +237,7 @@ const StyledPokemonDetails = styled.div`
   width: 80%;
   position: relative;
   z-index: 3;
+  cursor: auto;
 
   @media (max-width: 1000px) {
     width: 80%;
@@ -244,9 +245,10 @@ const StyledPokemonDetails = styled.div`
 
   .react-card-flip {
     position: absolute;
-    top: 100px;
+    top: 130px;
     left: 0px;
     z-index: 3 !important;
+    cursor: pointer;
   }
 
   .card-back {
@@ -343,6 +345,8 @@ const InnerDetails = styled.div`
   }
 
   .forward-back-button-container {
+    margin-top: 1rem;
+
     button {
       color: transparent;
       outline: none;
