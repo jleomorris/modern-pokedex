@@ -146,8 +146,8 @@ const PokemonDetails = ({
               <h3>Own moves & level learned</h3>
               {ownMoves &&
                 ownMoves.map((move) => (
-                  <div className="move" key={move.move.name}>
-                    <p className="move-title">{move.move.name}</p>
+                  <div className="own-move" key={move.move.name}>
+                    <p className="own-move-title">{move.move.name}</p>
                     <p className="level-learned">
                       Lvl.
                       {move.version_group_details[0].level_learned_at}
@@ -158,8 +158,8 @@ const PokemonDetails = ({
               <h3>Can learn</h3>
               {learnableMoves &&
                 learnableMoves.map((move) => (
-                  <div className="move" key={move.move.name}>
-                    <p className="move-title">{move.move.name}</p>
+                  <div className="can-learn" key={move.move.name}>
+                    <p className="can-learn-title">{move.move.name}</p>
                   </div>
                 ))}
             </div>
@@ -313,12 +313,21 @@ const InnerDetails = styled.div`
       margin: 2rem 0rem;
     }
 
-    .move {
+    .own-move {
       margin: 1rem;
       margin: 1rem;
       background: rgba(256, 256, 256, 0.3);
       border-radius: 2rem;
       padding: 2rem;
+      position: relative;
+    }
+
+    .can-learn {
+      margin: 1rem;
+      margin: 1rem;
+      background: rgba(256, 256, 256, 0.3);
+      border-radius: 2rem;
+      padding: 1rem;
       position: relative;
     }
 
