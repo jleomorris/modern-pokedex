@@ -16,6 +16,10 @@ const GlobalStyle = createGlobalStyle`
  .enable-blur >* {
   filter: blur(3px);
 }
+
+.enable-cursor {
+    cursor: pointer;
+}
   
   // Media Queries
 
