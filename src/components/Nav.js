@@ -36,6 +36,7 @@ const StyledNav = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
+    box-shadow: 0px -10px 40px rgba(255, 255, 255, 0.3);
   }
 
   h1 {
