@@ -312,6 +312,7 @@ const StyledPokemonCard = styled.div`
     .pokemon-card-image-official,
     .pokemon-card-image-default {
       height: 350px;
+      width: 350px;
       padding: 1rem;
       position: absolute;
       top: 50%;
