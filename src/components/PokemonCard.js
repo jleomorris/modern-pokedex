@@ -11,7 +11,7 @@ import {
 } from '../util';
 
 const PokemonCard = ({
-  pokemonId,
+  pathId,
   cardFlipHandler,
   isDreamWorldSelected,
   isDefaultSelected,
@@ -21,6 +21,7 @@ const PokemonCard = ({
   const pokemonData = useSelector((state) => state.pokemon.pokemonData);
   const pokemonData2 = useSelector((state) => state.pokemon.pokemonData2);
   // State
+  const [pokemonId, setPokemonId] = useState(pathId);
   const [selectedPokemon, setSelectedPokemon] = useState(
     pokemonData.filter((pokemon) => pokemon.id.toString() === pokemonId)
   );
@@ -32,11 +33,20 @@ const PokemonCard = ({
     background: convertTypeToColor(selectedPokemon[0].types[0].type.name),
   };
 
+  // When pokemon id changes reset selected pokemon
   useEffect(() => {
-    console.log('isDefaultSelected', isDefaultSelected);
-    console.log('isDreamWorldSelected', isDreamWorldSelected);
-    console.log('isOfficialSelected', isOfficialSelected);
-  }, []);
+    setSelectedPokemon(
+      pokemonData.filter((pokemon) => pokemon.id.toString() === pokemonId)
+    );
+    setSelectedPokemon2(
+      pokemonData2.filter((pokemon) => pokemon.id.toString() === pokemonId)
+    );
+  }, [pokemonId]);
+
+  // Re set pokemon id when path id changes
+  useEffect(() => {
+    setPokemonId(pathId);
+  }, [pathId]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -57,7 +67,9 @@ const PokemonCard = ({
               <div className="health-type-container">
                 <p className="hp">{selectedPokemon[0].stats[0].base_stat} HP</p>
                 {selectedPokemon[0].types.map((type) => (
-                  <div key={type}>{convertToTypeImage(type.type.name)}</div>
+                  <div key={type.type.name}>
+                    {convertToTypeImage(type.type.name)}
+                  </div>
                 ))}
               </div>
             </div>

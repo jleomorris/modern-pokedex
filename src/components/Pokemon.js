@@ -170,7 +170,7 @@ const Pokemon = () => {
     >
       {pathId && (
         <PokemonDetails
-          pokemonId={pathId}
+          pathId={pathId}
           isDreamWorldSelected={isDreamWorldSelected}
           isDefaultSelected={isDefaultSelected}
           isOfficialSelected={isOfficialSelected}

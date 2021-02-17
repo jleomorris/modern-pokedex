@@ -12,9 +12,11 @@ import PokemonCard from './PokemonCard';
 import { convertTypeToColor } from '../util';
 // Images
 import cardBack from '../img/card_back.png';
+import forwardArrow from '../img/icons8-forward-arrow-50.png';
+import backArrow from '../img/icons8-reply-arrow-50.png';
 
 const PokemonDetails = ({
-  pokemonId,
+  pathId,
   isOfficialSelected,
   isDreamWorldSelected,
   isDefaultSelected,
@@ -25,6 +27,7 @@ const PokemonDetails = ({
   const pokemonData = useSelector((state) => state.pokemon.pokemonData);
   const pokemonData2 = useSelector((state) => state.pokemon.pokemonData2);
   // State
+  const [pokemonId, setPokemonId] = useState(pathId);
   // SelectedPokemon 1 and 2 are based off 2 separate stores of data, from 2 different API calls
   const [selectedPokemon, setSelectedPokemon] = useState(
     pokemonData.filter((pokemon) => pokemon.id.toString() === pokemonId)
@@ -35,7 +38,6 @@ const PokemonDetails = ({
   const [isFlipped, setisFlipped] = useState(false);
   const [ownMoves, setOwnMoves] = useState();
   const [learnableMoves, setLearnableMoves] = useState();
-
   // Styled component variables
   const theme = {
     background: convertTypeToColor(selectedPokemon[0].types[0].type.name),
@@ -65,6 +67,16 @@ const PokemonDetails = ({
     setOwnMoves(filteredOwnMoves);
     setLearnableMoves(filteredLearnableMoves);
   }, [selectedPokemon]);
+
+  // When pokemon id changes reset selected pokemon
+  useEffect(() => {
+    setSelectedPokemon(
+      pokemonData.filter((pokemon) => pokemon.id.toString() === pokemonId)
+    );
+    setSelectedPokemon2(
+      pokemonData2.filter((pokemon) => pokemon.id.toString() === pokemonId)
+    );
+  }, [pokemonId]);
 
   const exitDetailHandler = (e) => {
     const element = e.target;
@@ -96,7 +108,7 @@ const PokemonDetails = ({
             >
               <PokemonCard
                 key="front"
-                pokemonId={pokemonId}
+                pathId={pokemonId}
                 cardFlipHandler={cardFlipHandler}
                 isDefaultSelected={isDefaultSelected}
                 isDreamWorldSelected={isDreamWorldSelected}
@@ -114,6 +126,7 @@ const PokemonDetails = ({
               </div>
             </ReactCardFlip>
           )}
+          {/* SPLIT INTO COMPONENT */}
           <InnerDetails className="inner-details">
             {/* <h2 className="feature-title">{selectedPokemon[0].name}</h2> */}
             <h2 className="feature-title">
@@ -122,7 +135,29 @@ const PokemonDetails = ({
             <p className="legendary-tag">
               {selectedPokemon2[0].is_legendary ? 'Legendary' : ''}
             </p>
-            <h2 className="pokemon-card-title">{selectedPokemon[0].name}</h2>
+            {/* Icons courtesy of icons8 */}
+            <div className="forward-back-button-container">
+              <button
+                type="button"
+                onClick={() =>
+                  setPokemonId((prev) => (parseFloat(prev) - 1).toString())
+                }
+              >
+                <img src={backArrow} alt="back arrow" />
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  setPokemonId((prev) => (parseFloat(prev) + 1).toString())
+                }
+              >
+                <img src={forwardArrow} alt="back arrow" />
+              </button>
+            </div>
+            <div className="title-id-container">
+              <h2 className="pokemon-card-id">#{selectedPokemon[0].id}</h2>
+              <h2 className="pokemon-card-title">{selectedPokemon[0].name}</h2>
+            </div>
             <div className="type">
               {selectedPokemon[0].types.map((type) => (
                 <p
@@ -266,6 +301,18 @@ const InnerDetails = styled.div`
     color: white;
   }
 
+  .title-id-container {
+    display: flex;
+    align-items: baseline;
+
+    .pokemon-card-id {
+      font-size: 2rem;
+      margin: 0.5rem;
+      font-weight: 100;
+      opacity: 0.8;
+    }
+  }
+
   .type {
     display: flex;
     p {
@@ -293,6 +340,21 @@ const InnerDetails = styled.div`
     text-transform: uppercase;
     color: gold;
     font-weight: 900;
+  }
+
+  .forward-back-button-container {
+    button {
+      color: transparent;
+      outline: none;
+      border: none;
+      margin: 0rem 0.5rem;
+      cursor: pointer;
+
+      img {
+        filter: invert(1);
+        background: white;
+      }
+    }
   }
 
   .move-container {
