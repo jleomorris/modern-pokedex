@@ -64,32 +64,25 @@ const PokemonCard = ({
             <div className="card-upper">
               <div className="background-image-container">
                 {convertToTypeBackground(selectedPokemon[0].types[0].type.name)}
-                {isDreamWorldSelected && (
-                  <img
-                    className="pokemon-card-image-dream-world"
-                    src={
-                      selectedPokemon[0].sprites.other.dream_world.front_default
-                    }
-                    alt={selectedPokemon[0].name}
-                  />
-                )}
-                {isOfficialSelected && (
-                  <img
-                    className="pokemon-card-image-official"
-                    src={
-                      Object.values(selectedPokemon[0].sprites.other)[1]
-                        .front_default
-                    }
-                    alt={selectedPokemon[0].name}
-                  />
-                )}
-                {isDefaultSelected && (
-                  <img
-                    className="pokemon-card-image-default"
-                    src={selectedPokemon[0].sprites.front_default}
-                    alt={selectedPokemon[0].name}
-                  />
-                )}
+                <img
+                  className={`${
+                    isDreamWorldSelected ? 'pokemon-card-image-dream-world' : ''
+                  } ${
+                    isOfficialSelected ? 'pokemon-card-image-official' : ''
+                  } ${isDefaultSelected ? 'pokemon-card-image-default' : ''}`}
+                  src={
+                    isDreamWorldSelected
+                      ? selectedPokemon[0].sprites.other.dream_world
+                          .front_default
+                      : '' || isOfficialSelected
+                      ? Object.values(selectedPokemon[0].sprites.other)[1]
+                          .front_default
+                      : '' || isDefaultSelected
+                      ? selectedPokemon[0].sprites.front_default
+                      : ''
+                  }
+                  alt={selectedPokemon[0].name}
+                />
                 <div className="genus-height-weight-container">
                   <p>{`${selectedPokemon2[0].genera[7].genus},`}</p>
                   {/* Height and weight are the wrong way around in the api data */}
