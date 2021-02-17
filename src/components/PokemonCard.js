@@ -61,6 +61,9 @@ const PokemonCard = ({
           role="button"
           tabIndex="0"
         >
+          <div className="click-message">
+            <p>Click card to flip</p>
+          </div>
           <div className="inner-content">
             <div className="title-health-type-container">
               <h2 className="pokemon-card-title">{selectedPokemon[0].name}</h2>
@@ -168,10 +171,36 @@ const StyledPokemonCard = styled.div`
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.4);
     background: #ffff7a;
     outline: none;
+    position: relative;
 
     @media (max-width: 1500px) {
       width: 500px;
       height: 696px;
+    }
+
+    .click-message {
+      position: absolute;
+      padding: 2rem;
+      bottom: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: black;
+      border-radius: 4rem;
+      box-shadow: 0px 0px 10px white;
+      height: 150px;
+      width: 150px;
+      z-index: -1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      cursor: auto;
+
+      p {
+        font-family: 'Bebas Neue', cursive;
+        font-size: 1.5rem;
+        text-align: center;
+        color: white;
+      }
     }
 
     .inner-content {
