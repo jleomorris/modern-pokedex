@@ -176,11 +176,6 @@ const Pokemon = () => {
           isOfficialSelected={isOfficialSelected}
         />
       )}
-      {pathId && (
-        <div className="exit-message">
-          <p>Click here to exit</p>
-        </div>
-      )}
       {/* MOVE TO ANOTHER COMPONENT */}
       <div className="custom-buttons">
         <div className="custom-button-container">
@@ -301,29 +296,6 @@ const StyledPokemon = styled.div`
   min-height: 100vh;
   position: relative;
 
-  .exit-message {
-    filter: blur(0);
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    background: black;
-    height: 150px;
-    width: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    padding: 2rem;
-    cursor: pointer;
-
-    p {
-      font-family: 'Bebas Neue', cursive;
-      font-size: 2rem;
-      text-align: center;
-      color: white;
-    }
-  }
-
   .custom-buttons {
     display: flex;
     justify-content: center;
@@ -397,8 +369,8 @@ const StyledPokemon = styled.div`
       }
 
       img {
-        height: 40px;
-        width: 40px;
+        height: 60px;
+        width: 60px;
         cursor: pointer;
         margin: 0.5rem;
       }

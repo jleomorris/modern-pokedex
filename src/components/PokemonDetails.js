@@ -96,6 +96,9 @@ const PokemonDetails = ({
   return (
     <ThemeProvider theme={theme}>
       <DetailsShadow className="details-shadow" onClick={exitDetailHandler}>
+        <div className="exit-message">
+          <p>Click blurred area to exit</p>
+        </div>
         <StyledPokemonDetails className="pokemon-details">
           {selectedPokemon && selectedPokemon2 && (
             <ReactCardFlip
@@ -229,6 +232,29 @@ const DetailsShadow = styled.div`
   &::-webkit-scrollbar-track {
     background: white;
   }
+
+  .exit-message {
+    filter: blur(0);
+    position: absolute;
+    top: 150px;
+    left: 30px;
+    background: black;
+    height: 150px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: 2rem;
+    cursor: pointer;
+
+    p {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.5rem;
+      text-align: center;
+      color: white;
+    }
+  }
 `;
 
 const StyledPokemonDetails = styled.div`
@@ -277,7 +303,7 @@ const InnerDetails = styled.div`
   justify-content: flex-start;
   align-items: flex-end;
   padding-top: 7rem;
-  padding-right: 1rem;
+  padding-right: 3rem;
   height: 100vh;
   overflow-y: scroll;
 
