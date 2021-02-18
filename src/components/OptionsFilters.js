@@ -1,4 +1,6 @@
 import React from 'react';
+// Styled components
+import styled from 'styled-components';
 // Images
 import bulbasaurDefault from '../img/bulbasaur_default.png';
 import lunatoneOfficial from '../img/lunatone_official.png';
@@ -15,7 +17,7 @@ const OptionsFilters = ({
   setIsDarkModeActive,
 }) => {
   return (
-    <div className="custom-buttons">
+    <StyledOptionsFilters className="options-filters">
       <div className="custom-button-container">
         {spriteIndex === 0 && <img src={bulbasaurDefault} alt="sprite" />}
         {spriteIndex === 1 && (
@@ -75,8 +77,90 @@ const OptionsFilters = ({
           </div>
         ))}
       </div>
-    </div>
+    </StyledOptionsFilters>
   );
 };
+
+// Styled components
+const StyledOptionsFilters = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4rem;
+  width: 80%;
+  margin: 0 auto;
+
+  .custom-button-container {
+    /* border: 1px solid blue; */
+    position: relative;
+    margin: 0rem 2rem;
+
+    img {
+      position: absolute;
+      top: -50px;
+      height: 100px;
+      left: -60px;
+    }
+
+    .dark-mode-sprite {
+      top: -50px;
+      left: -30px;
+    }
+
+    button {
+      padding: 1rem 2rem;
+      border-radius: 2rem;
+      border: none;
+      margin: 1rem;
+      outline: none;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 2rem;
+      letter-spacing: 0.25rem;
+      cursor: pointer;
+      /* transition: all 5s ease; */
+
+      p {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .search-container {
+    p {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.5rem;
+      font-weight: 900;
+    }
+
+    input {
+      font-size: 1.5rem;
+      padding: 1rem;
+      outline: none;
+      border-radius: 1rem;
+    }
+  }
+
+  .type-filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 2rem;
+
+    p {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.5rem;
+      font-weight: 900;
+      width: 100%;
+    }
+
+    img {
+      height: 60px;
+      width: 60px;
+      cursor: pointer;
+      margin: 0.5rem;
+    }
+  }
+`;
 
 export default OptionsFilters;
