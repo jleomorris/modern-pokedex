@@ -4,8 +4,7 @@ import styled from 'styled-components';
 // React Router
 import { useLocation, Link } from 'react-router-dom';
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
-import { loadGen1Data } from '../redux/pokemonReducer';
+import { useSelector } from 'react-redux';
 // Images
 import bulbasaurDefault from '../img/bulbasaur_default.png';
 import lunatoneOfficial from '../img/lunatone_official.png';
@@ -21,7 +20,6 @@ import PokemonDetails from './PokemonDetails';
 
 const Pokemon = () => {
   // Redux
-  const dispatch = useDispatch();
   const pokemonData = useSelector((state) => state.pokemon.pokemonData);
   // State
   const [filteredData, setFilteredData] = useState();
@@ -47,12 +45,6 @@ const Pokemon = () => {
       setIsBlurActive(false);
     }
   }, [location]);
-
-  // Check that all data is loading
-  useEffect(() => {
-    dispatch(loadGen1Data());
-    console.log(pokemonData);
-  }, [dispatch]);
 
   // Set filtered data when all intial data is loaded
   useEffect(() => {
