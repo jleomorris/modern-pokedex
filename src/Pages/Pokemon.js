@@ -16,7 +16,7 @@ import {
   convertToTypeBackground,
 } from '../util';
 // Components
-import PokemonDetails from './PokemonDetails';
+import PokemonDetails from '../components/PokemonDetails';
 
 const Pokemon = () => {
   // Redux

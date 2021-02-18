@@ -8,9 +8,9 @@ import { useDispatch } from 'react-redux';
 import { loadGen1Data } from './redux/pokemonReducer';
 // Components
 import GlobalStyle from './components/GlobalStyle';
-import Home from './components/Home';
+import Home from './Pages/Home';
 import Nav from './components/Nav';
-import Pokemon from './components/Pokemon';
+import Pokemon from './Pages/Pokemon';
 
 const App = () => {
   // Redux
