@@ -184,7 +184,7 @@ const StyledPokemonCard = styled.div`
       bottom: -100px;
       left: 50%;
       transform: translateX(-50%);
-      background: black;
+      background: rgba(256, 256, 256, 0.1);
       border-radius: 4rem;
       box-shadow: 0px 0px 10px white;
       height: 150px;

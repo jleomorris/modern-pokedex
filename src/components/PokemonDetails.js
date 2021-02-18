@@ -241,14 +241,14 @@ const DetailsShadow = styled.div`
     filter: blur(0);
     position: absolute;
     top: 150px;
-    left: 30px;
-    background: black;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.7);
     height: 150px;
     width: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
+    border-radius: 0 50% 50% 0;
     padding: 2rem;
     cursor: pointer;
 
@@ -395,6 +395,10 @@ const InnerDetails = styled.div`
         background: white;
       }
     }
+  }
+
+  .description {
+    width: 55%;
   }
 
   .move-container {
