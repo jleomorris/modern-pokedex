@@ -18,7 +18,7 @@ const OptionsFilters = ({
 }) => {
   return (
     <StyledOptionsFilters className="options-filters">
-      <div className="custom-button-container">
+      <div className="option-filter">
         {spriteIndex === 0 && <img src={bulbasaurDefault} alt="sprite" />}
         {spriteIndex === 1 && (
           <img
@@ -39,7 +39,7 @@ const OptionsFilters = ({
           {spriteIndex === 2 && 'Official'}
         </button>
       </div>
-      <div className="custom-button-container">
+      <div className="option-filter">
         <img
           src={isDarkModeActive ? lunatoneOfficial : solrockOfficial}
           alt="sprite"
@@ -65,6 +65,7 @@ const OptionsFilters = ({
         <p>Filter by element (click again to remove)</p>
         {typeImages.map((type) => (
           <div
+            key={type.type}
             onClick={() => filterPokemonByTypeHandler(type.type)}
             onKeyPress={filterPokemonByTypeHandler}
             role="presentation"
@@ -89,11 +90,12 @@ const StyledOptionsFilters = styled.div`
   margin-bottom: 4rem;
   width: 80%;
   margin: 0 auto;
+  flex-wrap: wrap;
 
-  .custom-button-container {
+  .option-filter {
     /* border: 1px solid blue; */
     position: relative;
-    margin: 0rem 2rem;
+    margin: 1rem 2rem;
 
     img {
       position: absolute;
@@ -146,6 +148,11 @@ const StyledOptionsFilters = styled.div`
     align-items: center;
     flex-wrap: wrap;
     margin: 2rem;
+    width: 50%;
+
+    @media (max-width: 1000px) {
+      width: 80%;
+    }
 
     p {
       font-family: 'Bebas Neue', cursive;
