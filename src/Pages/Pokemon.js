@@ -26,7 +26,6 @@ const Pokemon = () => {
   // Router
   const location = useLocation();
   const pathId = location.pathname.split('/')[2];
-  console.log('pathId', pathId);
 
   // Set blur if a card is being viewed
   useEffect(() => {
@@ -164,11 +163,14 @@ const Pokemon = () => {
         spriteIndex={spriteIndex}
         spriteSelectionHandler={spriteSelectionHandler}
         isDarkModeActive={isDarkModeActive}
+        setIsDarkModeActive={setIsDarkModeActive}
         filterPokemonBySearchHandler={filterPokemonBySearchHandler}
         filterPokemonByTypeHandler={filterPokemonByTypeHandler}
-        setIsDarkModeActive={setIsDarkModeActive}
       />
       <div className="pokemon-card-container">
+        {filteredData && filteredData.length === 0 && (
+          <h2 className="no-results">No results</h2>
+        )}
         {filteredData &&
           filteredData.map((pokemon) => (
             <Card
@@ -196,6 +198,10 @@ const StyledPokemon = styled.div`
     grid-row-gap: 1.5rem;
     margin: 4rem 2rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+
+    .no-results {
+      text-align: center;
+    }
   }
 `;
 
