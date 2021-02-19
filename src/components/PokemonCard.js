@@ -156,7 +156,7 @@ const PokemonCard = ({
 const StyledPokemonCard = styled.div`
   position: absolute;
   top: 0px;
-  left: 0px;
+  left: -75px;
   z-index: 3;
   display: flex;
   justify-content: start;

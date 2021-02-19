@@ -195,7 +195,7 @@ const DetailsShadow = styled.div`
 const StyledPokemonDetails = styled.div`
   background: rgba(0, 0, 0, 1);
   height: 120vh;
-  width: 80%;
+  width: 85%;
   position: relative;
   z-index: 3;
   cursor: auto;
@@ -215,7 +215,7 @@ const StyledPokemonDetails = styled.div`
   .card-back {
     position: absolute;
     top: 0px;
-    left: 0px;
+    left: -75px;
     outline: none;
 
     img {
