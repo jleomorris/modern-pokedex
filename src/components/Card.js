@@ -21,7 +21,7 @@ const Card = ({
       <p className="attack">{pokemon.stats[1].base_stat}</p>
       <div className="type-container">
         {pokemon.types.map((type) => (
-          <>{convertToTypeImage(type.type.name)}</>
+          <div key={type.type.name}>{convertToTypeImage(type.type.name)}</div>
         ))}
       </div>
       <div className="name-health-container">
@@ -122,6 +122,7 @@ const StyledCard = styled.div`
     top: -25px;
     left: 53%;
     transform: translateX(-50%);
+    display: flex;
 
     img {
       width: 50px;
