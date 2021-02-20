@@ -45,13 +45,24 @@ const InnerDetails = ({
         const secondEvolutionName = response.data.chain.evolves_to[0]
           .evolves_to[0]
           ? response.data.chain.evolves_to[0].evolves_to[0].species.name
-          : [];
-        // debugger;
+          : '';
 
         console.log('baseStageName', baseStageName);
         console.log('firstEvolutionName', firstEvolutionName);
         console.log('secondEvolutionName', secondEvolutionName);
         console.info('pokemonData', pokemonData);
+        console.info(
+          'baseStage',
+          pokemonData.filter((pokemon) => pokemon.name === baseStageName)
+        );
+        console.info(
+          'firstEvolution',
+          pokemonData.filter((pokemon) => pokemon.name === firstEvolutionName)
+        );
+        console.info(
+          'secondEvolution',
+          pokemonData.filter((pokemon) => pokemon.name === secondEvolutionName)
+        );
 
         // debugger;
 
@@ -174,11 +185,11 @@ const InnerDetails = ({
             </div>
           )}
           {/* TypeError: Cannot read property 'sprites' of undefined */}
-          {typeof secondEvolution !== 'undefined' && (
+          {secondEvolution && secondEvolution.length > 0 && (
             <div className="evolution-card">
               <img
                 src={
-                  typeof secondEvolution !== 'undefined'
+                  secondEvolution && secondEvolution.length > 0
                     ? Object.values(secondEvolution[0].sprites.other)[1]
                         .front_default
                     : ''
