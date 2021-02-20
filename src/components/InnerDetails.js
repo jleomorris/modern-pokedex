@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 // Images
 import forwardArrow from '../img/icons8-forward-arrow-50.png';
 import backArrow from '../img/icons8-reply-arrow-50.png';
+import ash from '../img/pokemon-ash.png';
 // Util
 import { convertTypeToColor } from '../util';
 
@@ -211,6 +212,19 @@ const InnerDetails = ({
               </div>
             </div>
           )}
+          <div className="evolution-card">
+            <img
+              src={ash}
+              style={{
+                height: '378px',
+                filter: 'brightness(0)',
+              }}
+              alt="trainer"
+            />
+            <div className="name-type-container">
+              <p className="trainer-name">Ash</p>
+            </div>
+          </div>
         </div>
       </div>
       <div className="move-container">
@@ -390,7 +404,8 @@ const StyledInnerDetails = styled.div`
 
         .base-stage-name,
         .first-evolution-name,
-        .second-evolution-name {
+        .second-evolution-name,
+        .trainer-name {
           margin: 0.25rem 0rem;
           border-radius: 2rem;
           text-align: center;
