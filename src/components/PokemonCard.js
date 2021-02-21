@@ -113,7 +113,7 @@ const PokemonCard = ({
             <div className="card-lower">
               <div className="move-container">
                 {selectedPokemon[0].moves.map((move) => (
-                  <div className="move">
+                  <div className="move" key={move.move.name}>
                     <p className="move-title">{move.move.name}</p>
                   </div>
                 ))}
@@ -129,7 +129,7 @@ const PokemonCard = ({
             </div>
             <div className="id-container">
               <p className="id">{selectedPokemon[0].id}/151</p>
-              <d className="circle" />
+              <div className="circle" />
             </div>
           </div>
         </div>
@@ -170,7 +170,7 @@ const StyledPokemonCard = styled.div`
       bottom: -100px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(256, 256, 256, 0.1);
+      background: rgba(0, 0, 0, 0.9);
       border-radius: 4rem;
       box-shadow: 0px 0px 10px white;
       height: 150px;
