@@ -112,29 +112,11 @@ const PokemonCard = ({
             </div>
             <div className="card-lower">
               <div className="move-container">
-                <>
+                {selectedPokemon[0].moves.map((move) => (
                   <div className="move">
-                    <p className="move-title">
-                      {selectedPokemon[0].moves[0].move.name}
-                    </p>
+                    <p className="move-title">{move.move.name}</p>
                   </div>
-                  <div className="move">
-                    <p className="move-title">
-                      {selectedPokemon[0].moves[1].move.name}
-                    </p>
-                  </div>
-                  <div className="move">
-                    <p className="move-title">
-                      {selectedPokemon[0].moves[2].move.name}
-                    </p>
-                  </div>
-                </>
-                {/* {selectedPokemon[0].moves.map((move) => (
-                <div className="move">
-                  <p className="move-title">{move.move.name}</p>
-                  <br />
-                </div>
-              ))} */}
+                ))}
               </div>
               <div className="description">
                 <p>
@@ -393,7 +375,7 @@ const StyledPokemonCard = styled.div`
           font-size: 1.5rem;
           text-transform: capitalize;
           font-weight: bolder;
-          padding: 1rem 0rem;
+          padding: 1.2rem 0rem;
 
           @media (max-width: 1700px) {
             margin: 1rem;
