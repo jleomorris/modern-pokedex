@@ -28,6 +28,7 @@ const InnerDetails = ({
   const [firstEvolution, setFirstEvolution] = useState();
   const [secondEvolution, setSecondEvolution] = useState();
   const [ashExtraSmall, setAshExtraSmall] = useState(false);
+  const [abilityData, setAbilityData] = useState();
 
   // Get evolution data
   useEffect(() => {
@@ -63,6 +64,14 @@ const InnerDetails = ({
         if (selectedPokemon2[0].name === 'hitmonchan') {
           baseStageName = selectedPokemon2[0].name;
           firstEvolutionName = '';
+        }
+        if (selectedPokemon2[0].name === 'flareon') {
+          baseStageName = 'eevee';
+          firstEvolutionName = 'flareon';
+        }
+        if (selectedPokemon2[0].name === 'jolteon') {
+          baseStageName = 'eevee';
+          firstEvolutionName = 'jolteon';
         }
 
         setAshExtraSmall(false);
@@ -112,6 +121,25 @@ const InnerDetails = ({
       });
   }, [selectedPokemon2]);
 
+  useEffect(async () => {
+    const allAbilityData = [];
+
+    if (selectedPokemon.length > 0) {
+      for (let i = 0; i < selectedPokemon[0].abilities.length; i += 1) {
+        // debugger;
+        const eachAbilitiesData = await axios.get(
+          selectedPokemon[0].abilites[i].ability.url
+        );
+        allAbilityData.push(eachAbilitiesData);
+      }
+
+      await Promise.all(allAbilityData).then(() => {
+        console.log('allAbilityData', allAbilityData);
+        setAbilityData(allAbilityData);
+      });
+    }
+  }, [selectedPokemon]);
+
   return (
     <StyledInnerDetails className="inner-details">
       <h2 className="feature-title">{selectedPokemon2[0].genera[8].genus}</h2>
@@ -147,6 +175,7 @@ const InnerDetails = ({
             style={{
               background: convertTypeToColor(type.type.name),
             }}
+            key={type.type.name}
           >
             {type.type.name}
           </p>
@@ -159,6 +188,26 @@ const InnerDetails = ({
                     selectedPokemon2[0].flavor_text_entries[0].flavor_text
                   )} */}
         </p>
+      </div>
+      <div className="abilities-container">
+        {selectedPokemon[0].abilities.map((ability) => (
+          <div
+            key={ability.ability.name}
+            className="ability"
+            style={{
+              background: convertTypeToColor(
+                selectedPokemon[0].types[0].type.name
+              ),
+            }}
+          >
+            <p className="ability-title">{ability.ability.name}</p>
+            <p className="ability-description">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
+              illum ea suscipit pariatur modi nemo laborum aliquam laudantium
+              non beatae.
+            </p>
+          </div>
+        ))}
       </div>
       <div className="evolution-chart-container">
         <h3>Evolution chart</h3>
@@ -184,6 +233,7 @@ const InnerDetails = ({
                 <p className="base-stage-name">{baseStage[0].name}</p>
                 {baseStage[0].types.map((type) => (
                   <p
+                    key={type.type.name}
                     style={{
                       background: convertTypeToColor(type.type.name),
                     }}
@@ -216,6 +266,7 @@ const InnerDetails = ({
                 <p className="first-evolution-name">{firstEvolution[0].name}</p>
                 {firstEvolution[0].types.map((type) => (
                   <p
+                    key={type.type.name}
                     style={{
                       background: convertTypeToColor(type.type.name),
                     }}
@@ -254,6 +305,7 @@ const InnerDetails = ({
                 </p>
                 {secondEvolution[0].types.map((type) => (
                   <p
+                    key={type.type.name}
                     style={{
                       background: convertTypeToColor(type.type.name),
                     }}
@@ -330,7 +382,7 @@ const StyledInnerDetails = styled.div`
 
   h2 {
     color: white;
-    font-size: 6rem;
+    font-size: 10rem;
     text-transform: capitalize;
   }
 
@@ -345,7 +397,6 @@ const StyledInnerDetails = styled.div`
 
     .pokemon-card-id {
       font-size: 2rem;
-      margin: 0.5rem;
       font-weight: 100;
       opacity: 0.8;
     }
@@ -377,7 +428,7 @@ const StyledInnerDetails = styled.div`
     position: absolute;
     top: 70px;
     right: 0;
-    font-size: 11rem;
+    font-size: 15rem;
     opacity: 0.2;
     text-transform: uppercase;
     letter-spacing: 0.5rem;
@@ -406,6 +457,38 @@ const StyledInnerDetails = styled.div`
     width: 55%;
     margin: 1rem 0rem;
     text-align: right;
+
+    p {
+      font-size: 2rem;
+    }
+  }
+
+  .abilities-container {
+    width: 70%;
+    border: 2px solid red;
+    padding: 2rem;
+    margin: 2rem 0rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .ability {
+      border-radius: 1rem;
+      padding: 1rem;
+      margin: 0rem 1rem;
+
+      .ability-title {
+        text-transform: capitalize;
+        font-weight: 900;
+        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
+        text-shadow: 0px 0px 5px black;
+      }
+
+      .ability-description {
+        color: black;
+      }
+    }
   }
 
   .evolution-chart-container {
@@ -426,7 +509,7 @@ const StyledInnerDetails = styled.div`
       position: relative;
       width: 100%;
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: center;
       border-radius: 0rem 2rem 2rem 0rem;
       padding: 3rem;
@@ -440,6 +523,7 @@ const StyledInnerDetails = styled.div`
         align-items: center;
         height: 100%;
         margin: 0rem 1rem;
+        max-width: 20%;
       }
 
       img {
