@@ -27,26 +27,53 @@ const InnerDetails = ({
   const [baseStage, setBaseStage] = useState();
   const [firstEvolution, setFirstEvolution] = useState();
   const [secondEvolution, setSecondEvolution] = useState();
+  const [ashExtraSmall, setAshExtraSmall] = useState(false);
 
   // Get evolution data
   useEffect(() => {
-    // debugger;
     axios
       .get(selectedPokemon2[0].evolution_chain.url)
       .then((response) => {
+        // debugger;
         // handle success
         console.log('response', response);
         setEvolutionData(response.data.chain.evolves_to);
 
-        // Execution breaks here
-        const baseStageName = response.data.chain.species.name;
-        const firstEvolutionName =
-          response.data.chain.evolves_to[0].species.name;
-        const secondEvolutionName = response.data.chain.evolves_to[0]
-          .evolves_to[0]
-          ? response.data.chain.evolves_to[0].evolves_to[0].species.name
-          : '';
+        let baseStageName = response.data.chain.species.name;
+        let firstEvolutionName =
+          response.data.chain.evolves_to.length > 0
+            ? response.data.chain.evolves_to[0].species.name
+            : '';
+        let secondEvolutionName;
 
+        if (typeof response.data.chain.evolves_to[0] !== 'undefined') {
+          if (
+            typeof response.data.chain.evolves_to[0].evolves_to[0] !==
+            'undefined'
+          ) {
+            secondEvolutionName =
+              response.data.chain.evolves_to[0].evolves_to[0].species.name;
+          }
+        } else {
+          secondEvolutionName = '';
+        }
+
+        // Manual overrides
+        // Handle cases where a base pokemon is outside of gen1
+        if (selectedPokemon2[0].name === 'hitmonchan') {
+          baseStageName = selectedPokemon2[0].name;
+          firstEvolutionName = '';
+        }
+
+        setAshExtraSmall(false);
+
+        // Enable ash height decrease for extra tall pokemon
+        if (baseStageName === 'onix' || firstEvolutionName === 'gyarados') {
+          setAshExtraSmall(true);
+        }
+
+        // Debugging checks
+        console.log('--------------------------------------------');
         console.log('baseStageName', baseStageName);
         console.log('firstEvolutionName', firstEvolutionName);
         console.log('secondEvolutionName', secondEvolutionName);
@@ -87,7 +114,6 @@ const InnerDetails = ({
 
   return (
     <StyledInnerDetails className="inner-details">
-      {/* <h2 className="feature-title">{selectedPokemon[0].name}</h2> */}
       <h2 className="feature-title">{selectedPokemon2[0].genera[8].genus}</h2>
       {/* Icons courtesy of icons8 */}
       <div className="forward-back-button-container">
@@ -137,11 +163,21 @@ const InnerDetails = ({
       <div className="evolution-chart-container">
         <h3>Evolution chart</h3>
         <div className="evolution-chart">
-          {baseStage && (
+          {baseStage && baseStage.length > 0 && (
             <div className="evolution-card">
               <img
-                src={Object.values(baseStage[0].sprites.other)[1].front_default}
-                style={{ height: `${baseStage[0].height * 25}px` }}
+                src={
+                  baseStage && baseStage.length > 0
+                    ? Object.values(baseStage[0].sprites.other)[1].front_default
+                    : ''
+                }
+                style={{
+                  height:
+                    baseStage[0].name === 'onix' ||
+                    baseStage[0].name === 'magikarp'
+                      ? `${baseStage[0].height * 8.5}px`
+                      : `${baseStage[0].height * 25.5}px`,
+                }}
                 alt="first evolution"
               />
               <div className="name-type-container">
@@ -159,14 +195,21 @@ const InnerDetails = ({
               </div>
             </div>
           )}
-          {firstEvolution && (
+          {firstEvolution && firstEvolution.length > 0 && (
             <div className="evolution-card">
               <img
                 src={
-                  Object.values(firstEvolution[0].sprites.other)[1]
-                    .front_default
+                  firstEvolution && firstEvolution.length > 0
+                    ? Object.values(firstEvolution[0].sprites.other)[1]
+                        .front_default
+                    : ''
                 }
-                style={{ height: `${firstEvolution[0].height * 25}px` }}
+                style={{
+                  height:
+                    firstEvolution[0].name === 'gyarados'
+                      ? `${firstEvolution[0].height * 8.5}px`
+                      : `${firstEvolution[0].height * 25.5}px`,
+                }}
                 alt="first evolution"
               />
               <div className="name-type-container">
@@ -184,7 +227,6 @@ const InnerDetails = ({
               </div>
             </div>
           )}
-          {/* TypeError: Cannot read property 'sprites' of undefined */}
           {secondEvolution && secondEvolution.length > 0 && (
             <div className="evolution-card">
               <img
@@ -199,10 +241,10 @@ const InnerDetails = ({
                   marginBottom:
                     secondEvolution[0].name === 'charizard' ||
                     secondEvolution[0].name === 'venusaur' ||
-                    secondEvolution[0].name === 'poliwrath'
+                    secondEvolution[0].name === 'poliwrath' ||
+                    secondEvolution[0].name === 'nidoking'
                       ? '-4.5rem'
                       : '',
-                  //   marginBottom: `${secondEvolution[0].name} === "charizard" || ${secondEvolution[0].name} === "venusaur" ? '4.5rem' : ''`,
                 }}
                 alt="second evolution"
               />
@@ -227,7 +269,7 @@ const InnerDetails = ({
             <img
               src={ash}
               style={{
-                height: '378px',
+                height: ashExtraSmall ? '126px' : '378px',
                 filter: 'brightness(0)',
               }}
               alt="trainer"
@@ -367,7 +409,7 @@ const StyledInnerDetails = styled.div`
   }
 
   .evolution-chart-container {
-    width: 70%;
+    width: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -382,12 +424,11 @@ const StyledInnerDetails = styled.div`
 
     .evolution-chart {
       position: relative;
-      width: fit-content;
-      max-width: 100%;
+      width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: 2rem;
+      border-radius: 0rem 2rem 2rem 0rem;
       padding: 3rem;
       margin: 2rem 0rem;
       background: rgba(256, 256, 256, 0.7);
@@ -444,7 +485,7 @@ const StyledInnerDetails = styled.div`
   }
 
   .move-container {
-    width: 55%;
+    width: 70%;
     display: flex;
     flex-wrap: wrap;
 
