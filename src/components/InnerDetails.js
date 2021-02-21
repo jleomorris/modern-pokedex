@@ -126,11 +126,16 @@ const InnerDetails = ({
 
     if (selectedPokemon.length > 0) {
       for (let i = 0; i < selectedPokemon[0].abilities.length; i += 1) {
-        // debugger;
+        // console.log(
+        //   'abilities url',
+        //   selectedPokemon[0].abilities[0].ability.url
+        // );
+
         const eachAbilitiesData = await axios.get(
-          selectedPokemon[0].abilites[i].ability.url
+          selectedPokemon[0].abilities[i].ability.url
         );
-        allAbilityData.push(eachAbilitiesData);
+
+        allAbilityData.push(eachAbilitiesData.data);
       }
 
       await Promise.all(allAbilityData).then(() => {
@@ -190,27 +195,30 @@ const InnerDetails = ({
         </p>
       </div>
       <div className="abilities-container">
-        {selectedPokemon[0].abilities.map((ability) => (
-          <div
-            key={ability.ability.name}
-            className="ability"
-            style={{
-              background: convertTypeToColor(
-                selectedPokemon[0].types[0].type.name
-              ),
-            }}
-          >
-            <p className="ability-title">{ability.ability.name}</p>
-            <p className="ability-description">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-              illum ea suscipit pariatur modi nemo laborum aliquam laudantium
-              non beatae.
-            </p>
-          </div>
-        ))}
+        {abilityData &&
+          abilityData.map((ability) => (
+            <div
+              key={ability.name}
+              className="ability"
+              style={{
+                background: convertTypeToColor(
+                  selectedPokemon[0].types[0].type.name
+                ),
+              }}
+            >
+              <p className="ability-title">{ability.name}</p>
+              {ability.effect_entries
+                .filter((entry) => entry.language.name === 'en')
+                .map((abilityDescription) => (
+                  <p className="ability-description">
+                    {abilityDescription.effect}
+                  </p>
+                ))}
+            </div>
+          ))}
       </div>
       <div className="evolution-chart-container">
-        <h3>Evolution chart</h3>
+        {/* <h3>Evolution chart</h3> */}
         <div className="evolution-chart">
           {baseStage && baseStage.length > 0 && (
             <div className="evolution-card">
@@ -465,7 +473,6 @@ const StyledInnerDetails = styled.div`
 
   .abilities-container {
     width: 70%;
-    border: 2px solid red;
     padding: 2rem;
     margin: 2rem 0rem;
     display: flex;
