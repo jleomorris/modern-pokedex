@@ -180,7 +180,7 @@ const DetailsShadow = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 0 50% 50% 0;
-    padding: 2rem;
+    padding: 2rem 3rem 2rem 1rem;
     cursor: pointer;
 
     p {
@@ -195,7 +195,7 @@ const DetailsShadow = styled.div`
 const StyledPokemonDetails = styled.div`
   background: rgba(0, 0, 0, 1);
   height: 120vh;
-  width: 85%;
+  width: 90%;
   position: relative;
   z-index: 3;
   cursor: auto;
