@@ -8,9 +8,11 @@ import { useSelector } from 'react-redux';
 // Images
 import forwardArrow from '../img/icons8-forward-arrow-50.png';
 import backArrow from '../img/icons8-reply-arrow-50.png';
-import ash from '../img/pokemon-ash.png';
 // Util
 import { convertTypeToColor } from '../util';
+// Components
+import EvolutionChart from './EvolutionChart';
+import Abilities from './Abilities';
 
 const InnerDetails = ({
   selectedPokemon,
@@ -30,97 +32,7 @@ const InnerDetails = ({
   const [ashExtraSmall, setAshExtraSmall] = useState(false);
   const [abilityData, setAbilityData] = useState();
 
-  // Get evolution data
-  useEffect(() => {
-    axios
-      .get(selectedPokemon2[0].evolution_chain.url)
-      .then((response) => {
-        // debugger;
-        // handle success
-        console.log('response', response);
-        setEvolutionData(response.data.chain.evolves_to);
-
-        let baseStageName = response.data.chain.species.name;
-        let firstEvolutionName =
-          response.data.chain.evolves_to.length > 0
-            ? response.data.chain.evolves_to[0].species.name
-            : '';
-        let secondEvolutionName;
-
-        if (typeof response.data.chain.evolves_to[0] !== 'undefined') {
-          if (
-            typeof response.data.chain.evolves_to[0].evolves_to[0] !==
-            'undefined'
-          ) {
-            secondEvolutionName =
-              response.data.chain.evolves_to[0].evolves_to[0].species.name;
-          }
-        } else {
-          secondEvolutionName = '';
-        }
-
-        // Manual overrides
-        // Handle cases where a base pokemon is outside of gen1
-        if (selectedPokemon2[0].name === 'hitmonchan') {
-          baseStageName = selectedPokemon2[0].name;
-          firstEvolutionName = '';
-        }
-        if (selectedPokemon2[0].name === 'flareon') {
-          baseStageName = 'eevee';
-          firstEvolutionName = 'flareon';
-        }
-        if (selectedPokemon2[0].name === 'jolteon') {
-          baseStageName = 'eevee';
-          firstEvolutionName = 'jolteon';
-        }
-
-        setAshExtraSmall(false);
-
-        // Enable ash height decrease for extra tall pokemon
-        if (baseStageName === 'onix' || firstEvolutionName === 'gyarados') {
-          setAshExtraSmall(true);
-        }
-
-        // Debugging checks
-        console.log('--------------------------------------------');
-        console.log('baseStageName', baseStageName);
-        console.log('firstEvolutionName', firstEvolutionName);
-        console.log('secondEvolutionName', secondEvolutionName);
-        console.info('pokemonData', pokemonData);
-        console.info(
-          'baseStage',
-          pokemonData.filter((pokemon) => pokemon.name === baseStageName)
-        );
-        console.info(
-          'firstEvolution',
-          pokemonData.filter((pokemon) => pokemon.name === firstEvolutionName)
-        );
-        console.info(
-          'secondEvolution',
-          pokemonData.filter((pokemon) => pokemon.name === secondEvolutionName)
-        );
-
-        // debugger;
-
-        setBaseStage(
-          pokemonData.filter((pokemon) => pokemon.name === baseStageName)
-        );
-        setFirstEvolution(
-          pokemonData.filter((pokemon) => pokemon.name === firstEvolutionName)
-        );
-        setSecondEvolution(
-          pokemonData.filter((pokemon) => pokemon.name === secondEvolutionName)
-        );
-      })
-      .catch((error) => {
-        // handle error
-        console.log(error);
-      })
-      .then(() => {
-        // always executed
-      });
-  }, [selectedPokemon2]);
-
+  // Get abilities data
   useEffect(async () => {
     const allAbilityData = [];
 
@@ -194,172 +106,58 @@ const InnerDetails = ({
                   )} */}
         </p>
       </div>
-      <div className="abilities-container">
-        {abilityData &&
-          abilityData.map((ability) => (
-            <div
-              key={ability.name}
-              className="ability"
-              style={{
-                background: convertTypeToColor(
-                  selectedPokemon[0].types[0].type.name
-                ),
-              }}
-            >
-              <p className="ability-title">{ability.name}</p>
-              {ability.effect_entries
-                .filter((entry) => entry.language.name === 'en')
-                .map((abilityDescription) => (
-                  <p className="ability-description">
-                    {abilityDescription.effect}
-                  </p>
-                ))}
-            </div>
-          ))}
-      </div>
-      <div className="evolution-chart-container">
-        {/* <h3>Evolution chart</h3> */}
-        <div className="evolution-chart">
-          {baseStage && baseStage.length > 0 && (
-            <div className="evolution-card">
-              <img
-                src={
-                  baseStage && baseStage.length > 0
-                    ? Object.values(baseStage[0].sprites.other)[1].front_default
-                    : ''
-                }
-                style={{
-                  height:
-                    baseStage[0].name === 'onix' ||
-                    baseStage[0].name === 'magikarp'
-                      ? `${baseStage[0].height * 8.5}px`
-                      : `${baseStage[0].height * 25.5}px`,
-                }}
-                alt="first evolution"
-              />
-              <div className="name-type-container">
-                <p className="base-stage-name">{baseStage[0].name}</p>
-                {baseStage[0].types.map((type) => (
-                  <p
-                    key={type.type.name}
-                    style={{
-                      background: convertTypeToColor(type.type.name),
-                    }}
-                    className="evolution-type"
-                  >
-                    {type.type.name}
-                  </p>
-                ))}
-              </div>
-            </div>
-          )}
-          {firstEvolution && firstEvolution.length > 0 && (
-            <div className="evolution-card">
-              <img
-                src={
-                  firstEvolution && firstEvolution.length > 0
-                    ? Object.values(firstEvolution[0].sprites.other)[1]
-                        .front_default
-                    : ''
-                }
-                style={{
-                  height:
-                    firstEvolution[0].name === 'gyarados'
-                      ? `${firstEvolution[0].height * 8.5}px`
-                      : `${firstEvolution[0].height * 25.5}px`,
-                }}
-                alt="first evolution"
-              />
-              <div className="name-type-container">
-                <p className="first-evolution-name">{firstEvolution[0].name}</p>
-                {firstEvolution[0].types.map((type) => (
-                  <p
-                    key={type.type.name}
-                    style={{
-                      background: convertTypeToColor(type.type.name),
-                    }}
-                    className="evolution-type"
-                  >
-                    {type.type.name}
-                  </p>
-                ))}
-              </div>
-            </div>
-          )}
-          {secondEvolution && secondEvolution.length > 0 && (
-            <div className="evolution-card">
-              <img
-                src={
-                  secondEvolution && secondEvolution.length > 0
-                    ? Object.values(secondEvolution[0].sprites.other)[1]
-                        .front_default
-                    : ''
-                }
-                style={{
-                  height: `${secondEvolution[0].height * 25}px`,
-                  marginBottom:
-                    secondEvolution[0].name === 'charizard' ||
-                    secondEvolution[0].name === 'venusaur' ||
-                    secondEvolution[0].name === 'poliwrath' ||
-                    secondEvolution[0].name === 'nidoking'
-                      ? '-4.5rem'
-                      : '',
-                }}
-                alt="second evolution"
-              />
-              <div className="name-type-container">
-                <p className="second-evolution-name">
-                  {secondEvolution[0].name}
-                </p>
-                {secondEvolution[0].types.map((type) => (
-                  <p
-                    key={type.type.name}
-                    style={{
-                      background: convertTypeToColor(type.type.name),
-                    }}
-                    className="evolution-type"
-                  >
-                    {type.type.name}
-                  </p>
-                ))}
-              </div>
-            </div>
-          )}
-          <div className="evolution-card">
-            <img
-              src={ash}
-              style={{
-                height: ashExtraSmall ? '126px' : '378px',
-                filter: 'brightness(0)',
-              }}
-              alt="trainer"
-            />
-            <div className="name-type-container">
-              <p className="trainer-name">Ash</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Abilities abilityData={abilityData} selectedPokemon={selectedPokemon} />
+      <EvolutionChart
+        pokemonData={pokemonData}
+        selectedPokemon2={selectedPokemon2}
+      />
       <div className="move-container">
-        <h3>Own moves & level learned</h3>
-        {ownMoves &&
-          ownMoves.map((move) => (
-            <div className="own-move" key={move.move.name}>
-              <p className="own-move-title">{move.move.name}</p>
-              <p className="level-learned">
-                Lvl.
-                {move.version_group_details[0].level_learned_at}
-              </p>
-              <br />
-            </div>
-          ))}
-        <h3>Can learn</h3>
-        {learnableMoves &&
-          learnableMoves.map((move) => (
-            <div className="can-learn" key={move.move.name}>
-              <p className="can-learn-title">{move.move.name}</p>
-            </div>
-          ))}
+        <h3>Own moves</h3>
+        <table className="move-table">
+          <tr>
+            <th className="move-header">Name</th>
+            <th className="level-method-version-header">
+              <th className="inner-heading">Level learned</th>
+              <th className="inner-heading">Method</th>
+              <th className="inner-heading">Version</th>
+            </th>
+          </tr>
+          {ownMoves &&
+            ownMoves
+              .filter(
+                (move) =>
+                  move.version_group_details[0].version_group.name ===
+                  'red-blue'
+              )
+              .map((move) => (
+                <tr className="own-move" key={move.move.name}>
+                  <td className="own-move-title">{move.move.name}</td>
+                  <td>
+                    {move.version_group_details
+                      .filter(
+                        (ver) =>
+                          ver.version_group.name === 'red-blue' &&
+                          ver.move_learn_method.name === 'level-up'
+                      )
+                      .map((moveDetails) => (
+                        <>
+                          <tr className="table-row-container">
+                            <td className="level-learned">
+                              {moveDetails.level_learned_at}
+                            </td>
+                            <td className="learn-method">
+                              {moveDetails.move_learn_method.name}
+                            </td>
+                            <td className="version">
+                              {moveDetails.version_group.name}
+                            </td>
+                          </tr>
+                        </>
+                      ))}
+                  </td>
+                </tr>
+              ))}
+        </table>
       </div>
     </StyledInnerDetails>
   );
@@ -471,114 +269,11 @@ const StyledInnerDetails = styled.div`
     }
   }
 
-  .abilities-container {
-    width: 70%;
-    padding: 2rem;
-    margin: 2rem 0rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .ability {
-      border-radius: 1rem;
-      padding: 1rem;
-      margin: 0rem 1rem;
-
-      .ability-title {
-        text-transform: capitalize;
-        font-weight: 900;
-        margin-bottom: 0.5rem;
-        font-size: 1.5rem;
-        text-shadow: 0px 0px 5px black;
-      }
-
-      .ability-description {
-        color: black;
-      }
-    }
-  }
-
-  .evolution-chart-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-
-    h3 {
-      color: white;
-      width: 100%;
-      text-transform: uppercase;
-      margin: 1rem 0rem;
-      margin: 2rem 0rem;
-    }
-
-    .evolution-chart {
-      position: relative;
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      border-radius: 0rem 2rem 2rem 0rem;
-      padding: 3rem;
-      margin: 2rem 0rem;
-      background: rgba(256, 256, 256, 0.7);
-
-      .evolution-card {
-        display: flex;
-        justify-content: flex-end;
-        flex-direction: column;
-        align-items: center;
-        height: 100%;
-        margin: 0rem 1rem;
-        max-width: 20%;
-      }
-
-      img {
-        width: auto;
-      }
-
-      .name-type-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: end;
-        align-items: center;
-        height: 140px;
-        margin-top: 1rem;
-
-        .base-stage-name,
-        .first-evolution-name,
-        .second-evolution-name,
-        .trainer-name {
-          margin: 0.25rem 0rem;
-          border-radius: 2rem;
-          text-align: center;
-          width: 80%;
-          font-family: 'Bebas Neue', cursive;
-          text-transform: uppercase;
-          font-size: 1.5rem;
-          color: black;
-          letter-spacing: 0.25rem;
-        }
-
-        .evolution-type {
-          margin: 0.25rem 0rem;
-          border-radius: 2rem;
-          text-align: center;
-          width: 200px;
-          font-family: 'Bebas Neue', cursive;
-          text-transform: uppercase;
-          font-size: 1.25rem;
-          color: black;
-          box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
-        }
-      }
-    }
-  }
-
   .move-container {
     width: 70%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-start;
 
     @media (max-width: 1700px) {
       width: 50%;
@@ -592,34 +287,56 @@ const StyledInnerDetails = styled.div`
       margin: 2rem 0rem;
     }
 
-    .own-move {
-      margin: 1rem;
-      margin: 1rem;
-      background: rgba(256, 256, 256, 0.3);
-      border-radius: 2rem;
-      padding: 2rem;
-      position: relative;
-    }
+    .move-table {
+      margin: 2rem 0rem;
+      width: 50%;
+      color: white;
+      background: rgba(256, 256, 256, 0.1);
 
-    .can-learn {
-      margin: 1rem;
-      margin: 1rem;
-      background: rgba(256, 256, 256, 0.3);
-      border-radius: 2rem;
-      padding: 1rem;
-      position: relative;
-    }
+      th {
+        color: white;
+      }
 
-    .level-learned {
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: white;
-      padding: 1rem;
-      border-radius: 1rem;
-      color: black;
-      padding: 1rem 1.2rem;
+      .move-header {
+        padding: 1rem 0rem;
+        background: #88888878;
+      }
+
+      .level-method-version-header {
+        background: #88888878;
+        padding: 1rem 0rem;
+        display: flex;
+        justify-content: center;
+
+        .inner-heading {
+          width: 33%;
+        }
+      }
+
+      .own-move {
+        .own-move-title {
+          padding: 1rem 2rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-transform: capitalize;
+          font-weight: 900;
+        }
+
+        .table-row-container {
+          display: block;
+          width: 100%;
+        }
+
+        .level-learned,
+        .learn-method,
+        .version {
+          padding: 0.25rem;
+          text-align: center;
+          width: 33%;
+          display: inline-block;
+        }
+      }
     }
   }
 `;
