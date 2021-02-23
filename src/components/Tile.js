@@ -6,14 +6,14 @@ import styled from 'styled-components';
 // Util
 import { convertToTypeImage, convertToTypeBackground } from '../util';
 
-const Card = ({
+const Tile = ({
   pokemon,
   isDefaultSelected,
   isDreamWorldSelected,
   isOfficialSelected,
 }) => {
   return (
-    <StyledCard className="card">
+    <StyledTile className="card">
       <div className="background-circle" />
       <div className="background-image-container">
         {convertToTypeBackground(pokemon.types[0].type.name)}
@@ -52,12 +52,12 @@ const Card = ({
         )}
       </Link>
       <p className="id">#{pokemon.id}</p>
-    </StyledCard>
+    </StyledTile>
   );
 };
 
 // Styled components
-const StyledCard = styled.div`
+const StyledTile = styled.div`
   height: 300px;
   margin: 2rem 1rem;
   display: flex;
@@ -181,4 +181,4 @@ const StyledCard = styled.div`
   }
 `;
 
-export default Card;
+export default Tile;

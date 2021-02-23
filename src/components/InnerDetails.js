@@ -5,14 +5,13 @@ import styled from 'styled-components';
 import axios from 'axios';
 // Redux
 import { useSelector } from 'react-redux';
-// Images
-import forwardArrow from '../img/icons8-forward-arrow-50.png';
-import backArrow from '../img/icons8-reply-arrow-50.png';
 // Util
 import { convertTypeToColor } from '../util';
 // Components
 import EvolutionChart from './EvolutionChart';
 import Abilities from './Abilities';
+import ForwardBackButtons from './ForwardBackButtons';
+import Moves from './Moves';
 
 const InnerDetails = ({
   selectedPokemon,
@@ -60,25 +59,7 @@ const InnerDetails = ({
   return (
     <StyledInnerDetails className="inner-details">
       <h2 className="feature-title">{selectedPokemon2[0].genera[8].genus}</h2>
-      {/* Icons courtesy of icons8 */}
-      <div className="forward-back-button-container">
-        <button
-          type="button"
-          onClick={() =>
-            setPokemonId((prev) => (parseFloat(prev) - 1).toString())
-          }
-        >
-          <img src={backArrow} alt="back arrow" />
-        </button>
-        <button
-          type="button"
-          onClick={() =>
-            setPokemonId((prev) => (parseFloat(prev) + 1).toString())
-          }
-        >
-          <img src={forwardArrow} alt="back arrow" />
-        </button>
-      </div>
+      <ForwardBackButtons setPokemonId={setPokemonId} />
       <div className="title-id-container">
         <h2 className="pokemon-card-id">#{selectedPokemon[0].id}</h2>
         <h2 className="pokemon-card-title">{selectedPokemon[0].name}</h2>
@@ -111,54 +92,7 @@ const InnerDetails = ({
         pokemonData={pokemonData}
         selectedPokemon2={selectedPokemon2}
       />
-      <div className="move-container">
-        <h3>Own moves</h3>
-        <table className="move-table">
-          <tr>
-            <th className="move-header">Name</th>
-            <th className="level-method-version-header">
-              <th className="inner-heading">Level learned</th>
-              <th className="inner-heading">Method</th>
-              <th className="inner-heading">Version</th>
-            </th>
-          </tr>
-          {ownMoves &&
-            ownMoves
-              .filter(
-                (move) =>
-                  move.version_group_details[0].version_group.name ===
-                  'red-blue'
-              )
-              .map((move) => (
-                <tr className="own-move" key={move.move.name}>
-                  <td className="own-move-title">{move.move.name}</td>
-                  <td>
-                    {move.version_group_details
-                      .filter(
-                        (ver) =>
-                          ver.version_group.name === 'red-blue' &&
-                          ver.move_learn_method.name === 'level-up'
-                      )
-                      .map((moveDetails) => (
-                        <>
-                          <tr className="table-row-container">
-                            <td className="level-learned">
-                              {moveDetails.level_learned_at}
-                            </td>
-                            <td className="learn-method">
-                              {moveDetails.move_learn_method.name}
-                            </td>
-                            <td className="version">
-                              {moveDetails.version_group.name}
-                            </td>
-                          </tr>
-                        </>
-                      ))}
-                  </td>
-                </tr>
-              ))}
-        </table>
-      </div>
+      <Moves ownMoves={ownMoves} selectedPokemon={selectedPokemon} />
     </StyledInnerDetails>
   );
 };
@@ -242,23 +176,6 @@ const StyledInnerDetails = styled.div`
     z-index: -1;
   }
 
-  .forward-back-button-container {
-    margin-top: 1rem;
-
-    button {
-      color: transparent;
-      outline: none;
-      border: none;
-      margin: 0rem 0.5rem;
-      cursor: pointer;
-
-      img {
-        filter: invert(1);
-        background: white;
-      }
-    }
-  }
-
   .description {
     width: 55%;
     margin: 1rem 0rem;
@@ -266,77 +183,6 @@ const StyledInnerDetails = styled.div`
 
     p {
       font-size: 2rem;
-    }
-  }
-
-  .move-container {
-    width: 70%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-
-    @media (max-width: 1700px) {
-      width: 50%;
-    }
-
-    h3 {
-      color: white;
-      width: 100%;
-      text-transform: uppercase;
-      margin: 1rem 0rem;
-      margin: 2rem 0rem;
-    }
-
-    .move-table {
-      margin: 2rem 0rem;
-      width: 50%;
-      color: white;
-      background: rgba(256, 256, 256, 0.1);
-
-      th {
-        color: white;
-      }
-
-      .move-header {
-        padding: 1rem 0rem;
-        background: #88888878;
-      }
-
-      .level-method-version-header {
-        background: #88888878;
-        padding: 1rem 0rem;
-        display: flex;
-        justify-content: center;
-
-        .inner-heading {
-          width: 33%;
-        }
-      }
-
-      .own-move {
-        .own-move-title {
-          padding: 1rem 2rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          text-transform: capitalize;
-          font-weight: 900;
-        }
-
-        .table-row-container {
-          display: block;
-          width: 100%;
-        }
-
-        .level-learned,
-        .learn-method,
-        .version {
-          padding: 0.25rem;
-          text-align: center;
-          width: 33%;
-          display: inline-block;
-        }
-      }
     }
   }
 `;

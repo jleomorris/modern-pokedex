@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 // Components
 import PokemonDetails from '../components/PokemonDetails';
 import OptionsFilters from '../components/OptionsFilters';
-import Card from '../components/Card';
+import PokemonTiles from '../components/PokemonTiles';
 
 const Pokemon = () => {
   // Redux
@@ -167,21 +167,12 @@ const Pokemon = () => {
         filterPokemonBySearchHandler={filterPokemonBySearchHandler}
         filterPokemonByTypeHandler={filterPokemonByTypeHandler}
       />
-      <div className="pokemon-card-container">
-        {filteredData && filteredData.length === 0 && (
-          <h2 className="no-results">No results</h2>
-        )}
-        {filteredData &&
-          filteredData.map((pokemon) => (
-            <Card
-              key={pokemon.name}
-              pokemon={pokemon}
-              isDefaultSelected={isDefaultSelected}
-              isDreamWorldSelected={isDreamWorldSelected}
-              isOfficialSelected={isOfficialSelected}
-            />
-          ))}
-      </div>
+      <PokemonTiles
+        filteredData={filteredData}
+        isDefaultSelected={isDefaultSelected}
+        isDreamWorldSelected={isDreamWorldSelected}
+        isOfficialSelected={isOfficialSelected}
+      />
     </StyledPokemon>
   );
 };
@@ -191,18 +182,6 @@ const StyledPokemon = styled.div`
   padding: 6rem 0rem;
   min-height: 100vh;
   position: relative;
-
-  .pokemon-card-container {
-    display: grid;
-    grid-column-gap: 1.5rem;
-    grid-row-gap: 1.5rem;
-    margin: 4rem 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
-
-    .no-results {
-      text-align: center;
-    }
-  }
 `;
 
 export default Pokemon;

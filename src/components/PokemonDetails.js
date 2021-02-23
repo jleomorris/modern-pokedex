@@ -37,8 +37,7 @@ const PokemonDetails = ({
     pokemonData2.filter((pokemon) => pokemon.id.toString() === pokemonId)
   );
   const [isFlipped, setisFlipped] = useState(false);
-  const [ownMoves, setOwnMoves] = useState();
-  const [learnableMoves, setLearnableMoves] = useState();
+
   // Styled component variables
   const theme = {
     background: convertTypeToColor(selectedPokemon[0].types[0].type.name),
@@ -54,20 +53,6 @@ const PokemonDetails = ({
       setisFlipped((prev) => !prev);
     }, 1000);
   }, []);
-
-  // Set up own moves and learnable moves
-  useEffect(() => {
-    const allMoves = selectedPokemon[0].moves.map((move) => move);
-    const filteredOwnMoves = allMoves.filter(
-      (move) => move.version_group_details[0].level_learned_at !== 0
-    );
-    const filteredLearnableMoves = allMoves.filter(
-      (move) => move.version_group_details[0].level_learned_at === 0
-    );
-
-    setOwnMoves(filteredOwnMoves);
-    setLearnableMoves(filteredLearnableMoves);
-  }, [selectedPokemon]);
 
   // When pokemon id changes reset selected pokemon
   useEffect(() => {
@@ -134,8 +119,6 @@ const PokemonDetails = ({
             selectedPokemon={selectedPokemon}
             selectedPokemon2={selectedPokemon2}
             setPokemonId={setPokemonId}
-            ownMoves={ownMoves}
-            learnableMoves={learnableMoves}
           />
         </StyledPokemonDetails>
       </DetailsShadow>
