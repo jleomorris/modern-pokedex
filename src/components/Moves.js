@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
+// Styled components
 import styled from 'styled-components';
+// Axios
+import axios from 'axios';
 
 const Moves = ({ selectedPokemon }) => {
   // State
   const [ownMoves, setOwnMoves] = useState();
   const [canLearn, setCanLearn] = useState();
-  const [fullMoveData, setFullMoveData] = useState();
+  const [fullOwnMoveData, setFullOwnMoveData] = useState();
 
   // Set up own moves and learnable moves
   useEffect(() => {
@@ -21,50 +24,85 @@ const Moves = ({ selectedPokemon }) => {
     setCanLearn(filteredLearnableMoves);
   }, [selectedPokemon]);
 
+  // Get full own moves data
+  useEffect(async () => {
+    const allOwnMoveData = [];
+
+    if (ownMoves.length > 0) {
+      for (let i = 0; i < ownMoves.length; i += 1) {
+        const eachOwnMovesData = await axios.get(ownMoves[i].move.url);
+
+        allOwnMoveData.push(eachOwnMovesData.data);
+      }
+
+      await Promise.all(allOwnMoveData).then(() => {
+        console.table('allOwnMoveData', allOwnMoveData);
+
+        // merge with ownMoves to get version group data (level learned at)
+        const mergedData = allOwnMoveData.map((move, i) => ({
+          ...move,
+          ...ownMoves[i],
+        }));
+
+        setFullOwnMoveData(mergedData);
+      });
+    }
+  }, [ownMoves]);
+
   return (
     <StyledMoves className="move-container">
       <h3>Own moves</h3>
       <table className="move-table">
         <tr>
           <th className="move-header">Name</th>
-          <th className="level-method-version-header">
-            <th className="inner-heading">Level learned</th>
-            <th className="inner-heading">Method</th>
-            <th className="inner-heading">Version</th>
-          </th>
+          <th className="inner-heading">Accuracy</th>
+          <th className="inner-heading">Type</th>
+          <th className="inner-heading">Power</th>
+          <th className="inner-heading">PP</th>
+          <th className="inner-heading">Target</th>
+          <th className="inner-heading">Damage class</th>
+          <th className="inner-heading">Ailment</th>
+          <th className="inner-heading">Crit rate</th>
+          <th className="inner-heading">Level learned</th>
+          <th className="inner-heading">Method</th>
+          <th className="inner-heading">Version</th>
         </tr>
-        {ownMoves &&
-          ownMoves
+        {fullOwnMoveData &&
+          fullOwnMoveData
             .filter(
               (move) =>
                 move.version_group_details[0].version_group.name === 'red-blue'
             )
             .map((move) => (
-              <tr className="own-move" key={move.move.name}>
-                <td className="own-move-title">{move.move.name}</td>
-                <td>
-                  {move.version_group_details
-                    .filter(
-                      (ver) =>
-                        ver.version_group.name === 'red-blue' &&
-                        ver.move_learn_method.name === 'level-up'
-                    )
-                    .map((moveDetails) => (
-                      <>
-                        <tr className="table-row-container">
-                          <td className="level-learned">
-                            {moveDetails.level_learned_at}
-                          </td>
-                          <td className="learn-method">
-                            {moveDetails.move_learn_method.name}
-                          </td>
-                          <td className="version">
-                            {moveDetails.version_group.name}
-                          </td>
-                        </tr>
-                      </>
-                    ))}
-                </td>
+              <tr className="own-move" key={move.name}>
+                <td className="own-move-title">{move.name}</td>
+                <td className="accuracy">{move.accuracy}</td>
+                <td className="accuracy">{move.type.name}</td>
+                <td className="power">{move.power ? move.power : '-'}</td>
+                <td className="power">{move.pp}</td>
+                <td className="power">{move.target.name}</td>
+                <td className="power">{move.damage_class.name}</td>
+                <td className="power">{move.meta.ailment.name}</td>
+                <td className="power">{move.meta.crit_rate}</td>
+                {move.version_group_details
+                  .filter(
+                    (ver) =>
+                      ver.version_group.name === 'red-blue' &&
+                      ver.move_learn_method.name === 'level-up'
+                  )
+                  .map((moveDetails) => (
+                    <>
+                      <td className="level-learned">
+                        {moveDetails.level_learned_at}
+                      </td>
+                      <td className="learn-method">
+                        {moveDetails.move_learn_method.name}
+                      </td>
+                      <td className="version">
+                        {moveDetails.version_group.name}
+                      </td>
+                    </>
+                  ))}
               </tr>
             ))}
       </table>
@@ -93,7 +131,7 @@ const StyledMoves = styled.div`
 
   .move-table {
     margin: 2rem 0rem;
-    width: 50%;
+    width: 100%;
     color: white;
     background: rgba(256, 256, 256, 0.1);
 
@@ -101,9 +139,9 @@ const StyledMoves = styled.div`
       color: white;
     }
 
-    .move-header {
-      padding: 1rem 0rem;
+    th {
       background: #88888878;
+      padding: 0.5rem 1rem;
     }
 
     .level-method-version-header {
@@ -132,13 +170,9 @@ const StyledMoves = styled.div`
         width: 100%;
       }
 
-      .level-learned,
-      .learn-method,
-      .version {
+      td {
         padding: 0.25rem;
         text-align: center;
-        width: 33%;
-        display: inline-block;
       }
     }
   }
