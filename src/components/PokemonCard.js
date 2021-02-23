@@ -28,6 +28,7 @@ const PokemonCard = ({
   const [selectedPokemon2, setSelectedPokemon2] = useState(
     pokemonData2.filter((pokemon) => pokemon.id.toString() === pokemonId)
   );
+  const [cardDescriptions, setCardDescriptions] = useState();
   // Styled component variables
   const theme = {
     background: convertTypeToColor(selectedPokemon[0].types[0].type.name),
@@ -47,6 +48,15 @@ const PokemonCard = ({
   useEffect(() => {
     setPokemonId(pathId);
   }, [pathId]);
+
+  //
+  useEffect(() => {
+    const engDescriptions = selectedPokemon2[0].flavor_text_entries.filter(
+      (entry) => entry.language.name === 'en'
+    );
+
+    setCardDescriptions(engDescriptions);
+  }, [selectedPokemon2]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -120,11 +130,12 @@ const PokemonCard = ({
               </div>
               <div className="description">
                 <p>
-                  {selectedPokemon2[0].flavor_text_entries[0].flavor_text}
-                  {/* {JSON.parse(
+                  {cardDescriptions &&
+                    cardDescriptions[0].flavor_text.toString()}
+                </p>
+                {/* {JSON.parse(
                     selectedPokemon2[0].flavor_text_entries[0].flavor_text
                   )} */}
-                </p>
               </div>
             </div>
             <div className="id-container">
