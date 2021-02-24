@@ -6,7 +6,11 @@ import axios from 'axios';
 // Redux
 import { useSelector } from 'react-redux';
 // Util
-import { convertTypeToColor } from '../util';
+import {
+  convertTypeToColor,
+  convertToTypeBackground,
+  convertToTypeImage,
+} from '../util';
 // Components
 import EvolutionChart from './EvolutionChart';
 import Abilities from './Abilities';
@@ -58,8 +62,19 @@ const InnerDetails = ({
 
   return (
     <StyledInnerDetails className="inner-details">
+      <div className="feature-type-symbol">
+        {convertToTypeImage(selectedPokemon[0].types[0].type.name)}
+      </div>
+      {/* <img
+        className="feature-type"
+        src={selectedPokemon[0].types[0].type.name}
+        alt="feature-type"
+      /> */}
       <h2 className="feature-title">{selectedPokemon2[0].genera[8].genus}</h2>
-      <ForwardBackButtons setPokemonId={setPokemonId} />
+      <ForwardBackButtons
+        setPokemonId={setPokemonId}
+        selectedPokemon={selectedPokemon}
+      />
       <div className="title-id-container">
         <h2 className="pokemon-card-id">#{selectedPokemon[0].id}</h2>
         <h2 className="pokemon-card-title">{selectedPokemon[0].name}</h2>
@@ -120,6 +135,18 @@ const StyledInnerDetails = styled.div`
     background: white;
   }
 
+  .feature-type-symbol {
+    img {
+      position: absolute;
+      top: -125px;
+      transform: translateX(-20%);
+      left: 20%;
+      width: 500px;
+      z-index: -1;
+      opacity: 0.3;
+    }
+  }
+
   h2 {
     color: white;
     font-size: 10rem;
@@ -139,6 +166,7 @@ const StyledInnerDetails = styled.div`
       font-size: 2rem;
       font-weight: 100;
       opacity: 0.8;
+      margin-right: 0.25rem;
     }
 
     .legendary-tag {
