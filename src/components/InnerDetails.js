@@ -151,6 +151,7 @@ const StyledInnerDetails = styled.div`
     color: white;
     font-size: 10rem;
     text-transform: capitalize;
+    margin-top: 1rem;
   }
 
   p {

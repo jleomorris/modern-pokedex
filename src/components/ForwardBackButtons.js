@@ -1,30 +1,93 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 // Styled components
 import styled from 'styled-components';
+// Redux
+import { useSelector } from 'react-redux';
 // Images
-import forwardArrow from '../img/icons8-forward-arrow-50.png';
-import backArrow from '../img/icons8-reply-arrow-50.png';
+import rightArrow from '../img/right-arrow.svg';
 
-const ForwardBackButtons = ({ setPokemonId }) => {
+const ForwardBackButtons = ({ selectedPokemon, setPokemonId }) => {
+  // Redux
+  const pokemonData = useSelector((state) => state.pokemon.pokemonData);
+  // State
+  const [formerPokemon, setFormerPokemon] = useState();
+  const [nextPokemon, setNextPokemon] = useState();
+
+  useEffect(() => {
+    let formerId;
+    let nextId;
+
+    formerId =
+      selectedPokemon[0].id === 1 ? 1 : (formerId = selectedPokemon[0].id - 1);
+
+    nextId =
+      selectedPokemon[0].id === 151
+        ? 151
+        : (nextId = selectedPokemon[0].id + 1);
+
+    // if (selectedPokemon[0].id === 151) {
+    //   nextId = 151;
+    // } else {
+    //   nextId = selectedPokemon[0].id + 1;
+    // }
+
+    setFormerPokemon(pokemonData.filter((pokemon) => pokemon.id === formerId));
+    setNextPokemon(pokemonData.filter((pokemon) => pokemon.id === nextId));
+
+    console.log(
+      'selectedPokemon',
+      selectedPokemon[0].name,
+      selectedPokemon[0].id
+    );
+  }, [selectedPokemon]);
+
+  useEffect(() => {
+    if (formerPokemon) {
+      console.log('former pokemon', formerPokemon[0].name, formerPokemon[0].id);
+    }
+  }, [formerPokemon]);
+
+  useEffect(() => {
+    if (nextPokemon) {
+      console.log('nextPokemon', nextPokemon[0].name, nextPokemon[0].id);
+    }
+  }, [nextPokemon]);
+
   return (
     // Icons courtesy of icons8
     <StyledForwardBackButtons className="forward-back-button-container">
-      <button
-        type="button"
-        onClick={() =>
-          setPokemonId((prev) => (parseFloat(prev) - 1).toString())
-        }
-      >
-        <img src={backArrow} alt="back arrow" />
-      </button>
-      <button
-        type="button"
-        onClick={() =>
-          setPokemonId((prev) => (parseFloat(prev) + 1).toString())
-        }
-      >
-        <img src={forwardArrow} alt="back arrow" />
-      </button>
+      {formerPokemon && selectedPokemon[0].name !== 'bulbasaur' && (
+        <button
+          type="button"
+          onClick={() =>
+            setPokemonId((prev) => (parseFloat(prev) - 1).toString())
+          }
+        >
+          <p className="former-pokemon-id">#{formerPokemon[0].id}</p>
+          <img className="back-arrow" src={rightArrow} alt="back arrow" />
+          <img
+            className="former-pokemon-image-official"
+            src={Object.values(formerPokemon[0].sprites.other)[1].front_default}
+            alt={formerPokemon[0].name}
+          />
+        </button>
+      )}
+      {nextPokemon && selectedPokemon[0].name !== 'mew' && (
+        <button
+          type="button"
+          onClick={() =>
+            setPokemonId((prev) => (parseFloat(prev) + 1).toString())
+          }
+        >
+          <p className="next-pokemon-id">#{nextPokemon[0].id}</p>
+          <img className="forward-arrow" src={rightArrow} alt="forward arrow" />
+          <img
+            className="next-pokemon-image-official"
+            src={Object.values(nextPokemon[0].sprites.other)[1].front_default}
+            alt={nextPokemon[0].name}
+          />
+        </button>
+      )}
     </StyledForwardBackButtons>
   );
 };
@@ -34,15 +97,48 @@ const StyledForwardBackButtons = styled.div`
   margin-top: 1rem;
 
   button {
-    color: transparent;
     outline: none;
     border: none;
     margin: 0rem 0.5rem;
     cursor: pointer;
+    background: rgba(256, 256, 256, 0.3);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    position: relative;
 
     img {
-      filter: invert(1);
-      background: white;
+      height: 50px;
+      filter: drop-shadow(0px 0px 5px black);
+    }
+
+    .back-arrow {
+      transform: rotate(180deg);
+    }
+
+    .former-pokemon-id,
+    .next-pokemon-id {
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+      font-weight: 900;
+    }
+
+    .former-pokemon-image-official {
+      position: absolute;
+      bottom: -40px;
+      left: -40px;
+      width: 75px;
+      height: 75px;
+    }
+
+    .next-pokemon-image-official {
+      position: absolute;
+      bottom: -40px;
+      right: -40px;
+      width: 75px;
+      height: 75px;
     }
   }
 `;
