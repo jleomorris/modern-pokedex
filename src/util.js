@@ -61,41 +61,117 @@ export const typeImages = [
 export const convertToTypeImage = (type) => {
   switch (type) {
     case 'fire':
-      return <img src={fireType} alt={type} />;
+      return (
+        <img className="type-symbol" src={fireType} alt={type} title="fire" />
+      );
     case 'bug':
-      return <img src={bugType} alt={type} />;
+      return (
+        <img className="type-symbol" src={bugType} alt={type} title="bug" />
+      );
     case 'dark':
-      return <img src={darkType} alt={type} />;
+      return (
+        <img className="type-symbol" src={darkType} alt={type} title="dark" />
+      );
     case 'dragon':
-      return <img src={dragonType} alt={type} />;
+      return (
+        <img
+          className="type-symbol"
+          src={dragonType}
+          alt={type}
+          title="dragon"
+        />
+      );
     case 'electric':
-      return <img src={electricType} alt={type} />;
+      return (
+        <img
+          className="type-symbol"
+          src={electricType}
+          alt={type}
+          title="electric"
+        />
+      );
     case 'fairy':
-      return <img src={fairyType} alt={type} />;
+      return (
+        <img className="type-symbol" src={fairyType} alt={type} title="fairy" />
+      );
     case 'fighting':
-      return <img src={fightingType} alt={type} />;
+      return (
+        <img
+          className="type-symbol"
+          src={fightingType}
+          alt={type}
+          title="fighting"
+        />
+      );
     case 'flying':
-      return <img src={flyingType} alt={type} />;
+      return (
+        <img
+          className="type-symbol"
+          src={flyingType}
+          alt={type}
+          title="flying"
+        />
+      );
     case 'ghost':
-      return <img src={ghostType} alt={type} />;
+      return (
+        <img className="type-symbol" src={ghostType} alt={type} title="ghost" />
+      );
     case 'grass':
-      return <img src={grassType} alt={type} />;
+      return (
+        <img className="type-symbol" src={grassType} alt={type} title="grass" />
+      );
     case 'ground':
-      return <img src={groundType} alt={type} />;
+      return (
+        <img
+          className="type-symbol"
+          src={groundType}
+          alt={type}
+          title="ground"
+        />
+      );
     case 'ice':
-      return <img src={iceType} alt={type} />;
+      return (
+        <img className="type-symbol" src={iceType} alt={type} title="ice" />
+      );
     case 'normal':
-      return <img src={normalType} alt={type} />;
+      return (
+        <img
+          className="type-symbol"
+          src={normalType}
+          alt={type}
+          title="normal"
+        />
+      );
     case 'poison':
-      return <img src={poisonType} alt={type} />;
+      return (
+        <img
+          className="type-symbol"
+          src={poisonType}
+          alt={type}
+          title="poison"
+        />
+      );
     case 'psychic':
-      return <img src={psychicType} alt={type} />;
+      return (
+        <img
+          className="type-symbol"
+          src={psychicType}
+          alt={type}
+          title="psychic"
+        />
+      );
     case 'rock':
-      return <img src={rockType} alt={type} />;
+      return (
+        <img className="type-symbol" src={rockType} alt={type} title="rock" />
+      );
     case 'steel':
-      return <img src={steelType} alt={type} />;
+      return (
+        <img className="type-symbol" src={steelType} alt={type} title="steel" />
+      );
     case 'water':
-      return <img src={waterType} alt={type} />;
+      return (
+        <img className="type-symbol" src={waterType} alt={type} title="water" />
+      );
     default:
       return type;
   }
