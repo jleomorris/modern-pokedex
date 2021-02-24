@@ -2,7 +2,7 @@ import React from 'react';
 // Styled components
 import styled from 'styled-components';
 // Images
-import screenshotBackground from '../img/screenshot.jpg';
+import screenshotBackground from '../img/home_background.jpg'; // Image courtesy of geocen on Fanpop
 
 const Home = () => {
   return (
@@ -71,6 +71,7 @@ const StyledHome = styled.div`
     width: 80vw;
     color: white;
     text-shadow: 0px 5px 30px rgb(0 0 0);
+    padding: 2rem;
 
     @media (max-width: 800px) {
       font-size: 3rem;
