@@ -36,6 +36,10 @@ import psychicBackground from './img/card_backgrounds/psychic.jpeg';
 import rockBackground from './img/card_backgrounds/rock.jpeg';
 import steelBackground from './img/card_backgrounds/steel.jpeg';
 import waterBackground from './img/card_backgrounds/water.jpeg';
+// Damage classes (from https://pokemondb.net)
+import movePhysical from './img/move-physical.png';
+import moveSpecial from './img/move-special.png';
+import moveStatus from './img/move-status.png';
 
 export const typeImages = [
   { type: 'fire', image: fireType },
@@ -57,6 +61,40 @@ export const typeImages = [
   { type: 'steel', image: steelType },
   { type: 'water', image: waterType },
 ];
+
+export const convertDamageClassToImage = (damageClass) => {
+  switch (damageClass) {
+    case 'physical':
+      return (
+        <img
+          className="damage-class-symbol"
+          src={movePhysical}
+          alt="physical move"
+          title="physical"
+        />
+      );
+    case 'special':
+      return (
+        <img
+          className="damage-class-symbol"
+          src={moveSpecial}
+          alt="special move"
+          title="special"
+        />
+      );
+    case 'status':
+      return (
+        <img
+          className="damage-class-symbol"
+          src={moveStatus}
+          alt="status move"
+          title="status"
+        />
+      );
+    default:
+      return damageClass;
+  }
+};
 
 export const convertToTypeImage = (type) => {
   switch (type) {

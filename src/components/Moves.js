@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // Axios
 import axios from 'axios';
 // Util
-import { convertToTypeImage } from '../util';
+import { convertToTypeImage, convertDamageClassToImage } from '../util';
 
 const Moves = ({ selectedPokemon }) => {
   // State
@@ -76,12 +76,16 @@ const Moves = ({ selectedPokemon }) => {
             .map((move) => (
               <tr className="own-move" key={move.name}>
                 <td className="own-move-title">{move.name}</td>
-                <td className="accuracy">{move.accuracy}</td>
+                <td className="accuracy">
+                  {move.accuracy ? move.accuracy : '-'}
+                </td>
                 <td className="type">{convertToTypeImage(move.type.name)}</td>
                 <td className="power">{move.power ? move.power : '-'}</td>
-                <td className="power">{move.pp}</td>
-                <td className="power">{move.target.name}</td>
-                <td className="power">{move.damage_class.name}</td>
+                <td className="pp">{move.pp}</td>
+                <td className="target">{move.target.name}</td>
+                <td className="damage-class">
+                  {convertDamageClassToImage(move.damage_class.name)}
+                </td>
                 <td className="power">{move.meta.crit_rate}</td>
                 {move.version_group_details
                   .filter(
@@ -144,6 +148,13 @@ const StyledMoves = styled.div`
 
       img {
         height: 35px;
+      }
+    }
+
+    .damage-class {
+      img {
+        height: 35px;
+        width: 35px;
       }
     }
 
