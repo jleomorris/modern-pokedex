@@ -14,22 +14,10 @@ const ForwardBackButtons = ({ selectedPokemon, setPokemonId }) => {
   const [nextPokemon, setNextPokemon] = useState();
 
   useEffect(() => {
-    let formerId;
-    let nextId;
-
-    formerId =
-      selectedPokemon[0].id === 1 ? 1 : (formerId = selectedPokemon[0].id - 1);
-
-    nextId =
-      selectedPokemon[0].id === 151
-        ? 151
-        : (nextId = selectedPokemon[0].id + 1);
-
-    // if (selectedPokemon[0].id === 151) {
-    //   nextId = 151;
-    // } else {
-    //   nextId = selectedPokemon[0].id + 1;
-    // }
+    const formerId =
+      selectedPokemon[0].id === 1 ? 1 : selectedPokemon[0].id - 1;
+    const nextId =
+      selectedPokemon[0].id === 151 ? 151 : selectedPokemon[0].id + 1;
 
     setFormerPokemon(pokemonData.filter((pokemon) => pokemon.id === formerId));
     setNextPokemon(pokemonData.filter((pokemon) => pokemon.id === nextId));

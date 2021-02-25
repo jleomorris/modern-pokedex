@@ -13,8 +13,6 @@ import InnerDetails from './InnerDetails';
 import { convertTypeToColor } from '../util';
 // Images
 import cardBack from '../img/card_back.png';
-import forwardArrow from '../img/icons8-forward-arrow-50.png';
-import backArrow from '../img/icons8-reply-arrow-50.png';
 
 const PokemonDetails = ({
   pathId,
@@ -37,7 +35,6 @@ const PokemonDetails = ({
     pokemonData2.filter((pokemon) => pokemon.id.toString() === pokemonId)
   );
   const [isFlipped, setisFlipped] = useState(false);
-
   // Styled component variables
   const theme = {
     background: convertTypeToColor(selectedPokemon[0].types[0].type.name),
@@ -179,6 +176,7 @@ const StyledPokemonDetails = styled.div`
   background: rgba(0, 0, 0, 1);
   height: 120vh;
   width: 90%;
+  max-width: 2000px;
   position: relative;
   z-index: 3;
   cursor: auto;

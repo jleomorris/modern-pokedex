@@ -6,11 +6,7 @@ import axios from 'axios';
 // Redux
 import { useSelector } from 'react-redux';
 // Util
-import {
-  convertTypeToColor,
-  convertToTypeBackground,
-  convertToTypeImage,
-} from '../util';
+import { convertTypeToColor, convertToTypeImage } from '../util';
 // Components
 import EvolutionChart from './EvolutionChart';
 import Abilities from './Abilities';
@@ -22,17 +18,11 @@ const InnerDetails = ({
   selectedPokemon2,
   setPokemonId,
   ownMoves,
-  learnableMoves,
 }) => {
   // Redux
   const pokemonData = useSelector((state) => state.pokemon.pokemonData);
-  const pokemonData2 = useSelector((state) => state.pokemon.pokemonData2);
+  //   const pokemonData2 = useSelector((state) => state.pokemon.pokemonData2);
   // State
-  const [evolutionData, setEvolutionData] = useState();
-  const [baseStage, setBaseStage] = useState();
-  const [firstEvolution, setFirstEvolution] = useState();
-  const [secondEvolution, setSecondEvolution] = useState();
-  const [ashExtraSmall, setAshExtraSmall] = useState(false);
   const [abilityData, setAbilityData] = useState();
 
   // Get abilities data
@@ -151,7 +141,7 @@ const StyledInnerDetails = styled.div`
     color: white;
     font-size: 10rem;
     text-transform: capitalize;
-    margin-top: 1rem;
+    margin-top: 2rem;
   }
 
   p {

@@ -110,7 +110,6 @@ const PokemonCard = ({
                 />
                 <div className="genus-height-weight-container">
                   <p>{`${selectedPokemon2[0].genera[7].genus},`}</p>
-                  {/* Height and weight are the wrong way around in the api data */}
                   <p>{`Height: ${(selectedPokemon[0].height * 0.33).toFixed(
                     2
                   )}ft,`}</p>
