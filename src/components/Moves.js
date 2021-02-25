@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 // Axios
 import axios from 'axios';
+// Util
+import { convertToTypeImage } from '../util';
 
 const Moves = ({ selectedPokemon }) => {
   // State
@@ -61,10 +63,8 @@ const Moves = ({ selectedPokemon }) => {
           <th className="inner-heading">PP</th>
           <th className="inner-heading">Target</th>
           <th className="inner-heading">Damage class</th>
-          <th className="inner-heading">Ailment</th>
           <th className="inner-heading">Crit rate</th>
           <th className="inner-heading">Level learned</th>
-          <th className="inner-heading">Method</th>
           <th className="inner-heading">Version</th>
         </tr>
         {fullOwnMoveData &&
@@ -77,12 +77,11 @@ const Moves = ({ selectedPokemon }) => {
               <tr className="own-move" key={move.name}>
                 <td className="own-move-title">{move.name}</td>
                 <td className="accuracy">{move.accuracy}</td>
-                <td className="accuracy">{move.type.name}</td>
+                <td className="type">{convertToTypeImage(move.type.name)}</td>
                 <td className="power">{move.power ? move.power : '-'}</td>
                 <td className="power">{move.pp}</td>
                 <td className="power">{move.target.name}</td>
                 <td className="power">{move.damage_class.name}</td>
-                <td className="power">{move.meta.ailment.name}</td>
                 <td className="power">{move.meta.crit_rate}</td>
                 {move.version_group_details
                   .filter(
@@ -94,9 +93,6 @@ const Moves = ({ selectedPokemon }) => {
                     <>
                       <td className="level-learned">
                         {moveDetails.level_learned_at}
-                      </td>
-                      <td className="learn-method">
-                        {moveDetails.move_learn_method.name}
                       </td>
                       <td className="version">
                         {moveDetails.version_group.name}
@@ -137,11 +133,18 @@ const StyledMoves = styled.div`
 
     th {
       color: white;
-    }
-
-    th {
       background: #88888878;
       padding: 0.5rem 1rem;
+    }
+
+    .type {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        height: 35px;
+      }
     }
 
     .level-method-version-header {
