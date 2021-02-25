@@ -22,7 +22,12 @@ const Abilities = ({ abilityData, selectedPokemon }) => {
                 ),
               }}
             >
-              <p className="ability-title">{ability.name}</p>
+              <p className="ability-title">
+                {ability.name}
+                <span className="ability-generation">
+                  ({ability.generation.name})
+                </span>
+              </p>
               {ability.effect_entries
                 .filter((entry) => entry.language.name === 'en')
                 .map((abilityDescription) => (
@@ -66,6 +71,14 @@ const StyledAbilities = styled.div`
       margin-bottom: 0.5rem;
       font-size: 1.5rem;
       text-shadow: 0px 0px 5px black;
+
+      .ability-generation {
+        font-size: 0.75rem;
+        color: black;
+        text-transform: none;
+        text-shadow: none;
+        margin-left: 0.25rem;
+      }
     }
 
     .ability-description {
