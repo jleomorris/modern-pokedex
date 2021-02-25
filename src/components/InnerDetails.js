@@ -14,6 +14,8 @@ import EvolutionChart from './EvolutionChart';
 import Abilities from './Abilities';
 import ForwardBackButtons from './ForwardBackButtons';
 import Moves from './Moves';
+import ChartExample from './ChartExample';
+import StatChart from './StatChart';
 // Images
 import close from '../img/close-button.svg';
 
@@ -216,7 +218,7 @@ const StyledInnerDetails = styled.div`
   .close-button {
     position: absolute;
     top: 115px;
-    right: 10px;
+    right: 20px;
     border: none;
     outline: none;
     cursor: pointer;
