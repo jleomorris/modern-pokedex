@@ -46,6 +46,7 @@ const ForwardBackButtons = ({ selectedPokemon, setPokemonId }) => {
     <StyledForwardBackButtons className="forward-back-button-container">
       {formerPokemon && selectedPokemon[0].name !== 'bulbasaur' && (
         <button
+          className="back-button"
           type="button"
           onClick={() =>
             setPokemonId((prev) => (parseFloat(prev) - 1).toString())
@@ -62,6 +63,7 @@ const ForwardBackButtons = ({ selectedPokemon, setPokemonId }) => {
       )}
       {nextPokemon && selectedPokemon[0].name !== 'mew' && (
         <button
+          className="forward-button"
           type="button"
           onClick={() =>
             setPokemonId((prev) => (parseFloat(prev) + 1).toString())
@@ -82,12 +84,20 @@ const ForwardBackButtons = ({ selectedPokemon, setPokemonId }) => {
 
 // Styled components
 const StyledForwardBackButtons = styled.div`
-  margin-top: 1rem;
+  margin: 0 auto;
+
+  .back-button {
+    border-radius: 1rem 0rem 0rem 1rem;
+  }
+
+  .forward-button {
+    border-radius: 0rem 1rem 1rem 0rem;
+  }
 
   button {
     outline: none;
     border: none;
-    margin: 0rem 0.5rem;
+    /* margin: 0rem 0.5rem; */
     cursor: pointer;
     background: rgba(256, 256, 256, 0.3);
     padding: 1.5rem;
@@ -95,7 +105,7 @@ const StyledForwardBackButtons = styled.div`
     position: relative;
 
     img {
-      height: 50px;
+      height: 30px;
       filter: drop-shadow(0px 0px 5px black);
     }
 
@@ -109,7 +119,7 @@ const StyledForwardBackButtons = styled.div`
       top: -8px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 1.5rem;
+      font-size: 1rem;
       font-weight: 900;
     }
 

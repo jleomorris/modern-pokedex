@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 // Axios
 import axios from 'axios';
+// React Router
+import { useHistory } from 'react-router-dom';
 // Redux
 import { useSelector } from 'react-redux';
 // Util
@@ -12,6 +14,8 @@ import EvolutionChart from './EvolutionChart';
 import Abilities from './Abilities';
 import ForwardBackButtons from './ForwardBackButtons';
 import Moves from './Moves';
+// Images
+import close from '../img/close-button.svg';
 
 const InnerDetails = ({
   selectedPokemon,
@@ -19,6 +23,8 @@ const InnerDetails = ({
   setPokemonId,
   ownMoves,
 }) => {
+  // React Router
+  const history = useHistory();
   // Redux
   const pokemonData = useSelector((state) => state.pokemon.pokemonData);
   //   const pokemonData2 = useSelector((state) => state.pokemon.pokemonData2);
@@ -50,6 +56,11 @@ const InnerDetails = ({
     }
   }, [selectedPokemon]);
 
+  const exitDetailHandler = () => {
+    document.body.style.overflow = 'auto';
+    history.push('/pokemon');
+  };
+
   return (
     <StyledInnerDetails className="inner-details">
       <div className="feature-type-symbol">
@@ -61,6 +72,13 @@ const InnerDetails = ({
         alt="feature-type"
       /> */}
       <h2 className="feature-title">{selectedPokemon2[0].genera[8].genus}</h2>
+      <button
+        type="button"
+        className="close-button"
+        onClick={exitDetailHandler}
+      >
+        <img src={close} alt="exit" />
+      </button>
       <ForwardBackButtons
         setPokemonId={setPokemonId}
         selectedPokemon={selectedPokemon}
@@ -193,6 +211,20 @@ const StyledInnerDetails = styled.div`
     letter-spacing: 0.5rem;
     margin: 2rem 0rem;
     z-index: -1;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 115px;
+    right: 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    img {
+      height: 50px;
+      background: black;
+    }
   }
 
   .description {
