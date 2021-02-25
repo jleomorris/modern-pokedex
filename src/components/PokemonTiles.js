@@ -35,7 +35,7 @@ const StyledPokemonTiles = styled.div`
   grid-column-gap: 1.5rem;
   grid-row-gap: 1.5rem;
   margin: 4rem 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 0.25fr)) !important;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
 
   .no-results {
     text-align: center;
