@@ -34,7 +34,7 @@ const StatChart = ({ selectedPokemon }) => {
   return (
     <StyledStatChart className="stat-chart">
       <h3>Base stats</h3>
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width="100%" height={500}>
         <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
           <PolarGrid />
           <PolarAngleAxis dataKey="stat" stroke="#ffffff" />
@@ -48,7 +48,7 @@ const StatChart = ({ selectedPokemon }) => {
           />
         </RadarChart>
       </ResponsiveContainer>
-      <ResponsiveContainer width="100%" height={300}>
+      {/* <ResponsiveContainer width="100%" height={300}>
         <LineChart
           data={data}
           margin={{ top: 15, right: 0, bottom: 15, left: 0 }}
@@ -59,9 +59,9 @@ const StatChart = ({ selectedPokemon }) => {
           <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
           <Legend />
           <Line type="monotone" dataKey="base" stroke="#FB8833" />
-          {/* <Line type="monotone" dataKey="leads" stroke="#17A8F5" /> */}
+          <Line type="monotone" dataKey="leads" stroke="#17A8F5" />
         </LineChart>
-      </ResponsiveContainer>
+      </ResponsiveContainer> */}
     </StyledStatChart>
   );
 };
@@ -74,7 +74,6 @@ const StyledStatChart = styled.div`
     color: white;
     width: 100%;
     text-transform: uppercase;
-    margin: 2rem 0rem;
   }
 `;
 
