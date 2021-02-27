@@ -116,6 +116,7 @@ const InnerDetails = ({
       <EvolutionChart
         pokemonData={pokemonData}
         selectedPokemon2={selectedPokemon2}
+        selectedPokemon={selectedPokemon}
       />
       <Moves ownMoves={ownMoves} selectedPokemon={selectedPokemon} />
     </StyledInnerDetails>
@@ -138,7 +139,7 @@ const StyledInnerDetails = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: black;
+    background-color: #5f5f5f;
   }
 
   &::-webkit-scrollbar-track {
