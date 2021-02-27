@@ -6,11 +6,12 @@ import axios from 'axios';
 // Redux
 import { useSelector } from 'react-redux';
 // Util
-import { convertTypeToColor } from '../util';
+import { convertTypeToColor, convertToTypeBackground } from '../util';
 // Images
 import ash from '../img/pokemon-ash.png';
+import rightArrow from '../img/right-arrow.svg';
 
-const EvolutionChart = ({ pokemonData, selectedPokemon2 }) => {
+const EvolutionChart = ({ pokemonData, selectedPokemon2, selectedPokemon }) => {
   // State
   const [evolutionData, setEvolutionData] = useState();
   const [baseStage, setBaseStage] = useState();
@@ -113,23 +114,43 @@ const EvolutionChart = ({ pokemonData, selectedPokemon2 }) => {
     <StyledEvolutionChart className="evolution-chart-container">
       {/* <h3>Evolution chart</h3> */}
       <div className="evolution-chart">
+        {/* <div className="background-image-container">
+          {convertToTypeBackground(selectedPokemon[0].types[0].type.name)}
+        </div> */}
         {baseStage && baseStage.length > 0 && (
           <div className="evolution-card">
-            <img
-              src={
-                baseStage && baseStage.length > 0
-                  ? Object.values(baseStage[0].sprites.other)[1].front_default
-                  : ''
-              }
-              style={{
-                height:
-                  baseStage[0].name === 'onix' ||
-                  baseStage[0].name === 'magikarp'
-                    ? `${baseStage[0].height * 8.5}px`
-                    : `${baseStage[0].height * 25.5}px`,
-              }}
-              alt="first evolution"
-            />
+            <div className="image-container">
+              <img
+                src={
+                  baseStage && baseStage.length > 0
+                    ? Object.values(baseStage[0].sprites.other)[1].front_default
+                    : ''
+                }
+                style={{
+                  height:
+                    baseStage[0].name === 'onix' ||
+                    baseStage[0].name === 'magikarp'
+                      ? `${baseStage[0].height * 8.5}px`
+                      : `${baseStage[0].height * 25.5}px`,
+                }}
+                alt="base evolution"
+              />
+              {evolutionData && firstEvolution && firstEvolution.length > 0 && (
+                <div className="right-arrow-container">
+                  <img src={rightArrow} alt="right arrow" />
+                  {evolutionData[0].evolution_details[0].min_level && (
+                    <p className="first-evolution-level">
+                      Lvl {evolutionData[0].evolution_details[0].min_level}
+                    </p>
+                  )}
+                  {evolutionData[0].evolution_details[0].item && (
+                    <p className="first-evolution-level">
+                      {evolutionData[0].evolution_details[0].item.name}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
             <div className="name-type-container">
               <p className="base-stage-name">{baseStage[0].name}</p>
               {baseStage[0].types.map((type) => (
@@ -148,21 +169,63 @@ const EvolutionChart = ({ pokemonData, selectedPokemon2 }) => {
         )}
         {firstEvolution && firstEvolution.length > 0 && (
           <div className="evolution-card">
-            <img
-              src={
-                firstEvolution && firstEvolution.length > 0
-                  ? Object.values(firstEvolution[0].sprites.other)[1]
-                      .front_default
-                  : ''
-              }
-              style={{
-                height:
-                  firstEvolution[0].name === 'gyarados'
-                    ? `${firstEvolution[0].height * 8.5}px`
-                    : `${firstEvolution[0].height * 25.5}px`,
-              }}
-              alt="first evolution"
-            />
+            <div className="image-container">
+              <img
+                src={
+                  firstEvolution && firstEvolution.length > 0
+                    ? Object.values(firstEvolution[0].sprites.other)[1]
+                        .front_default
+                    : ''
+                }
+                style={{
+                  height:
+                    firstEvolution[0].name === 'gyarados'
+                      ? `${firstEvolution[0].height * 8.5}px`
+                      : `${firstEvolution[0].height * 25.5}px`,
+                  marginBottom:
+                    firstEvolution[0].name === 'gyarados' ? '-4.5rem' : '',
+                }}
+                alt="first evolution"
+              />
+              {evolutionData && secondEvolution && secondEvolution.length > 0 && (
+                <div className="right-arrow-container">
+                  <img src={rightArrow} alt="right arrow" />
+                  {evolutionData[0].evolves_to[0].evolution_details[0]
+                    .min_level && (
+                    <p className="first-evolution-level">
+                      Lvl{' '}
+                      {evolutionData[0].evolves_to[0].evolution_details[0]
+                        .min_level ||
+                        evolutionData[0].evolves_to[0].evolution_details[0].item
+                          .name}
+                    </p>
+                  )}
+                  {evolutionData[0].evolves_to[0].evolution_details[0].item &&
+                    !evolutionData[0].evolves_to[0].evolution_details[0]
+                      .trigger && (
+                      <p className="second-evolution-level">
+                        {
+                          evolutionData[0].evolves_to[0].evolution_details[0]
+                            .item.name
+                        }
+                      </p>
+                    )}
+                  {!evolutionData[0].evolves_to[0].evolution_details[0].item &&
+                    evolutionData[0].evolves_to[0].evolution_details[0]
+                      .trigger && (
+                      <p
+                        className="secoevolutionData[0].evolves_to[0].evolution_details[0]
+                      .min_levelnd-evolution-level"
+                      >
+                        {
+                          evolutionData[0].evolves_to[0].evolution_details[0]
+                            .trigger.name
+                        }
+                      </p>
+                    )}
+                </div>
+              )}
+            </div>
             <div className="name-type-container">
               <p className="first-evolution-name">{firstEvolution[0].name}</p>
               {firstEvolution[0].types.map((type) => (
@@ -270,8 +333,33 @@ const StyledEvolutionChart = styled.div`
       max-width: 20%;
     }
 
-    img {
-      width: auto;
+    .image-container {
+      position: relative;
+
+      img {
+        width: auto;
+      }
+
+      .right-arrow-container {
+        position: absolute;
+        right: -100px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+
+        img {
+          width: 100px;
+        }
+
+        p {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 20px;
+          font-weight: 900;
+          font-size: 1.5rem;
+        }
+      }
     }
 
     .name-type-container {
