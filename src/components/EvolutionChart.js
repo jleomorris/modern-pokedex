@@ -204,17 +204,16 @@ const EvolutionChart = ({ pokemonData, selectedPokemon2 }) => {
                       </p>
                     )}
                   {/* Second evolution item (stone) */}
-                  {/* {!evolutionData[0].evolves_to[0].evolution_details[0] &&
-                    evolutionData[0].evolves_to[0].evolution_details[0].item &&
-                    !evolutionData[0].evolves_to[0].evolution_details[0]
-                      .trigger && (
+                  {evolutionData[0] &&
+                    evolutionData[0].evolves_to[0].evolution_details[0]
+                      .item && (
                       <p className="second-evolution-level">
                         {
                           evolutionData[0].evolves_to[0].evolution_details[0]
                             .item.name
                         }
                       </p>
-                    )} */}
+                    )}
                   {/* Second evolution trigger (trade) */}
                   {/* {!evolutionData[0].evolves_to[0].evolution_details[0]
                     .min_level &&
