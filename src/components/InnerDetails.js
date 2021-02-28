@@ -30,6 +30,7 @@ const InnerDetails = ({
   //   const pokemonData2 = useSelector((state) => state.pokemon.pokemonData2);
   // State
   const [abilityData, setAbilityData] = useState();
+  const [description, setDescription] = useState();
 
   // Get abilities data
   useEffect(async () => {
@@ -55,6 +56,15 @@ const InnerDetails = ({
       });
     }
   }, [selectedPokemon]);
+
+  useEffect(() => {
+    if (selectedPokemon2) {
+      const englishEntries = selectedPokemon2[0].flavor_text_entries.filter(
+        (entry) => entry.language.name === 'en'
+      );
+      setDescription(englishEntries);
+    }
+  }, [selectedPokemon2]);
 
   const exitDetailHandler = () => {
     document.body.style.overflow = 'auto';
@@ -103,12 +113,7 @@ const InnerDetails = ({
         ))}
       </div>
       <div className="description">
-        <p>
-          {selectedPokemon2[0].flavor_text_entries[0].flavor_text}
-          {/* {JSON.parse(
-                    selectedPokemon2[0].flavor_text_entries[0].flavor_text
-                  )} */}
-        </p>
+        {description && <p>{description[0].flavor_text}</p>}
       </div>
       <Abilities abilityData={abilityData} selectedPokemon={selectedPokemon} />
       <EvolutionChart
