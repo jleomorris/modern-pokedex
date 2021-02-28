@@ -33,7 +33,7 @@ const Tile = ({
       };
 
       for (let i = 0; i < pokemonStats.length; i += 1) {
-        if (pokemonStats[i].base_stat > highest.base_stat) {
+        if (pokemonStats[i].base_stat >= highest.base_stat) {
           highest = pokemonStats[i];
         }
       }
@@ -116,7 +116,7 @@ const StyledTile = styled.div`
     width: 150px;
     background: #ffffffa3;
     border-radius: 50%;
-    z-index: 1;
+    /* z-index: 1; */
   }
 
   .background-image-container {
@@ -127,6 +127,10 @@ const StyledTile = styled.div`
     height: 100%;
     width: 100%;
     /* z-index: -2; */
+
+    img {
+      z-index: -1;
+    }
   }
 
   .max-stat-container {
@@ -197,7 +201,7 @@ const StyledTile = styled.div`
       color: white;
       font-family: 'Bebas Neue', cursive;
       letter-spacing: 0.25rem;
-      z-index: 2;
+      /* z-index: 2; */
       text-shadow: 0px 5px 30px white;
     }
   }
@@ -212,7 +216,7 @@ const StyledTile = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1;
+    /* z-index: 1; */
   }
 
   .id {
