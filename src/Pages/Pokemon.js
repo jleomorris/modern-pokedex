@@ -23,6 +23,8 @@ const Pokemon = () => {
   const [isBlurActive, setIsBlurActive] = useState(false);
   const [isFilterByTypeActive, setIsFilterByTypeActive] = useState(false);
   const [typeFilterInEffect, setTypeFilterInEffect] = useState();
+  const [selectedTypeOption, setSelectedTypeOption] = useState(null);
+  const [selectedStatOption, setSelectedStatOption] = useState(null);
   // Router
   const location = useLocation();
   const pathId = location.pathname.split('/')[2];
@@ -81,43 +83,16 @@ const Pokemon = () => {
     setFilteredData(filteredByInput);
   };
 
-  // Apply grayscale filters to type icons when one is selected
-  const applyGrayscaleHandler = (type) => {
-    const allTypeImages = document.querySelectorAll('.type-filter-image');
-    const resetAll = () => {
-      for (let i = 0; i < allTypeImages.length; i += 1) {
-        allTypeImages[i].style.filter = 'grayscale(0)';
-      }
-    };
-
-    // If selected type filter is already in effect remove all grayscale and reset filtered data
-    if (isFilterByTypeActive && typeFilterInEffect === type) {
-      console.log(`${type} type already selected, undo filters and reset`);
-      resetAll();
-      setFilteredData(pokemonData);
-      setIsFilterByTypeActive(false);
-    }
-
-    if (
-      !isFilterByTypeActive ||
-      (isFilterByTypeActive && typeFilterInEffect !== type)
-    ) {
-      console.log(`apply ${type} type filter and greyscale all`);
-      // Apply greyscale to all but the one selected
-      for (let i = 0; i < allTypeImages.length; i += 1) {
-        if (allTypeImages[i].className.includes(type) === false) {
-          allTypeImages[i].style.filter = 'grayscale(1)';
-        } else {
-          allTypeImages[i].style.filter = 'grayscale(0)';
-        }
-      }
-    }
-  };
-
-  // Filter pokemon by type
-  const filterPokemonByTypeHandler = (typeToFilter) => {
+  const filterPokemonByTypeHandler = (e) => {
+    console.log(e.value);
+    const typeToFilter = e.value;
     const allPokemon = pokemonData;
     const filteredByType = [];
+
+    if (typeToFilter === 'reset') {
+      setFilteredData(pokemonData);
+      return;
+    }
 
     // Check if each pokemons type matches the type to filter
     for (let i = 0; i < allPokemon.length; i += 1) {
@@ -139,10 +114,42 @@ const Pokemon = () => {
       }
     }
 
+    setSelectedTypeOption(typeToFilter);
     setFilteredData(filteredByType);
-    setIsFilterByTypeActive(true);
-    setTypeFilterInEffect(typeToFilter);
-    applyGrayscaleHandler(typeToFilter);
+    setSelectedStatOption('');
+  };
+
+  const filterPokemonByStatHandler = (e) => {
+    console.log(e.value);
+    const statToFilter = e.value;
+    const allPokemon = pokemonData;
+    const filteredByStat = [];
+
+    if (statToFilter === 'reset') {
+      setFilteredData(pokemonData);
+      return;
+    }
+
+    // Check if each pokemons type matches the type to filter
+    for (let i = 0; i < allPokemon.length; i += 1) {
+      const maxStat = allPokemon[i].stats.reduce((prev, current) =>
+        prev.base_stat > current.base_stat ? prev : current
+      );
+
+      console.info('maxstat', maxStat);
+      console.info('stattofilter', statToFilter);
+      console.info('name', allPokemon[i].name);
+
+      //   debugger;
+
+      if (maxStat.stat.name === statToFilter) {
+        filteredByStat.push(allPokemon[i]);
+      }
+    }
+
+    console.info('filteretedbystat', filteredByStat);
+    setFilteredData(filteredByStat);
+    setSelectedTypeOption('');
   };
 
   return (
@@ -166,6 +173,9 @@ const Pokemon = () => {
         setIsDarkModeActive={setIsDarkModeActive}
         filterPokemonBySearchHandler={filterPokemonBySearchHandler}
         filterPokemonByTypeHandler={filterPokemonByTypeHandler}
+        filterPokemonByStatHandler={filterPokemonByStatHandler}
+        selectedTypeOption={selectedTypeOption}
+        selectedStatOption={selectedStatOption}
       />
       <PokemonTiles
         filteredData={filteredData}

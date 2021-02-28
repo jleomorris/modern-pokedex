@@ -69,6 +69,38 @@ export const typeImages = [
   { type: 'water', image: waterType },
 ];
 
+export const reactSelectTypeOptions = [
+  { value: 'reset', label: 'All', image: fireType },
+  { value: 'fire', label: 'Fire', image: fireType },
+  { value: 'bug', label: 'Bug', image: bugType },
+  { value: 'dark', label: 'Dark', image: darkType },
+  { value: 'dragon', label: 'Dragon', image: dragonType },
+  { value: 'electric', label: 'Electric', image: electricType },
+  { value: 'fairy', label: 'Fairy', image: fairyType },
+  { value: 'fighting', label: 'Fighting', image: fightingType },
+  { value: 'flying', label: 'Flying', image: flyingType },
+  { value: 'ghost', label: 'Ghost', image: ghostType },
+  { value: 'grass', label: 'Grass', image: grassType },
+  { value: 'ground', label: 'Ground', image: groundType },
+  { value: 'ice', label: 'Ice', image: iceType },
+  { value: 'normal', label: 'Normal', image: normalType },
+  { value: 'poison', label: 'Poison', image: poisonType },
+  { value: 'psychic', label: 'Psychic', image: psychicType },
+  { value: 'rock', label: 'Rock', image: rockType },
+  { value: 'steel', label: 'Steel', image: steelType },
+  { value: 'water', label: 'Water', image: waterType },
+];
+
+export const reactSelectStatOptions = [
+  { value: 'reset', label: 'All' },
+  { value: 'hp', label: 'Health' },
+  { value: 'attack', label: 'Attack' },
+  { value: 'defense', label: 'Defense', image: bugType },
+  { value: 'special-attack', label: 'Special Attack', image: darkType },
+  { value: 'special-defense', label: 'Special Defense', image: dragonType },
+  { value: 'speed', label: 'Speed', image: electricType },
+];
+
 export const convertMaxStatToIcon = (maxStat) => {
   switch (maxStat) {
     case 'hp':

@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 // Styled components
 import styled from 'styled-components';
+// React select
+import Select from 'react-select';
 // Images
 import bulbasaurDefault from '../img/bulbasaur_default.png';
 import lunatoneOfficial from '../img/lunatone_official.png';
 import solrockOfficial from '../img/solrock_official.png';
 // Util
-import { typeImages } from '../util';
+import {
+  typeImages,
+  reactSelectTypeOptions,
+  reactSelectStatOptions,
+} from '../util';
 
 const OptionsFilters = ({
   spriteIndex,
@@ -14,8 +20,15 @@ const OptionsFilters = ({
   isDarkModeActive,
   filterPokemonBySearchHandler,
   filterPokemonByTypeHandler,
+  filterPokemonByStatHandler,
   setIsDarkModeActive,
+  selectedTypeOption,
+  selectedStatOption,
 }) => {
+  // React select
+  const typeOptions = reactSelectTypeOptions;
+  const statOptions = reactSelectStatOptions;
+
   return (
     <StyledOptionsFilters className="options-filters">
       <div className="option-filter">
@@ -62,21 +75,23 @@ const OptionsFilters = ({
         />
       </div>
       <div className="type-filter-container">
-        <p>Filter by element (click again to remove)</p>
-        {typeImages.map((type) => (
-          <div
-            key={type.type}
-            onClick={() => filterPokemonByTypeHandler(type.type)}
-            onKeyPress={filterPokemonByTypeHandler}
-            role="presentation"
-          >
-            <img
-              className={`${type.type} type-filter-image`}
-              src={type.image}
-              alt={`${type.type} logo`}
-            />
-          </div>
-        ))}
+        <p>Filter by element</p>
+        <Select
+          defaultValue={selectedTypeOption}
+          //   value={selectedTypeOption}
+          onChange={filterPokemonByTypeHandler}
+          options={typeOptions}
+          width="500px"
+        />
+      </div>
+      <div className="stat-filter-container">
+        <p>Filter by max stat</p>
+        <Select
+          defaultValue={selectedStatOption}
+          onChange={filterPokemonByStatHandler}
+          options={statOptions}
+          width="500px"
+        />
       </div>
     </StyledOptionsFilters>
   );
@@ -142,30 +157,15 @@ const StyledOptionsFilters = styled.div`
     }
   }
 
-  .type-filter-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+  .type-filter-container,
+  .stat-filter-container {
     margin: 2rem;
-    width: 50%;
-
-    @media (max-width: 1000px) {
-      width: 80%;
-    }
 
     p {
       font-family: 'Bebas Neue', cursive;
       font-size: 1.5rem;
       font-weight: 900;
       width: 100%;
-    }
-
-    img {
-      height: 60px;
-      width: 60px;
-      cursor: pointer;
-      margin: 0.5rem;
     }
   }
 `;
