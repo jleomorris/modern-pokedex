@@ -3,15 +3,13 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 // Axios
 import axios from 'axios';
-// Redux
-import { useSelector } from 'react-redux';
 // Util
-import { convertTypeToColor, convertToTypeBackground } from '../util';
+import { convertTypeToColor } from '../util';
 // Images
 import ash from '../img/pokemon-ash.png';
 import rightArrow from '../img/right-arrow.svg';
 
-const EvolutionChart = ({ pokemonData, selectedPokemon2, selectedPokemon }) => {
+const EvolutionChart = ({ pokemonData, selectedPokemon2 }) => {
   // State
   const [evolutionData, setEvolutionData] = useState();
   const [baseStage, setBaseStage] = useState();
@@ -138,16 +136,20 @@ const EvolutionChart = ({ pokemonData, selectedPokemon2, selectedPokemon }) => {
               {evolutionData && firstEvolution && firstEvolution.length > 0 && (
                 <div className="right-arrow-container">
                   <img src={rightArrow} alt="right arrow" />
-                  {evolutionData[0].evolution_details[0].min_level && (
-                    <p className="first-evolution-level">
-                      Lvl {evolutionData[0].evolution_details[0].min_level}
-                    </p>
-                  )}
-                  {evolutionData[0].evolution_details[0].item && (
-                    <p className="first-evolution-level">
-                      {evolutionData[0].evolution_details[0].item.name}
-                    </p>
-                  )}
+                  {/* First evolution level */}
+                  {evolutionData[0] &&
+                    evolutionData[0].evolution_details[0].min_level && (
+                      <p className="first-evolution-level">
+                        Lvl {evolutionData[0].evolution_details[0].min_level}
+                      </p>
+                    )}
+                  {/* First evolution item (stone) */}
+                  {evolutionData[0] &&
+                    evolutionData[0].evolution_details[0].item && (
+                      <p className="first-evolution-level">
+                        {evolutionData[0].evolution_details[0].item.name}
+                      </p>
+                    )}
                 </div>
               )}
             </div>
@@ -187,20 +189,23 @@ const EvolutionChart = ({ pokemonData, selectedPokemon2, selectedPokemon }) => {
                 }}
                 alt="first evolution"
               />
-              {evolutionData && secondEvolution && secondEvolution.length > 0 && (
+              {/* Second evolution level */}
+              {secondEvolution && secondEvolution.length > 0 && (
                 <div className="right-arrow-container">
                   <img src={rightArrow} alt="right arrow" />
-                  {evolutionData[0].evolves_to[0].evolution_details[0]
-                    .min_level && (
-                    <p className="first-evolution-level">
-                      Lvl{' '}
-                      {evolutionData[0].evolves_to[0].evolution_details[0]
-                        .min_level ||
-                        evolutionData[0].evolves_to[0].evolution_details[0].item
-                          .name}
-                    </p>
-                  )}
-                  {evolutionData[0].evolves_to[0].evolution_details[0].item &&
+                  {/* Second evolution level */}
+                  {evolutionData[0] &&
+                    evolutionData[0].evolves_to[0] &&
+                    evolutionData[0].evolves_to[0].evolution_details[0] &&
+                    evolutionData[0].evolves_to[0].evolution_details[0]
+                      .min_level !== null && (
+                      <p className="second-evolution-level">
+                        {`Lvl ${evolutionData[0].evolves_to[0].evolution_details[0].min_level}`}
+                      </p>
+                    )}
+                  {/* Second evolution item (stone) */}
+                  {/* {!evolutionData[0].evolves_to[0].evolution_details[0] &&
+                    evolutionData[0].evolves_to[0].evolution_details[0].item &&
                     !evolutionData[0].evolves_to[0].evolution_details[0]
                       .trigger && (
                       <p className="second-evolution-level">
@@ -209,20 +214,20 @@ const EvolutionChart = ({ pokemonData, selectedPokemon2, selectedPokemon }) => {
                             .item.name
                         }
                       </p>
-                    )}
-                  {!evolutionData[0].evolves_to[0].evolution_details[0].item &&
+                    )} */}
+                  {/* Second evolution trigger (trade) */}
+                  {/* {!evolutionData[0].evolves_to[0].evolution_details[0]
+                    .min_level &&
+                    !evolutionData[0].evolves_to[0].evolution_details[0].item &&
                     evolutionData[0].evolves_to[0].evolution_details[0]
                       .trigger && (
-                      <p
-                        className="secoevolutionData[0].evolves_to[0].evolution_details[0]
-                      .min_levelnd-evolution-level"
-                      >
+                      <p className="second-evolution-level">
                         {
                           evolutionData[0].evolves_to[0].evolution_details[0]
                             .trigger.name
                         }
                       </p>
-                    )}
+                    )} */}
                 </div>
               )}
             </div>
