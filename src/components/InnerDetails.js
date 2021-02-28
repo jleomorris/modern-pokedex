@@ -14,8 +14,6 @@ import EvolutionChart from './EvolutionChart';
 import Abilities from './Abilities';
 import ForwardBackButtons from './ForwardBackButtons';
 import Moves from './Moves';
-import ChartExample from './ChartExample';
-import StatChart from './StatChart';
 // Images
 import close from '../img/close-button.svg';
 
