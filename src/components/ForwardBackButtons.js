@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // Redux
 import { useSelector } from 'react-redux';
 // Images
-import rightArrow from '../img/right-arrow.svg';
+import rightArrow from '../img/right-arrow-white.svg';
 
 const ForwardBackButtons = ({ selectedPokemon, setPokemonId }) => {
   // Redux

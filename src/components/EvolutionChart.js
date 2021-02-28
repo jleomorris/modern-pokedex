@@ -7,7 +7,7 @@ import axios from 'axios';
 import { convertTypeToColor } from '../util';
 // Images
 import ash from '../img/pokemon-ash.png';
-import rightArrow from '../img/right-arrow.svg';
+import rightArrow from '../img/right-arrow-black.svg';
 
 const EvolutionChart = ({ pokemonData, selectedPokemon2 }) => {
   // State
@@ -208,7 +208,7 @@ const EvolutionChart = ({ pokemonData, selectedPokemon2 }) => {
                     evolutionData[0].evolves_to[0] &&
                     evolutionData[0].evolves_to[0].evolution_details[0]
                       .item && (
-                      <p className="second-evolution-level">
+                      <p className="second-evolution-item">
                         {
                           evolutionData[0].evolves_to[0].evolution_details[0]
                             .item.name
@@ -224,7 +224,7 @@ const EvolutionChart = ({ pokemonData, selectedPokemon2 }) => {
                       null &&
                     evolutionData[0].evolves_to[0].evolution_details[0]
                       .trigger && (
-                      <p className="second-evolution-level">
+                      <p className="second-evolution-trigger">
                         {
                           evolutionData[0].evolves_to[0].evolution_details[0]
                             .trigger.name
@@ -366,6 +366,11 @@ const StyledEvolutionChart = styled.div`
           right: 20px;
           font-weight: 900;
           font-size: 1.5rem;
+        }
+
+        .second-evolution-item {
+          font-size: 1rem;
+          text-transform: capitalize;
         }
       }
     }
