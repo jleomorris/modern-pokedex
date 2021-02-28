@@ -40,6 +40,13 @@ import waterBackground from './img/card_backgrounds/water.jpeg';
 import movePhysical from './img/move-physical.png';
 import moveSpecial from './img/move-special.png';
 import moveStatus from './img/move-status.png';
+// Stat icons
+import healthIcon from './img/stats/health.svg';
+import attackIcon from './img/stats/attack.svg';
+import defenseIcon from './img/stats/defense.svg';
+import specialAttackIcon from './img/stats/special_attack.svg';
+import specialDefenseIcon from './img/stats/special_defense.svg';
+import speedIcon from './img/stats/speed.svg';
 
 export const typeImages = [
   { type: 'fire', image: fireType },
@@ -61,6 +68,61 @@ export const typeImages = [
   { type: 'steel', image: steelType },
   { type: 'water', image: waterType },
 ];
+
+export const convertMaxStatToIcon = (maxStat) => {
+  switch (maxStat) {
+    case 'hp':
+      return (
+        <img
+          className="health-stat-icon stat-icon"
+          src={healthIcon}
+          alt="health icon"
+        />
+      );
+    case 'attack':
+      return (
+        <img
+          className="attack-stat-icon stat-icon"
+          src={attackIcon}
+          alt="attack icon"
+        />
+      );
+    case 'defense':
+      return (
+        <img
+          className="defense-stat-icon stat-icon"
+          src={defenseIcon}
+          alt="defense icon"
+        />
+      );
+    case 'special-attack':
+      return (
+        <img
+          className="special-attack-stat-icon stat-icon"
+          src={specialAttackIcon}
+          alt="special attack icon"
+        />
+      );
+    case 'special-defense':
+      return (
+        <img
+          className="special-defense-stat-icon stat-icon"
+          src={specialDefenseIcon}
+          alt="special defense icon"
+        />
+      );
+    case 'speed':
+      return (
+        <img
+          className="speed-stat-icon stat-icon"
+          src={speedIcon}
+          alt="speed icon"
+        />
+      );
+    default:
+      return maxStat;
+  }
+};
 
 export const convertDamageClassToImage = (damageClass) => {
   switch (damageClass) {

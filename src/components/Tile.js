@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // React Router
 import { Link } from 'react-router-dom';
 // Styled components
 import styled from 'styled-components';
 // Util
-import { convertToTypeImage, convertToTypeBackground } from '../util';
+import {
+  convertToTypeImage,
+  convertToTypeBackground,
+  convertMaxStatToIcon,
+} from '../util';
 
 const Tile = ({
   pokemon,
@@ -12,13 +16,43 @@ const Tile = ({
   isDreamWorldSelected,
   isOfficialSelected,
 }) => {
+  // State
+  const [highestStat, setHighestStat] = useState();
+
+  useEffect(() => {
+    console.log(pokemon);
+    if (pokemon) {
+      const pokemonStats = pokemon.stats;
+      let highest = {
+        base_stat: 0,
+        effort: 0,
+        stat: {
+          name: 'hp',
+          url: '',
+        },
+      };
+
+      for (let i = 0; i < pokemonStats.length; i += 1) {
+        if (pokemonStats[i].base_stat > highest.base_stat) {
+          highest = pokemonStats[i];
+        }
+      }
+
+      console.log('highest stat', highest.stat.name);
+      setHighestStat(highest.stat.name);
+    }
+  }, [pokemon]);
+
   return (
     <StyledTile className="card">
       <div className="background-circle" />
       <div className="background-image-container">
         {convertToTypeBackground(pokemon.types[0].type.name)}
       </div>
-      <p className="attack">{pokemon.stats[1].base_stat}</p>
+      {/* <p className="attack">{pokemon.stats[1].base_stat}</p> */}
+      <div className="max-stat-container">
+        {convertMaxStatToIcon(highestStat)}
+      </div>
       <div className="type-container">
         {pokemon.types.map((type) => (
           <div key={type.type.name}>{convertToTypeImage(type.type.name)}</div>
@@ -26,7 +60,7 @@ const Tile = ({
       </div>
       <div className="name-health-container">
         <h2 className="pokemon-card-title">{pokemon.name}</h2>
-        <p className="hp">{pokemon.stats[0].base_stat} HP</p>
+        {/* <p className="hp">{pokemon.stats[0].base_stat} HP</p> */}
       </div>
       <Link to={`/pokemon/${pokemon.id}`}>
         {isDreamWorldSelected && (
@@ -95,6 +129,19 @@ const StyledTile = styled.div`
     /* z-index: -2; */
   }
 
+  .max-stat-container {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    padding: 0.5rem;
+    background: rgba(256, 256, 256, 0.7);
+    border-radius: 1rem;
+
+    img {
+      width: 30px;
+    }
+  }
+
   .background-image {
     position: absolute;
     top: 0;
@@ -106,7 +153,7 @@ const StyledTile = styled.div`
     /* z-index: -2; */
   }
 
-  .attack {
+  /* .attack {
     position: absolute;
     top: -25px;
     left: -5px;
@@ -115,13 +162,12 @@ const StyledTile = styled.div`
     border: 2px solid black;
     padding: 0.5rem;
     border-radius: 1rem;
-  }
+  } */
 
   .type-container {
     position: absolute;
-    top: -25px;
-    left: 53%;
-    transform: translateX(-50%);
+    top: 5px;
+    right: 5px;
     display: flex;
 
     img {
@@ -136,13 +182,13 @@ const StyledTile = styled.div`
     align-items: start;
     margin-top: 3rem;
 
-    .hp {
+    /* .hp {
       position: absolute;
       top: 5px;
       right: 5px;
       font-size: 1.25rem;
       color: white;
-    }
+    } */
 
     .pokemon-card-title {
       text-align: center;
