@@ -17,9 +17,10 @@ const Home = () => {
         <ul>
           <li>All data from pokeapi</li>
           <li>Custom sprite styles</li>
-          <li>View Pokemon card and extensive data</li>
+          <li>View Pokemon card</li>
+          <li>View evolution and move data</li>
           <li>Dark mode</li>
-          <li>Filter by search and type</li>
+          <li>Filter by search, type and highest base stat</li>
         </ul>
       </div>
     </StyledHome>
@@ -83,8 +84,8 @@ const StyledHome = styled.div`
     font-size: 2rem;
     list-style: none;
     position: absolute;
-    top: 60%;
-    transform: translateY(-60%);
+    top: 65%;
+    transform: translateY(-65%);
     right: -100px;
 
     @media (max-width: 800px) {
@@ -92,7 +93,7 @@ const StyledHome = styled.div`
     }
 
     li {
-      background: rgba(256, 256, 256, 0.2);
+      background: rgba(256, 256, 256, 0.4);
       padding: 0.5rem 1rem;
       margin: 1rem 0rem;
       border-radius: 0rem 1rem 1rem 0rem;
