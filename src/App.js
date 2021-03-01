@@ -6,6 +6,7 @@ import styled from 'styled-components';
 // Redux
 import { useDispatch } from 'react-redux';
 import { loadGen1Data } from './redux/pokemonReducer';
+import { loadAllTypeData } from './redux/typeReducer';
 // Components
 import GlobalStyle from './components/GlobalStyle';
 import Home from './Pages/Home';
@@ -19,6 +20,7 @@ const App = () => {
   // Get all data for gen1
   useEffect(() => {
     dispatch(loadGen1Data());
+    dispatch(loadAllTypeData());
   }, []);
 
   return (
