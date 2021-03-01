@@ -1,9 +1,5 @@
 import axios from 'axios';
-import {
-  pokemonDetailsUrl,
-  pokemonDetailsUrl2,
-  typeDetailsUrl,
-} from '../services/pokeapi';
+import { typeDetailsUrl } from '../services/pokeapi';
 
 const initialState = {
   typeData: [],
