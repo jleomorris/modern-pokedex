@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // Styled components
 import styled from 'styled-components';
 // React select
@@ -8,11 +8,7 @@ import bulbasaurDefault from '../img/bulbasaur_default.png';
 import lunatoneOfficial from '../img/lunatone_official.png';
 import solrockOfficial from '../img/solrock_official.png';
 // Util
-import {
-  typeImages,
-  reactSelectTypeOptions,
-  reactSelectStatOptions,
-} from '../util';
+import { reactSelectTypeOptions, reactSelectStatOptions } from '../util';
 
 const OptionsFilters = ({
   spriteIndex,
@@ -78,7 +74,6 @@ const OptionsFilters = ({
         <p>Filter by element</p>
         <Select
           defaultValue={selectedTypeOption}
-          //   value={selectedTypeOption}
           onChange={filterPokemonByTypeHandler}
           options={typeOptions}
           width="500px"

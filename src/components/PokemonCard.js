@@ -60,10 +60,7 @@ const PokemonCard = ({
 
   return (
     <ThemeProvider theme={theme}>
-      <StyledPokemonCard
-        // type={selectedPokemon[0].types[0].type.name}
-        className="pokemon-card"
-      >
+      <StyledPokemonCard className="pokemon-card">
         <div
           className="detailed-pokemon-card"
           onClick={cardFlipHandler}
@@ -132,9 +129,6 @@ const PokemonCard = ({
                   {cardDescriptions &&
                     cardDescriptions[0].flavor_text.toString()}
                 </p>
-                {/* {JSON.parse(
-                    selectedPokemon2[0].flavor_text_entries[0].flavor_text
-                  )} */}
               </div>
             </div>
             <div className="id-container">

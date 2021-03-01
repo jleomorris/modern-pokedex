@@ -21,8 +21,8 @@ const Pokemon = () => {
   const [spriteIndex, setSpriteIndex] = useState(2);
   const [isDarkModeActive, setIsDarkModeActive] = useState(false);
   const [isBlurActive, setIsBlurActive] = useState(false);
-  const [isFilterByTypeActive, setIsFilterByTypeActive] = useState(false);
-  const [typeFilterInEffect, setTypeFilterInEffect] = useState();
+  //   const [isFilterByTypeActive, setIsFilterByTypeActive] = useState(false);
+  //   const [typeFilterInEffect, setTypeFilterInEffect] = useState();
   const [selectedTypeOption, setSelectedTypeOption] = useState(null);
   const [selectedStatOption, setSelectedStatOption] = useState(null);
   // Router
@@ -149,7 +149,7 @@ const Pokemon = () => {
 
     console.info('filteretedbystat', filteredByStat);
     setFilteredData(filteredByStat);
-    setSelectedTypeOption('');
+    setSelectedTypeOption(null);
   };
 
   return (

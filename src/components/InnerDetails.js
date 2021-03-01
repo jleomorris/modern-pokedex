@@ -138,7 +138,7 @@ const StyledInnerDetails = styled.div`
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
-    width: 0.5rem;
+    width: 1rem;
   }
 
   &::-webkit-scrollbar-thumb {
@@ -222,7 +222,7 @@ const StyledInnerDetails = styled.div`
   .close-button {
     position: absolute;
     top: 115px;
-    right: 20px;
+    right: 30px;
     border: none;
     outline: none;
     cursor: pointer;
