@@ -112,9 +112,9 @@ const EvolutionChart = ({ pokemonData, selectedPokemon2 }) => {
     <StyledEvolutionChart className="evolution-chart-container">
       {/* <h3>Evolution chart</h3> */}
       <div className="evolution-chart">
-        {/* <div className="background-image-container">
-          {convertToTypeBackground(selectedPokemon[0].types[0].type.name)}
-        </div> */}
+        <div className="user-message">
+          <p>*Pokemon are size proportionate to Ash (who is 5ft in height)</p>
+        </div>
         {baseStage && baseStage.length > 0 && (
           <div className="evolution-card">
             <div className="image-container">
@@ -330,6 +330,17 @@ const StyledEvolutionChart = styled.div`
     padding: 3rem;
     margin: 2rem 0rem;
     background: rgba(256, 256, 256, 0.7);
+
+    .user-message {
+      position: absolute;
+      bottom: 15px;
+      right: 20px;
+
+      p {
+        font-size: 0.75rem;
+        color: black;
+      }
+    }
 
     .evolution-card {
       display: flex;
