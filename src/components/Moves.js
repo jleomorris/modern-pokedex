@@ -74,7 +74,15 @@ const Moves = ({ selectedPokemon }) => {
         }
       }
 
-      setRedBlueMoves(filteredMovesUnique);
+      // Sort moves by level ascending
+      const sortedByLevel = filteredMovesUnique.sort((a, b) =>
+        a.version_group_details[0].level_learned_at >
+        b.version_group_details[0].level_learned_at
+          ? 1
+          : -1
+      );
+
+      setRedBlueMoves(sortedByLevel);
     }
   }, [fullOwnMoveData]);
 
