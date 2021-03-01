@@ -11,6 +11,7 @@ const Moves = ({ selectedPokemon }) => {
   const [ownMoves, setOwnMoves] = useState();
   const [canLearn, setCanLearn] = useState();
   const [fullOwnMoveData, setFullOwnMoveData] = useState();
+  const [redBlueMoves, setRedBlueMoves] = useState(null);
 
   // Set up own moves and learnable moves
   useEffect(() => {
@@ -51,6 +52,32 @@ const Moves = ({ selectedPokemon }) => {
     }
   }, [ownMoves]);
 
+  // Set red and blue version move data
+  useEffect(() => {
+    if (fullOwnMoveData) {
+      const redBlueMovesFiltered = fullOwnMoveData.filter(
+        (move) =>
+          move.version_group_details[0].version_group.name === 'red-blue'
+      );
+
+      const filteredMovesUnique = [];
+
+      for (let i = 0; i < redBlueMovesFiltered.length; i += 1) {
+        for (const ver of redBlueMovesFiltered[i].version_group_details) {
+          if (
+            ver.version_group.name === 'red-blue' &&
+            ver.move_learn_method.name === 'level-up'
+          ) {
+            filteredMovesUnique.push(redBlueMovesFiltered[i]);
+            break;
+          }
+        }
+      }
+
+      setRedBlueMoves(filteredMovesUnique);
+    }
+  }, [fullOwnMoveData]);
+
   return (
     <StyledMoves className="move-container">
       <h3>Own moves</h3>
@@ -67,44 +94,29 @@ const Moves = ({ selectedPokemon }) => {
           <th className="inner-heading">Level learned</th>
           <th className="inner-heading">Version</th>
         </tr>
-        {fullOwnMoveData &&
-          fullOwnMoveData
-            .filter(
-              (move) =>
-                move.version_group_details[0].version_group.name === 'red-blue'
-            )
-            .map((move) => (
-              <tr className="own-move" key={move.name}>
-                <td className="own-move-title">{move.name}</td>
-                <td className="accuracy">
-                  {move.accuracy ? move.accuracy : '-'}
-                </td>
-                <td className="type">{convertToTypeImage(move.type.name)}</td>
-                <td className="power">{move.power ? move.power : '-'}</td>
-                <td className="pp">{move.pp}</td>
-                <td className="target">{move.target.name}</td>
-                <td className="damage-class">
-                  {convertDamageClassToImage(move.damage_class.name)}
-                </td>
-                <td className="power">{move.meta.crit_rate}</td>
-                {move.version_group_details
-                  .filter(
-                    (ver) =>
-                      ver.version_group.name === 'red-blue' &&
-                      ver.move_learn_method.name === 'level-up'
-                  )
-                  .map((moveDetails) => (
-                    <>
-                      <td className="level-learned">
-                        {moveDetails.level_learned_at}
-                      </td>
-                      <td className="version">
-                        {moveDetails.version_group.name}
-                      </td>
-                    </>
-                  ))}
-              </tr>
-            ))}
+        {redBlueMoves &&
+          redBlueMoves.map((move) => (
+            <tr className="own-move" key={move.name}>
+              <td className="own-move-title">{move.name}</td>
+              <td className="accuracy">
+                {move.accuracy ? move.accuracy : '-'}
+              </td>
+              <td className="type">{convertToTypeImage(move.type.name)}</td>
+              <td className="power">{move.power ? move.power : '-'}</td>
+              <td className="pp">{move.pp}</td>
+              <td className="target">{move.target.name}</td>
+              <td className="damage-class">
+                {convertDamageClassToImage(move.damage_class.name)}
+              </td>
+              <td className="power">{move.meta.crit_rate}</td>
+              <td className="level-learned">
+                {move.version_group_details[0].level_learned_at}
+              </td>
+              <td className="version">
+                {move.version_group_details[0].version_group.name}
+              </td>
+            </tr>
+          ))}
       </table>
     </StyledMoves>
   );

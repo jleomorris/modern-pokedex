@@ -20,10 +20,11 @@
     "arrow-body-style": "off",
     "import/prefer-default-export": "off",
     "react/self-closing-comp": "warn",
-    "no-await-in-loop": "warn",
+    "no-await-in-loop": "off",
     "no-debugger": "warn",
     "react/prop-types": "off",
     "no-nested-ternary": "warn",
+    "no-restricted-syntax": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "prettier/prettier": [
       "warn",
