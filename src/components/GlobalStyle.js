@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
   // Conditional classes
   .dark-mode {
       background: rgba(0,0,0,0.9);
+      z-index: 0;
   }
 
   .enable-blur >* {
