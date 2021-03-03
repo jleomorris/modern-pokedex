@@ -48,6 +48,14 @@ import specialAttackIcon from './img/stats/special_attack.svg';
 import specialDefenseIcon from './img/stats/special_defense.svg';
 import speedIcon from './img/stats/speed.svg';
 
+export const removeNonAscii = (string) => {
+  let removedNonAscii = string.toString();
+  removedNonAscii = removedNonAscii.replace(/é/g, 'e'); // Replace é in Pokémon to Pokemon;
+  removedNonAscii = removedNonAscii.replace(/[^\x20-\x7E]/g, ' '); // Remove all non ascii
+
+  return removedNonAscii;
+};
+
 export const typeImages = [
   { type: 'fire', image: fireType },
   { type: 'bug', image: bugType },

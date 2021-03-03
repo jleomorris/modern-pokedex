@@ -8,6 +8,7 @@ import {
   convertToTypeImage,
   convertToTypeBackground,
   convertTypeToColor,
+  removeNonAscii,
 } from '../util';
 
 const PokemonCard = ({
@@ -127,7 +128,7 @@ const PokemonCard = ({
               <div className="description">
                 <p>
                   {cardDescriptions &&
-                    cardDescriptions[0].flavor_text.toString()}
+                    removeNonAscii(cardDescriptions[0].flavor_text)}
                 </p>
               </div>
             </div>

@@ -8,7 +8,11 @@ import { useHistory } from 'react-router-dom';
 // Redux
 import { useSelector } from 'react-redux';
 // Util
-import { convertTypeToColor, convertToTypeImage } from '../util';
+import {
+  convertTypeToColor,
+  convertToTypeImage,
+  removeNonAscii,
+} from '../util';
 // Components
 import EvolutionChart from './EvolutionChart';
 import Abilities from './Abilities';
@@ -113,7 +117,7 @@ const InnerDetails = ({
         ))}
       </div>
       <div className="description">
-        {description && <p>{description[0].flavor_text}</p>}
+        {description && <p>{removeNonAscii(description[0].flavor_text)}</p>}
       </div>
       <Abilities abilityData={abilityData} selectedPokemon={selectedPokemon} />
       <EvolutionChart
