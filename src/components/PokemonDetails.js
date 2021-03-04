@@ -9,8 +9,9 @@ import { useSelector } from 'react-redux';
 import ReactCardFlip from 'react-card-flip';
 import PokemonCard from './PokemonCard';
 import InnerDetails from './InnerDetails';
+import StrengthsWeaknesses from './StrengthsWeaknesses';
 // Util
-import { convertTypeToColor, convertToTypeImage } from '../util';
+import { convertTypeToColor } from '../util';
 // Images
 import cardBack from '../img/card_back.png';
 
@@ -25,7 +26,6 @@ const PokemonDetails = ({
   // Redux
   const pokemonData = useSelector((state) => state.pokemon.pokemonData);
   const pokemonData2 = useSelector((state) => state.pokemon.pokemonData2);
-  const typeData = useSelector((state) => state.types.typeData);
   // State
   const [pokemonId, setPokemonId] = useState(pathId);
   // SelectedPokemon 1 and 2 are based off 2 separate stores of data, from 2 different API calls
@@ -77,46 +77,6 @@ const PokemonDetails = ({
     setisFlipped((prev) => !prev);
   };
 
-  const typeStrengthsHandler = () => {
-    const currentCardTypes = selectedPokemon[0].types;
-    const strongAgainst = [];
-    console.log('typeData', typeData);
-
-    currentCardTypes.forEach((type) => {
-      const filteredTypeData = typeData.filter(
-        (data) => data.name === type.type.name
-      );
-
-      filteredTypeData[0].damage_relations.double_damage_to.forEach(
-        (typeStrongAgainst) => {
-          strongAgainst.push(typeStrongAgainst.name);
-        }
-      );
-    });
-
-    return strongAgainst;
-  };
-
-  const typeWeaknessessHandler = () => {
-    const currentCardTypes = selectedPokemon[0].types;
-    const weakAgainst = [];
-    console.log('typeData', typeData);
-
-    currentCardTypes.forEach((type) => {
-      const filteredTypeData = typeData.filter(
-        (data) => data.name === type.type.name
-      );
-
-      filteredTypeData[0].damage_relations.double_damage_from.forEach(
-        (typeWeakAgainst) => {
-          weakAgainst.push(typeWeakAgainst.name);
-        }
-      );
-    });
-
-    return weakAgainst;
-  };
-
   return (
     <ThemeProvider theme={theme}>
       <DetailsShadow className="details-shadow" onClick={exitDetailHandler}>
@@ -150,28 +110,7 @@ const PokemonDetails = ({
                 tabIndex="0"
               >
                 <img className="back-image" src={cardBack} alt="card-back" />
-                <div className="strength-weakness-container">
-                  <div className="strengths">
-                    <h2>Strong against</h2>
-                    {typeData && typeStrengthsHandler().length === 0 && (
-                      <p className="none-message">None</p>
-                    )}
-                    {typeData &&
-                      typeStrengthsHandler().map((strongAgainst) =>
-                        convertToTypeImage(strongAgainst)
-                      )}
-                  </div>
-                  <div className="weaknesses">
-                    <h2>Weak against</h2>
-                    {typeData && typeWeaknessessHandler().length === 0 && (
-                      <p className="none-message">None</p>
-                    )}
-                    {typeData &&
-                      typeWeaknessessHandler().map((weakAgainst) =>
-                        convertToTypeImage(weakAgainst)
-                      )}
-                  </div>
-                </div>
+                <StrengthsWeaknesses selectedPokemon={selectedPokemon} />
               </div>
             </ReactCardFlip>
           )}
@@ -261,48 +200,6 @@ const StyledPokemonDetails = styled.div`
     top: 0px;
     left: -75px;
     outline: none;
-
-    .strength-weakness-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      -webkit-transform: translateX(-50%);
-      -ms-transform: translateX(-50%);
-      transform: translate(-50%, -50%);
-      width: 100%;
-      height: 50%;
-      /* margin-top: 6rem; */
-      /* background: rgba(0,0,0,0.6); */
-      border-radius: 2rem;
-      padding: 3rem;
-
-      .strengths,
-      .weaknesses {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-
-        .none-message {
-          font-size: 1.5rem;
-          color: white;
-        }
-
-        h2 {
-          font-size: 2rem;
-          color: white;
-          margin: 1rem 0rem;
-          width: 100%;
-          text-align: center;
-          text-shadow: 0px 5px 5px black;
-        }
-
-        .type-symbol {
-          width: 60px;
-          height: 60px;
-          filter: drop-shadow(2px 4px 6px black);
-        }
-      }
-    }
 
     .back-image {
       width: 575px;
