@@ -372,13 +372,13 @@ const StyledEvolutionChart = styled.div`
       max-width: 20%;
     }
 
-    .evolution-card > * {
+    /* .evolution-card > * {
       z-index: 1;
-    }
+    } */
 
     .image-container {
       position: relative;
-      z-index: 2;
+      /* z-index: 2; */
 
       img {
         width: auto;
