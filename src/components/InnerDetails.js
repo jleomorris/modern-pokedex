@@ -18,6 +18,7 @@ import EvolutionChart from './EvolutionChart';
 import Abilities from './Abilities';
 import ForwardBackButtons from './ForwardBackButtons';
 import Moves from './Moves';
+import LocationArea from './LocationArea';
 // Images
 import close from '../img/close-button.svg';
 
@@ -35,7 +36,6 @@ const InnerDetails = ({
   // State
   const [abilityData, setAbilityData] = useState();
   const [description, setDescription] = useState();
-  const [locationAreaEncounters, setLocationAreaEncounters] = useState();
 
   // Get abilities data
   useEffect(async () => {
@@ -62,6 +62,7 @@ const InnerDetails = ({
     }
   }, [selectedPokemon]);
 
+  // Filter english descriptions
   useEffect(() => {
     if (selectedPokemon2) {
       const englishEntries = selectedPokemon2[0].flavor_text_entries.filter(
@@ -70,26 +71,6 @@ const InnerDetails = ({
       setDescription(englishEntries);
     }
   }, [selectedPokemon2]);
-
-  // Get location area data
-  useEffect(() => {
-    axios
-      .get(selectedPokemon[0].location_area_encounters)
-      .then((response) => {
-        // debugger;
-        // handle success
-        console.log('response', response);
-
-        setLocationAreaEncounters(response.data);
-      })
-      .catch((error) => {
-        // handle error
-        console.log(error);
-      })
-      .then(() => {
-        // always executed
-      });
-  }, [selectedPokemon]);
 
   const exitDetailHandler = () => {
     document.body.style.overflow = 'auto';
@@ -101,11 +82,6 @@ const InnerDetails = ({
       <div className="feature-type-symbol">
         {convertToTypeImage(selectedPokemon[0].types[0].type.name)}
       </div>
-      {/* <img
-        className="feature-type"
-        src={selectedPokemon[0].types[0].type.name}
-        alt="feature-type"
-      /> */}
       <h2 className="feature-title">{selectedPokemon2[0].genera[8].genus}</h2>
       <button
         type="button"
@@ -141,25 +117,7 @@ const InnerDetails = ({
         {description && <p>{removeNonAscii(description[0].flavor_text)}</p>}
       </div>
       <Abilities abilityData={abilityData} selectedPokemon={selectedPokemon} />
-      {locationAreaEncounters && (
-        <div className="location-area">
-          <h3>Where to find</h3>
-          {locationAreaEncounters.length === 0 && <p>None</p>}
-          <ul>
-            {locationAreaEncounters.map((area) => (
-              <li className="area">
-                <p className="area-name">
-                  {area.location_area.name} (
-                  {area.version_details.map((version) => (
-                    <span className="version">{version.version.name}, </span>
-                  ))}
-                  )
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <LocationArea selectedPokemon={selectedPokemon} />
       <EvolutionChart
         pokemonData={pokemonData}
         selectedPokemon2={selectedPokemon2}
@@ -284,34 +242,6 @@ const StyledInnerDetails = styled.div`
 
     p {
       font-size: 2rem;
-    }
-  }
-
-  .location-area {
-    padding: 2rem 0rem;
-    width: 70%;
-
-    h3 {
-      margin: 2rem 0rem;
-      color: white;
-      text-transform: uppercase;
-    }
-
-    ul {
-      color: white;
-
-      .area {
-        .area-name {
-          text-transform: capitalize;
-          font-weight: 900;
-          font-size: 1.25rem;
-        }
-
-        .version {
-          font-style: italic;
-          font-weight: 100;
-        }
-      }
     }
   }
 `;
