@@ -145,7 +145,6 @@ const StyledMoves = styled.div`
     color: white;
     width: 100%;
     text-transform: uppercase;
-    margin: 1rem 0rem;
     margin: 2rem 0rem;
   }
 

@@ -11,6 +11,7 @@ const Abilities = ({ abilityData, selectedPokemon }) => {
     <StyledContainer className="statchart-abilities-container">
       <StatChart selectedPokemon={selectedPokemon} />
       <StyledAbilities className="abilities-container">
+        <h3>Abilities</h3>
         {abilityData &&
           abilityData.map((ability) => (
             <div
@@ -49,6 +50,7 @@ const StyledContainer = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: flex-start;
+  margin-top: 2rem;
 `;
 
 const StyledAbilities = styled.div`
@@ -59,6 +61,13 @@ const StyledAbilities = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+
+  h3 {
+    color: white;
+    width: 100%;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
 
   .ability {
     border-radius: 1rem;

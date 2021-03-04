@@ -9,7 +9,7 @@ import { convertTypeToColor } from '../util';
 import ash from '../img/pokemon-ash.png';
 import rightArrow from '../img/right-arrow-black.svg';
 
-const EvolutionChart = ({ pokemonData, selectedPokemon2 }) => {
+const EvolutionChart = ({ pokemonData, selectedPokemon2, selectedPokemon }) => {
   // State
   const [evolutionData, setEvolutionData] = useState();
   const [baseStage, setBaseStage] = useState();
@@ -114,6 +114,9 @@ const EvolutionChart = ({ pokemonData, selectedPokemon2 }) => {
       <div className="evolution-chart">
         <div className="user-message">
           <p>*Pokemon are size proportionate to Ash (who is 5ft in height)</p>
+        </div>
+        <div className="feature-title-container">
+          <h2 className="feature-title">Evolution Chart</h2>
         </div>
         {baseStage && baseStage.length > 0 && (
           <div className="evolution-card">
@@ -333,11 +336,28 @@ const StyledEvolutionChart = styled.div`
 
     .user-message {
       position: absolute;
-      bottom: 15px;
+      top: 15px;
       right: 20px;
 
       p {
         font-size: 0.75rem;
+        color: black;
+      }
+    }
+
+    .feature-title-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+
+      .feature-title {
+        font-size: 6rem;
+        opacity: 0.2;
+        text-transform: uppercase;
+        letter-spacing: 0.5rem;
+        margin: 2rem 0rem;
+        z-index: 0;
         color: black;
       }
     }
@@ -352,8 +372,13 @@ const StyledEvolutionChart = styled.div`
       max-width: 20%;
     }
 
+    .evolution-card > * {
+      z-index: 1;
+    }
+
     .image-container {
       position: relative;
+      z-index: 2;
 
       img {
         width: auto;
