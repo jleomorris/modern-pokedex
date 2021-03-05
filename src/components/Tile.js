@@ -44,7 +44,7 @@ const Tile = ({
   }, [pokemon]);
 
   return (
-    <StyledTile className="card">
+    <StyledTile className="tile">
       <div className="background-circle" />
       <div className="background-image-container">
         {convertToTypeBackground(pokemon.types[0].type.name)}
@@ -93,7 +93,7 @@ const Tile = ({
 // Styled components
 const StyledTile = styled.div`
   height: 300px;
-  margin: 2rem 1rem;
+  /* margin: 2rem 1rem; */
   display: flex;
   justify-content: start;
   flex-direction: column;

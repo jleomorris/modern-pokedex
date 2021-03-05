@@ -218,7 +218,7 @@ const StyledStrengthsWeaknesses = styled.div`
     p {
       border-radius: 1rem;
       margin: 0.5rem;
-      padding: 0.5rem 1rem;
+      padding: 0.25rem 0.5rem;
       color: black;
     }
 
