@@ -34,26 +34,28 @@ const LocationArea = ({ selectedPokemon }) => {
         <StyledLocationArea className="location-area-container">
           <h3>Where to find</h3>
           {locationAreaEncounters.length === 0 && <p>None</p>}
-          <table className="location-area-table">
-            <tr>
-              <th className="header">Area</th>
-              <th className="header">Version</th>
-            </tr>
-            {locationAreaEncounters.map((area) => (
-              <tr className="area" key={area.location_area.name}>
-                <td className="area-name">{area.location_area.name}</td>
-                <td className="version">
-                  {area.version_details.map((version, index) => (
-                    <span className="version">
-                      {index !== area.version_details.length - 1
-                        ? `${version.version.name}, `
-                        : version.version.name}
-                    </span>
-                  ))}
-                </td>
+          {locationAreaEncounters.length !== 0 && (
+            <table className="location-area-table">
+              <tr>
+                <th className="header">Area</th>
+                <th className="header">Version</th>
               </tr>
-            ))}
-          </table>
+              {locationAreaEncounters.map((area) => (
+                <tr className="area" key={area.location_area.name}>
+                  <td className="area-name">{area.location_area.name}</td>
+                  <td className="version">
+                    {area.version_details.map((version, index) => (
+                      <span className="version">
+                        {index !== area.version_details.length - 1
+                          ? `${version.version.name}, `
+                          : version.version.name}
+                      </span>
+                    ))}
+                  </td>
+                </tr>
+              ))}
+            </table>
+          )}
         </StyledLocationArea>
       )}
     </>
