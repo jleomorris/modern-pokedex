@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import PokemonDetails from '../components/PokemonDetails';
 import OptionsFilters from '../components/OptionsFilters';
 import PokemonTiles from '../components/PokemonTiles';
+import Pokeball from '../components/Pokeball';
 
 const Pokemon = () => {
   // Redux
@@ -21,8 +22,10 @@ const Pokemon = () => {
   const [spriteIndex, setSpriteIndex] = useState(2);
   const [isDarkModeActive, setIsDarkModeActive] = useState(false);
   const [isBlurActive, setIsBlurActive] = useState(false);
-  //   const [isFilterByTypeActive, setIsFilterByTypeActive] = useState(false);
-  //   const [typeFilterInEffect, setTypeFilterInEffect] = useState();
+  const [isFilterByTypeActive, setIsFilterByTypeActive] = useState(false);
+  const [isFilterByStatActive, setIsFilterByStatActive] = useState(false);
+  const [isFilterBySearchActive, setIsFilterBySearchActive] = useState(false);
+  // const [typeFilterInEffect, setTypeFilterInEffect] = useState();
   const [selectedTypeOption, setSelectedTypeOption] = useState(null);
   const [selectedStatOption, setSelectedStatOption] = useState(null);
   // Router
@@ -81,8 +84,11 @@ const Pokemon = () => {
     }
 
     setFilteredData(filteredByInput);
+    setIsFilterBySearchActive(true);
+    if (userInput.length === 0) setIsFilterBySearchActive(false);
   };
 
+  // Filter pokemon by type
   const filterPokemonByTypeHandler = (e) => {
     console.log(e.value);
     const typeToFilter = e.value;
@@ -91,6 +97,7 @@ const Pokemon = () => {
 
     if (typeToFilter === 'reset') {
       setFilteredData(pokemonData);
+      setIsFilterByTypeActive(false);
       return;
     }
 
@@ -117,6 +124,7 @@ const Pokemon = () => {
     setSelectedTypeOption(typeToFilter);
     setFilteredData(filteredByType);
     setSelectedStatOption('');
+    setIsFilterByTypeActive(true);
   };
 
   const filterPokemonByStatHandler = (e) => {
@@ -127,6 +135,7 @@ const Pokemon = () => {
 
     if (statToFilter === 'reset') {
       setFilteredData(pokemonData);
+      setIsFilterByStatActive(false);
       return;
     }
 
@@ -150,6 +159,8 @@ const Pokemon = () => {
     console.info('filteretedbystat', filteredByStat);
     setFilteredData(filteredByStat);
     setSelectedTypeOption(null);
+    setIsFilterByStatActive(true);
+    // filterPokemonByTypeHandler('reset');
   };
 
   return (
@@ -182,7 +193,15 @@ const Pokemon = () => {
         isDefaultSelected={isDefaultSelected}
         isDreamWorldSelected={isDreamWorldSelected}
         isOfficialSelected={isOfficialSelected}
+        isFilterBySearchActive={isFilterBySearchActive}
+        isFilterByTypeActive={isFilterByTypeActive}
+        isFilterByStatActive={isFilterByStatActive}
       />
+      {filteredData &&
+        !isFilterBySearchActive &&
+        !isFilterByTypeActive &&
+        !isFilterByStatActive &&
+        filteredData.length === 0 && <Pokeball />}
     </StyledPokemon>
   );
 };

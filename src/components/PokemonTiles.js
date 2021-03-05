@@ -9,12 +9,17 @@ const PokemonTiles = ({
   isDefaultSelected,
   isDreamWorldSelected,
   isOfficialSelected,
+  isFilterBySearchActive,
+  isFilterByTypeActive,
+  isFilterByStatActive,
 }) => {
   return (
     <StyledPokemonTiles className="pokemon-cards-container">
-      {filteredData && filteredData.length === 0 && (
-        <h2 className="no-results">No results</h2>
-      )}
+      {filteredData &&
+        filteredData.length === 0 &&
+        (isFilterBySearchActive ||
+          isFilterByTypeActive ||
+          isFilterByStatActive) && <h2 className="no-results">No results</h2>}
       {filteredData &&
         filteredData.map((pokemon) => (
           <Tile
