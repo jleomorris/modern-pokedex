@@ -163,6 +163,60 @@ export const convertMaxStatToIcon = (maxStat) => {
       return maxStat;
   }
 };
+export const convertEvolutionStoneToImage = (stone) => {
+  switch (stone) {
+    case 'fire-stone':
+      return (
+        <img
+          className="fire-stone evolution-stone"
+          src={fireStone}
+          alt="fire stone"
+        />
+      );
+    case 'water-stone':
+      return (
+        <img
+          className="water-stone evolution-stone"
+          src={waterStone}
+          alt="water stone"
+        />
+      );
+    case 'ice-stone':
+      return (
+        <img
+          className="ice-stone evolution-stone"
+          src={iceStone}
+          alt="ice stone"
+        />
+      );
+    case 'thunder-stone':
+      return (
+        <img
+          className="thunder-stone evolution-stone"
+          src={thunderStone}
+          alt="thunder stone"
+        />
+      );
+    case 'moon-stone':
+      return (
+        <img
+          className="moon-stone evolution-stone"
+          src={moonStone}
+          alt="moon stone"
+        />
+      );
+    case 'leaf-stone':
+      return (
+        <img
+          className="leaf-stone evolution-stone"
+          src={leafStone}
+          alt="leaf stone"
+        />
+      );
+    default:
+      return stone;
+  }
+};
 
 export const convertDamageClassToImage = (damageClass) => {
   switch (damageClass) {
