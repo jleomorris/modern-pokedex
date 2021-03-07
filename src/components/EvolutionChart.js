@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // Axios
 import axios from 'axios';
 // Util
-import { convertTypeToColor } from '../util';
+import { convertTypeToColor, convertEvolutionStoneToImage } from '../util';
 // Images
 import ash from '../img/pokemon-ash.png';
 import rightArrow from '../img/right-arrow-black.svg';
@@ -149,9 +149,11 @@ const EvolutionChart = ({ pokemonData, selectedPokemon2, selectedPokemon }) => {
                   {/* First evolution item (stone) */}
                   {evolutionData[0] &&
                     evolutionData[0].evolution_details[0].item && (
-                      <p className="first-evolution-level">
-                        {evolutionData[0].evolution_details[0].item.name}
-                      </p>
+                      <>
+                        {convertEvolutionStoneToImage(
+                          evolutionData[0].evolution_details[0].item.name
+                        )}
+                      </>
                     )}
                 </div>
               )}
@@ -211,12 +213,12 @@ const EvolutionChart = ({ pokemonData, selectedPokemon2, selectedPokemon }) => {
                     evolutionData[0].evolves_to[0] &&
                     evolutionData[0].evolves_to[0].evolution_details[0]
                       .item && (
-                      <p className="second-evolution-item">
-                        {
+                      <>
+                        {convertEvolutionStoneToImage(
                           evolutionData[0].evolves_to[0].evolution_details[0]
                             .item.name
-                        }
-                      </p>
+                        )}
+                      </>
                     )}
                   {/* Second evolution trigger (trade) */}
                   {evolutionData[0] &&
@@ -404,10 +406,18 @@ const StyledEvolutionChart = styled.div`
           font-size: 1.5rem;
         }
 
-        .second-evolution-item {
+        .evolution-stone {
+          position: absolute;
+          top: 50%;
+          left: 40%;
+          transform: translate(-40%, -50%);
+          width: 50px;
+        }
+
+        /* .second-evolution-item {
           font-size: 1rem;
           text-transform: capitalize;
-        }
+        } */
       }
     }
 

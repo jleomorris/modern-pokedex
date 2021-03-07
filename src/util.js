@@ -47,6 +47,13 @@ import defenseIcon from './img/stats/defense.svg';
 import specialAttackIcon from './img/stats/special_attack.svg';
 import specialDefenseIcon from './img/stats/special_defense.svg';
 import speedIcon from './img/stats/speed.svg';
+// Stone icons
+import fireStone from './img/stones/fire_stone.png';
+import waterStone from './img/stones/water_stone.png';
+import thunderStone from './img/stones/thunder_stone.png';
+import iceStone from './img/stones/ice_stone.png';
+import moonStone from './img/stones/moon_stone.png';
+import leafStone from './img/stones/leaf_stone.png';
 
 export const removeNonAscii = (string) => {
   let removedNonAscii = string.toString();
