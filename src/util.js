@@ -54,6 +54,30 @@ import thunderStone from './img/stones/thunder_stone.png';
 import iceStone from './img/stones/ice_stone.png';
 import moonStone from './img/stones/moon_stone.png';
 import leafStone from './img/stones/leaf_stone.png';
+// Version logos
+import redLogo from './img/logos/red.png';
+import blueLogo from './img/logos/blue.png';
+import yellowLogo from './img/logos/yellow.png';
+import greenLogo from './img/logos/green.png';
+import goldLogo from './img/logos/gold.png';
+import silverLogo from './img/logos/silver.png';
+import crystalLogo from './img/logos/crystal.png';
+import rubyLogo from './img/logos/ruby.png';
+import sapphireLogo from './img/logos/sapphire.png';
+import emeraldLogo from './img/logos/emerald.png';
+import diamondLogo from './img/logos/diamond.png';
+import pearlLogo from './img/logos/pearl.png';
+import platinumLogo from './img/logos/platinum.png';
+import blackLogo from './img/logos/black.png';
+import black2Logo from './img/logos/black_2.png';
+import whiteLogo from './img/logos/white.png';
+import white2Logo from './img/logos/white_2.png';
+import xLogo from './img/logos/x.png';
+import yLogo from './img/logos/y.png';
+import soulSilverLogo from './img/logos/soul_silver.png';
+import heartGoldLogo from './img/logos/heart_gold.png';
+import fireRedLogo from './img/logos/fire_red.png';
+import leafGreenLogo from './img/logos/leaf_green.png';
 
 export const removeNonAscii = (string) => {
   let removedNonAscii = string.toString();
@@ -170,6 +194,7 @@ export const convertMaxStatToIcon = (maxStat) => {
       return maxStat;
   }
 };
+
 export const convertEvolutionStoneToImage = (stone) => {
   switch (stone) {
     case 'fire-stone':
@@ -256,6 +281,169 @@ export const convertDamageClassToImage = (damageClass) => {
       );
     default:
       return damageClass;
+  }
+};
+
+export const convertGameVersionToImage = (version) => {
+  switch (version) {
+    case 'Red':
+      return (
+        <img className="version-logo" src={redLogo} alt="pokemon red logo" />
+      );
+    case 'Blue':
+      return (
+        <img className="version-logo" src={blueLogo} alt="pokemon blue logo" />
+      );
+    case 'Yellow':
+      return (
+        <img
+          className="version-logo"
+          src={yellowLogo}
+          alt="pokemon yellow logo"
+        />
+      );
+    case 'Green':
+      return (
+        <img
+          className="version-logo"
+          src={greenLogo}
+          alt="pokemon green logo"
+        />
+      );
+    case 'Gold':
+      return (
+        <img className="version-logo" src={goldLogo} alt="pokemon gold logo" />
+      );
+    case 'Silver':
+      return (
+        <img
+          className="version-logo"
+          src={silverLogo}
+          alt="pokemon silver logo"
+        />
+      );
+    case 'Crystal':
+      return (
+        <img
+          className="version-logo"
+          src={crystalLogo}
+          alt="pokemon crystal logo"
+        />
+      );
+    case 'Ruby':
+      return (
+        <img className="version-logo" src={rubyLogo} alt="pokemon ruby logo" />
+      );
+    case 'Sapphire':
+      return (
+        <img
+          className="version-logo"
+          src={sapphireLogo}
+          alt="pokemon sapphire logo"
+        />
+      );
+    case 'Emerald':
+      return (
+        <img
+          className="version-logo"
+          src={emeraldLogo}
+          alt="pokemon emerald logo"
+        />
+      );
+    case 'Diamond':
+      return (
+        <img
+          className="version-logo"
+          src={diamondLogo}
+          alt="pokemon diamond logo"
+        />
+      );
+    case 'Pearl':
+      return (
+        <img
+          className="version-logo"
+          src={pearlLogo}
+          alt="pokemon pearl logo"
+        />
+      );
+    case 'Platinum':
+      return (
+        <img
+          className="version-logo"
+          src={platinumLogo}
+          alt="pokemon platinum logo"
+        />
+      );
+    case 'Black':
+      return (
+        <img
+          className="version-logo"
+          src={blackLogo}
+          alt="pokemon black logo"
+        />
+      );
+    case 'White':
+      return (
+        <img
+          className="version-logo"
+          src={whiteLogo}
+          alt="pokemon white logo"
+        />
+      );
+    case 'Black 2':
+      return (
+        <img
+          className="version-logo"
+          src={black2Logo}
+          alt="pokemon white logo"
+        />
+      );
+    case 'White 2':
+      return (
+        <img
+          className="version-logo"
+          src={white2Logo}
+          alt="pokemon white logo"
+        />
+      );
+    case 'X':
+      return <img className="version-logo" src={xLogo} alt="pokemon X logo" />;
+    case 'Y':
+      return <img className="version-logo" src={yLogo} alt="pokemon Y logo" />;
+    case 'Soul silver':
+      return (
+        <img
+          className="version-logo"
+          src={soulSilverLogo}
+          alt="pokemon soul silver logo"
+        />
+      );
+    case 'Heart gold':
+      return (
+        <img
+          className="version-logo"
+          src={heartGoldLogo}
+          alt="pokemon heart gold logo"
+        />
+      );
+    case 'Fire red':
+      return (
+        <img
+          className="version-logo"
+          src={fireRedLogo}
+          alt="pokemon fire red logo"
+        />
+      );
+    case 'Leaf green':
+      return (
+        <img
+          className="version-logo"
+          src={leafGreenLogo}
+          alt="pokemon leaf green logo"
+        />
+      );
+    default:
+      return version;
   }
 };
 

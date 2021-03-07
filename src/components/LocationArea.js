@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 // Axios
 import axios from 'axios';
+// Util
+import { convertGameVersionToImage } from '../util';
 
 const LocationArea = ({ selectedPokemon }) => {
   // State
@@ -110,10 +112,10 @@ const LocationArea = ({ selectedPokemon }) => {
           { name: 'White', areas: white },
           { name: 'Black 2', areas: black2 },
           { name: 'White 2', areas: white2 },
-          { name: 'x', areas: x },
-          { name: 'y', areas: y },
+          { name: 'X', areas: x },
+          { name: 'Y', areas: y },
           { name: 'Soul silver', areas: soulSilver },
-          { name: 'Heart Gold', areas: heartGold },
+          { name: 'Heart gold', areas: heartGold },
           { name: 'Fire red', areas: fireRed },
           { name: 'Leaf green', areas: leafGreen },
         ];
@@ -145,7 +147,7 @@ const LocationArea = ({ selectedPokemon }) => {
               </tr>
               {locationAreaEncounters.map((game) => (
                 <tr key={game.name}>
-                  <td>{game.name}</td>
+                  <td>{convertGameVersionToImage(game.name)}</td>
                   <td>
                     {game.areas.length === 0 ? 'None' : ''}
                     {game.areas.map((area, index) => (
@@ -193,9 +195,14 @@ const StyledLocationArea = styled.div`
       padding: 1rem;
     }
 
+    .version-logo {
+      width: 200px;
+    }
+
     .area {
       margin: 0.5rem;
       display: inline-block;
+      text-transform: capitalize;
     }
   }
 `;
