@@ -93,6 +93,9 @@ const strengthsWeaknesses = ({ selectedPokemon }) => {
             <td>Double damage to</td>
             <td>
               {typeData &&
+                typeDamageHandler('doubleDamageTo').doubleDamageTo.length ===
+                  0 && <p className="none">None</p>}
+              {typeData &&
                 typeDamageHandler('doubleDamageTo').doubleDamageTo.map(
                   (type) => (
                     <p
@@ -110,6 +113,9 @@ const strengthsWeaknesses = ({ selectedPokemon }) => {
           <tr>
             <td>Double damage from</td>
             <td>
+              {typeData &&
+                typeDamageHandler('doubleDamageFrom').doubleDamageFrom
+                  .length === 0 && <p className="none">None</p>}
               {typeData &&
                 typeDamageHandler('doubleDamageFrom').doubleDamageFrom.map(
                   (type) => (
@@ -129,6 +135,10 @@ const strengthsWeaknesses = ({ selectedPokemon }) => {
             <td>Half damage to</td>
             <td>
               {typeData &&
+                typeDamageHandler('halfDamageTo').halfDamageTo.length === 0 && (
+                  <p className="none">None</p>
+                )}
+              {typeData &&
                 typeDamageHandler('halfDamageTo').halfDamageTo.map((type) => (
                   <p
                     style={{
@@ -144,6 +154,9 @@ const strengthsWeaknesses = ({ selectedPokemon }) => {
           <tr>
             <td>Half damage From</td>
             <td>
+              {typeData &&
+                typeDamageHandler('halfDamageFrom').halfDamageFrom.length ===
+                  0 && <p className="none">None</p>}
               {typeData &&
                 typeDamageHandler('halfDamageFrom').halfDamageFrom.map(
                   (type) => (
@@ -163,6 +176,10 @@ const strengthsWeaknesses = ({ selectedPokemon }) => {
             <td>No damage to</td>
             <td>
               {typeData &&
+                typeDamageHandler('noDamageTo').noDamageTo.length === 0 && (
+                  <p className="none">None</p>
+                )}
+              {typeData &&
                 typeDamageHandler('noDamageTo').noDamageTo.map((type) => (
                   <p
                     style={{
@@ -178,6 +195,10 @@ const strengthsWeaknesses = ({ selectedPokemon }) => {
           <tr>
             <td>No damage from</td>
             <td>
+              {typeData &&
+                typeDamageHandler('noDamageFrom').noDamageFrom.length === 0 && (
+                  <p className="none">None</p>
+                )}
               {typeData &&
                 typeDamageHandler('noDamageFrom').noDamageFrom.map((type) => (
                   <p
@@ -211,16 +232,25 @@ const StyledStrengthsWeaknesses = styled.div`
 
   table {
     width: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    /* background: rgba(0, 0, 0, 0.6); */
+    text-shadow: 0px 0px 5px black;
 
     thead {
       color: white;
-      background: #88888878;
+      /* background: #88888878; */
+    }
+
+    th {
+      padding: 1rem 0rem;
+      font-size: 1.75rem;
+      text-transform: uppercase;
     }
 
     td {
       color: white;
       padding: 0.25rem;
+      font-size: 1.5rem;
+      font-weight: 900;
 
       p {
         border-radius: 1rem;
@@ -229,6 +259,13 @@ const StyledStrengthsWeaknesses = styled.div`
         color: black;
         width: fit-content;
         display: inline-block;
+        text-shadow: none;
+        font-size: 1rem;
+        font-weight: 100;
+      }
+
+      .none {
+        color: white;
       }
 
       .none-message {

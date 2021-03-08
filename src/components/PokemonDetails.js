@@ -206,6 +206,7 @@ const StyledPokemonDetails = styled.div`
       height: 800px;
       object-fit: cover;
       margin: 2rem -4rem;
+      filter: brightness(0.6);
 
       @media (max-width: 1500px) {
         width: 500px;
