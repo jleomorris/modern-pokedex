@@ -83,108 +83,116 @@ const strengthsWeaknesses = ({ selectedPokemon }) => {
 
   return (
     <StyledStrengthsWeaknesses className="strengths-weaknesses-container">
-      <div className="double-damage-to">
-        <h2>Double damage to</h2>
-        {typeData && typeDamageHandler('doubleDamageTo').length === 0 && (
-          <p className="none-message">None</p>
-        )}
-        {typeData &&
-          typeDamageHandler('doubleDamageTo').doubleDamageTo.map((type) => (
-            <p
-              style={{
-                background: convertTypeToColor(type),
-              }}
-              key={type}
-            >
-              {type}
-            </p>
-          ))}
-      </div>
-      <div className="double-damage-from">
-        <h2>Double damage from</h2>
-        {typeData && typeDamageHandler('doubleDamageFrom').length === 0 && (
-          <p className="none-message">None</p>
-        )}
-        {typeData &&
-          typeDamageHandler('doubleDamageFrom').doubleDamageFrom.map((type) => (
-            <p
-              style={{
-                background: convertTypeToColor(type),
-              }}
-              key={type}
-            >
-              {type}
-            </p>
-          ))}
-      </div>
-      <div className="half-damage-from">
-        <h2>Half damage from</h2>
-        {typeData && typeDamageHandler('halfDamageFrom').length === 0 && (
-          <p className="none-message">None</p>
-        )}
-        {typeData &&
-          typeDamageHandler('halfDamageFrom').halfDamageFrom.map((type) => (
-            <p
-              style={{
-                background: convertTypeToColor(type),
-              }}
-              key={type}
-            >
-              {type}
-            </p>
-          ))}
-      </div>
-      <div className="half-damage-to">
-        <h2>Half damage to</h2>
-        {typeData && typeDamageHandler('halfDamageTo').length === 0 && (
-          <p className="none-message">None</p>
-        )}
-        {typeData &&
-          typeDamageHandler('halfDamageTo').halfDamageTo.map((type) => (
-            <p
-              style={{
-                background: convertTypeToColor(type),
-              }}
-              key={type}
-            >
-              {type}
-            </p>
-          ))}
-      </div>
-      <div className="no-damage-from">
-        <h2>No damage from</h2>
-        {typeData && typeDamageHandler('noDamageFrom').length === 0 && (
-          <p className="none-message">None</p>
-        )}
-        {typeData &&
-          typeDamageHandler('noDamageFrom').noDamageFrom.map((type) => (
-            <p
-              style={{
-                background: convertTypeToColor(type),
-              }}
-              key={type}
-            >
-              {type}
-            </p>
-          ))}
-      </div>
-      <div className="no-damage-to">
-        <h2>No damage to</h2>
-        {typeData && typeDamageHandler('noDamageTo').length === 0 && (
-          <p className="none-message">None</p>
-        )}
-        {typeData &&
-          typeDamageHandler('noDamageTo').noDamageTo.map((type) => (
-            <p
-              style={{
-                background: convertTypeToColor(type),
-              }}
-              key={type}
-            >
-              {type}
-            </p>
-          ))}
-      </div>
+      <table className="strengths-weaknesses-table">
+        <thead>
+          <th className="move-header">Damage type</th>
+          <th className="inner-heading">Affected types</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Double damage to</td>
+            <td>
+              {typeData &&
+                typeDamageHandler('doubleDamageTo').doubleDamageTo.map(
+                  (type) => (
+                    <p
+                      style={{
+                        background: convertTypeToColor(type),
+                      }}
+                      key={type}
+                    >
+                      {type}
+                    </p>
+                  )
+                )}
+            </td>
+          </tr>
+          <tr>
+            <td>Double damage from</td>
+            <td>
+              {typeData &&
+                typeDamageHandler('doubleDamageFrom').doubleDamageFrom.map(
+                  (type) => (
+                    <p
+                      style={{
+                        background: convertTypeToColor(type),
+                      }}
+                      key={type}
+                    >
+                      {type}
+                    </p>
+                  )
+                )}
+            </td>
+          </tr>
+          <tr>
+            <td>Half damage to</td>
+            <td>
+              {typeData &&
+                typeDamageHandler('halfDamageTo').halfDamageTo.map((type) => (
+                  <p
+                    style={{
+                      background: convertTypeToColor(type),
+                    }}
+                    key={type}
+                  >
+                    {type}
+                  </p>
+                ))}
+            </td>
+          </tr>
+          <tr>
+            <td>Half damage From</td>
+            <td>
+              {typeData &&
+                typeDamageHandler('halfDamageFrom').halfDamageFrom.map(
+                  (type) => (
+                    <p
+                      style={{
+                        background: convertTypeToColor(type),
+                      }}
+                      key={type}
+                    >
+                      {type}
+                    </p>
+                  )
+                )}
+            </td>
+          </tr>
+          <tr>
+            <td>No damage to</td>
+            <td>
+              {typeData &&
+                typeDamageHandler('noDamageTo').noDamageTo.map((type) => (
+                  <p
+                    style={{
+                      background: convertTypeToColor(type),
+                    }}
+                    key={type}
+                  >
+                    {type}
+                  </p>
+                ))}
+            </td>
+          </tr>
+          <tr>
+            <td>No damage from</td>
+            <td>
+              {typeData &&
+                typeDamageHandler('noDamageFrom').noDamageFrom.map((type) => (
+                  <p
+                    style={{
+                      background: convertTypeToColor(type),
+                    }}
+                    key={type}
+                  >
+                    {type}
+                  </p>
+                ))}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </StyledStrengthsWeaknesses>
   );
 };
@@ -192,54 +200,41 @@ const strengthsWeaknesses = ({ selectedPokemon }) => {
 // Styled components
 const StyledStrengthsWeaknesses = styled.div`
   position: absolute;
-  top: 50%;
+  top: 10%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0%);
   width: 110%;
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
   flex-wrap: wrap;
 
-  .double-damage-from,
-  .double-damage-to,
-  .half-damage-from,
-  .half-damage-to,
-  .no-damage-from,
-  .no-damage-to {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 40%;
+  table {
+    width: 100%;
     background: rgba(0, 0, 0, 0.6);
-    border-radius: 2rem;
-    margin: 0.5rem 0.25rem;
 
-    p {
-      border-radius: 1rem;
-      margin: 0.5rem;
-      padding: 0.25rem 0.5rem;
-      color: black;
-    }
-
-    .none-message {
-      font-size: 1.5rem;
+    thead {
       color: white;
+      background: #88888878;
     }
 
-    h2 {
-      font-size: 1rem;
+    td {
       color: white;
-      margin: 1rem 0rem;
-      width: 100%;
-      text-align: center;
-      text-shadow: 0px 5px 5px black;
-    }
+      padding: 0.25rem;
 
-    .type-symbol {
-      width: 60px;
-      height: 60px;
-      filter: drop-shadow(2px 4px 6px black);
+      p {
+        border-radius: 1rem;
+        margin: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        color: black;
+        width: fit-content;
+        display: inline-block;
+      }
+
+      .none-message {
+        font-size: 1.5rem;
+        color: white;
+      }
     }
   }
 `;
