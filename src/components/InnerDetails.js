@@ -21,6 +21,8 @@ import Moves from './Moves';
 import LocationArea from './LocationArea';
 // Images
 import close from '../img/close-button.svg';
+import egg from '../img/egg.png';
+import training from '../img/training.png';
 
 const InnerDetails = ({
   selectedPokemon,
@@ -117,6 +119,46 @@ const InnerDetails = ({
         {description && <p>{removeNonAscii(description[0].flavor_text)}</p>}
       </div>
       <Abilities abilityData={abilityData} selectedPokemon={selectedPokemon} />
+      <div className="training-egg-container">
+        <div className="training">
+          <img src={training} alt="training" className="training-icon" />
+          <h3>Training</h3>
+          <div className="stat">
+            <p className="title">Base happiness</p>
+            <p className="detail">{selectedPokemon2[0].base_happiness}</p>
+          </div>
+          <div className="stat">
+            <p className="title">Catch rate</p>
+            <p className="detail">{selectedPokemon2[0].capture_rate}</p>
+          </div>
+          <div className="stat">
+            <p className="title">Base exp</p>
+            <p className="detail">{selectedPokemon[0].base_experience}</p>
+          </div>
+          <div className="stat">
+            <p className="title">Growth rate</p>
+            <p className="detail">{selectedPokemon2[0].growth_rate.name}</p>
+          </div>
+        </div>
+        <div className="egg">
+          <img src={egg} alt="egg" className="egg-icon" />
+          <h3>Egg</h3>
+          <div className="stat">
+            <p className="title">Egg groups</p>
+            {selectedPokemon2[0].egg_groups.map((group, index) => (
+              <p className="detail">
+                {index !== selectedPokemon2[0].egg_groups.length - 1
+                  ? `${group.name},`
+                  : group.name}
+              </p>
+            ))}
+          </div>
+          <div className="stat">
+            <p className="title">Cycles</p>
+            <p className="detail">{selectedPokemon2[0].hatch_counter}</p>
+          </div>
+        </div>
+      </div>
       <LocationArea selectedPokemon={selectedPokemon} />
       <EvolutionChart
         pokemonData={pokemonData}
@@ -242,6 +284,57 @@ const StyledInnerDetails = styled.div`
 
     p {
       font-size: 2rem;
+    }
+  }
+
+  .training-egg-container {
+    width: 70%;
+    margin: 2rem 0rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    h3 {
+      color: white;
+      width: 100%;
+      text-transform: uppercase;
+      margin: 2rem 0rem;
+    }
+
+    .training,
+    .egg {
+      position: relative;
+      width: 50%;
+
+      .egg-icon,
+      .training-icon {
+        position: absolute;
+        top: 0;
+        left: -25px;
+        width: 60px;
+        z-index: -1;
+        opacity: 0.6;
+      }
+
+      .stat {
+        position: relative;
+        width: fit-content;
+        margin: 1rem 0rem;
+
+        .title {
+          font-size: 2rem;
+          display: inline-block;
+          color: #ffffff59;
+        }
+
+        .detail {
+          font-size: 3rem;
+          font-weight: 900;
+          display: inline-block;
+          color: rgba(256, 256, 256, 0.8);
+          margin-left: 1rem;
+        }
+      }
     }
   }
 `;
