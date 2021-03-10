@@ -10,6 +10,7 @@ import PokemonDetails from '../components/PokemonDetails';
 import OptionsFilters from '../components/OptionsFilters';
 import PokemonTiles from '../components/PokemonTiles';
 import Pokeball from '../components/Pokeball';
+import Footer from '../components/Footer';
 
 const Pokemon = () => {
   // Redux
@@ -164,45 +165,48 @@ const Pokemon = () => {
   };
 
   return (
-    <StyledPokemon
-      className={`pokemon ${isBlurActive ? 'enable-blur enable-cursor' : ''} ${
-        isDarkModeActive ? 'dark-mode' : ''
-      }`}
-    >
-      {pathId && (
-        <PokemonDetails
-          pathId={pathId}
-          isDreamWorldSelected={isDreamWorldSelected}
-          isDefaultSelected={isDefaultSelected}
-          isOfficialSelected={isOfficialSelected}
+    <>
+      <StyledPokemon
+        className={`pokemon ${
+          isBlurActive ? 'enable-blur enable-cursor' : ''
+        } ${isDarkModeActive ? 'dark-mode' : ''}`}
+      >
+        {pathId && (
+          <PokemonDetails
+            pathId={pathId}
+            isDreamWorldSelected={isDreamWorldSelected}
+            isDefaultSelected={isDefaultSelected}
+            isOfficialSelected={isOfficialSelected}
+          />
+        )}
+        <OptionsFilters
+          spriteIndex={spriteIndex}
+          spriteSelectionHandler={spriteSelectionHandler}
+          isDarkModeActive={isDarkModeActive}
+          setIsDarkModeActive={setIsDarkModeActive}
+          filterPokemonBySearchHandler={filterPokemonBySearchHandler}
+          filterPokemonByTypeHandler={filterPokemonByTypeHandler}
+          filterPokemonByStatHandler={filterPokemonByStatHandler}
+          selectedTypeOption={selectedTypeOption}
+          selectedStatOption={selectedStatOption}
         />
-      )}
-      <OptionsFilters
-        spriteIndex={spriteIndex}
-        spriteSelectionHandler={spriteSelectionHandler}
-        isDarkModeActive={isDarkModeActive}
-        setIsDarkModeActive={setIsDarkModeActive}
-        filterPokemonBySearchHandler={filterPokemonBySearchHandler}
-        filterPokemonByTypeHandler={filterPokemonByTypeHandler}
-        filterPokemonByStatHandler={filterPokemonByStatHandler}
-        selectedTypeOption={selectedTypeOption}
-        selectedStatOption={selectedStatOption}
-      />
-      <PokemonTiles
-        filteredData={filteredData}
-        isDefaultSelected={isDefaultSelected}
-        isDreamWorldSelected={isDreamWorldSelected}
-        isOfficialSelected={isOfficialSelected}
-        isFilterBySearchActive={isFilterBySearchActive}
-        isFilterByTypeActive={isFilterByTypeActive}
-        isFilterByStatActive={isFilterByStatActive}
-      />
-      {filteredData &&
-        !isFilterBySearchActive &&
-        !isFilterByTypeActive &&
-        !isFilterByStatActive &&
-        filteredData.length === 0 && <Pokeball />}
-    </StyledPokemon>
+        <PokemonTiles
+          filteredData={filteredData}
+          isDefaultSelected={isDefaultSelected}
+          isDreamWorldSelected={isDreamWorldSelected}
+          isOfficialSelected={isOfficialSelected}
+          isFilterBySearchActive={isFilterBySearchActive}
+          isFilterByTypeActive={isFilterByTypeActive}
+          isFilterByStatActive={isFilterByStatActive}
+        />
+        {filteredData &&
+          !isFilterBySearchActive &&
+          !isFilterByTypeActive &&
+          !isFilterByStatActive &&
+          filteredData.length === 0 && <Pokeball />}
+      </StyledPokemon>
+      <Footer />
+    </>
   );
 };
 

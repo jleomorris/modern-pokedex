@@ -3,27 +3,33 @@ import React from 'react';
 import styled from 'styled-components';
 // Images
 import screenshotBackground from '../img/home_background.jpg'; // Image courtesy of geocen on Fanpop
+// Components
+import Footer from '../components/Footer';
 
 const Home = () => {
   return (
-    <StyledHome>
-      <img
-        className="background-image"
-        src={screenshotBackground}
-        alt="background"
-      />
-      <div className="content-container">
-        <p>A modern take on the classic generation 1 pokedex.</p>
-        <ul>
-          <li>All data from pokeapi</li>
-          <li>Custom sprite styles</li>
-          <li>View Pokemon card</li>
-          <li>View evolution and move data</li>
-          <li>Dark mode</li>
-          <li>Filter by search, type and highest base stat</li>
-        </ul>
-      </div>
-    </StyledHome>
+    <>
+      <StyledHome>
+        <img
+          className="background-image"
+          src={screenshotBackground}
+          alt="background"
+        />
+        <div className="content-container">
+          <p>A modern take on the classic generation 1 pokedex.</p>
+          <ul>
+            <li>All data from pokeapi</li>
+            <li>Custom sprite styles</li>
+            <li>
+              View card, location area, evolution, learnable & machine moves{' '}
+            </li>
+            <li>Dark mode</li>
+            <li>Filter by search, type and highest base stat</li>
+          </ul>
+        </div>
+      </StyledHome>
+      <Footer />
+    </>
   );
 };
 
@@ -93,7 +99,7 @@ const StyledHome = styled.div`
     }
 
     li {
-      background: rgba(256, 256, 256, 0.4);
+      background: rgba(256, 256, 256, 0.5);
       padding: 0.5rem 1rem;
       margin: 1rem 0rem;
       border-radius: 0rem 1rem 1rem 0rem;
