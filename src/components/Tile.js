@@ -15,6 +15,7 @@ const Tile = ({
   isDefaultSelected,
   isDreamWorldSelected,
   isOfficialSelected,
+  isShinySelected,
 }) => {
   // State
   const [highestStat, setHighestStat] = useState();
@@ -81,6 +82,13 @@ const Tile = ({
           <img
             className="pokemon-card-image-default"
             src={pokemon.sprites.front_default}
+            alt={pokemon.name}
+          />
+        )}
+        {isShinySelected && (
+          <img
+            className="pokemon-card-image-shiny"
+            src={pokemon.sprites.front_shiny}
             alt={pokemon.name}
           />
         )}
@@ -208,7 +216,8 @@ const StyledTile = styled.div`
 
   .pokemon-card-image-dream-world,
   .pokemon-card-image-official,
-  .pokemon-card-image-default {
+  .pokemon-card-image-default,
+  .pokemon-card-image-shiny {
     height: 190px;
     width: 190px;
     padding: 1rem;

@@ -4,7 +4,8 @@ import styled from 'styled-components';
 // React select
 import Select from 'react-select';
 // Images
-import bulbasaurDefault from '../img/bulbasaur_default.png';
+import charizardDefault from '../img/charizard_default.png';
+import charizardShiny from '../img/charizard_shiny.png';
 import lunatoneOfficial from '../img/lunatone_official.png';
 import solrockOfficial from '../img/solrock_official.png';
 // Util
@@ -28,24 +29,26 @@ const OptionsFilters = ({
   return (
     <StyledOptionsFilters className="options-filters">
       <div className="option-filter">
-        {spriteIndex === 0 && <img src={bulbasaurDefault} alt="sprite" />}
+        {spriteIndex === 0 && <img src={charizardDefault} alt="sprite" />}
         {spriteIndex === 1 && (
           <img
-            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg"
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/6.svg"
             alt="sprite"
           />
         )}
         {spriteIndex === 2 && (
           <img
-            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png"
             alt="sprite"
           />
         )}
+        {spriteIndex === 3 && <img src={charizardShiny} alt="sprite" />}
         <button type="button" onClick={spriteSelectionHandler}>
           <p>Sprite Type</p>
           {spriteIndex === 0 && 'Default'}
           {spriteIndex === 1 && 'Dream World'}
           {spriteIndex === 2 && 'Official'}
+          {spriteIndex === 3 && 'Shiny'}
         </button>
       </div>
       <div className="option-filter">
@@ -77,6 +80,7 @@ const OptionsFilters = ({
           onChange={filterPokemonByTypeHandler}
           options={typeOptions}
           width="500px"
+          //   value={selectedTypeOption}
         />
       </div>
       <div className="stat-filter-container">
@@ -110,13 +114,14 @@ const StyledOptionsFilters = styled.div`
     img {
       position: absolute;
       top: -50px;
-      height: 100px;
+      height: 120px;
       left: -60px;
     }
 
     .dark-mode-sprite {
       top: -50px;
       left: -30px;
+      height: 100px;
     }
 
     button {

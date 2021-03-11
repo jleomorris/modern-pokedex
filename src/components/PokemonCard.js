@@ -17,10 +17,10 @@ const PokemonCard = ({
   isDreamWorldSelected,
   isDefaultSelected,
   isOfficialSelected,
+  isShinySelected,
 }) => {
   // Redux
   const pokemonData = useSelector((state) => state.pokemon.pokemonData);
-  const pokemonData2 = useSelector((state) => state.pokemon.pokemonData2);
   // State
   const [pokemonId, setPokemonId] = useState(pathId);
   const [selectedPokemon, setSelectedPokemon] = useState(
@@ -86,7 +86,9 @@ const PokemonCard = ({
                     isDreamWorldSelected ? 'pokemon-card-image-dream-world' : ''
                   } ${
                     isOfficialSelected ? 'pokemon-card-image-official' : ''
-                  } ${isDefaultSelected ? 'pokemon-card-image-default' : ''}`}
+                  } ${isDefaultSelected ? 'pokemon-card-image-default' : ''} ${
+                    isShinySelected ? 'pokemon-card-image-shiny' : ''
+                  }`}
                   src={
                     isDreamWorldSelected
                       ? selectedPokemon[0].sprites.other.dream_world
@@ -96,6 +98,8 @@ const PokemonCard = ({
                           .front_default
                       : '' || isDefaultSelected
                       ? selectedPokemon[0].sprites.front_default
+                      : '' || isShinySelected
+                      ? selectedPokemon[0].sprites.front_shiny
                       : ''
                   }
                   alt={selectedPokemon[0].name}
@@ -329,7 +333,8 @@ const StyledPokemonCard = styled.div`
 
     .pokemon-card-image-dream-world,
     .pokemon-card-image-official,
-    .pokemon-card-image-default {
+    .pokemon-card-image-default,
+    .pokemon-card-image-shiny {
       height: 350px;
       width: 350px;
       padding: 1rem;

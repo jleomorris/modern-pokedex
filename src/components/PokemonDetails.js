@@ -20,12 +20,12 @@ const PokemonDetails = ({
   isOfficialSelected,
   isDreamWorldSelected,
   isDefaultSelected,
+  isShinySelected,
 }) => {
   // React Router
   const history = useHistory();
   // Redux
   const pokemonData = useSelector((state) => state.pokemon.pokemonData);
-  const pokemonData2 = useSelector((state) => state.pokemon.pokemonData2);
   // State
   const [pokemonId, setPokemonId] = useState(pathId);
   // SelectedPokemon 1 and 2 are based off 2 separate stores of data, from 2 different API calls
@@ -94,6 +94,7 @@ const PokemonDetails = ({
                 isDefaultSelected={isDefaultSelected}
                 isDreamWorldSelected={isDreamWorldSelected}
                 isOfficialSelected={isOfficialSelected}
+                isShinySelected={isShinySelected}
               />
               <div
                 className="card-back"

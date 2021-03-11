@@ -20,6 +20,7 @@ const Pokemon = () => {
   const [isDefaultSelected, setIsDefaultSelected] = useState(false);
   const [isOfficialSelected, setIsOfficalSelected] = useState(true);
   const [isDreamWorldSelected, setIsDreamWorldSelected] = useState(false);
+  const [isShinySelected, setIsShinySelected] = useState(false);
   const [spriteIndex, setSpriteIndex] = useState(2);
   const [isDarkModeActive, setIsDarkModeActive] = useState(false);
   const [isBlurActive, setIsBlurActive] = useState(false);
@@ -54,18 +55,26 @@ const Pokemon = () => {
       setIsDreamWorldSelected(true);
       setIsOfficalSelected(false);
       setIsDefaultSelected(false);
+      setIsShinySelected(false);
     } else if (spriteIndex === 1) {
       setIsDreamWorldSelected(false);
       setIsOfficalSelected(true);
       setIsDefaultSelected(false);
+      setIsShinySelected(false);
+    } else if (spriteIndex === 2) {
+      setIsDreamWorldSelected(false);
+      setIsOfficalSelected(false);
+      setIsDefaultSelected(false);
+      setIsShinySelected(true);
     } else {
       setIsDreamWorldSelected(false);
       setIsOfficalSelected(false);
       setIsDefaultSelected(true);
+      setIsShinySelected(false);
     }
 
-    if (spriteIndex === 2) setSpriteIndex(0);
-    if (spriteIndex !== 2) setSpriteIndex((prev) => prev + 1);
+    if (spriteIndex === 3) setSpriteIndex(0);
+    if (spriteIndex !== 3) setSpriteIndex((prev) => prev + 1);
   };
 
   // Filter pokemon by user search
@@ -177,6 +186,7 @@ const Pokemon = () => {
             isDreamWorldSelected={isDreamWorldSelected}
             isDefaultSelected={isDefaultSelected}
             isOfficialSelected={isOfficialSelected}
+            isShinySelected={isShinySelected}
           />
         )}
         <OptionsFilters
@@ -195,6 +205,7 @@ const Pokemon = () => {
           isDefaultSelected={isDefaultSelected}
           isDreamWorldSelected={isDreamWorldSelected}
           isOfficialSelected={isOfficialSelected}
+          isShinySelected={isShinySelected}
           isFilterBySearchActive={isFilterBySearchActive}
           isFilterByTypeActive={isFilterByTypeActive}
           isFilterByStatActive={isFilterByStatActive}
