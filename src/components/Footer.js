@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 // Font Awesome
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+// import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+// Images
+import github from '../img/github.svg';
+import linkedin from '../img/linkedin.svg';
 
 const Footer = () => {
   return (
@@ -14,14 +17,14 @@ const Footer = () => {
           rel="noreferrer"
           href="https://github.com/jleomorris"
         >
-          <FontAwesomeIcon icon={faGithub} />
+          <img src={github} alt="github icon    " />
         </a>
         <a
           target="_blank"
           rel="noreferrer"
           href="https://www.linkedin.com/in/james-morris-62a66b166/"
         >
-          {/* <FontAwesomeIcon icon={faLinkedin} /> */}
+          <img src={linkedin} alt="linkedIn" style={{ height: '35px' }} />
         </a>
       </div>
       <div className="copyright-contact">
@@ -92,6 +95,7 @@ const StyledFooter = styled.div`
     flex: 1;
     align-items: center;
     justify-content: space-around;
+
     a {
       width: 30%;
       text-align: center;
