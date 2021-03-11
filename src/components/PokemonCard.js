@@ -26,9 +26,6 @@ const PokemonCard = ({
   const [selectedPokemon, setSelectedPokemon] = useState(
     pokemonData.filter((pokemon) => pokemon.id.toString() === pokemonId)
   );
-  const [selectedPokemon2, setSelectedPokemon2] = useState(
-    pokemonData2.filter((pokemon) => pokemon.id.toString() === pokemonId)
-  );
   const [cardDescriptions, setCardDescriptions] = useState();
   // Styled component variables
   const theme = {
@@ -40,9 +37,6 @@ const PokemonCard = ({
     setSelectedPokemon(
       pokemonData.filter((pokemon) => pokemon.id.toString() === pokemonId)
     );
-    setSelectedPokemon2(
-      pokemonData2.filter((pokemon) => pokemon.id.toString() === pokemonId)
-    );
   }, [pokemonId]);
 
   // Re set pokemon id when path id changes
@@ -52,12 +46,12 @@ const PokemonCard = ({
 
   //
   useEffect(() => {
-    const engDescriptions = selectedPokemon2[0].flavor_text_entries.filter(
+    const engDescriptions = selectedPokemon[0].flavor_text_entries.filter(
       (entry) => entry.language.name === 'en'
     );
 
     setCardDescriptions(engDescriptions);
-  }, [selectedPokemon2]);
+  }, [selectedPokemon]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -107,7 +101,7 @@ const PokemonCard = ({
                   alt={selectedPokemon[0].name}
                 />
                 <div className="genus-height-weight-container">
-                  <p>{`${selectedPokemon2[0].genera[7].genus},`}</p>
+                  <p>{`${selectedPokemon[0].genera[7].genus},`}</p>
                   <p>{`Height: ${(selectedPokemon[0].height * 0.33).toFixed(
                     2
                   )}ft,`}</p>

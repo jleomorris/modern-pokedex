@@ -32,9 +32,6 @@ const PokemonDetails = ({
   const [selectedPokemon, setSelectedPokemon] = useState(
     pokemonData.filter((pokemon) => pokemon.id.toString() === pokemonId)
   );
-  const [selectedPokemon2, setSelectedPokemon2] = useState(
-    pokemonData2.filter((pokemon) => pokemon.id.toString() === pokemonId)
-  );
   const [isFlipped, setisFlipped] = useState(false);
   // Styled component variables
   const theme = {
@@ -56,9 +53,6 @@ const PokemonDetails = ({
   useEffect(() => {
     setSelectedPokemon(
       pokemonData.filter((pokemon) => pokemon.id.toString() === pokemonId)
-    );
-    setSelectedPokemon2(
-      pokemonData2.filter((pokemon) => pokemon.id.toString() === pokemonId)
     );
   }, [pokemonId]);
 
@@ -84,7 +78,7 @@ const PokemonDetails = ({
           <p>Click blurred area to exit</p>
         </div>
         <StyledPokemonDetails className="pokemon-details">
-          {selectedPokemon && selectedPokemon2 && (
+          {selectedPokemon && (
             <ReactCardFlip
               className="react-card-flip"
               isFlipped={isFlipped}
@@ -116,7 +110,6 @@ const PokemonDetails = ({
           )}
           <InnerDetails
             selectedPokemon={selectedPokemon}
-            selectedPokemon2={selectedPokemon2}
             setPokemonId={setPokemonId}
           />
         </StyledPokemonDetails>

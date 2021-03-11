@@ -9,7 +9,7 @@ import { convertTypeToColor, convertEvolutionStoneToImage } from '../util';
 import ash from '../img/pokemon-ash.png';
 import rightArrow from '../img/right-arrow-black.svg';
 
-const EvolutionChart = ({ pokemonData, selectedPokemon2, selectedPokemon }) => {
+const EvolutionChart = ({ pokemonData, selectedPokemon }) => {
   // State
   const [evolutionData, setEvolutionData] = useState();
   const [baseStage, setBaseStage] = useState();
@@ -20,7 +20,7 @@ const EvolutionChart = ({ pokemonData, selectedPokemon2, selectedPokemon }) => {
   // Get evolution data
   useEffect(() => {
     axios
-      .get(selectedPokemon2[0].evolution_chain.url)
+      .get(selectedPokemon[0].evolution_chain.url)
       .then((response) => {
         // debugger;
         // handle success
@@ -48,15 +48,15 @@ const EvolutionChart = ({ pokemonData, selectedPokemon2, selectedPokemon }) => {
 
         // Manual overrides
         // Handle cases where a base pokemon is outside of gen1
-        if (selectedPokemon2[0].name === 'hitmonchan') {
-          baseStageName = selectedPokemon2[0].name;
+        if (selectedPokemon[0].name === 'hitmonchan') {
+          baseStageName = selectedPokemon[0].name;
           firstEvolutionName = '';
         }
-        if (selectedPokemon2[0].name === 'flareon') {
+        if (selectedPokemon[0].name === 'flareon') {
           baseStageName = 'eevee';
           firstEvolutionName = 'flareon';
         }
-        if (selectedPokemon2[0].name === 'jolteon') {
+        if (selectedPokemon[0].name === 'jolteon') {
           baseStageName = 'eevee';
           firstEvolutionName = 'jolteon';
         }
@@ -106,7 +106,7 @@ const EvolutionChart = ({ pokemonData, selectedPokemon2, selectedPokemon }) => {
       .then(() => {
         // always executed
       });
-  }, [selectedPokemon2]);
+  }, [selectedPokemon]);
 
   return (
     <StyledEvolutionChart className="evolution-chart-container">

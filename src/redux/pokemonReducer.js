@@ -3,7 +3,6 @@ import { pokemonDetailsUrl, pokemonDetailsUrl2 } from '../services/pokeapi';
 
 const initialState = {
   pokemonData: [],
-  pokemonData2: [],
 };
 
 // Reducer
@@ -13,7 +12,6 @@ const pokemonReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemonData: action.payload.pokemonData,
-        pokemonData2: action.payload.pokemonData2,
       };
     default:
       return { ...state };
@@ -25,7 +23,11 @@ export const loadGen1Data = () => async (dispatch) => {
   const allPokemonData = [];
   const allPokemonData2 = [];
 
-  for (let i = 1; i < 10; i += 1) {
+  for (let i = 1; i < 15; i += 1) {
+    // Skip iterations for pokemon that the api is having issues with
+    // if (i === 13 || i === 20 || i === 74 || i === 76) {
+    //   continue;
+    // }
     const pokemonData = await axios.get(pokemonDetailsUrl(i));
     const pokemonData2 = await axios.get(pokemonDetailsUrl2(i));
     allPokemonData.push(pokemonData.data);
@@ -33,13 +35,18 @@ export const loadGen1Data = () => async (dispatch) => {
   }
 
   await Promise.all(allPokemonData).then(() => {
-    console.log('allPokemonData', allPokemonData);
+    // Merge both requested sets of pokemon data into one
+    const mergedData = allPokemonData.map((pokemon, i) => ({
+      ...pokemon,
+      ...allPokemonData2[i],
+    }));
+
+    console.log('mergedData', mergedData);
 
     dispatch({
       type: 'FETCH_GEN1',
       payload: {
-        pokemonData: allPokemonData,
-        pokemonData2: allPokemonData2,
+        pokemonData: mergedData,
       },
     });
   });

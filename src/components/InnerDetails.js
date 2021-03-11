@@ -24,12 +24,7 @@ import close from '../img/close-button.svg';
 import egg from '../img/egg.png';
 import training from '../img/training.png';
 
-const InnerDetails = ({
-  selectedPokemon,
-  selectedPokemon2,
-  setPokemonId,
-  ownMoves,
-}) => {
+const InnerDetails = ({ selectedPokemon, setPokemonId, ownMoves }) => {
   // React Router
   const history = useHistory();
   // Redux
@@ -66,13 +61,13 @@ const InnerDetails = ({
 
   // Filter english descriptions
   useEffect(() => {
-    if (selectedPokemon2) {
-      const englishEntries = selectedPokemon2[0].flavor_text_entries.filter(
+    if (selectedPokemon) {
+      const englishEntries = selectedPokemon[0].flavor_text_entries.filter(
         (entry) => entry.language.name === 'en'
       );
       setDescription(englishEntries);
     }
-  }, [selectedPokemon2]);
+  }, [selectedPokemon]);
 
   const exitDetailHandler = () => {
     document.body.style.overflow = 'auto';
@@ -84,7 +79,7 @@ const InnerDetails = ({
       <div className="feature-type-symbol">
         {convertToTypeImage(selectedPokemon[0].types[0].type.name)}
       </div>
-      <h2 className="feature-title">{selectedPokemon2[0].genera[8].genus}</h2>
+      <h2 className="feature-title">{selectedPokemon[0].genera[8].genus}</h2>
       <button
         type="button"
         className="close-button"
@@ -100,10 +95,10 @@ const InnerDetails = ({
         <h2 className="pokemon-card-id">#{selectedPokemon[0].id}</h2>
         <h2 className="pokemon-card-title">{selectedPokemon[0].name}</h2>
         <p className="legendary-tag">
-          {selectedPokemon2[0].is_legendary ? 'Legendary' : ''}
+          {selectedPokemon[0].is_legendary ? 'Legendary' : ''}
         </p>
       </div>
-      <div className={`type ${selectedPokemon2[0].is_legendary ? 'mt-1' : ''}`}>
+      <div className={`type ${selectedPokemon[0].is_legendary ? 'mt-1' : ''}`}>
         {selectedPokemon[0].types.map((type) => (
           <p
             style={{
@@ -125,11 +120,11 @@ const InnerDetails = ({
           <h3>Training</h3>
           <div className="stat">
             <p className="title">Base happiness</p>
-            <p className="detail">{selectedPokemon2[0].base_happiness}</p>
+            <p className="detail">{selectedPokemon[0].base_happiness}</p>
           </div>
           <div className="stat">
             <p className="title">Catch rate</p>
-            <p className="detail">{selectedPokemon2[0].capture_rate}</p>
+            <p className="detail">{selectedPokemon[0].capture_rate}</p>
           </div>
           <div className="stat">
             <p className="title">Base exp</p>
@@ -137,7 +132,7 @@ const InnerDetails = ({
           </div>
           <div className="stat">
             <p className="title">Growth rate</p>
-            <p className="detail">{selectedPokemon2[0].growth_rate.name}</p>
+            <p className="detail">{selectedPokemon[0].growth_rate.name}</p>
           </div>
         </div>
         <div className="egg">
@@ -145,9 +140,9 @@ const InnerDetails = ({
           <h3>Egg</h3>
           <div className="stat">
             <p className="title">Egg groups</p>
-            {selectedPokemon2[0].egg_groups.map((group, index) => (
+            {selectedPokemon[0].egg_groups.map((group, index) => (
               <p className="detail">
-                {index !== selectedPokemon2[0].egg_groups.length - 1
+                {index !== selectedPokemon[0].egg_groups.length - 1
                   ? `${group.name},`
                   : group.name}
               </p>
@@ -155,14 +150,13 @@ const InnerDetails = ({
           </div>
           <div className="stat">
             <p className="title">Cycles</p>
-            <p className="detail">{selectedPokemon2[0].hatch_counter}</p>
+            <p className="detail">{selectedPokemon[0].hatch_counter}</p>
           </div>
         </div>
       </div>
       <LocationArea selectedPokemon={selectedPokemon} />
       <EvolutionChart
         pokemonData={pokemonData}
-        selectedPokemon2={selectedPokemon2}
         selectedPokemon={selectedPokemon}
       />
       <Moves ownMoves={ownMoves} selectedPokemon={selectedPokemon} />
