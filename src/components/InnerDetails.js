@@ -318,7 +318,7 @@ const StyledInnerDetails = styled.div`
         .title {
           font-size: 2rem;
           display: inline-block;
-          color: #ffffff59;
+          color: #ffffffa6;
         }
 
         .detail {

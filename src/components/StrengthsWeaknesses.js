@@ -221,7 +221,7 @@ const strengthsWeaknesses = ({ selectedPokemon }) => {
 // Styled components
 const StyledStrengthsWeaknesses = styled.div`
   position: absolute;
-  top: 10%;
+  top: 7.5%;
   left: 50%;
   transform: translate(-50%, 0%);
   width: 110%;
