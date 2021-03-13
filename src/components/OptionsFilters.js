@@ -3,9 +3,10 @@ import React from 'react';
 import styled from 'styled-components';
 // React select
 import Select from 'react-select';
+// Components
+import DynamicAnimatedDefaultSprite from './DynamicAnimatedDefaultSprite';
 // Images
 import charizardDefault from '../img/charizard_default.png';
-import charizardAnimatedDefault from '../img/sprite_animations/charizard.gif';
 import charizardShiny from '../img/charizard_shiny.png';
 import lunatoneOfficial from '../img/lunatone_official.png';
 import solrockOfficial from '../img/solrock_official.png';
@@ -37,9 +38,7 @@ const OptionsFilters = ({
           />
         )}
         {spriteIndex === 1 && <img src={charizardDefault} alt="sprite" />}
-        {spriteIndex === 2 && (
-          <img src={charizardAnimatedDefault} alt="sprite" />
-        )}
+        {spriteIndex === 2 && <DynamicAnimatedDefaultSprite id={6} />}
         {spriteIndex === 3 && (
           <img
             src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/6.svg"
@@ -51,7 +50,7 @@ const OptionsFilters = ({
           <p>Sprite Type</p>
           {spriteIndex === 0 && 'Official'}
           {spriteIndex === 1 && 'Default'}
-          {spriteIndex === 2 && 'Animated Default'}
+          {spriteIndex === 2 && 'B & W Animated'}
           {spriteIndex === 3 && 'Dream World'}
           {spriteIndex === 4 && 'Shiny'}
         </button>
