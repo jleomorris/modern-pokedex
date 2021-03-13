@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // Styled components
 import styled from 'styled-components';
+// Components
+import DynamicAnimatedDefaultSprite from './DyamicAnimatedDefaultSprite';
 // Util
 import {
   convertToTypeImage,
   convertToTypeBackground,
   convertMaxStatToIcon,
 } from '../util';
-import { convertNameToDefaultSpriteAnimation } from '../defaultSpriteAnimations';
 
 const Tile = ({
   pokemon,
@@ -87,8 +88,14 @@ const Tile = ({
             alt={pokemon.name}
           />
         )}
-        {isAnimatedDefaultSelected &&
-          convertNameToDefaultSpriteAnimation(pokemon.name)}
+        {isAnimatedDefaultSelected && (
+          <DynamicAnimatedDefaultSprite name={pokemon.name} />
+          //   <img
+          //     className="default-sprite-animation"
+          //     src={convertNameToDefaultSpriteAnimation(pokemon.name)}
+          //     alt="sprite animation"
+          //   />
+        )}
         {isShinySelected && (
           <img
             className="pokemon-card-image-shiny"

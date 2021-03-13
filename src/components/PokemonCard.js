@@ -5,6 +5,8 @@ import styled, { ThemeProvider } from 'styled-components';
 import { useSelector } from 'react-redux';
 import '../../node_modules/video-react/dist/video-react.css'; // import css
 import { Player } from 'video-react';
+// Components
+import DynamicAnimatedDefaultSprite from './DyamicAnimatedDefaultSprite';
 // Util
 import {
   convertToTypeImage,
@@ -12,10 +14,6 @@ import {
   convertTypeToColor,
   removeNonAscii,
 } from '../util';
-// Images
-import charizardAnimation from '../img/sprite_animations/charizard.gif';
-// Sprite Animations
-import { convertNameToDefaultSpriteAnimation } from '../defaultSpriteAnimations';
 
 const PokemonCard = ({
   pathId,
@@ -116,8 +114,11 @@ const PokemonCard = ({
                     alt={selectedPokemon[0].name}
                   />
                 )}
-                {isAnimatedDefaultSelected &&
-                  convertNameToDefaultSpriteAnimation(selectedPokemon[0].name)}
+                {isAnimatedDefaultSelected && (
+                  <DynamicAnimatedDefaultSprite
+                    name={selectedPokemon[0].name}
+                  />
+                )}
                 <div className="genus-height-weight-container">
                   <p>{`${selectedPokemon[0].genera[7].genus},`}</p>
                   <p>{`Height: ${(selectedPokemon[0].height * 0.33).toFixed(
