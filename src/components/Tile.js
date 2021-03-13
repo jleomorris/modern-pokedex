@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 // Styled components
 import styled from 'styled-components';
 // Components
-import DynamicAnimatedDefaultSprite from './DyamicAnimatedDefaultSprite';
+import DynamicAnimatedDefaultSprite from './DynamicAnimatedDefaultSprite';
 // Util
 import {
   convertToTypeImage,
@@ -15,7 +15,7 @@ import {
 const Tile = ({
   pokemon,
   isDefaultSelected,
-  isAnimatedDefaultSelected,
+  isBlackAndWhiteAnimatedSelected,
   isDreamWorldSelected,
   isOfficialSelected,
   isShinySelected,
@@ -88,13 +88,8 @@ const Tile = ({
             alt={pokemon.name}
           />
         )}
-        {isAnimatedDefaultSelected && (
-          <DynamicAnimatedDefaultSprite name={pokemon.name} />
-          //   <img
-          //     className="default-sprite-animation"
-          //     src={convertNameToDefaultSpriteAnimation(pokemon.name)}
-          //     alt="sprite animation"
-          //   />
+        {isBlackAndWhiteAnimatedSelected && (
+          <DynamicAnimatedDefaultSprite id={pokemon.id} />
         )}
         {isShinySelected && (
           <img
@@ -240,7 +235,6 @@ const StyledTile = styled.div`
 
   .default-sprite-animation {
     height: 150px;
-    width: 150px;
     padding: 1rem;
     position: absolute;
     top: 50%;

@@ -7,7 +7,7 @@ import Tile from './Tile';
 const PokemonTiles = ({
   filteredData,
   isDefaultSelected,
-  isAnimatedDefaultSelected,
+  isBlackAndWhiteAnimatedSelected,
   isDreamWorldSelected,
   isOfficialSelected,
   isShinySelected,
@@ -28,7 +28,7 @@ const PokemonTiles = ({
             key={pokemon.name}
             pokemon={pokemon}
             isDefaultSelected={isDefaultSelected}
-            isAnimatedDefaultSelected={isAnimatedDefaultSelected}
+            isBlackAndWhiteAnimatedSelected={isBlackAndWhiteAnimatedSelected}
             isDreamWorldSelected={isDreamWorldSelected}
             isOfficialSelected={isOfficialSelected}
             isShinySelected={isShinySelected}

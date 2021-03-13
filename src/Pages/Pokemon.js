@@ -18,9 +18,10 @@ const Pokemon = () => {
   // State
   const [filteredData, setFilteredData] = useState();
   const [isDefaultSelected, setIsDefaultSelected] = useState(false);
-  const [isAnimatedDefaultSelected, setIsAnimatedDefaultSelected] = useState(
-    false
-  );
+  const [
+    isBlackAndWhiteAnimatedSelected,
+    setisBlackAndWhiteAnimatedSelected,
+  ] = useState(false);
   const [isOfficialSelected, setIsOfficalSelected] = useState(true);
   const [isDreamWorldSelected, setIsDreamWorldSelected] = useState(false);
   const [isShinySelected, setIsShinySelected] = useState(false);
@@ -57,31 +58,31 @@ const Pokemon = () => {
     if (spriteIndex === 0) {
       setIsOfficalSelected(false);
       setIsDefaultSelected(true);
-      setIsAnimatedDefaultSelected(false);
+      setisBlackAndWhiteAnimatedSelected(false);
       setIsDreamWorldSelected(false);
       setIsShinySelected(false);
     } else if (spriteIndex === 1) {
       setIsOfficalSelected(false);
       setIsDefaultSelected(false);
-      setIsAnimatedDefaultSelected(true);
+      setisBlackAndWhiteAnimatedSelected(true);
       setIsDreamWorldSelected(false);
       setIsShinySelected(false);
     } else if (spriteIndex === 2) {
       setIsOfficalSelected(false);
       setIsDefaultSelected(false);
-      setIsAnimatedDefaultSelected(false);
+      setisBlackAndWhiteAnimatedSelected(false);
       setIsDreamWorldSelected(true);
       setIsShinySelected(false);
     } else if (spriteIndex === 3) {
       setIsOfficalSelected(false);
       setIsDefaultSelected(false);
-      setIsAnimatedDefaultSelected(false);
+      setisBlackAndWhiteAnimatedSelected(false);
       setIsDreamWorldSelected(false);
       setIsShinySelected(true);
     } else {
       setIsOfficalSelected(true);
       setIsDefaultSelected(false);
-      setIsAnimatedDefaultSelected(false);
+      setisBlackAndWhiteAnimatedSelected(false);
       setIsDreamWorldSelected(false);
       setIsShinySelected(false);
     }
@@ -200,7 +201,7 @@ const Pokemon = () => {
             isDefaultSelected={isDefaultSelected}
             isOfficialSelected={isOfficialSelected}
             isShinySelected={isShinySelected}
-            isAnimatedDefaultSelected={isAnimatedDefaultSelected}
+            isBlackAndWhiteAnimatedSelected={isBlackAndWhiteAnimatedSelected}
           />
         )}
         <OptionsFilters
@@ -216,7 +217,7 @@ const Pokemon = () => {
         />
         <PokemonTiles
           filteredData={filteredData}
-          isAnimatedDefaultSelected={isAnimatedDefaultSelected}
+          isBlackAndWhiteAnimatedSelected={isBlackAndWhiteAnimatedSelected}
           isDefaultSelected={isDefaultSelected}
           isDreamWorldSelected={isDreamWorldSelected}
           isOfficialSelected={isOfficialSelected}
