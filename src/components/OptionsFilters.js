@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Select from 'react-select';
 // Images
 import charizardDefault from '../img/charizard_default.png';
+import charizardAnimatedDefault from '../img/sprite_animations/charizard.gif';
 import charizardShiny from '../img/charizard_shiny.png';
 import lunatoneOfficial from '../img/lunatone_official.png';
 import solrockOfficial from '../img/solrock_official.png';
@@ -29,26 +30,30 @@ const OptionsFilters = ({
   return (
     <StyledOptionsFilters className="options-filters">
       <div className="option-filter">
-        {spriteIndex === 0 && <img src={charizardDefault} alt="sprite" />}
-        {spriteIndex === 1 && (
-          <img
-            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/6.svg"
-            alt="sprite"
-          />
-        )}
-        {spriteIndex === 2 && (
+        {spriteIndex === 0 && (
           <img
             src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png"
             alt="sprite"
           />
         )}
-        {spriteIndex === 3 && <img src={charizardShiny} alt="sprite" />}
+        {spriteIndex === 1 && <img src={charizardDefault} alt="sprite" />}
+        {spriteIndex === 2 && (
+          <img src={charizardAnimatedDefault} alt="sprite" />
+        )}
+        {spriteIndex === 3 && (
+          <img
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/6.svg"
+            alt="sprite"
+          />
+        )}
+        {spriteIndex === 4 && <img src={charizardShiny} alt="sprite" />}
         <button type="button" onClick={spriteSelectionHandler}>
           <p>Sprite Type</p>
-          {spriteIndex === 0 && 'Default'}
-          {spriteIndex === 1 && 'Dream World'}
-          {spriteIndex === 2 && 'Official'}
-          {spriteIndex === 3 && 'Shiny'}
+          {spriteIndex === 0 && 'Official'}
+          {spriteIndex === 1 && 'Default'}
+          {spriteIndex === 2 && 'Animated Default'}
+          {spriteIndex === 3 && 'Dream World'}
+          {spriteIndex === 4 && 'Shiny'}
         </button>
       </div>
       <div className="option-filter">

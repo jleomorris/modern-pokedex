@@ -18,10 +18,13 @@ const Pokemon = () => {
   // State
   const [filteredData, setFilteredData] = useState();
   const [isDefaultSelected, setIsDefaultSelected] = useState(false);
+  const [isAnimatedDefaultSelected, setIsAnimatedDefaultSelected] = useState(
+    false
+  );
   const [isOfficialSelected, setIsOfficalSelected] = useState(true);
   const [isDreamWorldSelected, setIsDreamWorldSelected] = useState(false);
   const [isShinySelected, setIsShinySelected] = useState(false);
-  const [spriteIndex, setSpriteIndex] = useState(2);
+  const [spriteIndex, setSpriteIndex] = useState(0);
   const [isDarkModeActive, setIsDarkModeActive] = useState(false);
   const [isBlurActive, setIsBlurActive] = useState(false);
   const [isFilterByTypeActive, setIsFilterByTypeActive] = useState(false);
@@ -52,29 +55,39 @@ const Pokemon = () => {
   // Set sprite type based on index
   const spriteSelectionHandler = () => {
     if (spriteIndex === 0) {
-      setIsDreamWorldSelected(true);
-      setIsOfficalSelected(false);
-      setIsDefaultSelected(false);
-      setIsShinySelected(false);
-    } else if (spriteIndex === 1) {
-      setIsDreamWorldSelected(false);
-      setIsOfficalSelected(true);
-      setIsDefaultSelected(false);
-      setIsShinySelected(false);
-    } else if (spriteIndex === 2) {
-      setIsDreamWorldSelected(false);
-      setIsOfficalSelected(false);
-      setIsDefaultSelected(false);
-      setIsShinySelected(true);
-    } else {
-      setIsDreamWorldSelected(false);
       setIsOfficalSelected(false);
       setIsDefaultSelected(true);
+      setIsAnimatedDefaultSelected(false);
+      setIsDreamWorldSelected(false);
+      setIsShinySelected(false);
+    } else if (spriteIndex === 1) {
+      setIsOfficalSelected(false);
+      setIsDefaultSelected(false);
+      setIsAnimatedDefaultSelected(true);
+      setIsDreamWorldSelected(false);
+      setIsShinySelected(false);
+    } else if (spriteIndex === 2) {
+      setIsOfficalSelected(false);
+      setIsDefaultSelected(false);
+      setIsAnimatedDefaultSelected(false);
+      setIsDreamWorldSelected(true);
+      setIsShinySelected(false);
+    } else if (spriteIndex === 3) {
+      setIsOfficalSelected(false);
+      setIsDefaultSelected(false);
+      setIsAnimatedDefaultSelected(false);
+      setIsDreamWorldSelected(false);
+      setIsShinySelected(true);
+    } else {
+      setIsOfficalSelected(true);
+      setIsDefaultSelected(false);
+      setIsAnimatedDefaultSelected(false);
+      setIsDreamWorldSelected(false);
       setIsShinySelected(false);
     }
 
-    if (spriteIndex === 3) setSpriteIndex(0);
-    if (spriteIndex !== 3) setSpriteIndex((prev) => prev + 1);
+    if (spriteIndex === 4) setSpriteIndex(0);
+    if (spriteIndex !== 4) setSpriteIndex((prev) => prev + 1);
   };
 
   // Filter pokemon by user search
@@ -187,6 +200,7 @@ const Pokemon = () => {
             isDefaultSelected={isDefaultSelected}
             isOfficialSelected={isOfficialSelected}
             isShinySelected={isShinySelected}
+            isAnimatedDefaultSelected={isAnimatedDefaultSelected}
           />
         )}
         <OptionsFilters
@@ -202,6 +216,7 @@ const Pokemon = () => {
         />
         <PokemonTiles
           filteredData={filteredData}
+          isAnimatedDefaultSelected={isAnimatedDefaultSelected}
           isDefaultSelected={isDefaultSelected}
           isDreamWorldSelected={isDreamWorldSelected}
           isOfficialSelected={isOfficialSelected}

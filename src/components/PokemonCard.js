@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 // Redux
 import { useSelector } from 'react-redux';
+import '../../node_modules/video-react/dist/video-react.css'; // import css
+import { Player } from 'video-react';
 // Util
 import {
   convertToTypeImage,
@@ -10,6 +12,10 @@ import {
   convertTypeToColor,
   removeNonAscii,
 } from '../util';
+// Images
+import charizardAnimation from '../img/sprite_animations/charizard.gif';
+// Sprite Animations
+import { convertNameToDefaultSpriteAnimation } from '../defaultSpriteAnimations';
 
 const PokemonCard = ({
   pathId,
@@ -18,6 +24,7 @@ const PokemonCard = ({
   isDefaultSelected,
   isOfficialSelected,
   isShinySelected,
+  isAnimatedDefaultSelected,
 }) => {
   // Redux
   const pokemonData = useSelector((state) => state.pokemon.pokemonData);
@@ -81,29 +88,36 @@ const PokemonCard = ({
             <div className="card-upper">
               <div className="background-image-container">
                 {convertToTypeBackground(selectedPokemon[0].types[0].type.name)}
-                <img
-                  className={`${
-                    isDreamWorldSelected ? 'pokemon-card-image-dream-world' : ''
-                  } ${
-                    isOfficialSelected ? 'pokemon-card-image-official' : ''
-                  } ${isDefaultSelected ? 'pokemon-card-image-default' : ''} ${
-                    isShinySelected ? 'pokemon-card-image-shiny' : ''
-                  }`}
-                  src={
-                    isDreamWorldSelected
-                      ? selectedPokemon[0].sprites.other.dream_world
-                          .front_default
-                      : '' || isOfficialSelected
-                      ? Object.values(selectedPokemon[0].sprites.other)[1]
-                          .front_default
-                      : '' || isDefaultSelected
-                      ? selectedPokemon[0].sprites.front_default
-                      : '' || isShinySelected
-                      ? selectedPokemon[0].sprites.front_shiny
-                      : ''
-                  }
-                  alt={selectedPokemon[0].name}
-                />
+                {/* {convertNameToSpriteAnimation(selectedPokemon[0].name)} */}
+                {!isAnimatedDefaultSelected && (
+                  <img
+                    className={`${
+                      isDreamWorldSelected
+                        ? 'pokemon-card-image-dream-world'
+                        : ''
+                    } ${
+                      isOfficialSelected ? 'pokemon-card-image-official' : ''
+                    } ${
+                      isDefaultSelected ? 'pokemon-card-image-default' : ''
+                    } ${isShinySelected ? 'pokemon-card-image-shiny' : ''}`}
+                    src={
+                      isDreamWorldSelected
+                        ? selectedPokemon[0].sprites.other.dream_world
+                            .front_default
+                        : '' || isOfficialSelected
+                        ? Object.values(selectedPokemon[0].sprites.other)[1]
+                            .front_default
+                        : '' || isDefaultSelected
+                        ? selectedPokemon[0].sprites.front_default
+                        : '' || isShinySelected
+                        ? selectedPokemon[0].sprites.front_shiny
+                        : ''
+                    }
+                    alt={selectedPokemon[0].name}
+                  />
+                )}
+                {isAnimatedDefaultSelected &&
+                  convertNameToDefaultSpriteAnimation(selectedPokemon[0].name)}
                 <div className="genus-height-weight-container">
                   <p>{`${selectedPokemon[0].genera[7].genus},`}</p>
                   <p>{`Height: ${(selectedPokemon[0].height * 0.33).toFixed(
@@ -348,6 +362,14 @@ const StyledPokemonCard = styled.div`
         height: 304px;
       }
     }
+  }
+
+  .default-sprite-animation {
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .card-lower {

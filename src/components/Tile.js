@@ -9,10 +9,12 @@ import {
   convertToTypeBackground,
   convertMaxStatToIcon,
 } from '../util';
+import { convertNameToDefaultSpriteAnimation } from '../defaultSpriteAnimations';
 
 const Tile = ({
   pokemon,
   isDefaultSelected,
+  isAnimatedDefaultSelected,
   isDreamWorldSelected,
   isOfficialSelected,
   isShinySelected,
@@ -85,6 +87,8 @@ const Tile = ({
             alt={pokemon.name}
           />
         )}
+        {isAnimatedDefaultSelected &&
+          convertNameToDefaultSpriteAnimation(pokemon.name)}
         {isShinySelected && (
           <img
             className="pokemon-card-image-shiny"
@@ -225,7 +229,16 @@ const StyledTile = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* z-index: 1; */
+  }
+
+  .default-sprite-animation {
+    height: 150px;
+    width: 150px;
+    padding: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .id {

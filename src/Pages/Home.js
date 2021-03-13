@@ -1,6 +1,9 @@
 import React from 'react';
 // Styled components
 import styled from 'styled-components';
+// Video player
+// import { Player, ControlBar } from 'video-react';
+// import charizardAnimation from '../img/sprite_animations/charizard.mp4';
 // Images
 import screenshotBackground from '../img/home_background.jpg'; // Image courtesy of geocen on Fanpop
 // Components
@@ -15,6 +18,9 @@ const Home = () => {
           src={screenshotBackground}
           alt="background"
         />
+        {/* <Player playsInline src={charizardAnimation} autoPlay loop>
+          <ControlBar autoHide />
+        </Player> */}
         <div className="content-container">
           <p>A modern take on the classic generation 1 pokedex.</p>
           <ul>
