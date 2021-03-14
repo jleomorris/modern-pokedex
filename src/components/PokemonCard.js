@@ -24,6 +24,7 @@ const PokemonCard = ({
   isShinySelected,
   isShinyAnimatedSelected,
   isBlackAndWhiteAnimatedSelected,
+  is3dSelected,
 }) => {
   // Redux
   const pokemonData = useSelector((state) => state.pokemon.pokemonData);
@@ -123,6 +124,13 @@ const PokemonCard = ({
                 )}
                 {isShinyAnimatedSelected && (
                   <DynamicSprite id={selectedPokemon[0].id} type="shiny" />
+                )}
+                {is3dSelected && (
+                  <DynamicSprite
+                    id={6}
+                    type="3d"
+                    name={selectedPokemon[0].name}
+                  />
                 )}
                 <div className="genus-height-weight-container">
                   <p>{`${selectedPokemon[0].genera[7].genus},`}</p>

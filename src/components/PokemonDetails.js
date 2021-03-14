@@ -23,6 +23,7 @@ const PokemonDetails = ({
   isShinySelected,
   isShinyAnimatedSelected,
   isBlackAndWhiteAnimatedSelected,
+  is3dSelected,
 }) => {
   // React Router
   const history = useHistory();
@@ -101,6 +102,7 @@ const PokemonDetails = ({
                 isBlackAndWhiteAnimatedSelected={
                   isBlackAndWhiteAnimatedSelected
                 }
+                is3dSelected={is3dSelected}
               />
               <div
                 className="card-back"

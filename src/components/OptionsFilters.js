@@ -47,6 +47,9 @@ const OptionsFilters = ({
         )}
         {spriteIndex === 4 && <img src={charizardShiny} alt="sprite" />}
         {spriteIndex === 5 && <DynamicSprite id={6} type="shiny" />}
+        {spriteIndex === 6 && (
+          <DynamicSprite id={6} type="3d" name="charizard" />
+        )}
         <button type="button" onClick={spriteSelectionHandler}>
           <p>Sprite Type</p>
           {spriteIndex === 0 && 'Official'}
@@ -55,6 +58,7 @@ const OptionsFilters = ({
           {spriteIndex === 3 && 'Dream World'}
           {spriteIndex === 4 && 'Shiny'}
           {spriteIndex === 5 && 'Shiny Animated'}
+          {spriteIndex === 6 && '3D'}
         </button>
       </div>
       <div className="option-filter">

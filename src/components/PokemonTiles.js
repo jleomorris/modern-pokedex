@@ -15,6 +15,7 @@ const PokemonTiles = ({
   isFilterBySearchActive,
   isFilterByTypeActive,
   isFilterByStatActive,
+  is3dSelected,
 }) => {
   return (
     <StyledPokemonTiles className="pokemon-cards-container">
@@ -34,6 +35,7 @@ const PokemonTiles = ({
             isOfficialSelected={isOfficialSelected}
             isShinySelected={isShinySelected}
             isShinyAnimatedSelected={isShinyAnimatedSelected}
+            is3dSelected={is3dSelected}
           />
         ))}
     </StyledPokemonTiles>

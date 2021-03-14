@@ -20,12 +20,13 @@ const Tile = ({
   isOfficialSelected,
   isShinySelected,
   isShinyAnimatedSelected,
+  is3dSelected,
 }) => {
   // State
   const [highestStat, setHighestStat] = useState();
 
   useEffect(() => {
-    console.log(pokemon);
+    // console.log('tile.pokemon', pokemon);
     if (pokemon) {
       const pokemonStats = pokemon.stats;
       let highest = {
@@ -102,6 +103,7 @@ const Tile = ({
         {isShinyAnimatedSelected && (
           <DynamicSprite id={pokemon.id} type="shiny" />
         )}
+        {is3dSelected && <DynamicSprite id={6} type="3d" name={pokemon.name} />}
       </Link>
       <p className="id">#{pokemon.id}</p>
     </StyledTile>
