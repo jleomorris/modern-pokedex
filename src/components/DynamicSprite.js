@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
-const DynamicDefaultSprite = ({ id }) => {
+const DynamicSprite = ({ id, type }) => {
   const [source, setSource] = useState(null);
 
   useEffect(async () => {
-    const sourceImport = await import(`../img/sprite_animations/${id}.gif`);
-
+    let sourceImport;
+    if (type === 'black and white') {
+      sourceImport = await import(`../img/sprite_animations/${id}.gif`);
+    } else if (type === 'shiny') {
+      sourceImport = await import(`../img/sprite_animations/shiny/${id}.gif`);
+    }
     setSource(sourceImport.default);
   });
 
@@ -20,4 +24,4 @@ const DynamicDefaultSprite = ({ id }) => {
   );
 };
 
-export default DynamicDefaultSprite;
+export default DynamicSprite;

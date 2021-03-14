@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // React select
 import Select from 'react-select';
 // Components
-import DynamicAnimatedDefaultSprite from './DynamicAnimatedDefaultSprite';
+import DynamicSprite from './DynamicSprite';
 // Images
 import charizardDefault from '../img/charizard_default.png';
 import charizardShiny from '../img/charizard_shiny.png';
@@ -38,7 +38,7 @@ const OptionsFilters = ({
           />
         )}
         {spriteIndex === 1 && <img src={charizardDefault} alt="sprite" />}
-        {spriteIndex === 2 && <DynamicAnimatedDefaultSprite id={6} />}
+        {spriteIndex === 2 && <DynamicSprite id={6} type="black and white" />}
         {spriteIndex === 3 && (
           <img
             src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/6.svg"
@@ -46,6 +46,7 @@ const OptionsFilters = ({
           />
         )}
         {spriteIndex === 4 && <img src={charizardShiny} alt="sprite" />}
+        {spriteIndex === 5 && <DynamicSprite id={6} type="shiny" />}
         <button type="button" onClick={spriteSelectionHandler}>
           <p>Sprite Type</p>
           {spriteIndex === 0 && 'Official'}
@@ -53,6 +54,7 @@ const OptionsFilters = ({
           {spriteIndex === 2 && 'B & W Animated'}
           {spriteIndex === 3 && 'Dream World'}
           {spriteIndex === 4 && 'Shiny'}
+          {spriteIndex === 5 && 'Shiny Animated'}
         </button>
       </div>
       <div className="option-filter">

@@ -11,6 +11,7 @@ const PokemonTiles = ({
   isDreamWorldSelected,
   isOfficialSelected,
   isShinySelected,
+  isShinyAnimatedSelected,
   isFilterBySearchActive,
   isFilterByTypeActive,
   isFilterByStatActive,
@@ -32,6 +33,7 @@ const PokemonTiles = ({
             isDreamWorldSelected={isDreamWorldSelected}
             isOfficialSelected={isOfficialSelected}
             isShinySelected={isShinySelected}
+            isShinyAnimatedSelected={isShinyAnimatedSelected}
           />
         ))}
     </StyledPokemonTiles>

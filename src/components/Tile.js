@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 // Styled components
 import styled from 'styled-components';
 // Components
-import DynamicAnimatedDefaultSprite from './DynamicAnimatedDefaultSprite';
+import DynamicSprite from './DynamicSprite';
 // Util
 import {
   convertToTypeImage,
@@ -19,6 +19,7 @@ const Tile = ({
   isDreamWorldSelected,
   isOfficialSelected,
   isShinySelected,
+  isShinyAnimatedSelected,
 }) => {
   // State
   const [highestStat, setHighestStat] = useState();
@@ -89,7 +90,7 @@ const Tile = ({
           />
         )}
         {isBlackAndWhiteAnimatedSelected && (
-          <DynamicAnimatedDefaultSprite id={pokemon.id} />
+          <DynamicSprite id={pokemon.id} type="black and white" />
         )}
         {isShinySelected && (
           <img
@@ -97,6 +98,9 @@ const Tile = ({
             src={pokemon.sprites.front_shiny}
             alt={pokemon.name}
           />
+        )}
+        {isShinyAnimatedSelected && (
+          <DynamicSprite id={pokemon.id} type="shiny" />
         )}
       </Link>
       <p className="id">#{pokemon.id}</p>

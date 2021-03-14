@@ -25,6 +25,7 @@ const Pokemon = () => {
   const [isOfficialSelected, setIsOfficalSelected] = useState(true);
   const [isDreamWorldSelected, setIsDreamWorldSelected] = useState(false);
   const [isShinySelected, setIsShinySelected] = useState(false);
+  const [isShinyAnimatedSelected, setIsShinyAnimatedSelected] = useState(false);
   const [spriteIndex, setSpriteIndex] = useState(0);
   const [isDarkModeActive, setIsDarkModeActive] = useState(false);
   const [isBlurActive, setIsBlurActive] = useState(false);
@@ -61,34 +62,46 @@ const Pokemon = () => {
       setisBlackAndWhiteAnimatedSelected(false);
       setIsDreamWorldSelected(false);
       setIsShinySelected(false);
+      setIsShinyAnimatedSelected(false);
     } else if (spriteIndex === 1) {
       setIsOfficalSelected(false);
       setIsDefaultSelected(false);
       setisBlackAndWhiteAnimatedSelected(true);
       setIsDreamWorldSelected(false);
       setIsShinySelected(false);
+      setIsShinyAnimatedSelected(false);
     } else if (spriteIndex === 2) {
       setIsOfficalSelected(false);
       setIsDefaultSelected(false);
       setisBlackAndWhiteAnimatedSelected(false);
       setIsDreamWorldSelected(true);
       setIsShinySelected(false);
+      setIsShinyAnimatedSelected(false);
     } else if (spriteIndex === 3) {
       setIsOfficalSelected(false);
       setIsDefaultSelected(false);
       setisBlackAndWhiteAnimatedSelected(false);
       setIsDreamWorldSelected(false);
       setIsShinySelected(true);
+      setIsShinyAnimatedSelected(false);
+    } else if (spriteIndex === 4) {
+      setIsOfficalSelected(false);
+      setIsDefaultSelected(false);
+      setisBlackAndWhiteAnimatedSelected(false);
+      setIsDreamWorldSelected(false);
+      setIsShinySelected(false);
+      setIsShinyAnimatedSelected(true);
     } else {
       setIsOfficalSelected(true);
       setIsDefaultSelected(false);
       setisBlackAndWhiteAnimatedSelected(false);
       setIsDreamWorldSelected(false);
       setIsShinySelected(false);
+      setIsShinyAnimatedSelected(false);
     }
 
-    if (spriteIndex === 4) setSpriteIndex(0);
-    if (spriteIndex !== 4) setSpriteIndex((prev) => prev + 1);
+    if (spriteIndex === 5) setSpriteIndex(0);
+    if (spriteIndex !== 5) setSpriteIndex((prev) => prev + 1);
   };
 
   // Filter pokemon by user search
@@ -202,6 +215,7 @@ const Pokemon = () => {
             isOfficialSelected={isOfficialSelected}
             isShinySelected={isShinySelected}
             isBlackAndWhiteAnimatedSelected={isBlackAndWhiteAnimatedSelected}
+            isShinyAnimatedSelected={isShinyAnimatedSelected}
           />
         )}
         <OptionsFilters
@@ -222,6 +236,7 @@ const Pokemon = () => {
           isDreamWorldSelected={isDreamWorldSelected}
           isOfficialSelected={isOfficialSelected}
           isShinySelected={isShinySelected}
+          isShinyAnimatedSelected={isShinyAnimatedSelected}
           isFilterBySearchActive={isFilterBySearchActive}
           isFilterByTypeActive={isFilterByTypeActive}
           isFilterByStatActive={isFilterByStatActive}

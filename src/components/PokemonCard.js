@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import '../../node_modules/video-react/dist/video-react.css'; // import css
 import { Player } from 'video-react';
 // Components
-import DynamicAnimatedDefaultSprite from './DynamicAnimatedDefaultSprite';
+import DynamicSprite from './DynamicSprite';
 // Util
 import {
   convertToTypeImage,
@@ -22,6 +22,7 @@ const PokemonCard = ({
   isDefaultSelected,
   isOfficialSelected,
   isShinySelected,
+  isShinyAnimatedSelected,
   isBlackAndWhiteAnimatedSelected,
 }) => {
   // Redux
@@ -115,7 +116,13 @@ const PokemonCard = ({
                   />
                 )}
                 {isBlackAndWhiteAnimatedSelected && (
-                  <DynamicAnimatedDefaultSprite id={selectedPokemon[0].id} />
+                  <DynamicSprite
+                    id={selectedPokemon[0].id}
+                    type="black and white"
+                  />
+                )}
+                {isShinyAnimatedSelected && (
+                  <DynamicSprite id={selectedPokemon[0].id} type="shiny" />
                 )}
                 <div className="genus-height-weight-container">
                   <p>{`${selectedPokemon[0].genera[7].genus},`}</p>

@@ -21,6 +21,7 @@ const PokemonDetails = ({
   isDreamWorldSelected,
   isDefaultSelected,
   isShinySelected,
+  isShinyAnimatedSelected,
   isBlackAndWhiteAnimatedSelected,
 }) => {
   // React Router
@@ -96,6 +97,7 @@ const PokemonDetails = ({
                 isDreamWorldSelected={isDreamWorldSelected}
                 isOfficialSelected={isOfficialSelected}
                 isShinySelected={isShinySelected}
+                isShinyAnimatedSelected={isShinyAnimatedSelected}
                 isBlackAndWhiteAnimatedSelected={
                   isBlackAndWhiteAnimatedSelected
                 }
