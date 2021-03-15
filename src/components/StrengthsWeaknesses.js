@@ -220,15 +220,12 @@ const strengthsWeaknesses = ({ selectedPokemon }) => {
 
 // Styled components
 const StyledStrengthsWeaknesses = styled.div`
-  position: absolute;
-  top: 7.5%;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  width: 110%;
+  width: 70%;
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
   flex-wrap: wrap;
+  margin: 2rem 0rem;
 
   table {
     width: 100%;
@@ -243,7 +240,7 @@ const StyledStrengthsWeaknesses = styled.div`
     th {
       padding: 1rem 0rem;
       font-size: 1.75rem;
-      text-transform: uppercase;
+      background: #88888878;
     }
 
     td {

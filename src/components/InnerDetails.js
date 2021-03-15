@@ -19,6 +19,7 @@ import Abilities from './Abilities';
 import ForwardBackButtons from './ForwardBackButtons';
 import Moves from './Moves';
 import LocationArea from './LocationArea';
+import StrengthsWeaknesses from './StrengthsWeaknesses';
 // Images
 import close from '../img/close-button.svg';
 import egg from '../img/egg.png';
@@ -114,6 +115,7 @@ const InnerDetails = ({ selectedPokemon, setPokemonId, ownMoves }) => {
         {description && <p>{removeNonAscii(description[0].flavor_text)}</p>}
       </div>
       <Abilities abilityData={abilityData} selectedPokemon={selectedPokemon} />
+      <StrengthsWeaknesses selectedPokemon={selectedPokemon} />
       <div className="training-egg-container">
         <div className="training">
           <img src={training} alt="training" className="training-icon" />
