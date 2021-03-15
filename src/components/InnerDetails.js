@@ -24,6 +24,7 @@ import ForwardBackButtons from './ForwardBackButtons';
 import Moves from './Moves';
 import LocationArea from './LocationArea';
 import StrengthsWeaknesses from './StrengthsWeaknesses';
+import ScrollToTop from './ScrollToTop';
 // Images
 import close from '../img/close-button.svg';
 import egg from '../img/egg.png';
@@ -182,6 +183,7 @@ const InnerDetails = ({ selectedPokemon, setPokemonId, ownMoves }) => {
         selectedPokemon={selectedPokemon}
       />
       <Moves ownMoves={ownMoves} selectedPokemon={selectedPokemon} />
+      <ScrollToTop />
     </StyledInnerDetails>
   );
 };

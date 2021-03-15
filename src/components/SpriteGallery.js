@@ -111,6 +111,8 @@ const StyledSpriteGallery = styled.div`
   .shiny-sprite-animation,
   .sprite-animation-3d {
     height: 125px;
+    width: 125px;
+    object-fit: contain;
   }
 `;
 
