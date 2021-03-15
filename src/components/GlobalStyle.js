@@ -14,6 +14,11 @@ const GlobalStyle = createGlobalStyle`
       z-index: 0;
   }
 
+  .dark-mode-font {
+      color: white;
+      font-weight: 100 !important;
+  }
+
   .enable-blur >* {
    filter: blur(3px);
   }

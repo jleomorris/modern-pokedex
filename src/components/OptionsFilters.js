@@ -69,14 +69,16 @@ const OptionsFilters = ({
         />
         <button
           type="button"
-          onClick={() => setIsDarkModeActive(!isDarkModeActive)}
+          onClick={() => setIsDarkModeActive((prev) => !prev)}
         >
           <p>Dark Mode</p>
           {isDarkModeActive ? 'Off' : 'On'}
         </button>
       </div>
       <div className="search-container">
-        <p>Filter by search:</p>
+        <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>
+          Filter by search
+        </p>
         <input
           type="text"
           className="search-pokemon"
@@ -84,7 +86,9 @@ const OptionsFilters = ({
         />
       </div>
       <div className="type-filter-container">
-        <p>Filter by element</p>
+        <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>
+          Filter by element
+        </p>
         <Select
           defaultValue={selectedTypeOption}
           onChange={filterPokemonByTypeHandler}
@@ -94,7 +98,9 @@ const OptionsFilters = ({
         />
       </div>
       <div className="stat-filter-container">
-        <p>Filter by max stat</p>
+        <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>
+          Filter by max stat
+        </p>
         <Select
           defaultValue={selectedStatOption}
           onChange={filterPokemonByStatHandler}
