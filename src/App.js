@@ -3,6 +3,8 @@ import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 // Styled components
 import styled from 'styled-components';
+// Styled components
+import { AnimatePresence } from 'framer-motion';
 // Redux
 import { useDispatch } from 'react-redux';
 import { loadGen1Data } from './redux/pokemonReducer';
@@ -27,14 +29,16 @@ const App = () => {
     <StyledApp>
       <GlobalStyle />
       <Nav />
-      <Switch>
-        <Route path="/" exact>
-          <Home />
-        </Route>
-        <Route path={['/pokemon/:id', '/pokemon']}>
-          <Pokemon />
-        </Route>
-      </Switch>
+      <AnimatePresence exitBeforeEnter>
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path={['/pokemon/:id', '/pokemon']}>
+            <Pokemon />
+          </Route>
+        </Switch>
+      </AnimatePresence>
     </StyledApp>
   );
 };

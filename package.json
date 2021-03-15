@@ -19,6 +19,7 @@
     "core-js": "^3.8.3",
     "css-loader": "^5.0.1",
     "file-loader": "^6.2.0",
+    "framer-motion": "^2.9.5",
     "html-webpack-plugin": "^5.0.0",
     "react": "^17.0.1",
     "react-card-flip": "^1.0.11",

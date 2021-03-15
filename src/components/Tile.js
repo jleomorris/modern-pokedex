@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // Styled components
 import styled from 'styled-components';
+// Framer motion and animations
+import { motion } from 'framer-motion';
+import { scrollRevealBottom, container } from '../animation';
 // Components
 import DynamicSprite from './DynamicSprite';
 // Util
@@ -50,20 +53,26 @@ const Tile = ({
   }, [pokemon]);
 
   return (
-    <StyledTile className="tile">
+    <StyledTile
+      variants={container}
+      initial="hidden"
+      animate="show"
+      exit="exit"
+      className="tile"
+    >
       <div className="background-circle" />
       <div className="background-image-container">
         {convertToTypeBackground(pokemon.types[0].type.name)}
       </div>
       {/* <p className="attack">{pokemon.stats[1].base_stat}</p> */}
-      <div className="max-stat-container">
+      <motion.div variants={scrollRevealBottom} className="max-stat-container">
         {convertMaxStatToIcon(highestStat)}
-      </div>
-      <div className="type-container">
+      </motion.div>
+      <motion.div variants={scrollRevealBottom} className="type-container">
         {pokemon.types.map((type) => (
           <div key={type.type.name}>{convertToTypeImage(type.type.name)}</div>
         ))}
-      </div>
+      </motion.div>
       <div className="name-health-container">
         <h2 className="pokemon-card-title">{pokemon.name}</h2>
         {/* <p className="hp">{pokemon.stats[0].base_stat} HP</p> */}
@@ -111,7 +120,7 @@ const Tile = ({
 };
 
 // Styled components
-const StyledTile = styled.div`
+const StyledTile = styled(motion.div)`
   height: 300px;
   /* margin: 2rem 1rem; */
   display: flex;

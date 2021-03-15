@@ -7,6 +7,10 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 // Redux
 import { useSelector } from 'react-redux';
+// Framer motion
+import { motion } from 'framer-motion';
+// Animations
+import { scrollRevealRight } from '../animation';
 // Util
 import {
   convertTypeToColor,
@@ -93,8 +97,24 @@ const InnerDetails = ({ selectedPokemon, setPokemonId, ownMoves }) => {
         selectedPokemon={selectedPokemon}
       />
       <div className="title-id-container">
-        <h2 className="pokemon-card-id">#{selectedPokemon[0].id}</h2>
-        <h2 className="pokemon-card-title">{selectedPokemon[0].name}</h2>
+        <motion.h2
+          variants={scrollRevealRight}
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          className="pokemon-card-id"
+        >
+          #{selectedPokemon[0].id}
+        </motion.h2>
+        <motion.h2
+          variants={scrollRevealRight}
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          className="pokemon-card-title"
+        >
+          {selectedPokemon[0].name}
+        </motion.h2>
         <p className="legendary-tag">
           {selectedPokemon[0].is_legendary ? 'Legendary' : ''}
         </p>
