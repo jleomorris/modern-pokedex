@@ -378,8 +378,17 @@ const StyledPokemonCard = styled.div`
     }
   }
 
-  .default-sprite-animation {
+  .default-sprite-animation,
+  .shiny-sprite-animation {
     height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .sprite-animation-3d {
+    height: 125px;
     position: absolute;
     top: 50%;
     left: 50%;

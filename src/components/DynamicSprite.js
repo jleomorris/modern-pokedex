@@ -20,7 +20,11 @@ const DynamicSprite = ({ id, type, name }) => {
   return (
     source && (
       <img
-        className="default-sprite-animation"
+        className={`${
+          type === 'black and white' ? 'default-sprite-animation' : ''
+        } ${type === 'shiny' ? 'shiny-sprite-animation' : ''} ${
+          type === '3d' ? 'sprite-animation-3d' : ''
+        }`}
         src={source}
         alt="sprite animation"
       />

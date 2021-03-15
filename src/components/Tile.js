@@ -239,7 +239,17 @@ const StyledTile = styled.div`
     transform: translate(-50%, -50%);
   }
 
-  .default-sprite-animation {
+  .sprite-animation-3d {
+    height: 100px;
+    padding: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .default-sprite-animation,
+  .shiny-sprite-animation {
     height: 150px;
     padding: 1rem;
     position: absolute;
