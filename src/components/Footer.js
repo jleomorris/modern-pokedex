@@ -48,12 +48,6 @@ const Footer = () => {
           are for identification purposes only. Use of these names, logos, and
           brands does not imply endorsement
         </p>
-        <p>
-          Pokemon series logos from brfa98 -
-          <a href="https://www.instagram.com/bplayingcards/">
-            https://www.instagram.com/bplayingcards/
-          </a>
-        </p>
       </div>
     </StyledFooter>
   );
