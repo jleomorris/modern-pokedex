@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import ReactCardFlip from 'react-card-flip';
 import PokemonCard from './PokemonCard';
 import InnerDetails from './InnerDetails';
-import StrengthsWeaknesses from './StrengthsWeaknesses';
+import SpriteGallery from './SpriteGallery';
 // Util
 import { convertTypeToColor } from '../util';
 // Images
@@ -113,7 +113,7 @@ const PokemonDetails = ({
                 tabIndex="0"
               >
                 <img className="back-image" src={cardBack} alt="card-back" />
-                <StrengthsWeaknesses selectedPokemon={selectedPokemon} />
+                <SpriteGallery selectedPokemon={selectedPokemon} />
               </div>
             </ReactCardFlip>
           )}
@@ -208,7 +208,7 @@ const StyledPokemonDetails = styled.div`
       height: 800px;
       object-fit: cover;
       margin: 2rem -4rem;
-      filter: brightness(0.6);
+      filter: brightness(0.5);
 
       @media (max-width: 1500px) {
         width: 500px;
