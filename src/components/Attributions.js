@@ -3,22 +3,42 @@ import React from 'react';
 import styled from 'styled-components';
 // Images
 import info from '../img/info.svg';
+import wallpaper from '../img/attributions_wallpaper.png';
 
 const Attributions = () => {
   return (
     <StyledAttributions className="attributions">
-      {/* <img src={info} alt="info" /> */}
-      {/* <div className="attributions-container"> */}
+      <img className="wallpaper" src={wallpaper} alt="wallpaper" />
+      <h1>Attributions</h1>
       <ul>
-        <li>Icons - Icons8</li>
-        <li>3d animations - https://projectpokemon.org/</li>
-        <li>Pokeball loading animation - arhg</li>
-        <li>Api - pokeAPI</li>
         <li>
-          Pokemon series logos - brfa98
+          <span className="asset">Api </span>- pokeAPI
+        </li>
+        <li>
+          <span className="asset">Home wallpaper</span>- eocen on Fanpop
+        </li>
+        <li>
+          <span className="asset">Icons</span> - Icons8
+        </li>
+        <li>
+          <span className="asset">Black and White and Shiny animations</span> -
+          https://github.com/PokeAPI/sprites
+        </li>
+        <li>
+          <span className="asset">3D sprite animations </span>-
+          https://projectpokemon.org/
+        </li>
+        <li>
+          <span className="asset">Pokeball css animation </span>-
+          https://github.com/athanstancss{' '}
+        </li>
+        <li>
+          <span className="asset">Pokemon series custom logos </span>- brfa98
           (https://www.instagram.com/bplayingcards/)
         </li>
-        <li>Tile backgrounds - pexels</li>
+        <li>
+          <span className="asset">Tile backgrounds </span>- Pexels
+        </li>
       </ul>
       {/* </div> */}
     </StyledAttributions>
@@ -32,10 +52,47 @@ const StyledAttributions = styled.div`
   justify-content: center;
   align-items: center;
   background: white;
+  position: relative;
+  flex-direction: column;
+
+  .wallpaper {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 600px;
+    filter: drop-shadow(2px 4px 6px black);
+    z-index: 0;
+  }
+
+  h1 {
+    font-size: 10rem;
+    text-transform: uppercase;
+    letter-spacing: 1rem;
+    color: #000000b3;
+    /* margin-right: -40vh; */
+    /* text-shadow: 0px 0px 10px black; */
+    margin: 2rem;
+    /* margin-right: -52vh; */
+    z-index: 1;
+    align-self: flex-start;
+  }
 
   ul {
     font-size: 2rem;
     color: black;
+    box-shadow: 0px 0px 10px rgb(0 0 0 / 30%);
+    padding: 4rem;
+    border-radius: 2rem;
+    margin: 4rem 0rem;
+
+    li {
+      line-height: 4rem;
+
+      .asset {
+        font-size: 2.5rem;
+        font-weight: 900;
+      }
+    }
   }
   /* position: absolute;
   bottom: 100px;
