@@ -3,14 +3,23 @@
 import React from 'react';
 // Styled components
 import styled from 'styled-components';
+// Redux
+import { useSelector } from 'react-redux';
 
 const PokeBall = () => {
+  // Redux
+  const dataLoaded = useSelector((state) => state.pokemon.pokemonLoaded);
   return (
     <StyledPokeball className="poke_box">
       <div className="pokeball">
         <div className="pokeball__button" />
       </div>
-      <h2>Loading...</h2>
+      <h2>
+        Loaded{' '}
+        <span className="loading-percentage">{`${Math.round(
+          (dataLoaded / 302) * 100
+        )}%`}</span>
+      </h2>
     </StyledPokeball>
   );
 };
@@ -26,8 +35,24 @@ const StyledPokeball = styled.div`
   align-items: center;
 
   h2 {
+    position: relative;
     margin-left: 2rem;
+    padding: 6rem 2rem;
     font-size: 3rem;
+    font-weight: 100;
+    text-transform: uppercase;
+
+    .loading-percentage {
+      font-size: 6rem;
+      font-weight: 900;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      text-shadow: 0px 5px 20px black;
+      z-index: -1;
+    }
   }
 
   .pokeball {
