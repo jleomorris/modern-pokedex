@@ -1,37 +1,43 @@
-import React, { useState } from 'react';
+import React from 'react';
 // Styled components
 import styled from 'styled-components';
 // Images
 import info from '../img/info.svg';
 
 const Attributions = () => {
-  const [isVisible, setIsVisible] = useState(false);
   return (
-    <StyledAttributions
-      className="attributions"
-      onClick={() => setIsVisible((prev) => !prev)}
-    >
-      <img src={info} alt="info" />
-      {isVisible && (
-        <div className="attributions-container">
-          <p>Icons - Icons8</p>
-          <p>3d animations - https://projectpokemon.org/</p>
-          <p>Pokeball loading animation - arhg</p>
-          <p>Api - pokeAPI</p>
-          <p>
-            Pokemon series logos - brfa98
-            (https://www.instagram.com/bplayingcards/)
-          </p>
-          <p>tile backgrounds - pexels</p>
-        </div>
-      )}
+    <StyledAttributions className="attributions">
+      {/* <img src={info} alt="info" /> */}
+      {/* <div className="attributions-container"> */}
+      <ul>
+        <li>Icons - Icons8</li>
+        <li>3d animations - https://projectpokemon.org/</li>
+        <li>Pokeball loading animation - arhg</li>
+        <li>Api - pokeAPI</li>
+        <li>
+          Pokemon series logos - brfa98
+          (https://www.instagram.com/bplayingcards/)
+        </li>
+        <li>Tile backgrounds - pexels</li>
+      </ul>
+      {/* </div> */}
     </StyledAttributions>
   );
 };
 
 // Styled components
 const StyledAttributions = styled.div`
-  position: absolute;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+
+  ul {
+    font-size: 2rem;
+    color: black;
+  }
+  /* position: absolute;
   bottom: 100px;
   right: 100px;
   background: #fffffff2;
@@ -52,7 +58,7 @@ const StyledAttributions = styled.div`
       font-size: 1rem;
       font-weight: 600;
     }
-  }
+  } */
 `;
 
 export default Attributions;

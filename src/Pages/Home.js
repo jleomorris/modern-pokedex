@@ -10,7 +10,6 @@ import { motion } from 'framer-motion';
 import screenshotBackground from '../img/home_background.jpg'; // Image courtesy of geocen on Fanpop
 // Components
 import Footer from '../components/Footer';
-import Attributions from '../components/Attributions';
 // Animations
 import pageAnimation from '../animation';
 
@@ -50,7 +49,6 @@ const Home = () => {
             </ul>
           </div>
         </StyledHome>
-        <Attributions />
         <Footer />
       </motion.div>
     </>

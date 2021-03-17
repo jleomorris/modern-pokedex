@@ -11,9 +11,11 @@ import { loadGen1Data } from './redux/pokemonReducer';
 import { loadAllTypeData } from './redux/typeReducer';
 // Components
 import GlobalStyle from './components/GlobalStyle';
-import Home from './Pages/Home';
 import Nav from './components/Nav';
+// Pages
+import Home from './Pages/Home';
 import Pokemon from './Pages/Pokemon';
+import AttributionsPage from './Pages/AttributionsPage';
 
 const App = () => {
   // Redux
@@ -36,6 +38,9 @@ const App = () => {
           </Route>
           <Route path={['/pokemon/:id', '/pokemon']}>
             <Pokemon />
+          </Route>
+          <Route path="/attributions" exact>
+            <AttributionsPage />
           </Route>
         </Switch>
       </AnimatePresence>
