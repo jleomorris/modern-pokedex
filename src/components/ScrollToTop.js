@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 // Styled components
 import styled from 'styled-components';
 // Images
