@@ -406,6 +406,10 @@ const StyledEvolutionChart = styled.div`
           font-size: 1.5rem;
         }
 
+        .second-evolution-trigger {
+          text-transform: capitalize;
+        }
+
         .evolution-stone {
           position: absolute;
           top: 50%;
