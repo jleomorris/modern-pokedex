@@ -256,6 +256,7 @@ const Pokemon = () => {
           isFilterByTypeActive={isFilterByTypeActive}
           isFilterByStatActive={isFilterByStatActive}
           is3dSelected={is3dSelected}
+          isDarkModeActive={isDarkModeActive}
         />
         {filteredData &&
           !isFilterBySearchActive &&

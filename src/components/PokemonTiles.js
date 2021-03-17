@@ -16,6 +16,7 @@ const PokemonTiles = ({
   isFilterByTypeActive,
   isFilterByStatActive,
   is3dSelected,
+  isDarkModeActive,
 }) => {
   return (
     <StyledPokemonTiles className="pokemon-cards-container">
@@ -23,7 +24,13 @@ const PokemonTiles = ({
         filteredData.length === 0 &&
         (isFilterBySearchActive ||
           isFilterByTypeActive ||
-          isFilterByStatActive) && <h2 className="no-results">No results</h2>}
+          isFilterByStatActive) && (
+          <h2
+            className={`no-results ${isDarkModeActive ? 'dark-mode-font' : ''}`}
+          >
+            No results
+          </h2>
+        )}
       {filteredData &&
         filteredData.map((pokemon) => (
           <Tile
