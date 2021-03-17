@@ -15,7 +15,7 @@ import {
   removeNonAscii,
 } from '../util';
 
-const PokemonCard = ({
+const PokemonCardBody = ({
   pathId,
   cardFlipHandler,
   isDreamWorldSelected,
@@ -45,7 +45,6 @@ const PokemonCard = ({
   useEffect(() => {
     console.log(window.innerWidth);
     setWindowWidth(window.innerWidth);
-
     window.addEventListener('resize', () => {
       console.log(window.innerWidth);
       setWindowWidth(window.innerWidth);
@@ -84,8 +83,8 @@ const PokemonCard = ({
 
   return (
     <ThemeProvider theme={theme}>
-      {!onMobile && (
-        <StyledPokemonCard className="pokemon-card">
+      {onMobile && (
+        <StyledPokemonCardBody className="pokemon-card-body">
           <div
             className="detailed-pokemon-card"
             onClick={cardFlipHandler}
@@ -180,7 +179,7 @@ const PokemonCard = ({
                     </div>
                   ))}
                 </div>
-                <div className="description">
+                <div className="card-description">
                   <p>
                     {cardDescriptions &&
                       removeNonAscii(cardDescriptions[0].flavor_text)}
@@ -193,17 +192,17 @@ const PokemonCard = ({
               </div>
             </div>
           </div>
-        </StyledPokemonCard>
+        </StyledPokemonCardBody>
       )}
     </ThemeProvider>
   );
 };
 
 // Styled components
-const StyledPokemonCard = styled.div`
-  position: absolute;
+const StyledPokemonCardBody = styled.div`
+  /* position: absolute;
   top: 0px;
-  left: -75px;
+  left: -75px; */
   z-index: 3;
   display: flex;
   justify-content: start;
@@ -266,6 +265,10 @@ const StyledPokemonCard = styled.div`
         justify-content: center;
         align-items: center;
 
+        p {
+          color: black;
+        }
+
         .circle {
           background: black;
           border-radius: 50%;
@@ -283,6 +286,7 @@ const StyledPokemonCard = styled.div`
       margin: 0.5rem;
 
       .pokemon-card-title {
+        color: black;
         text-transform: capitalize;
         font-size: 2rem;
         /* font-family: 'Bebas Neue', cursive; */
@@ -348,6 +352,10 @@ const StyledPokemonCard = styled.div`
         left: 50%;
         transform: translateX(-50%);
         width: 100%;
+
+        p {
+          color: black;
+        }
       }
     }
 
@@ -456,19 +464,28 @@ const StyledPokemonCard = styled.div`
           text-transform: capitalize;
           font-weight: bolder;
           padding: 1.2rem 0rem;
+          color: black;
 
           @media (max-width: 1700px) {
             margin: 1rem;
+          }
+
+          @media (max-width: 1500px) {
+            margin: 0.5rem;
           }
         }
       }
     }
 
-    .description {
+    .card-description {
       border: 2px solid #ffff7a;
       padding: 0.25rem;
+
+      p {
+        color: black;
+      }
     }
   }
 `;
 
-export default PokemonCard;
+export default PokemonCardBody;

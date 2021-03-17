@@ -115,8 +115,8 @@ const EvolutionChart = ({ pokemonData, selectedPokemon }) => {
         <div className="user-message">
           <p>*Pokemon are size proportionate to Ash (who is 5ft in height)</p>
         </div>
-        <div className="feature-title-container">
-          <h2 className="feature-title">Evolution Chart</h2>
+        <div className="evolution-feature-title-container">
+          <h2 className="evolution-feature-title">Evolution Chart</h2>
         </div>
         {baseStage && baseStage.length > 0 && (
           <div className="evolution-card">
@@ -292,7 +292,7 @@ const EvolutionChart = ({ pokemonData, selectedPokemon }) => {
             </div>
           </div>
         )}
-        <div className="evolution-card">
+        <div className="evolution-card ash">
           <img
             src={ash}
             style={{
@@ -317,6 +317,10 @@ const StyledEvolutionChart = styled.div`
   justify-content: center;
   flex-wrap: wrap;
 
+  @media (max-width: 1500px) {
+    width: 90%;
+  }
+
   h3 {
     color: white;
     width: 100%;
@@ -335,6 +339,12 @@ const StyledEvolutionChart = styled.div`
     padding: 3rem;
     margin: 2rem 0rem;
     background: rgba(256, 256, 256, 0.7);
+    overflow: hidden;
+
+    @media (max-width: 1500px) {
+      flex-direction: column;
+      border-radius: 2rem;
+    }
 
     .user-message {
       position: absolute;
@@ -347,13 +357,13 @@ const StyledEvolutionChart = styled.div`
       }
     }
 
-    .feature-title-container {
+    .evolution-feature-title-container {
       position: absolute;
       top: 0;
       right: 0;
       width: 100%;
 
-      .feature-title {
+      .evolution-feature-title {
         font-size: 6rem;
         opacity: 0.2;
         text-transform: uppercase;
@@ -361,6 +371,13 @@ const StyledEvolutionChart = styled.div`
         margin: 2rem 0rem;
         z-index: 0;
         color: black;
+        text-align: right;
+        margin-right: -1rem;
+
+        @media (max-width: 1500px) {
+          text-align: center;
+          margin-right: unset;
+        }
       }
     }
 
@@ -372,15 +389,24 @@ const StyledEvolutionChart = styled.div`
       height: 100%;
       margin: 0rem 1rem;
       max-width: 20%;
+
+      @media (max-width: 1500px) {
+        position: relative;
+      }
     }
 
-    /* .evolution-card > * {
-      z-index: 1;
-    } */
+    .ash {
+      @media (max-width: 1500px) {
+        display: none;
+      }
+    }
 
     .image-container {
       position: relative;
-      /* z-index: 2; */
+
+      @media (max-width: 1500px) {
+        position: unset;
+      }
 
       img {
         width: auto;
@@ -393,6 +419,14 @@ const StyledEvolutionChart = styled.div`
         transform: translateY(-50%);
         z-index: 1;
 
+        @media (max-width: 1500px) {
+          transform: rotate(90deg);
+          right: unset;
+          left: 20%;
+          top: unset;
+          bottom: -20%;
+        }
+
         img {
           width: 100px;
         }
@@ -404,6 +438,10 @@ const StyledEvolutionChart = styled.div`
           right: 20px;
           font-weight: 900;
           font-size: 1.5rem;
+
+          @media (max-width: 1500px) {
+            transform: translateY(-50%) rotate(270deg);
+          }
         }
 
         .second-evolution-trigger {
@@ -452,7 +490,7 @@ const StyledEvolutionChart = styled.div`
         margin: 0.25rem 0rem;
         border-radius: 2rem;
         text-align: center;
-        width: 200px;
+        padding: 0rem 5rem;
         font-family: 'Bebas Neue', cursive;
         text-transform: uppercase;
         font-size: 1.25rem;

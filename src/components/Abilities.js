@@ -51,6 +51,11 @@ const StyledContainer = styled.div`
   flex-wrap: wrap;
   align-items: flex-start;
   margin-top: 2rem;
+
+  @media (max-width: 1500px) {
+    width: 90%;
+    margin-top: 10rem;
+  }
 `;
 
 const StyledAbilities = styled.div`

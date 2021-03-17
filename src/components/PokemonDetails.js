@@ -31,7 +31,6 @@ const PokemonDetails = ({
   const pokemonData = useSelector((state) => state.pokemon.pokemonData);
   // State
   const [pokemonId, setPokemonId] = useState(pathId);
-  // SelectedPokemon 1 and 2 are based off 2 separate stores of data, from 2 different API calls
   const [selectedPokemon, setSelectedPokemon] = useState(
     pokemonData.filter((pokemon) => pokemon.id.toString() === pokemonId)
   );
@@ -120,6 +119,15 @@ const PokemonDetails = ({
           <InnerDetails
             selectedPokemon={selectedPokemon}
             setPokemonId={setPokemonId}
+            pathId={pokemonId}
+            cardFlipHandler={cardFlipHandler}
+            isDefaultSelected={isDefaultSelected}
+            isDreamWorldSelected={isDreamWorldSelected}
+            isOfficialSelected={isOfficialSelected}
+            isShinySelected={isShinySelected}
+            isShinyAnimatedSelected={isShinyAnimatedSelected}
+            isBlackAndWhiteAnimatedSelected={isBlackAndWhiteAnimatedSelected}
+            is3dSelected={is3dSelected}
           />
         </StyledPokemonDetails>
       </DetailsShadow>
@@ -185,9 +193,13 @@ const StyledPokemonDetails = styled.div`
   z-index: 3;
   cursor: auto;
 
-  @media (max-width: 1000px) {
-    width: 80%;
+  @media (max-width: 1500px) {
+    width: 100%;
   }
+
+  /* @media (max-width: 1000px) {
+    width: 80%;
+  } */
 
   .react-card-flip {
     position: absolute;

@@ -29,8 +29,22 @@ import ScrollToTop from './ScrollToTop';
 import close from '../img/close-button.svg';
 import egg from '../img/egg.png';
 import training from '../img/training.png';
+import PokemonCardBody from './PokemonCardBody';
 
-const InnerDetails = ({ selectedPokemon, setPokemonId, ownMoves }) => {
+const InnerDetails = ({
+  selectedPokemon,
+  setPokemonId,
+  ownMoves,
+  pathId,
+  cardFlipHandler,
+  isDefaultSelected,
+  isDreamWorldSelected,
+  isOfficialSelected,
+  isShinySelected,
+  isShinyAnimatedSelected,
+  isBlackAndWhiteAnimatedSelected,
+  is3dSelected,
+}) => {
   // React Router
   const history = useHistory();
   // Redux
@@ -112,7 +126,7 @@ const InnerDetails = ({ selectedPokemon, setPokemonId, ownMoves }) => {
           initial="hidden"
           animate="show"
           exit="exit"
-          className="pokemon-card-title"
+          className="pokemon-title"
         >
           {selectedPokemon[0].name}
         </motion.h2>
@@ -135,6 +149,17 @@ const InnerDetails = ({ selectedPokemon, setPokemonId, ownMoves }) => {
       <div className="description">
         {description && <p>{removeNonAscii(description[0].flavor_text)}</p>}
       </div>
+      <PokemonCardBody
+        pathId={pathId}
+        cardFlipHandler={cardFlipHandler}
+        isDefaultSelected={isDefaultSelected}
+        isDreamWorldSelected={isDreamWorldSelected}
+        isOfficialSelected={isOfficialSelected}
+        isShinySelected={isShinySelected}
+        isShinyAnimatedSelected={isShinyAnimatedSelected}
+        isBlackAndWhiteAnimatedSelected={isBlackAndWhiteAnimatedSelected}
+        is3dSelected={is3dSelected}
+      />
       <Abilities abilityData={abilityData} selectedPokemon={selectedPokemon} />
       <StrengthsWeaknesses selectedPokemon={selectedPokemon} />
       <div className="training-egg-container">
@@ -198,6 +223,11 @@ const StyledInnerDetails = styled.div`
   padding-right: 3rem;
   height: 100vh;
   overflow-y: scroll;
+
+  @media (max-width: 1500px) {
+    align-items: center;
+    padding-right: unset;
+  }
 
   &::-webkit-scrollbar {
     width: 1rem;
@@ -289,6 +319,10 @@ const StyledInnerDetails = styled.div`
     outline: none;
     cursor: pointer;
 
+    @media (max-width: 1500px) {
+      top: 95px;
+    }
+
     img {
       height: 50px;
       background: black;
@@ -299,6 +333,10 @@ const StyledInnerDetails = styled.div`
     width: 55%;
     margin: 1rem 0rem;
     text-align: right;
+
+    @media (max-width: 1500px) {
+      text-align: center;
+    }
 
     p {
       font-size: 2rem;
@@ -311,6 +349,10 @@ const StyledInnerDetails = styled.div`
     display: flex;
     justify-content: center;
     align-items: flex-start;
+
+    @media (max-width: 1500px) {
+      width: 90%;
+    }
 
     h3 {
       color: white;

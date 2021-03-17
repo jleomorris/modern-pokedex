@@ -84,7 +84,7 @@ const ForwardBackButtons = ({ selectedPokemon, setPokemonId }) => {
 
 // Styled components
 const StyledForwardBackButtons = styled.div`
-  margin: 0 auto;
+  margin: 1rem auto;
 
   .back-button {
     border-radius: 1rem 0rem 0rem 1rem;

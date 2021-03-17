@@ -170,6 +170,10 @@ const LocationArea = ({ selectedPokemon }) => {
 const StyledLocationArea = styled.div`
   width: 70%;
 
+  @media (max-width: 1500px) {
+    width: 90%;
+  }
+
   h3 {
     margin: 2rem 0rem;
     color: white;

@@ -124,41 +124,6 @@ const Moves = ({ selectedPokemon }) => {
     }
   }, [fullOwnMoveData]);
 
-  // Set red and blue version machine move data
-  //   useEffect(() => {
-  //     if (fullOwnMoveData) {
-  //       const redBlueMovesFiltered = fullOwnMoveData.filter(
-  //         (move) =>
-  //           move.version_group_details[0].version_group.name === 'red-blue'
-  //       );
-
-  //       const filteredMachineMovesUnique = [];
-
-  //       for (let i = 0; i < redBlueMovesFiltered.length; i += 1) {
-  //         for (const ver of redBlueMovesFiltered[i].version_group_details) {
-  //           if (
-  //             ver.version_group.name === 'red-blue' &&
-  //             ver.move_learn_method.name === 'machine'
-  //           ) {
-  //             filteredMachineMovesUnique.push(redBlueMovesFiltered[i]);
-  //             break;
-  //           }
-  //         }
-  //       }
-
-  //       // Sort moves by level ascending
-  //       const machineMovesSortedByLevel = filteredMachineMovesUnique.sort(
-  //         (a, b) =>
-  //           a.version_group_details[0].level_learned_at >
-  //           b.version_group_details[0].level_learned_at
-  //             ? 1
-  //             : -1
-  //       );
-
-  //       setRedBlueMachineMoves(machineMovesSortedByLevel);
-  //     }
-  //   }, [fullMachineMoveData]);
-
   return (
     <StyledMoves className="move-container">
       <h3>Own moves</h3>
@@ -244,9 +209,13 @@ const StyledMoves = styled.div`
   flex-wrap: wrap;
   justify-content: flex-start;
 
-  @media (max-width: 1700px) {
-    width: 50%;
+  @media (max-width: 1500px) {
+    width: 90%;
   }
+
+  /* @media (max-width: 1700px) {
+    width: 50%;
+  } */
 
   h3 {
     color: white;

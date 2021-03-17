@@ -42,8 +42,13 @@ const StyledScrollToTop = styled.div`
   cursor: pointer;
 
   img {
-    height: 70px;
-    width: 70px;
+    height: 60px;
+    width: 60px;
+
+    @media (max-width: 1500px) {
+      height: 35px;
+      width: 35px;
+    }
   }
 `;
 

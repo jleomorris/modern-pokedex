@@ -227,6 +227,10 @@ const StyledStrengthsWeaknesses = styled.div`
   flex-wrap: wrap;
   margin: 2rem 0rem;
 
+  @media (max-width: 1500px) {
+    width: 90%;
+  }
+
   table {
     width: 100%;
     /* background: rgba(0, 0, 0, 0.6); */
