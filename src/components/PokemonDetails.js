@@ -34,11 +34,33 @@ const PokemonDetails = ({
   const [selectedPokemon, setSelectedPokemon] = useState(
     pokemonData.filter((pokemon) => pokemon.id.toString() === pokemonId)
   );
+  const [windowWidth, setWindowWidth] = useState();
+  const [onMobile, setOnMobile] = useState(false);
   const [isFlipped, setisFlipped] = useState(false);
   // Styled component variables
   const theme = {
     background: convertTypeToColor(selectedPokemon[0].types[0].type.name),
   };
+
+  // Setup monitoring of window size
+  useEffect(() => {
+    console.log(window.innerWidth);
+    setWindowWidth(window.innerWidth);
+
+    window.addEventListener('resize', () => {
+      console.log(window.innerWidth);
+      setWindowWidth(window.innerWidth);
+    });
+  }, []);
+
+  // Hide card when under a certain width
+  useEffect(() => {
+    if (windowWidth < 1500) {
+      setOnMobile(true);
+    } else {
+      setOnMobile(false);
+    }
+  }, [windowWidth]);
 
   // Automate card flip
   useEffect(() => {
@@ -80,7 +102,7 @@ const PokemonDetails = ({
           <p>Click blurred area to exit</p>
         </div>
         <StyledPokemonDetails className="pokemon-details">
-          {selectedPokemon && (
+          {selectedPokemon && !onMobile && (
             <ReactCardFlip
               className="react-card-flip"
               isFlipped={isFlipped}

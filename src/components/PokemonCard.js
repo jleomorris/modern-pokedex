@@ -34,32 +34,10 @@ const PokemonCard = ({
     pokemonData.filter((pokemon) => pokemon.id.toString() === pokemonId)
   );
   const [cardDescriptions, setCardDescriptions] = useState();
-  const [windowWidth, setWindowWidth] = useState();
-  const [onMobile, setOnMobile] = useState(false);
   // Styled component variables
   const theme = {
     background: convertTypeToColor(selectedPokemon[0].types[0].type.name),
   };
-
-  // Setup monitoring of window size
-  useEffect(() => {
-    console.log(window.innerWidth);
-    setWindowWidth(window.innerWidth);
-
-    window.addEventListener('resize', () => {
-      console.log(window.innerWidth);
-      setWindowWidth(window.innerWidth);
-    });
-  }, []);
-
-  // Hide card when under a certain width
-  useEffect(() => {
-    if (windowWidth < 1500) {
-      setOnMobile(true);
-    } else {
-      setOnMobile(false);
-    }
-  }, [windowWidth]);
 
   // When pokemon id changes reset selected pokemon
   useEffect(() => {
@@ -84,117 +62,109 @@ const PokemonCard = ({
 
   return (
     <ThemeProvider theme={theme}>
-      {!onMobile && (
-        <StyledPokemonCard className="pokemon-card">
-          <div
-            className="detailed-pokemon-card"
-            onClick={cardFlipHandler}
-            onKeyPress={cardFlipHandler}
-            role="button"
-            tabIndex="0"
-          >
-            <div className="click-message">
-              <p>Click card to flip</p>
-            </div>
-            <div className="inner-content">
-              <div className="title-health-type-container">
-                <h2 className="pokemon-card-title">
-                  {selectedPokemon[0].name}
-                </h2>
-                <div className="health-type-container">
-                  <p className="hp">
-                    {selectedPokemon[0].stats[0].base_stat} HP
-                  </p>
-                  {selectedPokemon[0].types.map((type) => (
-                    <div key={type.type.name}>
-                      {convertToTypeImage(type.type.name)}
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="card-upper">
-                <div className="background-image-container">
-                  {convertToTypeBackground(
-                    selectedPokemon[0].types[0].type.name
-                  )}
-                  {/* {convertNameToSpriteAnimation(selectedPokemon[0].name)} */}
-                  {!isBlackAndWhiteAnimatedSelected && (
-                    <img
-                      className={`${
-                        isDreamWorldSelected
-                          ? 'pokemon-card-image-dream-world'
-                          : ''
-                      } ${
-                        isOfficialSelected ? 'pokemon-card-image-official' : ''
-                      } ${
-                        isDefaultSelected ? 'pokemon-card-image-default' : ''
-                      } ${isShinySelected ? 'pokemon-card-image-shiny' : ''}`}
-                      src={
-                        isDreamWorldSelected
-                          ? selectedPokemon[0].sprites.other.dream_world
-                              .front_default
-                          : '' || isOfficialSelected
-                          ? Object.values(selectedPokemon[0].sprites.other)[1]
-                              .front_default
-                          : '' || isDefaultSelected
-                          ? selectedPokemon[0].sprites.front_default
-                          : '' || isShinySelected
-                          ? selectedPokemon[0].sprites.front_shiny
-                          : ''
-                      }
-                      alt={selectedPokemon[0].name}
-                    />
-                  )}
-                  {isBlackAndWhiteAnimatedSelected && (
-                    <DynamicSprite
-                      id={selectedPokemon[0].id}
-                      type="black and white"
-                    />
-                  )}
-                  {isShinyAnimatedSelected && (
-                    <DynamicSprite id={selectedPokemon[0].id} type="shiny" />
-                  )}
-                  {is3dSelected && (
-                    <DynamicSprite
-                      id={6}
-                      type="3d"
-                      name={selectedPokemon[0].name}
-                    />
-                  )}
-                  <div className="genus-height-weight-container">
-                    <p>{`${selectedPokemon[0].genera[7].genus},`}</p>
-                    <p>{`Height: ${(selectedPokemon[0].height * 0.33).toFixed(
-                      2
-                    )}ft,`}</p>
-                    <p>{`Weight: ${(selectedPokemon[0].weight * 0.22).toFixed(
-                      2
-                    )}lbs`}</p>
+      <StyledPokemonCard className="pokemon-card">
+        <div
+          className="detailed-pokemon-card"
+          onClick={cardFlipHandler}
+          onKeyPress={cardFlipHandler}
+          role="button"
+          tabIndex="0"
+        >
+          <div className="click-message">
+            <p>Click card to flip</p>
+          </div>
+          <div className="inner-content">
+            <div className="title-health-type-container">
+              <h2 className="pokemon-card-title">{selectedPokemon[0].name}</h2>
+              <div className="health-type-container">
+                <p className="hp">{selectedPokemon[0].stats[0].base_stat} HP</p>
+                {selectedPokemon[0].types.map((type) => (
+                  <div key={type.type.name}>
+                    {convertToTypeImage(type.type.name)}
                   </div>
+                ))}
+              </div>
+            </div>
+            <div className="card-upper">
+              <div className="background-image-container">
+                {convertToTypeBackground(selectedPokemon[0].types[0].type.name)}
+                {/* {convertNameToSpriteAnimation(selectedPokemon[0].name)} */}
+                {!isBlackAndWhiteAnimatedSelected && (
+                  <img
+                    className={`${
+                      isDreamWorldSelected
+                        ? 'pokemon-card-image-dream-world'
+                        : ''
+                    } ${
+                      isOfficialSelected ? 'pokemon-card-image-official' : ''
+                    } ${
+                      isDefaultSelected ? 'pokemon-card-image-default' : ''
+                    } ${isShinySelected ? 'pokemon-card-image-shiny' : ''}`}
+                    src={
+                      isDreamWorldSelected
+                        ? selectedPokemon[0].sprites.other.dream_world
+                            .front_default
+                        : '' || isOfficialSelected
+                        ? Object.values(selectedPokemon[0].sprites.other)[1]
+                            .front_default
+                        : '' || isDefaultSelected
+                        ? selectedPokemon[0].sprites.front_default
+                        : '' || isShinySelected
+                        ? selectedPokemon[0].sprites.front_shiny
+                        : ''
+                    }
+                    alt={selectedPokemon[0].name}
+                  />
+                )}
+                {isBlackAndWhiteAnimatedSelected && (
+                  <DynamicSprite
+                    id={selectedPokemon[0].id}
+                    type="black and white"
+                  />
+                )}
+                {isShinyAnimatedSelected && (
+                  <DynamicSprite id={selectedPokemon[0].id} type="shiny" />
+                )}
+                {is3dSelected && (
+                  <DynamicSprite
+                    id={6}
+                    type="3d"
+                    name={selectedPokemon[0].name}
+                  />
+                )}
+                <div className="genus-height-weight-container">
+                  <p>{`${selectedPokemon[0].genera[7].genus},`}</p>
+                  <p>{`Height: ${(selectedPokemon[0].height * 0.33).toFixed(
+                    2
+                  )}ft,`}</p>
+                  <p>{`Weight: ${(selectedPokemon[0].weight * 0.22).toFixed(
+                    2
+                  )}lbs`}</p>
                 </div>
               </div>
-              <div className="card-lower">
-                <div className="move-container">
-                  {selectedPokemon[0].moves.map((move) => (
-                    <div className="move" key={move.move.name}>
-                      <p className="move-title">{move.move.name}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="description">
-                  <p>
-                    {cardDescriptions &&
-                      removeNonAscii(cardDescriptions[0].flavor_text)}
-                  </p>
-                </div>
+            </div>
+            <div className="card-lower">
+              <div className="move-container">
+                {selectedPokemon[0].moves.map((move) => (
+                  <div className="move" key={move.move.name}>
+                    <p className="move-title">{move.move.name}</p>
+                  </div>
+                ))}
               </div>
-              <div className="id-container">
-                <p className="id">{selectedPokemon[0].id}/151</p>
-                <div className="circle" />
+              <div className="description">
+                <p>
+                  {cardDescriptions &&
+                    removeNonAscii(cardDescriptions[0].flavor_text)}
+                </p>
               </div>
+            </div>
+            <div className="id-container">
+              <p className="id">{selectedPokemon[0].id}/151</p>
+              <div className="circle" />
             </div>
           </div>
-        </StyledPokemonCard>
-      )}
+        </div>
+      </StyledPokemonCard>
     </ThemeProvider>
   );
 };
@@ -241,6 +211,11 @@ const StyledPokemonCard = styled.div`
       justify-content: center;
       align-items: flex-end;
       cursor: auto;
+
+      // NOT WORKING
+      @media (max-width: 1500px) {
+        bottom: -80px;
+      }
 
       p {
         font-family: 'Bebas Neue', cursive;
