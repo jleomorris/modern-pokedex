@@ -150,6 +150,7 @@ const PokemonDetails = ({
             isShinyAnimatedSelected={isShinyAnimatedSelected}
             isBlackAndWhiteAnimatedSelected={isBlackAndWhiteAnimatedSelected}
             is3dSelected={is3dSelected}
+            onMobile={onMobile}
           />
         </StyledPokemonDetails>
       </DetailsShadow>

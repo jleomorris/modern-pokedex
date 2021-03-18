@@ -9,6 +9,22 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // Framer motion
 import { motion } from 'framer-motion';
+// Components
+import ReactCardFlip from 'react-card-flip';
+import EvolutionChart from './EvolutionChart';
+import Abilities from './Abilities';
+import ForwardBackButtons from './ForwardBackButtons';
+import Moves from './Moves';
+import LocationArea from './LocationArea';
+import StrengthsWeaknesses from './StrengthsWeaknesses';
+import ScrollToTop from './ScrollToTop';
+import SpriteGallery from './SpriteGallery';
+// Images
+import close from '../img/close-button.svg';
+import egg from '../img/egg.png';
+import training from '../img/training.png';
+import PokemonCardBody from './PokemonCardBody';
+import cardBack from '../img/card_back.png';
 // Animations
 import { scrollRevealRight } from '../animation';
 // Util
@@ -17,26 +33,12 @@ import {
   convertToTypeImage,
   removeNonAscii,
 } from '../util';
-// Components
-import EvolutionChart from './EvolutionChart';
-import Abilities from './Abilities';
-import ForwardBackButtons from './ForwardBackButtons';
-import Moves from './Moves';
-import LocationArea from './LocationArea';
-import StrengthsWeaknesses from './StrengthsWeaknesses';
-import ScrollToTop from './ScrollToTop';
-// Images
-import close from '../img/close-button.svg';
-import egg from '../img/egg.png';
-import training from '../img/training.png';
-import PokemonCardBody from './PokemonCardBody';
 
 const InnerDetails = ({
   selectedPokemon,
   setPokemonId,
   ownMoves,
   pathId,
-  cardFlipHandler,
   isDefaultSelected,
   isDreamWorldSelected,
   isOfficialSelected,
@@ -44,6 +46,7 @@ const InnerDetails = ({
   isShinyAnimatedSelected,
   isBlackAndWhiteAnimatedSelected,
   is3dSelected,
+  onMobile,
 }) => {
   // React Router
   const history = useHistory();
@@ -53,6 +56,18 @@ const InnerDetails = ({
   // State
   const [abilityData, setAbilityData] = useState();
   const [description, setDescription] = useState();
+  const [isFlipped, setisFlipped] = useState(false);
+
+  // Automate card flip
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+      setisFlipped((prev) => !prev);
+    }, 1750);
+    setTimeout(() => {
+      setisFlipped((prev) => !prev);
+    }, 1000);
+  }, []);
 
   // Get abilities data
   useEffect(async () => {
@@ -92,6 +107,11 @@ const InnerDetails = ({
   const exitDetailHandler = () => {
     document.body.style.overflow = 'auto';
     history.push('/pokemon');
+  };
+
+  const cardFlipHandler = (e) => {
+    e.preventDefault();
+    setisFlipped((prev) => !prev);
   };
 
   return (
@@ -149,17 +169,40 @@ const InnerDetails = ({
       <div className="description">
         {description && <p>{removeNonAscii(description[0].flavor_text)}</p>}
       </div>
-      <PokemonCardBody
-        pathId={pathId}
-        cardFlipHandler={cardFlipHandler}
-        isDefaultSelected={isDefaultSelected}
-        isDreamWorldSelected={isDreamWorldSelected}
-        isOfficialSelected={isOfficialSelected}
-        isShinySelected={isShinySelected}
-        isShinyAnimatedSelected={isShinyAnimatedSelected}
-        isBlackAndWhiteAnimatedSelected={isBlackAndWhiteAnimatedSelected}
-        is3dSelected={is3dSelected}
-      />
+      {selectedPokemon && onMobile && (
+        <ReactCardFlip
+          className="react-card-flip"
+          isFlipped={isFlipped}
+          flipDirection="horizontal"
+          infinite
+          flipSpeedBackToFront="0.5"
+          flipSpeedFrontToBack="0.5"
+        >
+          <PokemonCardBody
+            key="front"
+            pathId={pathId}
+            cardFlipHandler={cardFlipHandler}
+            isDefaultSelected={isDefaultSelected}
+            isDreamWorldSelected={isDreamWorldSelected}
+            isOfficialSelected={isOfficialSelected}
+            isShinySelected={isShinySelected}
+            isShinyAnimatedSelected={isShinyAnimatedSelected}
+            isBlackAndWhiteAnimatedSelected={isBlackAndWhiteAnimatedSelected}
+            is3dSelected={is3dSelected}
+          />
+          <div
+            className="card-back"
+            key="back"
+            onClick={cardFlipHandler}
+            onKeyPress={cardFlipHandler}
+            role="button"
+            tabIndex="0"
+          >
+            <img className="back-image" src={cardBack} alt="card-back" />
+            <SpriteGallery selectedPokemon={selectedPokemon} />
+          </div>
+        </ReactCardFlip>
+      )}
       <Abilities abilityData={abilityData} selectedPokemon={selectedPokemon} />
       <StrengthsWeaknesses selectedPokemon={selectedPokemon} />
       <div className="training-egg-container">
@@ -340,6 +383,16 @@ const StyledInnerDetails = styled.div`
 
     p {
       font-size: 2rem;
+    }
+  }
+
+  .react-card-flip {
+    position: unset !important;
+    z-index: 3 !important;
+    cursor: pointer;
+
+    .card-back {
+      position: unset !important;
     }
   }
 
