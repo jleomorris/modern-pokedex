@@ -56,6 +56,7 @@ const StyledNav = styled.div`
     align-items: center;
     list-style: none;
     text-transform: uppercase;
+    flex-wrap: wrap;
 
     li {
       margin: 1rem;
