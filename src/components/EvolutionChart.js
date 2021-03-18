@@ -424,12 +424,16 @@ const StyledEvolutionChart = styled.div`
         z-index: 1;
 
         @media (max-width: 1500px) {
-          transform: rotate(90deg);
           right: unset;
-          left: 20%;
           top: unset;
+          transform: rotate(90deg) translateY(50%);
+          left: 50%;
           bottom: -20%;
         }
+
+        /* @media (max-width: 800px) {
+          left: -15%;
+        } */
 
         img {
           width: 100px;

@@ -301,6 +301,10 @@ const StyledInnerDetails = styled.div`
     font-size: 10rem;
     text-transform: capitalize;
     margin-top: 2rem;
+
+    @media (max-width: 800px) {
+      font-size: 6rem;
+    }
   }
 
   p {
@@ -361,9 +365,14 @@ const StyledInnerDetails = styled.div`
     border: none;
     outline: none;
     cursor: pointer;
+    z-index: 4;
 
     @media (max-width: 1500px) {
       top: 95px;
+    }
+
+    @media (max-width: 800px) {
+      top: 120px;
     }
 
     img {
@@ -388,11 +397,18 @@ const StyledInnerDetails = styled.div`
 
   .react-card-flip {
     position: unset !important;
-    z-index: 3 !important;
+    /* z-index: 3 !important; */
     cursor: pointer;
 
     .card-back {
       position: unset !important;
+
+      .back-image {
+        @media (max-width: 800px) {
+          width: 435px;
+          height: 625px;
+        }
+      }
     }
   }
 
@@ -427,6 +443,10 @@ const StyledInnerDetails = styled.div`
         width: 60px;
         z-index: -1;
         opacity: 0.6;
+
+        @media (max-width: 800px) {
+          left: 0px;
+        }
       }
 
       .stat {

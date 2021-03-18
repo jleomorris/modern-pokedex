@@ -61,6 +61,10 @@ const StatChart = ({ selectedPokemon }) => {
 const StyledStatChart = styled.div`
   width: 50%;
 
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+
   h3 {
     color: white;
     width: 100%;

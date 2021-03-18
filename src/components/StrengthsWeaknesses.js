@@ -85,8 +85,10 @@ const strengthsWeaknesses = ({ selectedPokemon }) => {
     <StyledStrengthsWeaknesses className="strengths-weaknesses-container">
       <table className="strengths-weaknesses-table">
         <thead>
-          <th className="move-header">Damage type</th>
-          <th className="inner-heading">Affected types</th>
+          <tr>
+            <th className="move-header">Damage type</th>
+            <th className="inner-heading">Affected types</th>
+          </tr>
         </thead>
         <tbody>
           <tr>

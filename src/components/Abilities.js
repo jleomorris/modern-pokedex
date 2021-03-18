@@ -67,6 +67,10 @@ const StyledAbilities = styled.div`
   justify-content: center;
   align-items: flex-start;
 
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+
   h3 {
     color: white;
     width: 100%;

@@ -48,6 +48,12 @@ const StyledNav = styled.div`
     padding: 2rem;
     font-family: 'Bebas Neue', cursive;
     font-weight: 100;
+
+    @media (max-width: 800px) {
+      padding: 1rem;
+      font-size: 1rem;
+      width: 20%;
+    }
   }
 
   ul {
@@ -60,6 +66,10 @@ const StyledNav = styled.div`
 
     li {
       margin: 1rem;
+
+      @media (max-width: 800px) {
+        margin: 0.5rem;
+      }
 
       a {
         color: white;

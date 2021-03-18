@@ -128,49 +128,57 @@ const Moves = ({ selectedPokemon }) => {
     <StyledMoves className="move-container">
       <h3>Own moves</h3>
       <table className="move-table">
-        <tr>
-          <th className="move-header">Name</th>
-          <th className="inner-heading">Level learned</th>
-          <th className="inner-heading">Accuracy</th>
-          <th className="inner-heading">Type</th>
-          <th className="inner-heading">Power</th>
-          <th className="inner-heading">PP</th>
-          <th className="inner-heading">Target</th>
-          <th className="inner-heading">Damage class</th>
-          <th className="inner-heading">Crit rate</th>
-          <th className="inner-heading">Version</th>
-        </tr>
+        <thead>
+          <tr>
+            <th className="move-header show-on-mobile">Name</th>
+            <th className="inner-heading show-on-mobile">Level learned</th>
+            <th className="inner-heading">Accuracy</th>
+            <th className="inner-heading show-on-mobile">Type</th>
+            <th className="inner-heading show-on-mobile">Power</th>
+            <th className="inner-heading">PP</th>
+            <th className="inner-heading">Target</th>
+            <th className="inner-heading">Damage class</th>
+            <th className="inner-heading">Crit rate</th>
+            <th className="inner-heading">Version</th>
+          </tr>
+        </thead>
         {redBlueLevelUpMoves &&
           redBlueLevelUpMoves.map((move) => (
-            <tr className="own-move" key={move.name}>
-              <td className="own-move-title">{move.name}</td>
-              <td className="level-learned">
-                {move.version_group_details[0].level_learned_at}
-              </td>
-              <td className="accuracy">
-                {move.accuracy ? move.accuracy : '-'}
-              </td>
-              <td className="type">{convertToTypeImage(move.type.name)}</td>
-              <td className="power">{move.power ? move.power : '-'}</td>
-              <td className="pp">{move.pp}</td>
-              <td className="target">{move.target.name}</td>
-              <td className="damage-class">
-                {convertDamageClassToImage(move.damage_class.name)}
-              </td>
-              <td className="power">{move.meta.crit_rate}</td>
-              <td className="version">
-                {move.version_group_details[0].version_group.name}
-              </td>
-            </tr>
+            <tbody>
+              <tr className="own-move" key={move.name}>
+                <td className="own-move-title show-on-mobile">{move.name}</td>
+                <td className="level-learned show-on-mobile">
+                  {move.version_group_details[0].level_learned_at}
+                </td>
+                <td className="accuracy">
+                  {move.accuracy ? move.accuracy : '-'}
+                </td>
+                <td className="type show-on-mobile">
+                  {convertToTypeImage(move.type.name)}
+                </td>
+                <td className="power show-on-mobile">
+                  {move.power ? move.power : '-'}
+                </td>
+                <td className="pp">{move.pp}</td>
+                <td className="target">{move.target.name}</td>
+                <td className="damage-class">
+                  {convertDamageClassToImage(move.damage_class.name)}
+                </td>
+                <td className="power">{move.meta.crit_rate}</td>
+                <td className="version">
+                  {move.version_group_details[0].version_group.name}
+                </td>
+              </tr>
+            </tbody>
           ))}
       </table>
       <h3>Machine moves</h3>
       <table className="move-table">
         <tr>
-          <th className="move-header">Name</th>
+          <th className="move-header show-on-mobile">Name</th>
           <th className="inner-heading">Accuracy</th>
-          <th className="inner-heading">Type</th>
-          <th className="inner-heading">Power</th>
+          <th className="inner-heading show-on-mobile">Type</th>
+          <th className="inner-heading show-on-mobile">Power</th>
           <th className="inner-heading">PP</th>
           <th className="inner-heading">Target</th>
           <th className="inner-heading">Damage class</th>
@@ -180,12 +188,16 @@ const Moves = ({ selectedPokemon }) => {
         {fullMachineMoveData &&
           fullMachineMoveData.map((move) => (
             <tr className="own-move" key={move.name}>
-              <td className="own-move-title">{move.name}</td>
+              <td className="own-move-title show-on-mobile">{move.name}</td>
               <td className="accuracy">
                 {move.accuracy ? move.accuracy : '-'}
               </td>
-              <td className="type">{convertToTypeImage(move.type.name)}</td>
-              <td className="power">{move.power ? move.power : '-'}</td>
+              <td className="type show-on-mobile">
+                {convertToTypeImage(move.type.name)}
+              </td>
+              <td className="power show-on-mobile">
+                {move.power ? move.power : '-'}
+              </td>
               <td className="pp">{move.pp}</td>
               <td className="target">{move.target.name}</td>
               <td className="damage-class">
@@ -230,10 +242,26 @@ const StyledMoves = styled.div`
     color: white;
     background: rgba(256, 256, 256, 0.1);
 
+    @media (max-width: 800px) {
+      tr {
+        display: flex;
+      }
+
+      .show-on-mobile {
+        display: block !important;
+        flex: 1;
+      }
+    }
+
     th {
       color: white;
       background: #88888878;
       padding: 0.5rem 1rem;
+
+      @media (max-width: 800px) {
+        display: none;
+        flex: 1;
+      }
     }
 
     .type {
@@ -266,7 +294,7 @@ const StyledMoves = styled.div`
 
     .own-move {
       .own-move-title {
-        padding: 1rem 2rem;
+        /* padding: 1rem 2rem; */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -279,9 +307,19 @@ const StyledMoves = styled.div`
         width: 100%;
       }
 
+      @media (max-width: 800px) {
+        .show-on-mobile {
+          display: block !important;
+        }
+      }
+
       td {
-        padding: 0.25rem;
+        padding: 1rem 0.5rem;
         text-align: center;
+
+        @media (max-width: 800px) {
+          display: none;
+        }
       }
     }
   }

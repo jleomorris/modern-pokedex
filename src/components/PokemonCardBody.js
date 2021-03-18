@@ -216,6 +216,11 @@ const StyledPokemonCardBody = styled.div`
       height: 696px;
     }
 
+    @media (max-width: 800px) {
+      width: 435px;
+      height: 625px;
+    }
+
     .click-message {
       position: absolute;
       padding: 2rem;
@@ -322,6 +327,10 @@ const StyledPokemonCardBody = styled.div`
 
     @media (max-width: 1600px) {
       height: 304px;
+    }
+
+    @media (max-width: 800px) {
+      height: 264px;
     }
 
     .background-image-container {
@@ -439,6 +448,10 @@ const StyledPokemonCardBody = styled.div`
       height: 234.8px;
     }
 
+    @media (max-width: 800px) {
+      height: 204.2px;
+    }
+
     .move-container {
       display: flex;
       justify-content: start;
@@ -464,6 +477,10 @@ const StyledPokemonCardBody = styled.div`
 
           @media (max-width: 1500px) {
             margin: 0.5rem;
+          }
+
+          @media (max-width: 800px) {
+            margin: 0rem;
           }
         }
       }

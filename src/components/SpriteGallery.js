@@ -100,6 +100,11 @@ const StyledSpriteGallery = styled.div`
       background: #ffffffa3;
       border-radius: 50%;
       z-index: -1;
+
+      @media (max-width: 800px) {
+        height: 90px;
+        width: 90px;
+      }
     }
   }
 
@@ -113,6 +118,11 @@ const StyledSpriteGallery = styled.div`
     height: 125px;
     width: 125px;
     object-fit: contain;
+
+    @media (max-width: 800px) {
+      height: 80px;
+      width: 80px;
+    }
   }
 `;
 
