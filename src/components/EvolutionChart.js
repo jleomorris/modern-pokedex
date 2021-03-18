@@ -351,6 +351,10 @@ const StyledEvolutionChart = styled.div`
       top: 15px;
       right: 20px;
 
+      @media (max-width: 1500px) {
+        display: none;
+      }
+
       p {
         font-size: 0.75rem;
         color: black;
