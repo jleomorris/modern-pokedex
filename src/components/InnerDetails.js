@@ -58,6 +58,13 @@ const InnerDetails = ({
   const [description, setDescription] = useState();
   const [isFlipped, setisFlipped] = useState(false);
 
+  // Reset document body overflow on component unmount
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  });
+
   // Automate card flip
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -272,6 +279,10 @@ const StyledInnerDetails = styled.div`
     padding-right: unset;
   }
 
+  @media (max-width: 800px) {
+    padding-top: 3rem;
+  }
+
   &::-webkit-scrollbar {
     width: 1rem;
   }
@@ -356,6 +367,10 @@ const StyledInnerDetails = styled.div`
     letter-spacing: 0.5rem;
     margin: 2rem 0rem;
     z-index: -1;
+
+    @media (max-width: 800px) {
+      font-size: 5rem;
+    }
   }
 
   .close-button {
@@ -372,7 +387,7 @@ const StyledInnerDetails = styled.div`
     }
 
     @media (max-width: 800px) {
-      top: 120px;
+      top: 65px;
     }
 
     img {
