@@ -65,6 +65,12 @@ const StyledStatChart = styled.div`
     width: 100%;
   }
 
+  svg {
+    @media (max-width: 400px) {
+      margin-top: -8rem;
+    }
+  }
+
   h3 {
     color: white;
     width: 100%;

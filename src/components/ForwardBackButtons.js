@@ -111,6 +111,10 @@ const StyledForwardBackButtons = styled.div`
     img {
       height: 30px;
       filter: drop-shadow(0px 0px 5px black);
+
+      @media (max-width: 400px) {
+        height: 20px;
+      }
     }
 
     .back-arrow {
@@ -133,6 +137,13 @@ const StyledForwardBackButtons = styled.div`
       left: -40px;
       width: 75px;
       height: 75px;
+
+      @media (max-width: 400px) {
+        bottom: -30px;
+        left: -30px;
+        width: 50px;
+        height: 50px;
+      }
     }
 
     .next-pokemon-image-official {
@@ -141,6 +152,13 @@ const StyledForwardBackButtons = styled.div`
       right: -40px;
       width: 75px;
       height: 75px;
+
+      @media (max-width: 400px) {
+        bottom: -30px;
+        right: -30px;
+        width: 50px;
+        height: 50px;
+      }
     }
   }
 `;

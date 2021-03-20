@@ -247,6 +247,10 @@ const StyledStrengthsWeaknesses = styled.div`
       padding: 1rem 0rem;
       font-size: 1.75rem;
       background: #88888878;
+
+      @media (max-width: 400px) {
+        font-size: 1rem;
+      }
     }
 
     td {
@@ -254,6 +258,10 @@ const StyledStrengthsWeaknesses = styled.div`
       padding: 0.25rem;
       font-size: 1.5rem;
       font-weight: 900;
+
+      @media (max-width: 400px) {
+        font-size: 1rem;
+      }
 
       p {
         border-radius: 1rem;

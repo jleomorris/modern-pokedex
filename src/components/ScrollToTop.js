@@ -40,6 +40,7 @@ const StyledScrollToTop = styled.div`
   right: 0px;
   transform: translateY(-80%);
   cursor: pointer;
+  z-index: 3;
 
   img {
     height: 60px;

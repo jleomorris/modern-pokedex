@@ -105,6 +105,11 @@ const StyledSpriteGallery = styled.div`
         height: 90px;
         width: 90px;
       }
+
+      @media (max-width: 400px) {
+        height: 70px;
+        width: 70px;
+      }
     }
   }
 
@@ -122,6 +127,11 @@ const StyledSpriteGallery = styled.div`
     @media (max-width: 800px) {
       height: 80px;
       width: 80px;
+    }
+
+    @media (max-width: 400px) {
+      height: 60px;
+      width: 60px;
     }
   }
 `;

@@ -182,7 +182,7 @@ const StyledPokemonCard = styled.div`
   .detailed-pokemon-card {
     width: 575px;
     height: 800px;
-    border-radius: 1.55rem;
+    border-radius: 1.5rem;
     background: rgba(256, 256, 256, 1);
     margin: 2rem -4rem;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.4);
@@ -194,6 +194,11 @@ const StyledPokemonCard = styled.div`
       width: 500px;
       height: 696px;
     }
+
+    /* @media (max-width: 1600px) {
+      width: 500px;
+      height: 696px;
+    } */
 
     .click-message {
       position: absolute;

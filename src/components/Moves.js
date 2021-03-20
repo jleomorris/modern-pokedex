@@ -310,6 +310,7 @@ const StyledMoves = styled.div`
       @media (max-width: 800px) {
         .show-on-mobile {
           display: block !important;
+          word-break: break-word;
         }
       }
 

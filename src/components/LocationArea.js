@@ -147,7 +147,9 @@ const LocationArea = ({ selectedPokemon }) => {
               </tr>
               {locationAreaEncounters.map((game) => (
                 <tr key={game.name}>
-                  <td>{convertGameVersionToImage(game.name)}</td>
+                  <td className="game-version-logo">
+                    {convertGameVersionToImage(game.name)}
+                  </td>
                   <td>
                     {game.areas.length === 0 ? 'None' : ''}
                     {game.areas.map((area, index) => (
@@ -186,6 +188,12 @@ const StyledLocationArea = styled.div`
     color: white;
     background: rgba(256, 256, 256, 0.1);
 
+    .game-version-logo {
+      @media (max-width: 768px) {
+        vertical-align: top;
+      }
+    }
+
     th {
       color: white;
       background: #88888878;
@@ -201,6 +209,10 @@ const StyledLocationArea = styled.div`
 
     .version-logo {
       width: 200px;
+
+      @media (max-width: 400px) {
+        width: 75px;
+      }
     }
 
     .area {

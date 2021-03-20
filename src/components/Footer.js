@@ -95,6 +95,14 @@ const StyledFooter = styled.div`
       text-align: center;
       color: white;
       margin: 1rem 2rem;
+
+      img {
+        width: 50px;
+
+        @media (max-width: 800px) {
+          width: 30px;
+        }
+      }
     }
   }
 `;

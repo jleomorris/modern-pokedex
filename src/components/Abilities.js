@@ -71,6 +71,10 @@ const StyledAbilities = styled.div`
     width: 100%;
   }
 
+  @media (max-width: 400px) {
+    margin-top: -14rem;
+  }
+
   h3 {
     color: white;
     width: 100%;

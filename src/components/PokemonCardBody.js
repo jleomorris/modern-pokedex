@@ -197,13 +197,13 @@ const StyledPokemonCardBody = styled.div`
   left: -75px; */
   z-index: 3;
   display: flex;
-  justify-content: start;
-  align-items: start;
+  justify-content: center;
+  align-items: center;
 
   .detailed-pokemon-card {
     width: 575px;
     height: 800px;
-    border-radius: 1.55rem;
+    border-radius: 1.5rem;
     background: rgba(256, 256, 256, 1);
     margin: 2rem -4rem;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.4);
@@ -219,6 +219,12 @@ const StyledPokemonCardBody = styled.div`
     @media (max-width: 800px) {
       width: 435px;
       height: 625px;
+    }
+
+    @media (max-width: 400px) {
+      border-radius: 1rem;
+      width: 90%;
+      height: 420px;
     }
 
     .click-message {
@@ -253,6 +259,10 @@ const StyledPokemonCardBody = styled.div`
       padding: 0.5rem 0rem;
       height: 94%;
       position: relative;
+
+      @media (max-width: 400px) {
+        margin: 1rem;
+      }
 
       .id-container {
         position: absolute;
@@ -289,6 +299,12 @@ const StyledPokemonCardBody = styled.div`
         /* font-family: 'Bebas Neue', cursive; */
         /* letter-spacing: 0.25rem; */
         margin-left: 3rem;
+
+        @media (max-width: 400px) {
+          font-size: 1.75rem;
+          margin-left: 2.5rem;
+          margin-top: 1rem;
+        }
       }
     }
 
@@ -303,6 +319,11 @@ const StyledPokemonCardBody = styled.div`
         font-weight: 900;
         align-self: center;
         color: red;
+
+        @media (max-width: 400px) {
+          /* margin-right: unset; */
+          font-size: 1.5rem;
+        }
       }
 
       img {
@@ -310,6 +331,12 @@ const StyledPokemonCardBody = styled.div`
         margin-left: -20px;
         height: 50px;
         width: 50px;
+
+        @media (max-width: 400px) {
+          height: 30px;
+          width: 30px;
+          /* margin-left: unset; */
+        }
       }
     }
   }
@@ -333,6 +360,10 @@ const StyledPokemonCardBody = styled.div`
       height: 264px;
     }
 
+    @media (max-width: 400px) {
+      height: 160px;
+    }
+
     .background-image-container {
       position: absolute;
       top: 0;
@@ -341,6 +372,10 @@ const StyledPokemonCardBody = styled.div`
       width: 100%;
       border: 12px solid #ffff7a;
       box-shadow: 10px 10px 20px black;
+
+      @media (max-width: 400px) {
+        border: 6px solid #ffff7a;
+      }
 
       .genus-height-weight-container {
         background: #ffff7a;
@@ -354,8 +389,17 @@ const StyledPokemonCardBody = styled.div`
         transform: translateX(-50%);
         width: 100%;
 
+        @media (max-width: 400px) {
+          bottom: -25px;
+          width: 120%;
+        }
+
         p {
           color: black;
+
+          @media (max-width: 400px) {
+            font-size: 0.75rem;
+          }
         }
       }
     }
@@ -415,6 +459,10 @@ const StyledPokemonCardBody = styled.div`
       @media (max-width: 1600px) {
         height: 304px;
       }
+
+      @media (max-width: 400px) {
+        height: 140px;
+      }
     }
   }
 
@@ -425,6 +473,10 @@ const StyledPokemonCardBody = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    @media (max-width: 400px) {
+      height: 125px;
+    }
   }
 
   .sprite-animation-3d {
@@ -450,6 +502,10 @@ const StyledPokemonCardBody = styled.div`
 
     @media (max-width: 800px) {
       height: 204.2px;
+    }
+
+    @media (max-width: 400px) {
+      height: 120px;
     }
 
     .move-container {
@@ -481,6 +537,10 @@ const StyledPokemonCardBody = styled.div`
 
           @media (max-width: 800px) {
             margin: 0rem;
+          }
+          @media (max-width: 400px) {
+            font-size: 1rem;
+            padding: 0.6rem 0rem;
           }
         }
       }

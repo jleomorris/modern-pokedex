@@ -64,6 +64,10 @@ const StyledNav = styled.div`
     text-transform: uppercase;
     flex-wrap: wrap;
 
+    @media (max-width: 500px) {
+      justify-content: flex-end;
+    }
+
     li {
       margin: 1rem;
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // Styled components
 import styled from 'styled-components';
 // Video player
@@ -14,6 +14,10 @@ import Footer from '../components/Footer';
 import pageAnimation from '../animation';
 
 const Home = () => {
+  //   useEffect(() => {
+  //     document.body.style.overflow = 'auto';
+  //   }, []);
+
   return (
     <>
       <motion.div
@@ -87,7 +91,7 @@ const StyledHome = styled.div`
     flex-direction: column;
     align-items: end;
     padding: 2rem;
-    height: 90vh;
+    min-height: 90vh;
     position: relative;
 
     @media (max-width: 800px) {
@@ -105,26 +109,27 @@ const StyledHome = styled.div`
     @media (max-width: 800px) {
       font-size: 3rem;
     }
+
+    @media (max-width: 500px) {
+      font-size: 2rem;
+    }
   }
 
   ul {
     color: white;
     font-size: 2rem;
     list-style: none;
-    position: absolute;
-    top: 65%;
-    transform: translateY(-65%);
-    right: -100px;
+    margin-left: -2rem;
 
-    @media (max-width: 800px) {
-      right: -50px;
+    @media (max-width: 400px) {
+      font-size: 1rem;
     }
 
     li {
       background: rgba(256, 256, 256, 0.5);
       padding: 0.5rem 1rem;
       margin: 1rem 0rem;
-      border-radius: 0rem 1rem 1rem 0rem;
+      border-radius: 0rem 2rem 2rem 0rem;
     }
   }
 `;

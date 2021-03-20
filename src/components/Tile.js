@@ -131,6 +131,11 @@ const StyledTile = styled(motion.div)`
   position: relative;
   box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
 
+  @media (max-width: 400px) {
+    height: 200px;
+    overflow: hidden;
+  }
+
   a {
     /* width: 100%;
         height: 100%; */
@@ -172,6 +177,10 @@ const StyledTile = styled(motion.div)`
 
     img {
       width: 30px;
+
+      @media (max-width: 400px) {
+        width: 20px;
+      }
     }
   }
 
@@ -186,17 +195,6 @@ const StyledTile = styled(motion.div)`
     /* z-index: -2; */
   }
 
-  /* .attack {
-    position: absolute;
-    top: -25px;
-    left: -5px;
-    font-size: 2rem;
-    background: red;
-    border: 2px solid black;
-    padding: 0.5rem;
-    border-radius: 1rem;
-  } */
-
   .type-container {
     position: absolute;
     top: 5px;
@@ -206,6 +204,10 @@ const StyledTile = styled(motion.div)`
     img {
       width: 50px;
       margin-left: -20px;
+
+      @media (max-width: 400px) {
+        width: 35px;
+      }
     }
   }
 
@@ -215,13 +217,17 @@ const StyledTile = styled(motion.div)`
     align-items: start;
     margin-top: 3rem;
 
-    /* .hp {
+    @media (max-width: 800px) {
+      margin-top: 5rem;
+    }
+
+    @media (max-width: 400px) {
       position: absolute;
-      top: 5px;
-      right: 5px;
-      font-size: 1.25rem;
-      color: white;
-    } */
+      bottom: 50px;
+      right: -20px;
+      transform: rotate(90deg);
+      z-index: 1;
+    }
 
     .pokemon-card-title {
       text-align: center;
@@ -230,8 +236,11 @@ const StyledTile = styled(motion.div)`
       color: white;
       font-family: 'Bebas Neue', cursive;
       letter-spacing: 0.25rem;
-      /* z-index: 2; */
       text-shadow: 0px 5px 30px white;
+
+      @media (max-width: 400px) {
+        color: #000000a8;
+      }
     }
   }
 
@@ -246,6 +255,11 @@ const StyledTile = styled(motion.div)`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    @media (max-width: 400px) {
+      height: 150px;
+      width: 150px;
+    }
   }
 
   .sprite-animation-3d {
@@ -276,6 +290,18 @@ const StyledTile = styled(motion.div)`
     padding: 1rem 2rem;
     border-radius: 2rem;
     box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+
+    @media (max-width: 400px) {
+      padding: 0rem 2rem;
+      bottom: 10px;
+      left: 0;
+      transform: unset;
+      font-size: 2rem;
+      font-weight: 900;
+      background: #ffffff45;
+      border-radius: unset;
+    }
   }
 `;
 

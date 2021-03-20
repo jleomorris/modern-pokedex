@@ -85,19 +85,20 @@ const OptionsFilters = ({
           onChange={filterPokemonBySearchHandler}
         />
       </div>
-      <div className="type-filter-container">
+      <div className="type-filter-container" style={{ zIndex: '4' }}>
         <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>
           Filter by element
         </p>
         <Select
           defaultValue={selectedTypeOption}
+          style={{ zIndex: '3' }}
           onChange={filterPokemonByTypeHandler}
           options={typeOptions}
           width="500px"
           //   value={selectedTypeOption}
         />
       </div>
-      <div className="stat-filter-container">
+      <div className="stat-filter-container" style={{ zIndex: '3' }}>
         <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>
           Filter by max stat
         </p>
@@ -127,11 +128,25 @@ const StyledOptionsFilters = styled.div`
     position: relative;
     margin: 1rem 2rem;
 
+    @media (max-width: 500px) {
+      width: 35%;
+    }
+
+    @media (max-width: 400px) {
+      width: 30%;
+    }
+
     img {
       position: absolute;
       top: -50px;
       height: 120px;
       left: -60px;
+
+      @media (max-width: 400px) {
+        top: -40px;
+        height: 100px;
+        left: -50px;
+      }
     }
 
     .dark-mode-sprite {
@@ -150,10 +165,18 @@ const StyledOptionsFilters = styled.div`
       font-size: 2rem;
       letter-spacing: 0.25rem;
       cursor: pointer;
-      /* transition: all 5s ease; */
+
+      @media (max-width: 400px) {
+        font-size: 1rem;
+      }
 
       p {
         font-size: 1.5rem;
+
+        @media (max-width: 400px) {
+          font-size: 1rem;
+          margin-bottom: 0.5rem;
+        }
       }
     }
   }
@@ -176,6 +199,11 @@ const StyledOptionsFilters = styled.div`
   .type-filter-container,
   .stat-filter-container {
     margin: 2rem;
+
+    @media (max-width: 400px) {
+      margin: 1rem 2rem;
+      width: 30%;
+    }
 
     p {
       font-family: 'Bebas Neue', cursive;

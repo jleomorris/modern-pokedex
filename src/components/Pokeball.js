@@ -10,16 +10,16 @@ const PokeBall = () => {
   // Redux
   const dataLoaded = useSelector((state) => state.pokemon.pokemonLoaded);
   return (
-    <StyledPokeball className="poke_box">
-      <div className="pokeball">
-        <div className="pokeball__button" />
+    <StyledPokeball className="poke-ball">
+      <div className="pokeball-container">
+        <div className="pokeball">
+          <div className="pokeball__button" />
+        </div>
+        <h2 className="loading-percentage">
+          {`${Math.round((dataLoaded / 302) * 100)}%`}
+        </h2>
+        <h2>Loaded </h2>
       </div>
-      <h2>
-        Loaded{' '}
-        <span className="loading-percentage">{`${Math.round(
-          (dataLoaded / 302) * 100
-        )}%`}</span>
-      </h2>
     </StyledPokeball>
   );
 };
@@ -27,32 +27,42 @@ const PokeBall = () => {
 // Styled components
 const StyledPokeball = styled.div`
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  width: 100%;
+  background: #000000b8;
+  z-index: 999;
+
+  .pokeball-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 
   h2 {
     position: relative;
-    margin-left: 2rem;
-    padding: 6rem 2rem;
+    padding-top: 1rem;
     font-size: 3rem;
     font-weight: 100;
     text-transform: uppercase;
+    color: white;
+  }
 
-    .loading-percentage {
-      font-size: 6rem;
-      font-weight: 900;
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      color: white;
-      text-shadow: 0px 5px 20px black;
-      z-index: -1;
-    }
+  .loading-percentage {
+    font-size: 6rem;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0px 5px 20px black;
+    z-index: -1;
   }
 
   .pokeball {
@@ -67,6 +77,11 @@ const StyledPokeball = styled.div`
     animation: shake 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
     /* animation-play-state: paused; */
     animation-play-state: running;
+
+    @media (max-width: 400px) {
+      width: 100px;
+      height: 100px;
+    }
   }
 
   /* .pokeball:hover {
@@ -126,6 +141,13 @@ const StyledPokeball = styled.div`
     animation: blink 1s alternate infinite;
     /* animation-play-state: paused; */
     animation-play-state: running;
+
+    @media (max-width: 400px) {
+      top: calc(50% - 10px);
+      left: calc(50% - 10px);
+      width: 20px;
+      height: 20px;
+    }
   }
 
   /* .pokeball:hover .pokeball__button {

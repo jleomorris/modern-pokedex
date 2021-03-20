@@ -257,25 +257,27 @@ const EvolutionChart = ({ pokemonData, selectedPokemon }) => {
         )}
         {secondEvolution && secondEvolution.length > 0 && (
           <div className="evolution-card">
-            <img
-              src={
-                secondEvolution && secondEvolution.length > 0
-                  ? Object.values(secondEvolution[0].sprites.other)[1]
-                      .front_default
-                  : ''
-              }
-              style={{
-                height: `${secondEvolution[0].height * 25}px`,
-                marginBottom:
-                  secondEvolution[0].name === 'charizard' ||
-                  secondEvolution[0].name === 'venusaur' ||
-                  secondEvolution[0].name === 'poliwrath' ||
-                  secondEvolution[0].name === 'nidoking'
-                    ? '-4.5rem'
-                    : '',
-              }}
-              alt="second evolution"
-            />
+            <div className="image-container">
+              <img
+                src={
+                  secondEvolution && secondEvolution.length > 0
+                    ? Object.values(secondEvolution[0].sprites.other)[1]
+                        .front_default
+                    : ''
+                }
+                style={{
+                  height: `${secondEvolution[0].height * 25}px`,
+                  marginBottom:
+                    secondEvolution[0].name === 'charizard' ||
+                    secondEvolution[0].name === 'venusaur' ||
+                    secondEvolution[0].name === 'poliwrath' ||
+                    secondEvolution[0].name === 'nidoking'
+                      ? '-4.5rem'
+                      : '',
+                }}
+                alt="second evolution"
+              />
+            </div>
             <div className="name-type-container">
               <p className="second-evolution-name">{secondEvolution[0].name}</p>
               {secondEvolution[0].types.map((type) => (
@@ -382,6 +384,10 @@ const StyledEvolutionChart = styled.div`
           text-align: center;
           margin-right: unset;
         }
+
+        @media (max-width: 400px) {
+          font-size: 3rem;
+        }
       }
     }
 
@@ -393,6 +399,7 @@ const StyledEvolutionChart = styled.div`
       height: 100%;
       margin: 0rem 1rem;
       max-width: 20%;
+      border: 2px solid red;
 
       @media (max-width: 1500px) {
         position: relative;
@@ -407,13 +414,25 @@ const StyledEvolutionChart = styled.div`
 
     .image-container {
       position: relative;
+      border: 2px solid yellow;
 
       @media (max-width: 1500px) {
         position: unset;
       }
 
+      @media (max-width: 400px) {
+        height: 150px;
+      }
+
       img {
         width: auto;
+        filter: drop-shadow(2px 4px 6px black);
+
+        @media (max-width: 400px) {
+          width: 150px;
+          object-fit: contain;
+          height: unset !important;
+        }
       }
 
       .right-arrow-container {
@@ -422,21 +441,22 @@ const StyledEvolutionChart = styled.div`
         top: 50%;
         transform: translateY(-50%);
         z-index: 1;
+        border: 2px solid blue;
 
         @media (max-width: 1500px) {
           right: unset;
           top: unset;
-          transform: rotate(90deg) translateY(50%);
+          transform: translateX(-50%);
           left: 50%;
-          bottom: -20%;
+          bottom: -40px;
         }
-
-        /* @media (max-width: 800px) {
-          left: -15%;
-        } */
 
         img {
           width: 100px;
+          @media (max-width: 1500px) {
+            width: 50px;
+            transform: rotate(90deg);
+          }
         }
 
         p {
@@ -446,9 +466,15 @@ const StyledEvolutionChart = styled.div`
           right: 20px;
           font-weight: 900;
           font-size: 1.5rem;
+          left: 0px;
+          text-shadow: 0px 0px 5px black;
 
           @media (max-width: 1500px) {
-            transform: translateY(-50%) rotate(270deg);
+            position: unset;
+            /* transform: rotate(270deg); */
+            text-align: center;
+            top: 0;
+            left: 0;
           }
         }
 

@@ -40,6 +40,10 @@ const Pokemon = () => {
   const location = useLocation();
   const pathId = location.pathname.split('/')[2];
 
+  //   useEffect(() => {
+  //     document.body.style.overflow = 'auto';
+  //   }, []);
+
   // Set blur if a card is being viewed
   useEffect(() => {
     console.log('location', location);
@@ -274,6 +278,10 @@ const StyledPokemon = styled.div`
   padding: 6rem 0rem;
   min-height: 100vh;
   position: relative;
+
+  @media (max-width: 400px) {
+    padding: 4rem 0rem;
+  }
 `;
 
 export default Pokemon;

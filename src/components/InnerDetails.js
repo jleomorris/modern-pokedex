@@ -63,7 +63,7 @@ const InnerDetails = ({
     return () => {
       document.body.style.overflow = 'auto';
     };
-  });
+  }, []);
 
   // Automate card flip
   useEffect(() => {
@@ -273,6 +273,7 @@ const StyledInnerDetails = styled.div`
   padding-right: 3rem;
   height: 100vh;
   overflow-y: scroll;
+  overflow-x: hidden;
 
   @media (max-width: 1500px) {
     align-items: center;
@@ -304,6 +305,18 @@ const StyledInnerDetails = styled.div`
       width: 500px;
       z-index: -1;
       opacity: 0.3;
+
+      @media (max-width: 600px) {
+        width: 300px;
+        top: 0px;
+        left: 0px;
+      }
+
+      @media (max-width: 400px) {
+        width: 150px;
+        top: unset;
+        left: 0px;
+      }
     }
   }
 
@@ -315,6 +328,10 @@ const StyledInnerDetails = styled.div`
 
     @media (max-width: 800px) {
       font-size: 6rem;
+    }
+
+    @media (max-width: 400px) {
+      font-size: 3rem;
     }
   }
 
@@ -393,6 +410,10 @@ const StyledInnerDetails = styled.div`
     img {
       height: 50px;
       background: black;
+
+      @media (max-width: 400px) {
+        height: 35px;
+      }
     }
   }
 
@@ -407,6 +428,10 @@ const StyledInnerDetails = styled.div`
 
     p {
       font-size: 2rem;
+
+      @media (max-width: 400px) {
+        font-size: 1.5rem;
+      }
     }
   }
 
@@ -419,9 +444,16 @@ const StyledInnerDetails = styled.div`
       position: unset !important;
 
       .back-image {
+        border-radius: 1rem;
+
         @media (max-width: 800px) {
           width: 435px;
           height: 625px;
+        }
+
+        @media (max-width: 400px) {
+          width: 285px;
+          height: 420px;
         }
       }
     }
@@ -449,6 +481,7 @@ const StyledInnerDetails = styled.div`
     .egg {
       position: relative;
       width: 50%;
+      margin: 0.5rem;
 
       .egg-icon,
       .training-icon {
@@ -473,6 +506,10 @@ const StyledInnerDetails = styled.div`
           font-size: 2rem;
           display: inline-block;
           color: #ffffffa6;
+
+          @media (max-width: 400px) {
+            font-size: 1.5rem;
+          }
         }
 
         .detail {
@@ -481,6 +518,10 @@ const StyledInnerDetails = styled.div`
           display: inline-block;
           color: rgba(256, 256, 256, 0.8);
           margin-left: 1rem;
+
+          @media (max-width: 400px) {
+            font-size: 2rem;
+          }
         }
       }
     }
