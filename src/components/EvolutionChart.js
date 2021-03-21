@@ -433,6 +433,12 @@ const StyledEvolutionChart = styled.div`
           object-fit: contain;
           height: unset !important;
         }
+
+        @media (max-width: 500px) and (min-width: 400px) {
+          width: 250px;
+          object-fit: contain;
+          height: unset !important;
+        }
       }
 
       .right-arrow-container {
@@ -453,7 +459,12 @@ const StyledEvolutionChart = styled.div`
 
         img {
           width: 100px;
+
           @media (max-width: 1500px) {
+            transform: rotate(90deg);
+          }
+
+          @media (max-width: 500px) {
             width: 50px;
             transform: rotate(90deg);
           }
@@ -488,6 +499,10 @@ const StyledEvolutionChart = styled.div`
           left: 40%;
           transform: translate(-40%, -50%);
           width: 50px;
+
+          @media (max-width: 500px) {
+            width: 30px;
+          }
         }
 
         /* .second-evolution-item {

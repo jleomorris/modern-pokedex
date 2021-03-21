@@ -226,7 +226,7 @@ const StyledPokemonDetails = styled.div`
 
   .react-card-flip {
     position: absolute;
-    top: 130px;
+    top: 95px;
     left: 0px;
     z-index: 3 !important;
     cursor: pointer;
