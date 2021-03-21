@@ -66,7 +66,7 @@ const StyledFooter = styled.div`
     color: white;
   }
   @media (max-width: 800px) {
-    padding: 1rem 0rem;
+    padding: 1rem;
   }
   a {
     text-decoration: none;

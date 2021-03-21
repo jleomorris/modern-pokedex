@@ -210,6 +210,10 @@ const StyledLocationArea = styled.div`
     .version-logo {
       width: 200px;
 
+      @media (max-width: 500px) {
+        width: 100px;
+      }
+
       @media (max-width: 400px) {
         width: 75px;
       }

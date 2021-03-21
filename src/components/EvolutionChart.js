@@ -399,7 +399,7 @@ const StyledEvolutionChart = styled.div`
       height: 100%;
       margin: 0rem 1rem;
       max-width: 20%;
-      border: 2px solid red;
+      /* border: 2px solid red; */
 
       @media (max-width: 1500px) {
         position: relative;
@@ -414,7 +414,7 @@ const StyledEvolutionChart = styled.div`
 
     .image-container {
       position: relative;
-      border: 2px solid yellow;
+      /* border: 2px solid yellow; */
 
       @media (max-width: 1500px) {
         position: unset;
@@ -441,7 +441,7 @@ const StyledEvolutionChart = styled.div`
         top: 50%;
         transform: translateY(-50%);
         z-index: 1;
-        border: 2px solid blue;
+        /* border: 2px solid blue; */
 
         @media (max-width: 1500px) {
           right: unset;

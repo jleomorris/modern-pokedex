@@ -244,7 +244,6 @@ const StyledTile = styled(motion.div)`
     }
   }
 
-  .pokemon-card-image-dream-world,
   .pokemon-card-image-official,
   .pokemon-card-image-default,
   .pokemon-card-image-shiny {
@@ -255,10 +254,27 @@ const StyledTile = styled(motion.div)`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.5));
 
-    @media (max-width: 400px) {
+    @media (max-width: 800px) {
       height: 150px;
       width: 150px;
+    }
+  }
+
+  .pokemon-card-image-dream-world {
+    height: 170px;
+    width: 170px;
+    padding: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.5));
+
+    @media (max-width: 500px) {
+      height: 120px;
+      width: 120px;
     }
   }
 
@@ -269,6 +285,7 @@ const StyledTile = styled(motion.div)`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.5));
   }
 
   .default-sprite-animation,
@@ -279,6 +296,12 @@ const StyledTile = styled(motion.div)`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.5));
+
+    @media (max-width: 400px) {
+      height: 120px;
+      width: 120px;
+    }
   }
 
   .id {

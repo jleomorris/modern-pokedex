@@ -153,6 +153,10 @@ const StyledOptionsFilters = styled.div`
       top: -50px;
       left: -30px;
       height: 100px;
+
+      @media (max-width: 400px) {
+        height: 80px;
+      }
     }
 
     button {

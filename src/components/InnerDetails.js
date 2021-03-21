@@ -353,7 +353,7 @@ const StyledInnerDetails = styled.div`
 
     .legendary-tag {
       position: absolute;
-      bottom: -15px;
+      bottom: -20px;
       right: -30px;
       color: gold;
       font-weight: 900;
@@ -452,7 +452,7 @@ const StyledInnerDetails = styled.div`
         }
 
         @media (max-width: 400px) {
-          width: 285px;
+          width: 300px;
           height: 420px;
         }
       }
