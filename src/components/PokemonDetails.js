@@ -24,6 +24,7 @@ const PokemonDetails = ({
   isShinyAnimatedSelected,
   isBlackAndWhiteAnimatedSelected,
   is3dSelected,
+  spriteSelectionHandler,
 }) => {
   // React Router
   const history = useHistory();
@@ -125,16 +126,21 @@ const PokemonDetails = ({
                 }
                 is3dSelected={is3dSelected}
               />
-              <div
-                className="card-back"
-                key="back"
-                onClick={cardFlipHandler}
-                onKeyPress={cardFlipHandler}
-                role="button"
-                tabIndex="0"
-              >
-                <img className="back-image" src={cardBack} alt="card-back" />
-                <SpriteGallery selectedPokemon={selectedPokemon} />
+              <div className="card-back" key="back">
+                <button onClick={cardFlipHandler} type="button">
+                  <img
+                    className="back-image"
+                    src={cardBack}
+                    alt="card-back"
+                    // onKeyPress={cardFlipHandler}
+                    //   role="button"
+                    //   tabIndex="0"
+                  />
+                </button>
+                <SpriteGallery
+                  selectedPokemon={selectedPokemon}
+                  spriteSelectionHandler={spriteSelectionHandler}
+                />
               </div>
             </ReactCardFlip>
           )}
@@ -237,6 +243,16 @@ const StyledPokemonDetails = styled.div`
     top: 0px;
     left: -75px;
     outline: none;
+
+    button {
+      background: #ffffff00;
+      border: none;
+      cursor: pointer;
+
+      &:focus {
+        outline: none;
+      }
+    }
 
     .back-image {
       width: 575px;

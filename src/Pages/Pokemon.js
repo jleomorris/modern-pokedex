@@ -60,8 +60,8 @@ const Pokemon = () => {
 
   // Set sprite type based on index
   const spriteSelectionHandler = (e) => {
-    console.log(e.value);
-    const spriteToChangeTo = e.value;
+    console.log('Pokemon.spriteSelectionHander.e', e);
+    const spriteToChangeTo = e.value || e;
 
     // Reset all
     setIsOfficalSelected(false);
