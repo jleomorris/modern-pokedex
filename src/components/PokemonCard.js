@@ -140,11 +140,11 @@ const PokemonCard = ({
                     src={firstEditionLogo}
                     alt="first edition logo"
                   />
-                  <p>{`${selectedPokemon[0].genera[7].genus},`}</p>
-                  <p>{`Height: ${(selectedPokemon[0].height * 0.33).toFixed(
+                  <p>{`${selectedPokemon[0].genera[7].genus}`}</p>
+                  <p>{`HT: ${(selectedPokemon[0].height * 0.33).toFixed(
                     2
-                  )}ft,`}</p>
-                  <p>{`Weight: ${(selectedPokemon[0].weight * 0.22).toFixed(
+                  )}ft`}</p>
+                  <p>{`WT: ${(selectedPokemon[0].weight * 0.22).toFixed(
                     2
                   )}lbs`}</p>
                 </div>

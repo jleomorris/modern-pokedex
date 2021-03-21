@@ -161,10 +161,10 @@ const PokemonCardBody = ({
                     src={firstEditionLogo}
                     alt="first edition logo"
                   />
-                  <p>{`${selectedPokemon[0].genera[7].genus},`}</p>
+                  <p>{`${selectedPokemon[0].genera[7].genus}`}</p>
                   <p>{`HT: ${(selectedPokemon[0].height * 0.33).toFixed(
                     2
-                  )}ft,`}</p>
+                  )}ft`}</p>
                   <p>{`WT: ${(selectedPokemon[0].weight * 0.22).toFixed(
                     2
                   )}lbs`}</p>
