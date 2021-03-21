@@ -32,7 +32,10 @@ const Abilities = ({ abilityData, selectedPokemon }) => {
               {ability.effect_entries
                 .filter((entry) => entry.language.name === 'en')
                 .map((abilityDescription) => (
-                  <p className="ability-description">
+                  <p
+                    className="ability-description"
+                    key={abilityDescription.effect}
+                  >
                     {abilityDescription.effect}
                   </p>
                 ))}

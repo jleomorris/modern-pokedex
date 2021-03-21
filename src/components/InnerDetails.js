@@ -239,7 +239,7 @@ const InnerDetails = ({
           <div className="stat">
             <p className="title">Egg groups</p>
             {selectedPokemon[0].egg_groups.map((group, index) => (
-              <p className="detail">
+              <p className="detail" key={group.name}>
                 {index !== selectedPokemon[0].egg_groups.length - 1
                   ? `${group.name},`
                   : group.name}

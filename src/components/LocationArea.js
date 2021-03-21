@@ -153,7 +153,7 @@ const LocationArea = ({ selectedPokemon }) => {
                   <td>
                     {game.areas.length === 0 ? 'None' : ''}
                     {game.areas.map((area, index) => (
-                      <p className="area">
+                      <p className="area" key={area}>
                         {index !== game.areas.length - 1 ? `${area}, ` : area}
                       </p>
                     ))}
