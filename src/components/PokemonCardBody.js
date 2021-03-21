@@ -7,6 +7,8 @@ import '../../node_modules/video-react/dist/video-react.css'; // import css
 import { Player } from 'video-react';
 // Components
 import DynamicSprite from './DynamicSprite';
+// Images
+import firstEditionLogo from '../img/first-edition-logo.png';
 // Util
 import {
   convertToTypeImage,
@@ -154,11 +156,16 @@ const PokemonCardBody = ({
                   />
                 )}
                 <div className="genus-height-weight-container">
+                  <img
+                    className="first-edition-logo"
+                    src={firstEditionLogo}
+                    alt="first edition logo"
+                  />
                   <p>{`${selectedPokemon[0].genera[7].genus},`}</p>
-                  <p>{`Height: ${(selectedPokemon[0].height * 0.33).toFixed(
+                  <p>{`HT: ${(selectedPokemon[0].height * 0.33).toFixed(
                     2
                   )}ft,`}</p>
-                  <p>{`Weight: ${(selectedPokemon[0].weight * 0.22).toFixed(
+                  <p>{`WT: ${(selectedPokemon[0].weight * 0.22).toFixed(
                     2
                   )}lbs`}</p>
                 </div>
@@ -391,7 +398,19 @@ const StyledPokemonCardBody = styled.div`
 
         @media (max-width: 400px) {
           bottom: -25px;
-          width: 120%;
+          /* width: 120%; */
+        }
+
+        .first-edition-logo {
+          position: absolute;
+          top: 0;
+          left: -32px;
+          height: 20px;
+
+          @media (max-width: 400px) {
+            left: -25px;
+            height: 15px;
+          }
         }
 
         p {

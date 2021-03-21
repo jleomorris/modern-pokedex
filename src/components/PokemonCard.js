@@ -5,6 +5,8 @@ import styled, { ThemeProvider } from 'styled-components';
 import { useSelector } from 'react-redux';
 import '../../node_modules/video-react/dist/video-react.css'; // import css
 import { Player } from 'video-react';
+// Images
+import firstEditionLogo from '../img/first-edition-logo.png';
 // Components
 import DynamicSprite from './DynamicSprite';
 // Util
@@ -133,6 +135,11 @@ const PokemonCard = ({
                   />
                 )}
                 <div className="genus-height-weight-container">
+                  <img
+                    className="first-edition-logo"
+                    src={firstEditionLogo}
+                    alt="first edition logo"
+                  />
                   <p>{`${selectedPokemon[0].genera[7].genus},`}</p>
                   <p>{`Height: ${(selectedPokemon[0].height * 0.33).toFixed(
                     2
@@ -328,6 +335,13 @@ const StyledPokemonCard = styled.div`
         left: 50%;
         transform: translateX(-50%);
         width: 100%;
+
+        .first-edition-logo {
+          position: absolute;
+          top: 0;
+          left: -32px;
+          height: 20px;
+        }
       }
     }
 
