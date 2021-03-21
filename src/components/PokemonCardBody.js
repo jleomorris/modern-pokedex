@@ -9,6 +9,8 @@ import { Player } from 'video-react';
 import DynamicSprite from './DynamicSprite';
 // Images
 import firstEditionLogo from '../img/first-edition-logo.png';
+import star from '../img/star.png';
+
 // Util
 import {
   convertToTypeImage,
@@ -188,7 +190,7 @@ const PokemonCardBody = ({
             </div>
             <div className="id-container">
               <p className="id">{selectedPokemon[0].id}/151</p>
-              <div className="circle" />
+              <img className="star" src={star} alt="star" />
             </div>
           </div>
         </div>
@@ -277,13 +279,12 @@ const StyledPokemonCardBody = styled.div`
         justify-content: center;
         align-items: center;
 
-        p {
+        .id {
+          font-size: 0.75rem;
           color: black;
         }
 
-        .circle {
-          background: black;
-          border-radius: 50%;
+        .star {
           height: 10px;
           width: 10px;
           margin-left: 5px;

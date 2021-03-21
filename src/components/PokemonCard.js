@@ -7,6 +7,7 @@ import '../../node_modules/video-react/dist/video-react.css'; // import css
 import { Player } from 'video-react';
 // Images
 import firstEditionLogo from '../img/first-edition-logo.png';
+import star from '../img/star.png';
 // Components
 import DynamicSprite from './DynamicSprite';
 // Util
@@ -167,7 +168,7 @@ const PokemonCard = ({
             </div>
             <div className="id-container">
               <p className="id">{selectedPokemon[0].id}/151</p>
-              <div className="circle" />
+              <img className="star" src={star} alt="star" />
             </div>
           </div>
         </div>
@@ -254,9 +255,11 @@ const StyledPokemonCard = styled.div`
         justify-content: center;
         align-items: center;
 
-        .circle {
-          background: black;
-          border-radius: 50%;
+        .id {
+          font-size: 0.75rem;
+        }
+
+        .star {
           height: 10px;
           width: 10px;
           margin-left: 5px;
@@ -273,8 +276,6 @@ const StyledPokemonCard = styled.div`
       .pokemon-card-title {
         text-transform: capitalize;
         font-size: 2rem;
-        /* font-family: 'Bebas Neue', cursive; */
-        /* letter-spacing: 0.25rem; */
         margin-left: 3rem;
       }
     }
