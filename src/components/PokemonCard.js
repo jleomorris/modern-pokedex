@@ -19,7 +19,7 @@ import {
 
 const PokemonCard = ({
   pathId,
-  cardFlipHandler,
+  mainCardFlipHandler,
   isDreamWorldSelected,
   isDefaultSelected,
   isOfficialSelected,
@@ -67,8 +67,8 @@ const PokemonCard = ({
       <StyledPokemonCard className="pokemon-card">
         <div
           className="detailed-pokemon-card"
-          onClick={cardFlipHandler}
-          onKeyPress={cardFlipHandler}
+          onClick={mainCardFlipHandler}
+          onKeyPress={mainCardFlipHandler}
           role="button"
           tabIndex="0"
         >
@@ -196,6 +196,7 @@ const StyledPokemonCard = styled.div`
     background: #ffff7a;
     outline: none;
     position: relative;
+    cursor: pointer;
 
     @media (max-width: 1600px) {
       width: 500px;

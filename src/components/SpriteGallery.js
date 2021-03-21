@@ -4,17 +4,26 @@ import styled from 'styled-components';
 // Components
 import DynamicSprite from './DynamicSprite';
 
-const SpriteGallery = ({ selectedPokemon, spriteSelectionHandler }) => {
+const SpriteGallery = ({
+  selectedPokemon,
+  spriteSelectionHandler,
+  mainCardFlipHandler,
+}) => {
+  const spriteChangeHandler = (type) => {
+    // if (type === 'official') {
+    spriteSelectionHandler(type);
+    mainCardFlipHandler();
+    // }
+  };
+
   return (
     <StyledSpriteGallery className="sprite-gallery">
       <h3>Sprite Gallery</h3>
+      <p>(Select one)</p>
       <div className="sprites">
         <div className="sprite">
           <div className="circle" />
-          <button
-            type="button"
-            onClick={() => spriteSelectionHandler('official')}
-          >
+          <button type="button" onClick={() => spriteChangeHandler('official')}>
             <img
               className="official-sprite"
               src={
@@ -27,10 +36,7 @@ const SpriteGallery = ({ selectedPokemon, spriteSelectionHandler }) => {
         </div>
         <div className="sprite">
           <div className="circle" />
-          <button
-            type="button"
-            onClick={() => spriteSelectionHandler('default')}
-          >
+          <button type="button" onClick={() => spriteChangeHandler('default')}>
             <img
               className="default-sprite"
               src={selectedPokemon[0].sprites.front_default}
@@ -40,7 +46,7 @@ const SpriteGallery = ({ selectedPokemon, spriteSelectionHandler }) => {
         </div>
         <div className="sprite">
           <div className="circle" />
-          <button type="button" onClick={() => spriteSelectionHandler('B&W')}>
+          <button type="button" onClick={() => spriteChangeHandler('B&W')}>
             <DynamicSprite id={selectedPokemon[0].id} type="black and white" />
           </button>
         </div>
@@ -48,7 +54,7 @@ const SpriteGallery = ({ selectedPokemon, spriteSelectionHandler }) => {
           <div className="circle" />
           <button
             type="button"
-            onClick={() => spriteSelectionHandler('dream world')}
+            onClick={() => spriteChangeHandler('dream world')}
           >
             <img
               className="dream-world-sprite"
@@ -59,7 +65,7 @@ const SpriteGallery = ({ selectedPokemon, spriteSelectionHandler }) => {
         </div>
         <div className="sprite">
           <div className="circle" />
-          <button type="button" onClick={() => spriteSelectionHandler('shiny')}>
+          <button type="button" onClick={() => spriteChangeHandler('shiny')}>
             <img
               className="shiny-sprite"
               src={selectedPokemon[0].sprites.front_shiny}
@@ -71,14 +77,14 @@ const SpriteGallery = ({ selectedPokemon, spriteSelectionHandler }) => {
           <div className="circle" />
           <button
             type="button"
-            onClick={() => spriteSelectionHandler('shiny animated')}
+            onClick={() => spriteChangeHandler('shiny animated')}
           >
             <DynamicSprite id={selectedPokemon[0].id} type="shiny" />
           </button>
         </div>
         <div className="sprite">
           <div className="circle" />
-          <button type="button" onClick={() => spriteSelectionHandler('3D')}>
+          <button type="button" onClick={() => spriteChangeHandler('3D')}>
             <DynamicSprite type="3d" name={selectedPokemon[0].name} />
           </button>
         </div>
@@ -99,6 +105,11 @@ const StyledSpriteGallery = styled.div`
   h3 {
     color: white;
     text-transform: uppercase;
+    text-align: center;
+  }
+
+  p {
+    color: white;
     text-align: center;
   }
 
