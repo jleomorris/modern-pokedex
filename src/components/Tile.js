@@ -47,7 +47,7 @@ const Tile = ({
         }
       }
 
-      console.log('highest stat', highest.stat.name);
+      //   console.log('highest stat', highest.stat.name);
       setHighestStat(highest.stat.name);
     }
   }, [pokemon]);

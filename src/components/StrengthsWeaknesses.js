@@ -19,7 +19,7 @@ const strengthsWeaknesses = ({ selectedPokemon }) => {
     const noDamageFrom = [];
     const noDamageTo = [];
 
-    console.log('typeData', typeData);
+    // console.log('typeData', typeData);
 
     currentCardTypes.forEach((type) => {
       const filteredTypeData = typeData.filter(
