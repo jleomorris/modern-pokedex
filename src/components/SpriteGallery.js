@@ -7,12 +7,12 @@ import DynamicSprite from './DynamicSprite';
 const SpriteGallery = ({
   selectedPokemon,
   spriteSelectionHandler,
-  mainCardFlipHandler,
+  flipHandler,
 }) => {
   const spriteChangeHandler = (type) => {
     // if (type === 'official') {
     spriteSelectionHandler(type);
-    mainCardFlipHandler();
+    flipHandler();
     // }
   };
 

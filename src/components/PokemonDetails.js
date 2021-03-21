@@ -134,7 +134,7 @@ const PokemonDetails = ({
                 <SpriteGallery
                   selectedPokemon={selectedPokemon}
                   spriteSelectionHandler={spriteSelectionHandler}
-                  mainCardFlipHandler={mainCardFlipHandler}
+                  flipHandler={mainCardFlipHandler}
                 />
               </div>
             </ReactCardFlip>
@@ -151,6 +151,7 @@ const PokemonDetails = ({
             isBlackAndWhiteAnimatedSelected={isBlackAndWhiteAnimatedSelected}
             is3dSelected={is3dSelected}
             onMobile={onMobile}
+            spriteSelectionHandler={spriteSelectionHandler}
           />
         </StyledPokemonDetails>
       </DetailsShadow>

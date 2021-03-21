@@ -47,6 +47,7 @@ const InnerDetails = ({
   isBlackAndWhiteAnimatedSelected,
   is3dSelected,
   onMobile,
+  spriteSelectionHandler,
 }) => {
   // React Router
   const history = useHistory();
@@ -56,7 +57,7 @@ const InnerDetails = ({
   // State
   const [abilityData, setAbilityData] = useState();
   const [description, setDescription] = useState();
-  const [isFlipped, setisFlipped] = useState(false);
+  const [isResponsiveCardFlipped, setisResponsiveCardFlipped] = useState(false);
 
   // Reset document body overflow on component unmount
   useEffect(() => {
@@ -69,10 +70,10 @@ const InnerDetails = ({
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     setTimeout(() => {
-      setisFlipped((prev) => !prev);
+      setisResponsiveCardFlipped((prev) => !prev);
     }, 1750);
     setTimeout(() => {
-      setisFlipped((prev) => !prev);
+      setisResponsiveCardFlipped((prev) => !prev);
     }, 1000);
   }, []);
 
@@ -116,9 +117,9 @@ const InnerDetails = ({
     history.push('/pokemon');
   };
 
-  const cardFlipHandler = (e) => {
-    e.preventDefault();
-    setisFlipped((prev) => !prev);
+  const responsiveCardFlipHandler = (e) => {
+    // e.preventDefault();
+    setisResponsiveCardFlipped((prev) => !prev);
   };
 
   return (
@@ -179,7 +180,7 @@ const InnerDetails = ({
       {selectedPokemon && onMobile && (
         <ReactCardFlip
           className="react-card-flip"
-          isFlipped={isFlipped}
+          isFlipped={isResponsiveCardFlipped}
           flipDirection="horizontal"
           infinite
           flipSpeedBackToFront="0.5"
@@ -188,7 +189,7 @@ const InnerDetails = ({
           <PokemonCardBody
             key="front"
             pathId={pathId}
-            cardFlipHandler={cardFlipHandler}
+            cardFlipHandler={responsiveCardFlipHandler}
             isDefaultSelected={isDefaultSelected}
             isDreamWorldSelected={isDreamWorldSelected}
             isOfficialSelected={isOfficialSelected}
@@ -200,13 +201,17 @@ const InnerDetails = ({
           <div
             className="card-back"
             key="back"
-            onClick={cardFlipHandler}
-            onKeyPress={cardFlipHandler}
-            role="button"
-            tabIndex="0"
+            // onClick={cardFlipHandler}
+            // onKeyPress={cardFlipHandler}
+            // role="button"
+            // tabIndex="0"
           >
             <img className="back-image" src={cardBack} alt="card-back" />
-            <SpriteGallery selectedPokemon={selectedPokemon} />
+            <SpriteGallery
+              selectedPokemon={selectedPokemon}
+              spriteSelectionHandler={spriteSelectionHandler}
+              flipHandler={responsiveCardFlipHandler}
+            />
           </div>
         </ReactCardFlip>
       )}
@@ -438,7 +443,7 @@ const StyledInnerDetails = styled.div`
   .react-card-flip {
     position: unset !important;
     /* z-index: 3 !important; */
-    cursor: pointer;
+    /* cursor: pointer; */
 
     .card-back {
       position: unset !important;

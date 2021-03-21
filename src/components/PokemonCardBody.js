@@ -199,9 +199,6 @@ const PokemonCardBody = ({
 
 // Styled components
 const StyledPokemonCardBody = styled.div`
-  /* position: absolute;
-  top: 0px;
-  left: -75px; */
   z-index: 3;
   display: flex;
   justify-content: center;
@@ -217,6 +214,7 @@ const StyledPokemonCardBody = styled.div`
     background: #ffff7a;
     outline: none;
     position: relative;
+    cursor: pointer;
 
     @media (max-width: 1600px) {
       width: 500px;
@@ -303,8 +301,6 @@ const StyledPokemonCardBody = styled.div`
         color: black;
         text-transform: capitalize;
         font-size: 2rem;
-        /* font-family: 'Bebas Neue', cursive; */
-        /* letter-spacing: 0.25rem; */
         margin-left: 3rem;
 
         @media (max-width: 400px) {
@@ -328,7 +324,6 @@ const StyledPokemonCardBody = styled.div`
         color: red;
 
         @media (max-width: 400px) {
-          /* margin-right: unset; */
           font-size: 1.5rem;
         }
       }
@@ -342,7 +337,6 @@ const StyledPokemonCardBody = styled.div`
         @media (max-width: 400px) {
           height: 30px;
           width: 30px;
-          /* margin-left: unset; */
         }
       }
     }
