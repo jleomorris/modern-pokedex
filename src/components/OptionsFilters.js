@@ -11,10 +11,14 @@ import charizardShiny from '../img/charizard_shiny.png';
 import lunatoneOfficial from '../img/lunatone_official.png';
 import solrockOfficial from '../img/solrock_official.png';
 // Util
-import { reactSelectTypeOptions, reactSelectStatOptions } from '../util';
+import {
+  reactSelectTypeOptions,
+  reactSelectStatOptions,
+  reactSelectSpriteOptions,
+  reactSelectDarkModeOptions,
+} from '../util';
 
 const OptionsFilters = ({
-  spriteIndex,
   spriteSelectionHandler,
   isDarkModeActive,
   filterPokemonBySearchHandler,
@@ -23,69 +27,81 @@ const OptionsFilters = ({
   setIsDarkModeActive,
   selectedTypeOption,
   selectedStatOption,
+  isOfficialSelected,
+  isDefaultSelected,
+  isDreamWorldSelected,
+  isShinySelected,
+  isShinyAnimatedSelected,
+  is3dSelected,
+  isBlackAndWhiteAnimatedSelected,
 }) => {
   // React select
   const typeOptions = reactSelectTypeOptions;
   const statOptions = reactSelectStatOptions;
+  const spriteOptions = reactSelectSpriteOptions;
+  const darkModeOptions = reactSelectDarkModeOptions;
+
+  const darkModeHandler = (e) => {
+    console.log(e.value);
+    const darkModeAction = e.value;
+
+    if (darkModeAction === 'dark mode on') {
+      setIsDarkModeActive(true);
+    } else if (darkModeAction === 'dark mode off') {
+      setIsDarkModeActive(false);
+    }
+  };
 
   return (
     <StyledOptionsFilters className="options-filters">
-      <div className="option-filter">
-        {spriteIndex === 0 && (
-          <img
-            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png"
-            alt="sprite"
-          />
-        )}
-        {spriteIndex === 1 && <img src={charizardDefault} alt="sprite" />}
-        {spriteIndex === 2 && <DynamicSprite id={6} type="black and white" />}
-        {spriteIndex === 3 && (
-          <img
-            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/6.svg"
-            alt="sprite"
-          />
-        )}
-        {spriteIndex === 4 && <img src={charizardShiny} alt="sprite" />}
-        {spriteIndex === 5 && <DynamicSprite id={6} type="shiny" />}
-        {spriteIndex === 6 && (
-          <DynamicSprite id={6} type="3d" name="charizard" />
-        )}
-        <button type="button" onClick={spriteSelectionHandler}>
-          <p>Sprite Type</p>
-          {spriteIndex === 0 && 'Official'}
-          {spriteIndex === 1 && 'Default'}
-          {spriteIndex === 2 && 'B & W Animated'}
-          {spriteIndex === 3 && 'Dream World'}
-          {spriteIndex === 4 && 'Shiny'}
-          {spriteIndex === 5 && 'Shiny Animated'}
-          {spriteIndex === 6 && '3D'}
-        </button>
-      </div>
-      <div className="option-filter">
-        <img
-          src={isDarkModeActive ? lunatoneOfficial : solrockOfficial}
-          alt="sprite"
-          className="dark-mode-sprite"
-        />
-        <button
-          type="button"
-          onClick={() => setIsDarkModeActive((prev) => !prev)}
-        >
-          <p>Dark Mode</p>
-          {isDarkModeActive ? 'Off' : 'On'}
-        </button>
-      </div>
-      <div className="search-container">
+      <div className="sprite-change-container" style={{ zIndex: '4' }}>
+        <div className="container">
+          {isOfficialSelected && (
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png"
+              alt="sprite"
+            />
+          )}
+          {isDefaultSelected && <img src={charizardDefault} alt="sprite" />}
+          {isBlackAndWhiteAnimatedSelected && (
+            <DynamicSprite id={6} type="black and white" />
+          )}
+          {isDreamWorldSelected && (
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/6.svg"
+              alt="sprite"
+            />
+          )}
+          {isShinySelected && <img src={charizardShiny} alt="sprite" />}
+          {isShinyAnimatedSelected && <DynamicSprite id={6} type="shiny" />}
+          {is3dSelected && <DynamicSprite id={6} type="3d" name="charizard" />}
+        </div>
         <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>
-          Filter by search
+          Change sprite type
         </p>
-        <input
-          type="text"
-          className="search-pokemon"
-          onChange={filterPokemonBySearchHandler}
+        <Select
+          defaultValue="official"
+          onChange={spriteSelectionHandler}
+          options={spriteOptions}
+          width="500px"
         />
       </div>
-      <div className="type-filter-container" style={{ zIndex: '4' }}>
+      <div className="dark-mode-change-container" style={{ zIndex: '4' }}>
+        <div className="container">
+          {isDarkModeActive && <img src={lunatoneOfficial} alt="lunatone" />}
+          {!isDarkModeActive && <img src={solrockOfficial} alt="solrock" />}
+        </div>
+        <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>
+          Dark Mode
+        </p>
+        <Select
+          defaultValue="dark mode off"
+          onChange={darkModeHandler}
+          options={darkModeOptions}
+          width="500px"
+        />
+      </div>
+      <div className="type-filter-container" style={{ zIndex: '3' }}>
         <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>
           Filter by element
         </p>
@@ -109,6 +125,16 @@ const OptionsFilters = ({
           width="500px"
         />
       </div>
+      <div className="search-container">
+        <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>
+          Filter by search
+        </p>
+        <input
+          type="text"
+          className="search-pokemon"
+          onChange={filterPokemonBySearchHandler}
+        />
+      </div>
     </StyledOptionsFilters>
   );
 };
@@ -117,11 +143,30 @@ const OptionsFilters = ({
 const StyledOptionsFilters = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   margin-bottom: 4rem;
   width: 80%;
   margin: 0 auto;
   flex-wrap: wrap;
+
+  .sprite-change-container,
+  .dark-mode-change-container {
+    .container {
+      position: relative;
+      height: 100px;
+      width: 100%;
+      margin-bottom: 1rem;
+
+      img {
+        height: 100px;
+        width: 100px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
 
   .option-filter {
     /* border: 1px solid blue; */
@@ -134,19 +179,6 @@ const StyledOptionsFilters = styled.div`
 
     @media (max-width: 400px) {
       width: 30%;
-    }
-
-    img {
-      position: absolute;
-      top: -50px;
-      height: 120px;
-      left: -60px;
-
-      @media (max-width: 400px) {
-        top: -40px;
-        height: 100px;
-        left: -50px;
-      }
     }
 
     .dark-mode-sprite {
@@ -186,6 +218,12 @@ const StyledOptionsFilters = styled.div`
   }
 
   .search-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     p {
       font-family: 'Bebas Neue', cursive;
       font-size: 1.5rem;
@@ -197,11 +235,14 @@ const StyledOptionsFilters = styled.div`
       padding: 1rem;
       outline: none;
       border-radius: 1rem;
+      width: 20%;
     }
   }
 
   .type-filter-container,
-  .stat-filter-container {
+  .stat-filter-container,
+  .sprite-change-container,
+  .dark-mode-change-container {
     margin: 2rem;
 
     @media (max-width: 400px) {

@@ -27,7 +27,6 @@ const Pokemon = () => {
   const [isShinySelected, setIsShinySelected] = useState(false);
   const [isShinyAnimatedSelected, setIsShinyAnimatedSelected] = useState(false);
   const [is3dSelected, setIs3dSelected] = useState(false);
-  const [spriteIndex, setSpriteIndex] = useState(0);
   const [isDarkModeActive, setIsDarkModeActive] = useState(false);
   const [isBlurActive, setIsBlurActive] = useState(false);
   const [isFilterByTypeActive, setIsFilterByTypeActive] = useState(false);
@@ -60,66 +59,34 @@ const Pokemon = () => {
   }, [pokemonData]);
 
   // Set sprite type based on index
-  const spriteSelectionHandler = () => {
-    if (spriteIndex === 0) {
-      setIsOfficalSelected(false);
-      setIsDefaultSelected(true);
-      setisBlackAndWhiteAnimatedSelected(false);
-      setIsDreamWorldSelected(false);
-      setIsShinySelected(false);
-      setIsShinyAnimatedSelected(false);
-    } else if (spriteIndex === 1) {
-      setIsOfficalSelected(false);
-      setIsDefaultSelected(false);
-      setisBlackAndWhiteAnimatedSelected(true);
-      setIsDreamWorldSelected(false);
-      setIsShinySelected(false);
-      setIsShinyAnimatedSelected(false);
-      setIs3dSelected(false);
-    } else if (spriteIndex === 2) {
-      setIsOfficalSelected(false);
-      setIsDefaultSelected(false);
-      setisBlackAndWhiteAnimatedSelected(false);
-      setIsDreamWorldSelected(true);
-      setIsShinySelected(false);
-      setIsShinyAnimatedSelected(false);
-      setIs3dSelected(false);
-    } else if (spriteIndex === 3) {
-      setIsOfficalSelected(false);
-      setIsDefaultSelected(false);
-      setisBlackAndWhiteAnimatedSelected(false);
-      setIsDreamWorldSelected(false);
-      setIsShinySelected(true);
-      setIsShinyAnimatedSelected(false);
-      setIs3dSelected(false);
-    } else if (spriteIndex === 4) {
-      setIsOfficalSelected(false);
-      setIsDefaultSelected(false);
-      setisBlackAndWhiteAnimatedSelected(false);
-      setIsDreamWorldSelected(false);
-      setIsShinySelected(false);
-      setIsShinyAnimatedSelected(true);
-      setIs3dSelected(false);
-    } else if (spriteIndex === 5) {
-      setIsOfficalSelected(false);
-      setIsDefaultSelected(false);
-      setisBlackAndWhiteAnimatedSelected(false);
-      setIsDreamWorldSelected(false);
-      setIsShinySelected(false);
-      setIsShinyAnimatedSelected(false);
-      setIs3dSelected(true);
-    } else {
-      setIsOfficalSelected(true);
-      setIsDefaultSelected(false);
-      setisBlackAndWhiteAnimatedSelected(false);
-      setIsDreamWorldSelected(false);
-      setIsShinySelected(false);
-      setIsShinyAnimatedSelected(false);
-      setIs3dSelected(false);
-    }
+  const spriteSelectionHandler = (e) => {
+    console.log(e.value);
+    const spriteToChangeTo = e.value;
 
-    if (spriteIndex === 6) setSpriteIndex(0);
-    if (spriteIndex !== 6) setSpriteIndex((prev) => prev + 1);
+    // Reset all
+    setIsOfficalSelected(false);
+    setIsDefaultSelected(false);
+    setisBlackAndWhiteAnimatedSelected(false);
+    setIsDreamWorldSelected(false);
+    setIsShinySelected(false);
+    setIsShinyAnimatedSelected(false);
+    setIs3dSelected(false);
+
+    if (spriteToChangeTo === 'default') {
+      setIsDefaultSelected(true);
+    } else if (spriteToChangeTo === 'B&W') {
+      setisBlackAndWhiteAnimatedSelected(true);
+    } else if (spriteToChangeTo === 'dream world') {
+      setIsDreamWorldSelected(true);
+    } else if (spriteToChangeTo === 'shiny') {
+      setIsShinySelected(true);
+    } else if (spriteToChangeTo === 'shiny animated') {
+      setIsShinyAnimatedSelected(true);
+    } else if (spriteToChangeTo === '3D') {
+      setIs3dSelected(true);
+    } else if (spriteToChangeTo === 'official') {
+      setIsOfficalSelected(true);
+    }
   };
 
   // Filter pokemon by user search
@@ -235,10 +202,10 @@ const Pokemon = () => {
             isBlackAndWhiteAnimatedSelected={isBlackAndWhiteAnimatedSelected}
             isShinyAnimatedSelected={isShinyAnimatedSelected}
             is3dSelected={is3dSelected}
+            spriteSelectionHandler={spriteSelectionHandler}
           />
         )}
         <OptionsFilters
-          spriteIndex={spriteIndex}
           spriteSelectionHandler={spriteSelectionHandler}
           isDarkModeActive={isDarkModeActive}
           setIsDarkModeActive={setIsDarkModeActive}
@@ -247,6 +214,13 @@ const Pokemon = () => {
           filterPokemonByStatHandler={filterPokemonByStatHandler}
           selectedTypeOption={selectedTypeOption}
           selectedStatOption={selectedStatOption}
+          isOfficialSelected={isOfficialSelected}
+          isDefaultSelected={isDefaultSelected}
+          isDreamWorldSelected={isDreamWorldSelected}
+          isShinySelected={isShinySelected}
+          isShinyAnimatedSelected={isShinyAnimatedSelected}
+          is3dSelected={is3dSelected}
+          isBlackAndWhiteAnimatedSelected={isBlackAndWhiteAnimatedSelected}
         />
         <PokemonTiles
           filteredData={filteredData}

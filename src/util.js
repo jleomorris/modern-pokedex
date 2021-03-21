@@ -140,6 +140,21 @@ export const reactSelectStatOptions = [
   { value: 'speed', label: 'Speed', image: electricType },
 ];
 
+export const reactSelectSpriteOptions = [
+  { value: 'official', label: 'Official' },
+  { value: 'default', label: 'Default' },
+  { value: 'B&W', label: 'B & W Animated' },
+  { value: 'dream world', label: 'Dream World' },
+  { value: 'shiny', label: 'Shiny' },
+  { value: 'shiny animated', label: 'Shiny Animated' },
+  { value: '3D', label: '3D' },
+];
+
+export const reactSelectDarkModeOptions = [
+  { value: 'dark mode on', label: 'On' },
+  { value: 'dark mode off', label: 'Off' },
+];
+
 export const convertMaxStatToIcon = (maxStat) => {
   switch (maxStat) {
     case 'hp':
