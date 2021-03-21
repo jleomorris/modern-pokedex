@@ -1,12 +1,22 @@
 // Animation and design courtesy of Athanstan https://github.com/athanstan
 
-import React from 'react';
+import React, { useEffect } from 'react';
 // Styled components
 import styled from 'styled-components';
 // Redux
 import { useSelector } from 'react-redux';
 
 const PokeBall = () => {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
   // Redux
   const dataLoaded = useSelector((state) => state.pokemon.pokemonLoaded);
   return (
