@@ -170,6 +170,9 @@ const PokemonCard = ({
               <p className="id">{selectedPokemon[0].id}/151</p>
               <img className="star" src={star} alt="star" />
             </div>
+            <div className="illustrator-container">
+              <p className="illustrator">Illus. Mitsuhiro Arita</p>
+            </div>
           </div>
         </div>
       </StyledPokemonCard>
@@ -263,6 +266,20 @@ const StyledPokemonCard = styled.div`
           height: 10px;
           width: 10px;
           margin-left: 5px;
+        }
+      }
+
+      .illustrator-container {
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .illustrator {
+          font-size: 0.75rem;
+          font-weight: 900;
         }
       }
     }
