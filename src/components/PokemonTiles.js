@@ -1,6 +1,8 @@
 import React from 'react';
 // Styled components
 import styled from 'styled-components';
+// Redux
+import { useSelector } from 'react-redux';
 // Components
 import Tile from './Tile';
 
@@ -18,6 +20,9 @@ const PokemonTiles = ({
   is3dSelected,
   isDarkModeActive,
 }) => {
+  // Redux
+  const typeData = useSelector((state) => state.types.typeData);
+
   return (
     <StyledPokemonTiles className="pokemon-cards-container">
       {filteredData &&
@@ -31,7 +36,8 @@ const PokemonTiles = ({
             No results
           </h2>
         )}
-      {filteredData &&
+      {typeData &&
+        filteredData &&
         filteredData.map((pokemon) => (
           <Tile
             key={pokemon.name}
