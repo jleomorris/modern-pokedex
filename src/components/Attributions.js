@@ -39,6 +39,10 @@ const Attributions = () => {
         <li>
           <span className="asset">Tile backgrounds </span>- Pexels
         </li>
+        <li>
+          <span className="asset">Move category and first edition icons </span>-
+          Bulbapedia
+        </li>
       </ul>
       {/* </div> */}
     </StyledAttributions>
