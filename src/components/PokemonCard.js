@@ -92,41 +92,32 @@ const PokemonCard = ({
               <div className="background-image-container">
                 {convertToTypeBackground(selectedPokemon[0].types[0].type.name)}
                 {/* {convertNameToSpriteAnimation(selectedPokemon[0].name)} */}
-                {!isBlackAndWhiteAnimatedSelected && (
-                  <img
-                    className={`${
-                      isDreamWorldSelected
-                        ? 'pokemon-card-image-dream-world'
-                        : ''
-                    } ${
-                      isOfficialSelected ? 'pokemon-card-image-official' : ''
-                    } ${
-                      isDefaultSelected ? 'pokemon-card-image-default' : ''
-                    } ${isShinySelected ? 'pokemon-card-image-shiny' : ''}`}
-                    src={
-                      isDreamWorldSelected
-                        ? selectedPokemon[0].sprites.other.dream_world
-                            .front_default
-                        : '' || isOfficialSelected
-                        ? Object.values(selectedPokemon[0].sprites.other)[1]
-                            .front_default
-                        : '' || isDefaultSelected
-                        ? selectedPokemon[0].sprites.front_default
-                        : '' || isShinySelected
-                        ? selectedPokemon[0].sprites.front_shiny
-                        : ''
-                    }
-                    alt={selectedPokemon[0].name}
+                {isDreamWorldSelected && (
+                  <DynamicSprite
+                    id={selectedPokemon[0].id}
+                    type="dream world"
                   />
+                )}
+                {isOfficialSelected && (
+                  <DynamicSprite id={selectedPokemon[0].id} type="official" />
+                )}
+                {isDefaultSelected && (
+                  <DynamicSprite id={selectedPokemon[0].id} type="default" />
                 )}
                 {isBlackAndWhiteAnimatedSelected && (
                   <DynamicSprite
                     id={selectedPokemon[0].id}
-                    type="black and white"
+                    type="black and white animated"
                   />
                 )}
-                {isShinyAnimatedSelected && (
+                {isShinySelected && (
                   <DynamicSprite id={selectedPokemon[0].id} type="shiny" />
+                )}
+                {isShinyAnimatedSelected && (
+                  <DynamicSprite
+                    id={selectedPokemon[0].id}
+                    type="shiny animated"
+                  />
                 )}
                 {is3dSelected && (
                   <DynamicSprite
@@ -288,7 +279,10 @@ const StyledPokemonCard = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 0.5rem;
+      border-top: 2px solid yellow;
+      width: 85%;
+      margin: 0 auto;
+      margin-top: 1rem;
 
       .pokemon-card-title {
         text-transform: capitalize;

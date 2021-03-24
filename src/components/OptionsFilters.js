@@ -56,24 +56,16 @@ const OptionsFilters = ({
     <StyledOptionsFilters className="options-filters">
       <div className="sprite-change-container" style={{ zIndex: '4' }}>
         <div className="container">
-          {isOfficialSelected && (
-            <img
-              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png"
-              alt="sprite"
-            />
-          )}
-          {isDefaultSelected && <img src={charizardDefault} alt="sprite" />}
+          {isOfficialSelected && <DynamicSprite id="6" type="official" />}
+          {isDefaultSelected && <DynamicSprite id="6" type="default" />}
           {isBlackAndWhiteAnimatedSelected && (
-            <DynamicSprite id={6} type="black and white" />
+            <DynamicSprite id={6} type="black and white animated" />
           )}
-          {isDreamWorldSelected && (
-            <img
-              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/6.svg"
-              alt="sprite"
-            />
+          {isDreamWorldSelected && <DynamicSprite id="6" type="dream world" />}
+          {isShinySelected && <DynamicSprite id="6" type="shiny" />}
+          {isShinyAnimatedSelected && (
+            <DynamicSprite id={6} type="shiny animated" />
           )}
-          {isShinySelected && <img src={charizardShiny} alt="sprite" />}
-          {isShinyAnimatedSelected && <DynamicSprite id={6} type="shiny" />}
           {is3dSelected && <DynamicSprite id={6} type="3d" name="charizard" />}
         </div>
         <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>

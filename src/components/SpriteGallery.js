@@ -47,7 +47,10 @@ const SpriteGallery = ({
         <div className="sprite">
           <div className="circle" />
           <button type="button" onClick={() => spriteChangeHandler('B&W')}>
-            <DynamicSprite id={selectedPokemon[0].id} type="black and white" />
+            <DynamicSprite
+              id={selectedPokemon[0].id}
+              type="black and white animated"
+            />
           </button>
         </div>
         <div className="sprite">
@@ -79,7 +82,7 @@ const SpriteGallery = ({
             type="button"
             onClick={() => spriteChangeHandler('shiny animated')}
           >
-            <DynamicSprite id={selectedPokemon[0].id} type="shiny" />
+            <DynamicSprite id={selectedPokemon[0].id} type="shiny animated" />
           </button>
         </div>
         <div className="sprite">
@@ -138,6 +141,10 @@ const StyledSpriteGallery = styled.div`
       background: #ffffffa3;
       border-radius: 50%;
       z-index: -1;
+
+      &:hover {
+        background: #030000;
+      }
 
       @media (max-width: 800px) {
         height: 90px;

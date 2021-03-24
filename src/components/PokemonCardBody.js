@@ -114,7 +114,7 @@ const PokemonCardBody = ({
               <div className="background-image-container">
                 {convertToTypeBackground(selectedPokemon[0].types[0].type.name)}
                 {/* {convertNameToSpriteAnimation(selectedPokemon[0].name)} */}
-                {!isBlackAndWhiteAnimatedSelected && (
+                {/* {!isBlackAndWhiteAnimatedSelected && (
                   <img
                     className={`${
                       isDreamWorldSelected
@@ -140,15 +140,33 @@ const PokemonCardBody = ({
                     }
                     alt={selectedPokemon[0].name}
                   />
+                )} */}
+                {isDreamWorldSelected && (
+                  <DynamicSprite
+                    id={selectedPokemon[0].id}
+                    type="dream world"
+                  />
+                )}
+                {isOfficialSelected && (
+                  <DynamicSprite id={selectedPokemon[0].id} type="official" />
+                )}
+                {isDefaultSelected && (
+                  <DynamicSprite id={selectedPokemon[0].id} type="default" />
                 )}
                 {isBlackAndWhiteAnimatedSelected && (
                   <DynamicSprite
                     id={selectedPokemon[0].id}
-                    type="black and white"
+                    type="black and white animated"
                   />
                 )}
-                {isShinyAnimatedSelected && (
+                {isShinySelected && (
                   <DynamicSprite id={selectedPokemon[0].id} type="shiny" />
+                )}
+                {isShinyAnimatedSelected && (
+                  <DynamicSprite
+                    id={selectedPokemon[0].id}
+                    type="shiny animated"
+                  />
                 )}
                 {is3dSelected && (
                   <DynamicSprite
@@ -314,7 +332,10 @@ const StyledPokemonCardBody = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 0.5rem;
+      border-top: 2px solid yellow;
+      width: 85%;
+      margin: 0 auto;
+      margin-top: 1rem;
 
       .pokemon-card-title {
         color: black;

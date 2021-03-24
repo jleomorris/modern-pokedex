@@ -79,38 +79,18 @@ const Tile = ({
       </div>
       <Link to={`/pokemon/${pokemon.id}`}>
         {isDreamWorldSelected && (
-          <img
-            className="pokemon-card-image-dream-world"
-            src={pokemon.sprites.other.dream_world.front_default}
-            alt={pokemon.name}
-          />
+          <DynamicSprite id={pokemon.id} type="dream world" />
         )}
         {isOfficialSelected && (
-          <img
-            className="pokemon-card-image-official"
-            src={Object.values(pokemon.sprites.other)[1].front_default}
-            alt={pokemon.name}
-          />
+          <DynamicSprite id={pokemon.id} type="official" />
         )}
-        {isDefaultSelected && (
-          <img
-            className="pokemon-card-image-default"
-            src={pokemon.sprites.front_default}
-            alt={pokemon.name}
-          />
-        )}
+        {isDefaultSelected && <DynamicSprite id={pokemon.id} type="default" />}
         {isBlackAndWhiteAnimatedSelected && (
-          <DynamicSprite id={pokemon.id} type="black and white" />
+          <DynamicSprite id={pokemon.id} type="black and white animated" />
         )}
-        {isShinySelected && (
-          <img
-            className="pokemon-card-image-shiny"
-            src={pokemon.sprites.front_shiny}
-            alt={pokemon.name}
-          />
-        )}
+        {isShinySelected && <DynamicSprite id={pokemon.id} type="shiny" />}
         {isShinyAnimatedSelected && (
-          <DynamicSprite id={pokemon.id} type="shiny" />
+          <DynamicSprite id={pokemon.id} type="shiny animated" />
         )}
         {is3dSelected && <DynamicSprite id={6} type="3d" name={pokemon.name} />}
       </Link>
