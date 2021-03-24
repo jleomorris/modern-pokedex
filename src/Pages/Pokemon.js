@@ -11,6 +11,7 @@ import OptionsFilters from '../components/OptionsFilters';
 import PokemonTiles from '../components/PokemonTiles';
 import Pokeball from '../components/Pokeball';
 import Footer from '../components/Footer';
+import ScrollToTopOfPage from '../components/ScrollToTopOfPage';
 
 const Pokemon = () => {
   // Redux

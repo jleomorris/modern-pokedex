@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 import screenshotBackground from '../img/home_background.jpg'; // Image courtesy of geocen on Fanpop
 // Components
 import Footer from '../components/Footer';
+import ScrollToTopOfPage from '../components/ScrollToTopOfPage';
 // Animations
 import pageAnimation from '../animation';
 
@@ -26,6 +27,7 @@ const Home = () => {
         animate="show"
         exit="exit"
       >
+        <ScrollToTopOfPage />
         <StyledHome
           variants={pageAnimation}
           initial="hidden"
