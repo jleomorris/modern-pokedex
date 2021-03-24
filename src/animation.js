@@ -3,8 +3,8 @@ export const container = {
   show: {
     opacity: 1,
     transition: {
-      // when: "beforeChildren",
-      staggerChildren: 1,
+      when: 'beforeChildren',
+      staggerChildren: 0.2,
     },
   },
 };
@@ -63,7 +63,7 @@ export const titleAnimation = {
   },
 };
 
-export const fade = {
+export const fadeIn = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
@@ -104,7 +104,7 @@ export const scrollRevealRight = {
   show: {
     opacity: 1,
     x: 0,
-    transition: { duration: 1, ease: 'easeOut' },
+    transition: { duration: 0.75, ease: 'easeOut' },
   },
 };
 
@@ -113,7 +113,7 @@ export const scrollRevealLeft = {
   show: {
     opacity: 1,
     x: 0,
-    transition: { duration: 1, ease: 'easeOut' },
+    transition: { duration: 0.75, ease: 'easeOut' },
   },
 };
 
@@ -122,7 +122,7 @@ export const scrollRevealBottom = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 1, ease: 'easeOut' },
+    transition: { duration: 0.75, ease: 'easeOut' },
   },
 };
 
