@@ -193,6 +193,7 @@ const Pokemon = () => {
           isBlurActive ? 'enable-blur enable-cursor' : ''
         } ${isDarkModeActive ? 'dark-mode' : ''}`}
       >
+        <ScrollToTopOfPage />
         {pathId && (
           <PokemonDetails
             pathId={pathId}
