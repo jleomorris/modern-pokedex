@@ -519,6 +519,7 @@ const StyledEvolutionChart = styled.div`
       align-items: center;
       height: 140px;
       margin-top: 1rem;
+      z-index: 1;
 
       .base-stage-name,
       .first-evolution-name,

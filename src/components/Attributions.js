@@ -2,13 +2,12 @@ import React from 'react';
 // Styled components
 import styled from 'styled-components';
 // Images
-import info from '../img/info.svg';
-import wallpaper from '../img/attributions_wallpaper.png';
+import zapdos from '../img/attributions_wallpaper.png';
 
 const Attributions = () => {
   return (
     <StyledAttributions className="attributions">
-      <img className="wallpaper" src={wallpaper} alt="wallpaper" />
+      <img className="zapdos" src={zapdos} alt="zapdos" />
       <h1>Attributions</h1>
       <ul>
         <li>
@@ -58,8 +57,9 @@ const StyledAttributions = styled.div`
   background: white;
   position: relative;
   flex-direction: column;
+  padding: 2rem;
 
-  .wallpaper {
+  .zapdos {
     position: absolute;
     top: 40px;
     right: 40px;
@@ -68,17 +68,33 @@ const StyledAttributions = styled.div`
     z-index: 0;
   }
 
-  h1 {
+  /* h1 {
     font-size: 10rem;
     text-transform: uppercase;
     letter-spacing: 1rem;
     color: #000000b3;
-    /* margin-right: -40vh; */
-    /* text-shadow: 0px 0px 10px black; */
     margin: 2rem;
-    /* margin-right: -52vh; */
     z-index: 1;
     align-self: flex-start;
+  } */
+
+  h1 {
+    font-size: 5rem;
+    width: 80vw;
+    color: white;
+    text-shadow: 0px 5px 30px rgb(0 0 0);
+    padding: 2rem;
+    font-weight: 100;
+    align-self: flex-start;
+    color: black;
+
+    @media (max-width: 800px) {
+      font-size: 3rem;
+    }
+
+    @media (max-width: 500px) {
+      font-size: 2rem;
+    }
   }
 
   ul {
@@ -93,7 +109,6 @@ const StyledAttributions = styled.div`
       line-height: 4rem;
 
       .asset {
-        font-size: 2.5rem;
         font-weight: 900;
       }
     }
