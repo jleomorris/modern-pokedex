@@ -36,7 +36,7 @@ const PokemonTiles = ({
             No results
           </h2>
         )}
-      {typeData &&
+      {typeData.length > 0 &&
         filteredData &&
         filteredData.map((pokemon) => (
           <Tile

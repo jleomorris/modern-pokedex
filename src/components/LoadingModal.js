@@ -1,12 +1,19 @@
 // Animation and design courtesy of Athanstan https://github.com/athanstan
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 // Styled components
 import styled from 'styled-components';
 // Redux
 import { useSelector } from 'react-redux';
+// Carousel
+import { Carousel } from 'react-responsive-carousel';
+import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
+// Quotes
+import { LoadingPageQuotes } from '../LoadingPageQuotes';
 
-const PokeBall = () => {
+const LoadingModal = () => {
+  const [facts, setFacts] = useState();
+
   useEffect(() => {
     document.body.style.overflow = 'hidden';
   }, []);
@@ -17,25 +24,55 @@ const PokeBall = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const randomFacts = LoadingPageQuotes().sort(() => Math.random() - 0.5);
+    setFacts(randomFacts);
+  }, []);
+
   // Redux
   const dataLoaded = useSelector((state) => state.pokemon.pokemonLoaded);
+
   return (
-    <StyledPokeball className="poke-ball">
+    <StyledLoadingModal className="poke-ball">
       <div className="pokeball-container">
-        <div className="pokeball">
-          <div className="pokeball__button" />
+        <div className="loading-block">
+          <div className="pokeball">
+            <div className="pokeball__button" />
+          </div>
+          <h2 className="loading-percentage">
+            {`${Math.round((dataLoaded / 302) * 100)}%`}
+          </h2>
+          <h2>Loaded </h2>
         </div>
-        <h2 className="loading-percentage">
-          {`${Math.round((dataLoaded / 302) * 100)}%`}
-        </h2>
-        <h2>Loaded </h2>
+        <div className="fact-block">
+          <Carousel
+            showArrows={false}
+            showStatus={false}
+            showIndicators={false}
+            autoPlay
+            infiniteLoop
+            // axis="vertical"
+            dynamicHeight
+            interval={5000}
+            //   onChange={onChange}
+            //   onClickItem={onClickItem}
+            //   onClickThumb={onClickThumb}
+          >
+            {facts &&
+              facts.map((fact) => (
+                <div className="slide">
+                  <p>{fact}</p>
+                </div>
+              ))}
+          </Carousel>
+        </div>
       </div>
-    </StyledPokeball>
+    </StyledLoadingModal>
   );
 };
 
 // Styled components
-const StyledPokeball = styled.div`
+const StyledLoadingModal = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -44,7 +81,7 @@ const StyledPokeball = styled.div`
   align-items: center;
   height: 100vh;
   width: 100%;
-  background: #000000b8;
+  background: #000000e8;
   z-index: 999;
 
   .pokeball-container {
@@ -55,7 +92,36 @@ const StyledPokeball = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    width: 100%;
+
+    @media (max-width: 1200px) {
+      flex-direction: column;
+    }
+
+    .loading-block {
+      /* margin: 4rem; */
+      width: 30%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: flex-end;
+      padding-right: 8rem;
+    }
+
+    .fact-block {
+      width: 50%;
+      border-left: 4px solid white;
+
+      .slide {
+        p {
+          color: white;
+          padding: 2rem 8rem;
+          font-size: 2rem;
+          letter-spacing: 0.5rem;
+          text-align: left;
+        }
+      }
+    }
   }
 
   h2 {
@@ -172,4 +238,4 @@ const StyledPokeball = styled.div`
     }
   }
 `;
-export default PokeBall;
+export default LoadingModal;

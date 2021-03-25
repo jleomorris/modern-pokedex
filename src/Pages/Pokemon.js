@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import PokemonDetails from '../components/PokemonDetails';
 import OptionsFilters from '../components/OptionsFilters';
 import PokemonTiles from '../components/PokemonTiles';
-import Pokeball from '../components/Pokeball';
+import LoadingModal from '../components/LoadingModal';
 import Footer from '../components/Footer';
 import ScrollToTopOfPage from '../components/ScrollToTopOfPage';
 
@@ -242,7 +242,7 @@ const Pokemon = () => {
           !isFilterBySearchActive &&
           !isFilterByTypeActive &&
           !isFilterByStatActive &&
-          filteredData.length === 0 && <Pokeball />}
+          filteredData.length === 0 && <LoadingModal />}
       </StyledPokemon>
       <Footer />
     </>
