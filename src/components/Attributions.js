@@ -42,6 +42,10 @@ const Attributions = () => {
           <span className="asset">Move category and first edition icons </span>-
           Bulbapedia
         </li>
+        <li>
+          <span className="asset">Pokemon quotes </span>- sweetyhigh.com,
+          factcity.com, softschools.com
+        </li>
       </ul>
       {/* </div> */}
     </StyledAttributions>
