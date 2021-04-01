@@ -44,7 +44,7 @@ const Attributions = () => {
         </li>
         <li>
           <span className="asset">Pokemon quotes </span>- sweetyhigh.com,
-          factcity.com, softschools.com
+          factcity.com, softschools.com, factinate.com, thefactsite.com
         </li>
       </ul>
       {/* </div> */}
