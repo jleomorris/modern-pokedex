@@ -12,6 +12,7 @@ import card from '../img/feature_gallery/card.png';
 import attack from '../img/stats/attack.svg';
 import fire from '../img/pokemon_type_symbols/fire.png';
 import search from '../img/feature_gallery/search.png';
+import factBulb from '../img/feature_gallery/fact.png';
 // Components
 import DynamicSprite from './DynamicSprite';
 
@@ -60,7 +61,7 @@ const FeatureGallery = () => {
           <h2 className="title">Filter by highest base stat</h2>
         </StyledFeature>
         <StyledFeature className="feature" variants={fadeIn}>
-          <img src={attack} alt="attack" />
+          <img src={factBulb} alt="fact bulb" />
           <h2 className="title">Facts while you wait</h2>
         </StyledFeature>
       </motion.div>
