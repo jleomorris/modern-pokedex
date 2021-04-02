@@ -1,11 +1,11 @@
 export const LoadingPageQuotes = () => {
   return [
-    'The first Pokémon ever designed was actually a rock and ground-type - Rhydon! The Rhydon statues found throughout the games are a little tribute to it',
-    'Some people think that "Pokémon" is a Japanese word It\'s not Pokémon is actually a contraction of "Pocket Monsters," the original name of the franchise in Japan',
+    'The first Pokémon ever designed was Rhydon! The Rhydon statues found throughout the games are a little tribute to it',
+    'Some think "Pokémon" is a Japanese word but it\'s actually a contraction of "Pocket Monsters," the original name of the franchise in Japan',
     'Satoshi Tajiri first developed the Pokémon concept back in 1989, having collected insects as a child',
     'The Pokémon Company generates an average of $15 billion each year',
     'Pokemon is a worldwide phenomenon that’s nearly 30 years old and Vietnam are the biggest fans',
-    'In the original games, Arcanine was meant to be a legendary pokémon, along with Zapdos and Articuno, but the game designers thought that it might be confusing two have two birds and a dog as the legendary trio',
+    'In the original games, Arcanine was meant to be a legendary pokémon, along with Zapdos and Articuno',
     'Bulbasaur is the only unevolved dual type starter Pokémon',
     'Ivysaur is the only Generation I Pokémon whose name begins with the letter I',
     'Venusaur is a combination of the words Venus which refers to the Venus Flytrap plant, and the Greek word saur, meaning lizard',
