@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 // Images
 import rightArrow from '../img/right-arrow-white.svg';
+// Components
+import DynamicSprite from './DynamicSprite';
 
 const ForwardBackButtons = ({ selectedPokemon, setPokemonId }) => {
   // Redux
@@ -54,10 +56,10 @@ const ForwardBackButtons = ({ selectedPokemon, setPokemonId }) => {
         >
           <p className="former-pokemon-id">#{formerPokemon[0].id}</p>
           <img className="back-arrow" src={rightArrow} alt="back arrow" />
-          <img
-            className="former-pokemon-image-official"
-            src={Object.values(formerPokemon[0].sprites.other)[1].front_default}
-            alt={formerPokemon[0].name}
+          <DynamicSprite
+            id={formerPokemon[0].id}
+            type="official"
+            customClass="former-pokemon-image-official"
           />
         </button>
       )}
@@ -71,10 +73,10 @@ const ForwardBackButtons = ({ selectedPokemon, setPokemonId }) => {
         >
           <p className="next-pokemon-id">#{nextPokemon[0].id}</p>
           <img className="forward-arrow" src={rightArrow} alt="forward arrow" />
-          <img
-            className="next-pokemon-image-official"
-            src={Object.values(nextPokemon[0].sprites.other)[1].front_default}
-            alt={nextPokemon[0].name}
+          <DynamicSprite
+            id={nextPokemon[0].id}
+            type="official"
+            customClass="next-pokemon-image-official"
           />
         </button>
       )}
@@ -99,9 +101,7 @@ const StyledForwardBackButtons = styled.div`
   }
 
   button {
-    outline: none;
     border: none;
-    /* margin: 0rem 0.5rem; */
     cursor: pointer;
     background: rgba(256, 256, 256, 0.3);
     padding: 1.5rem;
