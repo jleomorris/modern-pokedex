@@ -6,6 +6,7 @@ const DynamicSprite = ({
   name,
   mouseEnterHandler,
   mouseLeaveHandler,
+  customClass,
 }) => {
   const [source, setSource] = useState(null);
 
@@ -43,7 +44,7 @@ const DynamicSprite = ({
           type === 'official' ? 'pokemon-card-image-official' : ''
         } ${type === 'default' ? 'pokemon-card-image-default' : ''} ${
           type === 'dream world' ? 'pokemon-card-image-dream-world' : ''
-        }`}
+        } ${customClass}`}
         src={source}
         alt="sprite animation"
         onMouseEnter={mouseEnterHandler}
