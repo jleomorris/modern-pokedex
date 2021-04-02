@@ -10,10 +10,20 @@ const SpriteGallery = ({
   flipHandler,
 }) => {
   const spriteChangeHandler = (type) => {
-    // if (type === 'official') {
     spriteSelectionHandler(type);
     flipHandler();
-    // }
+  };
+
+  const spriteMouseEnterHandler = (e) => {
+    console.log(e);
+    // e.target.offsetParent.children[0].style.border = '5px solid #ffff7a';
+    e.target.offsetParent.children[0].style.background = '#ffff7a';
+  };
+
+  const spriteMouseLeaveHandler = (e) => {
+    console.log(e);
+    e.target.offsetParent.children[0].style.background = '#ffffffa3';
+    // e.target.offsetParent.children[0].style.border = 'unset';
   };
 
   return (
@@ -24,23 +34,22 @@ const SpriteGallery = ({
         <div className="sprite">
           <div className="circle" />
           <button type="button" onClick={() => spriteChangeHandler('official')}>
-            <img
-              className="official-sprite"
-              src={
-                Object.values(selectedPokemon[0].sprites.other)[1].front_default
-              }
-              alt="default-sprite"
-              value="official"
+            <DynamicSprite
+              id={selectedPokemon[0].id}
+              type="official"
+              mouseEnterHandler={spriteMouseEnterHandler}
+              mouseLeaveHandler={spriteMouseLeaveHandler}
             />
           </button>
         </div>
         <div className="sprite">
           <div className="circle" />
           <button type="button" onClick={() => spriteChangeHandler('default')}>
-            <img
-              className="default-sprite"
-              src={selectedPokemon[0].sprites.front_default}
-              alt="default-sprite"
+            <DynamicSprite
+              id={selectedPokemon[0].id}
+              type="default"
+              mouseEnterHandler={spriteMouseEnterHandler}
+              mouseLeaveHandler={spriteMouseLeaveHandler}
             />
           </button>
         </div>
@@ -50,6 +59,8 @@ const SpriteGallery = ({
             <DynamicSprite
               id={selectedPokemon[0].id}
               type="black and white animated"
+              mouseEnterHandler={spriteMouseEnterHandler}
+              mouseLeaveHandler={spriteMouseLeaveHandler}
             />
           </button>
         </div>
@@ -59,20 +70,22 @@ const SpriteGallery = ({
             type="button"
             onClick={() => spriteChangeHandler('dream world')}
           >
-            <img
-              className="dream-world-sprite"
-              src={selectedPokemon[0].sprites.other.dream_world.front_default}
-              alt="default-sprite"
+            <DynamicSprite
+              id={selectedPokemon[0].id}
+              type="dream world"
+              mouseEnterHandler={spriteMouseEnterHandler}
+              mouseLeaveHandler={spriteMouseLeaveHandler}
             />
           </button>
         </div>
         <div className="sprite">
           <div className="circle" />
           <button type="button" onClick={() => spriteChangeHandler('shiny')}>
-            <img
-              className="shiny-sprite"
-              src={selectedPokemon[0].sprites.front_shiny}
-              alt="default-sprite"
+            <DynamicSprite
+              id={selectedPokemon[0].id}
+              type="shiny"
+              mouseEnterHandler={spriteMouseEnterHandler}
+              mouseLeaveHandler={spriteMouseLeaveHandler}
             />
           </button>
         </div>
@@ -82,13 +95,23 @@ const SpriteGallery = ({
             type="button"
             onClick={() => spriteChangeHandler('shiny animated')}
           >
-            <DynamicSprite id={selectedPokemon[0].id} type="shiny animated" />
+            <DynamicSprite
+              id={selectedPokemon[0].id}
+              type="shiny animated"
+              mouseEnterHandler={spriteMouseEnterHandler}
+              mouseLeaveHandler={spriteMouseLeaveHandler}
+            />
           </button>
         </div>
         <div className="sprite">
           <div className="circle" />
           <button type="button" onClick={() => spriteChangeHandler('3D')}>
-            <DynamicSprite type="3d" name={selectedPokemon[0].name} />
+            <DynamicSprite
+              type="3d"
+              name={selectedPokemon[0].name}
+              mouseEnterHandler={spriteMouseEnterHandler}
+              mouseLeaveHandler={spriteMouseLeaveHandler}
+            />
           </button>
         </div>
       </div>
@@ -127,6 +150,24 @@ const StyledSpriteGallery = styled.div`
     .sprite {
       position: relative !important;
       margin: 1rem;
+
+      button {
+        img {
+          height: 125px;
+          width: 125px;
+          object-fit: contain;
+
+          @media (max-width: 800px) {
+            height: 80px;
+            width: 80px;
+          }
+
+          @media (max-width: 400px) {
+            height: 60px;
+            width: 60px;
+          }
+        }
+      }
     }
 
     .circle {
@@ -141,6 +182,7 @@ const StyledSpriteGallery = styled.div`
       background: #ffffffa3;
       border-radius: 50%;
       z-index: -1;
+      transition: 0.5s all ease;
 
       &:hover {
         background: #030000;
@@ -155,28 +197,6 @@ const StyledSpriteGallery = styled.div`
         height: 70px;
         width: 70px;
       }
-    }
-  }
-
-  .official-sprite,
-  .default-sprite,
-  .dream-world-sprite,
-  .shiny-sprite,
-  .default-sprite-animation,
-  .shiny-sprite-animation,
-  .sprite-animation-3d {
-    height: 125px;
-    width: 125px;
-    object-fit: contain;
-
-    @media (max-width: 800px) {
-      height: 80px;
-      width: 80px;
-    }
-
-    @media (max-width: 400px) {
-      height: 60px;
-      width: 60px;
     }
   }
 `;

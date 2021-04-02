@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-const DynamicSprite = ({ id, type, name }) => {
+const DynamicSprite = ({
+  id,
+  type,
+  name,
+  mouseEnterHandler,
+  mouseLeaveHandler,
+}) => {
   const [source, setSource] = useState(null);
 
   useEffect(async () => {
@@ -40,6 +46,8 @@ const DynamicSprite = ({ id, type, name }) => {
         }`}
         src={source}
         alt="sprite animation"
+        onMouseEnter={mouseEnterHandler}
+        onMouseLeave={mouseLeaveHandler}
       />
     )
   );
