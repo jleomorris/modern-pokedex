@@ -19,6 +19,8 @@ import LocationArea from './LocationArea';
 import StrengthsWeaknesses from './StrengthsWeaknesses';
 import ScrollToTop from './ScrollToTop';
 import SpriteGallery from './SpriteGallery';
+import InnerDetailsNav from './InnerDetailsNav';
+
 // Images
 import close from '../img/close-button.svg';
 import egg from '../img/egg.png';
@@ -31,6 +33,7 @@ import { scrollRevealRight } from '../animation';
 import {
   convertTypeToColor,
   convertToTypeImage,
+  convertToTypeBackground,
   removeNonAscii,
 } from '../util';
 
@@ -69,6 +72,7 @@ const InnerDetails = ({
   // Automate card flip
   useEffect(() => {
     document.body.style.overflow = 'hidden';
+
     setTimeout(() => {
       setisResponsiveCardFlipped((prev) => !prev);
     }, 1750);
@@ -135,135 +139,146 @@ const InnerDetails = ({
       >
         <img src={close} alt="exit" />
       </button>
-      <ForwardBackButtons
-        setPokemonId={setPokemonId}
-        selectedPokemon={selectedPokemon}
-      />
-      <div className="title-id-container">
-        <motion.h2
-          variants={scrollRevealRight}
-          initial="hidden"
-          animate="show"
-          exit="exit"
-          className="pokemon-card-id"
-        >
-          #{selectedPokemon[0].id}
-        </motion.h2>
-        <motion.h2
-          variants={scrollRevealRight}
-          initial="hidden"
-          animate="show"
-          exit="exit"
-          className="pokemon-title"
-        >
-          {selectedPokemon[0].name}
-        </motion.h2>
-        <p className="legendary-tag">
-          {selectedPokemon[0].is_legendary ? 'Legendary' : ''}
-        </p>
-      </div>
-      <div className={`type ${selectedPokemon[0].is_legendary ? 'mt-1' : ''}`}>
-        {selectedPokemon[0].types.map((type) => (
-          <p
-            style={{
-              background: convertTypeToColor(type.type.name),
-            }}
-            key={type.type.name}
+      <div className="inner-details-header">
+        {convertToTypeBackground(selectedPokemon[0].types[0].type.name)}
+        <ForwardBackButtons
+          setPokemonId={setPokemonId}
+          selectedPokemon={selectedPokemon}
+        />
+        <div className="title-id-container">
+          <motion.h2
+            variants={scrollRevealRight}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            className="pokemon-card-id"
           >
-            {type.type.name}
+            #{selectedPokemon[0].id}
+          </motion.h2>
+          <motion.h2
+            variants={scrollRevealRight}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            className="pokemon-title"
+          >
+            {selectedPokemon[0].name}
+          </motion.h2>
+          <p className="legendary-tag">
+            {selectedPokemon[0].is_legendary ? 'Legendary' : ''}
           </p>
-        ))}
-      </div>
-      <div className="description">
-        {description && <p>{removeNonAscii(description[0].flavor_text)}</p>}
-      </div>
-      {selectedPokemon && onMobile && (
-        <ReactCardFlip
-          className="react-card-flip"
-          isFlipped={isResponsiveCardFlipped}
-          flipDirection="horizontal"
-          infinite
-          flipSpeedBackToFront="0.5"
-          flipSpeedFrontToBack="0.5"
+        </div>
+        <div
+          className={`type ${selectedPokemon[0].is_legendary ? 'mt-1' : ''}`}
         >
-          <PokemonCardBody
-            key="front"
-            pathId={pathId}
-            cardFlipHandler={responsiveCardFlipHandler}
-            isDefaultSelected={isDefaultSelected}
-            isDreamWorldSelected={isDreamWorldSelected}
-            isOfficialSelected={isOfficialSelected}
-            isShinySelected={isShinySelected}
-            isShinyAnimatedSelected={isShinyAnimatedSelected}
-            isBlackAndWhiteAnimatedSelected={isBlackAndWhiteAnimatedSelected}
-            is3dSelected={is3dSelected}
-          />
-          <div
-            className="card-back"
-            key="back"
-            // onClick={cardFlipHandler}
-            // onKeyPress={cardFlipHandler}
-            // role="button"
-            // tabIndex="0"
-          >
-            <img className="back-image" src={cardBack} alt="card-back" />
-            <SpriteGallery
-              selectedPokemon={selectedPokemon}
-              spriteSelectionHandler={spriteSelectionHandler}
-              flipHandler={responsiveCardFlipHandler}
-            />
-          </div>
-        </ReactCardFlip>
-      )}
-      <Abilities abilityData={abilityData} selectedPokemon={selectedPokemon} />
-      <StrengthsWeaknesses selectedPokemon={selectedPokemon} />
-      <div className="training-egg-container">
-        <div className="training">
-          <img src={training} alt="training" className="training-icon" />
-          <h3>Training</h3>
-          <div className="stat">
-            <p className="title">Base happiness</p>
-            <p className="detail">{selectedPokemon[0].base_happiness}</p>
-          </div>
-          <div className="stat">
-            <p className="title">Catch rate</p>
-            <p className="detail">{selectedPokemon[0].capture_rate}</p>
-          </div>
-          <div className="stat">
-            <p className="title">Base exp</p>
-            <p className="detail">{selectedPokemon[0].base_experience}</p>
-          </div>
-          <div className="stat">
-            <p className="title">Growth rate</p>
-            <p className="detail">{selectedPokemon[0].growth_rate.name}</p>
-          </div>
+          {selectedPokemon[0].types.map((type) => (
+            <p
+              style={{
+                background: convertTypeToColor(type.type.name),
+              }}
+              key={type.type.name}
+            >
+              {type.type.name}
+            </p>
+          ))}
         </div>
-        <div className="egg">
-          <img src={egg} alt="egg" className="egg-icon" />
-          <h3>Egg</h3>
-          <div className="stat">
-            <p className="title">Egg groups</p>
-            {selectedPokemon[0].egg_groups.map((group, index) => (
-              <p className="detail" key={group.name}>
-                {index !== selectedPokemon[0].egg_groups.length - 1
-                  ? `${group.name},`
-                  : group.name}
-              </p>
-            ))}
-          </div>
-          <div className="stat">
-            <p className="title">Cycles</p>
-            <p className="detail">{selectedPokemon[0].hatch_counter}</p>
-          </div>
+        <div className="description">
+          {description && <p>{removeNonAscii(description[0].flavor_text)}</p>}
         </div>
+        <InnerDetailsNav />
       </div>
-      <LocationArea selectedPokemon={selectedPokemon} />
-      <EvolutionChart
-        pokemonData={pokemonData}
-        selectedPokemon={selectedPokemon}
-      />
-      <Moves ownMoves={ownMoves} selectedPokemon={selectedPokemon} />
-      <ScrollToTop />
+      <div className="inner-details-body">
+        {selectedPokemon && onMobile && (
+          <ReactCardFlip
+            className="react-card-flip"
+            isFlipped={isResponsiveCardFlipped}
+            flipDirection="horizontal"
+            infinite
+            flipSpeedBackToFront="0.5"
+            flipSpeedFrontToBack="0.5"
+          >
+            <PokemonCardBody
+              key="front"
+              pathId={pathId}
+              cardFlipHandler={responsiveCardFlipHandler}
+              isDefaultSelected={isDefaultSelected}
+              isDreamWorldSelected={isDreamWorldSelected}
+              isOfficialSelected={isOfficialSelected}
+              isShinySelected={isShinySelected}
+              isShinyAnimatedSelected={isShinyAnimatedSelected}
+              isBlackAndWhiteAnimatedSelected={isBlackAndWhiteAnimatedSelected}
+              is3dSelected={is3dSelected}
+            />
+            <div
+              className="card-back"
+              key="back"
+              // onClick={cardFlipHandler}
+              // onKeyPress={cardFlipHandler}
+              // role="button"
+              // tabIndex="0"
+            >
+              <img className="back-image" src={cardBack} alt="card-back" />
+              <SpriteGallery
+                selectedPokemon={selectedPokemon}
+                spriteSelectionHandler={spriteSelectionHandler}
+                flipHandler={responsiveCardFlipHandler}
+              />
+            </div>
+          </ReactCardFlip>
+        )}
+        <Abilities
+          abilityData={abilityData}
+          selectedPokemon={selectedPokemon}
+        />
+        <StrengthsWeaknesses selectedPokemon={selectedPokemon} />
+        <div className="training-egg-container">
+          <div className="training">
+            <img src={training} alt="training" className="training-icon" />
+            <h3>Training</h3>
+            <div className="stat">
+              <p className="title">Base happiness</p>
+              <p className="detail">{selectedPokemon[0].base_happiness}</p>
+            </div>
+            <div className="stat">
+              <p className="title">Catch rate</p>
+              <p className="detail">{selectedPokemon[0].capture_rate}</p>
+            </div>
+            <div className="stat">
+              <p className="title">Base exp</p>
+              <p className="detail">{selectedPokemon[0].base_experience}</p>
+            </div>
+            <div className="stat">
+              <p className="title">Growth rate</p>
+              <p className="detail">{selectedPokemon[0].growth_rate.name}</p>
+            </div>
+          </div>
+          <div className="egg">
+            <img src={egg} alt="egg" className="egg-icon" />
+            <h3>Egg</h3>
+            <div className="stat">
+              <p className="title">Egg groups</p>
+              {selectedPokemon[0].egg_groups.map((group, index) => (
+                <p className="detail" key={group.name}>
+                  {index !== selectedPokemon[0].egg_groups.length - 1
+                    ? `${group.name},`
+                    : group.name}
+                </p>
+              ))}
+            </div>
+            <div className="stat">
+              <p className="title">Cycles</p>
+              <p className="detail">{selectedPokemon[0].hatch_counter}</p>
+            </div>
+          </div>
+        </div>
+        <LocationArea selectedPokemon={selectedPokemon} />
+        <EvolutionChart
+          pokemonData={pokemonData}
+          selectedPokemon={selectedPokemon}
+        />
+        <Moves ownMoves={ownMoves} selectedPokemon={selectedPokemon} />
+        <ScrollToTop />
+      </div>
     </StyledInnerDetails>
   );
 };
@@ -275,7 +290,6 @@ const StyledInnerDetails = styled.div`
   justify-content: flex-start;
   align-items: flex-end;
   padding-top: 7rem;
-  padding-right: 3rem;
   height: 100vh;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -322,6 +336,47 @@ const StyledInnerDetails = styled.div`
         top: unset;
         left: 0px;
       }
+    }
+  }
+
+  .inner-details-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    padding: 3rem;
+    padding-top: 0rem;
+
+    @media (max-width: 1200px) {
+      align-items: center;
+      padding-top: 4rem;
+    }
+
+    .background-image {
+      position: absolute;
+      top: -10px;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      filter: brightness(0.8);
+      z-index: -2;
+      border-radius: 0rem 0rem 4rem 4rem;
+    }
+  }
+
+  .inner-details-body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: column;
+    padding-right: 3rem;
+
+    @media (max-width: 1200px) {
+      align-items: center;
+      padding-right: unset;
     }
   }
 
@@ -384,12 +439,15 @@ const StyledInnerDetails = styled.div`
     top: 70px;
     right: 0;
     font-size: 15rem;
-    opacity: 0.2;
+    opacity: 0.5;
     text-transform: uppercase;
     letter-spacing: 0.5rem;
     margin: 2rem 0rem;
     z-index: -1;
 
+    @media (max-width: 1000px) {
+      font-size: 10rem;
+    }
     @media (max-width: 800px) {
       font-size: 5rem;
     }

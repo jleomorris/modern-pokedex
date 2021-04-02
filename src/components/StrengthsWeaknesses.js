@@ -19,8 +19,6 @@ const strengthsWeaknesses = ({ selectedPokemon }) => {
     const noDamageFrom = [];
     const noDamageTo = [];
 
-    // console.log('typeData', typeData);
-
     currentCardTypes.forEach((type) => {
       const filteredTypeData = typeData.filter(
         (data) => data.name === type.type.name
@@ -83,6 +81,7 @@ const strengthsWeaknesses = ({ selectedPokemon }) => {
 
   return (
     <StyledStrengthsWeaknesses className="strengths-weaknesses-container">
+      <h3>Damage types</h3>
       <table className="strengths-weaknesses-table">
         <thead>
           <tr>
@@ -231,6 +230,13 @@ const StyledStrengthsWeaknesses = styled.div`
 
   @media (max-width: 1500px) {
     width: 90%;
+  }
+
+  h3 {
+    color: white;
+    width: 100%;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
   }
 
   table {

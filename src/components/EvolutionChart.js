@@ -110,7 +110,6 @@ const EvolutionChart = ({ pokemonData, selectedPokemon }) => {
 
   return (
     <StyledEvolutionChart className="evolution-chart-container">
-      {/* <h3>Evolution chart</h3> */}
       <div className="evolution-chart">
         <div className="user-message">
           <p>*Pokemon are size proportionate to Ash (who is 5ft in height)</p>
@@ -477,7 +476,7 @@ const StyledEvolutionChart = styled.div`
           right: 20px;
           font-weight: 900;
           font-size: 1.5rem;
-          left: 0px;
+          left: 5px;
           text-shadow: 0px 0px 5px black;
 
           @media (max-width: 1500px) {

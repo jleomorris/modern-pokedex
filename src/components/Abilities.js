@@ -53,7 +53,7 @@ const StyledContainer = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: flex-start;
-  margin-top: 2rem;
+  margin-top: 5rem;
 
   @media (max-width: 1500px) {
     width: 90%;
@@ -63,8 +63,6 @@ const StyledContainer = styled.div`
 
 const StyledAbilities = styled.div`
   width: 45%;
-  /* padding: 2rem; */
-  /* margin: 2rem 0rem; */
   display: flex;
   flex-direction: column;
   justify-content: center;

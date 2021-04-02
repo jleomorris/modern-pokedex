@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 const Nav = () => {
   return (
-    <StyledNav>
+    <StyledNav className="nav">
       <nav>
         <h1>Modern Pokedex</h1>
         <ul>
