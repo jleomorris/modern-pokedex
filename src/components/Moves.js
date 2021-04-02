@@ -126,7 +126,7 @@ const Moves = ({ selectedPokemon }) => {
 
   return (
     <StyledMoves className="move-container">
-      <h3>Own moves</h3>
+      <h3 className="own-moves">Own moves</h3>
       <table className="move-table">
         <thead>
           <tr>
@@ -172,7 +172,7 @@ const Moves = ({ selectedPokemon }) => {
             </tbody>
           ))}
       </table>
-      <h3>Machine moves</h3>
+      <h3 className="machine-moves">Machine moves</h3>
       <table className="move-table">
         <tr>
           <th className="move-header show-on-mobile">Name</th>
