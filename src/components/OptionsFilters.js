@@ -69,7 +69,7 @@ const OptionsFilters = ({
           {is3dSelected && <DynamicSprite id={6} type="3d" name="charizard" />}
         </div>
         <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>
-          Change sprite type
+          Sprite type
         </p>
         <Select
           defaultValue="official"
@@ -94,9 +94,7 @@ const OptionsFilters = ({
         />
       </div>
       <div className="type-filter-container" style={{ zIndex: '3' }}>
-        <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>
-          Filter by element
-        </p>
+        <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>Element</p>
         <Select
           defaultValue={selectedTypeOption}
           style={{ zIndex: '3' }}
@@ -108,7 +106,7 @@ const OptionsFilters = ({
       </div>
       <div className="stat-filter-container" style={{ zIndex: '3' }}>
         <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>
-          Filter by max stat
+          Max stat
         </p>
         <Select
           defaultValue={selectedStatOption}
@@ -118,9 +116,7 @@ const OptionsFilters = ({
         />
       </div>
       <div className="search-container">
-        <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>
-          Filter by search
-        </p>
+        <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>Search</p>
         <input
           type="text"
           className="search-pokemon"
@@ -227,7 +223,12 @@ const StyledOptionsFilters = styled.div`
       padding: 1rem;
       outline: none;
       border-radius: 1rem;
-      width: 20%;
+      width: 300px;
+      text-align: center;
+
+      @media (max-width: 400px) {
+        width: 200px;
+      }
     }
   }
 
@@ -236,10 +237,15 @@ const StyledOptionsFilters = styled.div`
   .sprite-change-container,
   .dark-mode-change-container {
     margin: 2rem;
+    width: 150px;
 
     @media (max-width: 400px) {
       margin: 1rem 2rem;
-      width: 30%;
+      width: 120px;
+    }
+    @media (max-width: 400px) {
+      margin: 1rem 2rem;
+      width: 75px;
     }
 
     p {
