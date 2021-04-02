@@ -71,16 +71,13 @@ const FeatureGallery = () => {
 
 // Styled components
 const StyledFeatureGallery = styled.div`
-  /* display: grid;
-  grid-column-gap: 1.5rem;
-  grid-row-gap: 1.5rem; */
   margin: 4rem auto;
-  /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important; */
   width: 70%;
 
-  /* @media (max-width: 800px) {
-    grid-template-columns: repeat(auto-fit, minmax(40%, 1fr)) !important;
-  } */
+  @media (max-width: 1200px) {
+    margin: 0rem auto;
+    width: 90%;
+  }
 
   .feature-row {
     display: grid;
@@ -90,8 +87,11 @@ const StyledFeatureGallery = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
     /* width: 70%; */
 
-    @media (max-width: 800px) {
-      grid-template-columns: repeat(auto-fit, minmax(40%, 1fr)) !important;
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    }
+    @media (max-width: 500px) {
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
     }
   }
 `;
@@ -109,18 +109,25 @@ const StyledFeature = styled(motion.div)`
   box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
   padding: 2rem;
 
-  @media (max-width: 400px) {
+  @media (max-width: 500px) {
     height: 200px;
   }
 
   img {
     margin: 1rem;
     width: 100px;
+
+    @media (max-width: 500px) {
+      width: 100px;
+      height: 70px;
+      object-fit: contain;
+    }
   }
 
   .title {
     text-align: center;
     font-weight: 100;
+    font-size: 1rem;
   }
 `;
 
