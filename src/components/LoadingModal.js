@@ -53,7 +53,7 @@ const LoadingModal = () => {
             infiniteLoop
             // axis="vertical"
             dynamicHeight
-            interval={5000}
+            interval={6000}
             //   onChange={onChange}
             //   onClickItem={onClickItem}
             //   onClickThumb={onClickThumb}
@@ -106,11 +106,27 @@ const StyledLoadingModal = styled.div`
       flex-direction: column;
       align-items: flex-end;
       padding-right: 8rem;
+
+      @media (max-width: 1200px) {
+        /* margin-bottom: 4rem; */
+        align-items: center;
+        padding-right: unset;
+      }
     }
 
     .fact-block {
       width: 50%;
       border-left: 4px solid white;
+      margin-top: 4rem;
+
+      @media (max-width: 1200px) {
+        border-top: 4px solid white;
+        border-left: unset;
+      }
+
+      @media (max-width: 500px) {
+        margin-top: 1rem;
+      }
 
       .slide {
         p {
@@ -119,6 +135,15 @@ const StyledLoadingModal = styled.div`
           font-size: 2rem;
           letter-spacing: 0.5rem;
           text-align: left;
+
+          @media (max-width: 1200px) {
+            padding: 4rem 0rem;
+          }
+
+          @media (max-width: 500px) {
+            padding: 1rem 1rem;
+            font-size: 1rem;
+          }
         }
       }
     }
@@ -131,6 +156,10 @@ const StyledLoadingModal = styled.div`
     font-weight: 100;
     text-transform: uppercase;
     color: white;
+
+    @media (max-width: 500px) {
+      font-size: 2rem;
+    }
   }
 
   .loading-percentage {
@@ -139,6 +168,10 @@ const StyledLoadingModal = styled.div`
     color: white;
     text-shadow: 0px 5px 20px black;
     z-index: -1;
+
+    @media (max-width: 500px) {
+      font-size: 2rem;
+    }
   }
 
   .pokeball {
@@ -154,7 +187,7 @@ const StyledLoadingModal = styled.div`
     /* animation-play-state: paused; */
     animation-play-state: running;
 
-    @media (max-width: 400px) {
+    @media (max-width: 500px) {
       width: 100px;
       height: 100px;
     }
@@ -218,7 +251,7 @@ const StyledLoadingModal = styled.div`
     /* animation-play-state: paused; */
     animation-play-state: running;
 
-    @media (max-width: 400px) {
+    @media (max-width: 500px) {
       top: calc(50% - 10px);
       left: calc(50% - 10px);
       width: 20px;
