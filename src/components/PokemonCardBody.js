@@ -346,7 +346,7 @@ const StyledPokemonCardBody = styled.div`
         @media (max-width: 400px) {
           font-size: 1.5rem;
           margin-left: 2rem;
-          margin-top: 1rem;
+          /* margin-top: 1rem; */
         }
       }
     }

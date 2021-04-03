@@ -75,6 +75,7 @@ const StyledInnerDetailsNav = styled.div`
 
   @media (max-width: 1200px) {
     justify-content: center;
+    margin-right: 0rem;
   }
 
   ul {
@@ -86,10 +87,13 @@ const StyledInnerDetailsNav = styled.div`
     flex-wrap: wrap;
     width: 70%;
 
+    @media (max-width: 1200px) {
+      width: 90%;
+    }
+
     button {
       background: none;
       border: none;
-      /* margin-right: 1rem; */
       color: white;
       font-size: 1rem;
       transition: all 0.5s ease;

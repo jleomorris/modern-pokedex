@@ -288,6 +288,7 @@ const StyledPokemonCard = styled.div`
         text-transform: capitalize;
         font-size: 2rem;
         margin-left: 3rem;
+        margin-top: 0rem;
       }
     }
 

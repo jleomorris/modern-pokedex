@@ -349,7 +349,23 @@ const StyledInnerDetails = styled.div`
 
     @media (max-width: 1200px) {
       align-items: center;
+      padding-right: 0rem;
       /* padding-top: 4rem; */
+    }
+
+    h2 {
+      color: white;
+      font-size: 10rem;
+      text-transform: capitalize;
+      margin-top: 2rem;
+
+      @media (max-width: 800px) {
+        font-size: 5rem;
+      }
+
+      @media (max-width: 400px) {
+        font-size: 3rem;
+      }
     }
 
     .background-image {
@@ -375,21 +391,6 @@ const StyledInnerDetails = styled.div`
     @media (max-width: 1600px) {
       align-items: center;
       padding-right: unset;
-    }
-  }
-
-  h2 {
-    color: white;
-    font-size: 10rem;
-    text-transform: capitalize;
-    margin-top: 2rem;
-
-    @media (max-width: 800px) {
-      font-size: 5rem;
-    }
-
-    @media (max-width: 400px) {
-      font-size: 3rem;
     }
   }
 
