@@ -31,11 +31,13 @@ const Pokemon = () => {
   const [isDarkModeActive, setIsDarkModeActive] = useState(false);
   const [isBlurActive, setIsBlurActive] = useState(false);
   const [isFilterByTypeActive, setIsFilterByTypeActive] = useState(false);
+  const [typeFilterInEffect, setTypeFilterInEffect] = useState();
   const [isFilterByStatActive, setIsFilterByStatActive] = useState(false);
+  const [statFilterInEffect, setStatFilterInEffect] = useState();
   const [isFilterBySearchActive, setIsFilterBySearchActive] = useState(false);
-  // const [typeFilterInEffect, setTypeFilterInEffect] = useState();
   const [selectedTypeOption, setSelectedTypeOption] = useState(null);
   const [selectedStatOption, setSelectedStatOption] = useState(null);
+  const [searchInputValue, setSearchInputValue] = useState('');
   // Router
   const location = useLocation();
   const pathId = location.pathname.split('/')[2];
@@ -95,7 +97,8 @@ const Pokemon = () => {
     console.log(e.target.value);
 
     const allPokemon = pokemonData;
-    const userInput = e.target.value;
+    const userInput = e.target.value.toLowerCase();
+    setSearchInputValue(userInput);
     const allTypeImages = document.querySelectorAll('.type-filter-image');
     const filteredByInput = allPokemon.filter((pokemon) =>
       pokemon.name.includes(userInput)
@@ -109,12 +112,17 @@ const Pokemon = () => {
     setFilteredData(filteredByInput);
     setIsFilterBySearchActive(true);
     if (userInput.length === 0) setIsFilterBySearchActive(false);
+    setTypeFilterInEffect('');
+    setStatFilterInEffect('');
   };
 
   // Filter pokemon by type
   const filterPokemonByTypeHandler = (e) => {
-    console.log(e.value);
+    setStatFilterInEffect();
+    setSearchInputValue('');
+
     const typeToFilter = e.value;
+    setTypeFilterInEffect(typeToFilter);
     const allPokemon = pokemonData;
     const filteredByType = [];
 
@@ -150,9 +158,13 @@ const Pokemon = () => {
     setIsFilterByTypeActive(true);
   };
 
+  // Filter pokemon by stat
   const filterPokemonByStatHandler = (e) => {
-    console.log(e.value);
+    setTypeFilterInEffect();
+    setSearchInputValue('');
+
     const statToFilter = e.value;
+    setStatFilterInEffect(statToFilter);
     const allPokemon = pokemonData;
     const filteredByStat = [];
 
@@ -223,6 +235,10 @@ const Pokemon = () => {
           isShinyAnimatedSelected={isShinyAnimatedSelected}
           is3dSelected={is3dSelected}
           isBlackAndWhiteAnimatedSelected={isBlackAndWhiteAnimatedSelected}
+          typeFilterInEffect={typeFilterInEffect}
+          statFilterInEffect={statFilterInEffect}
+          isFilterBySearchActive={isFilterBySearchActive}
+          searchInputValue={searchInputValue}
         />
         <PokemonTiles
           filteredData={filteredData}
@@ -243,6 +259,7 @@ const Pokemon = () => {
           !isFilterByTypeActive &&
           !isFilterByStatActive &&
           filteredData.length === 0 && <LoadingModal />}
+        {/* <LoadingModal /> */}
       </StyledPokemon>
       <Footer />
     </>

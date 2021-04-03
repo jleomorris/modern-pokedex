@@ -6,8 +6,6 @@ import Select from 'react-select';
 // Components
 import DynamicSprite from './DynamicSprite';
 // Images
-import charizardDefault from '../img/charizard_default.png';
-import charizardShiny from '../img/charizard_shiny.png';
 import lunatoneOfficial from '../img/lunatone_official.png';
 import solrockOfficial from '../img/solrock_official.png';
 // Util
@@ -16,6 +14,8 @@ import {
   reactSelectStatOptions,
   reactSelectSpriteOptions,
   reactSelectDarkModeOptions,
+  convertToTypeImage,
+  convertMaxStatToIcon,
 } from '../util';
 
 const OptionsFilters = ({
@@ -34,6 +34,10 @@ const OptionsFilters = ({
   isShinyAnimatedSelected,
   is3dSelected,
   isBlackAndWhiteAnimatedSelected,
+  typeFilterInEffect,
+  statFilterInEffect,
+  isFilterBySearchActive,
+  searchInputValue,
 }) => {
   // React select
   const typeOptions = reactSelectTypeOptions;
@@ -72,7 +76,7 @@ const OptionsFilters = ({
           Sprite type
         </p>
         <Select
-          defaultValue="official"
+          //   defaultValue="official"
           onChange={spriteSelectionHandler}
           options={spriteOptions}
           width="500px"
@@ -87,32 +91,49 @@ const OptionsFilters = ({
           Dark Mode
         </p>
         <Select
-          defaultValue="dark mode off"
+          //   defaultValue="dark mode off"
           onChange={darkModeHandler}
           options={darkModeOptions}
           width="500px"
         />
       </div>
       <div className="type-filter-container" style={{ zIndex: '3' }}>
+        <div className="container">
+          {typeFilterInEffect ? (
+            convertToTypeImage(typeFilterInEffect)
+          ) : (
+            <DynamicSprite id={0} type="official" customClass="reset-icon" />
+          )}
+        </div>
         <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>Element</p>
         <Select
-          defaultValue={selectedTypeOption}
+          //   defaultValue={selectedTypeOption}
           style={{ zIndex: '3' }}
           onChange={filterPokemonByTypeHandler}
           options={typeOptions}
           width="500px"
-          //   value={selectedTypeOption}
+          //   value={(statFilterInEffect || isFilterBySearchActive === true) && ''}
+          value={statFilterInEffect && ''}
         />
       </div>
       <div className="stat-filter-container" style={{ zIndex: '3' }}>
+        <div className="container">
+          {statFilterInEffect ? (
+            convertMaxStatToIcon(statFilterInEffect)
+          ) : (
+            <DynamicSprite id={0} type="official" customClass="reset-icon" />
+          )}
+        </div>
         <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>
           Max stat
         </p>
         <Select
-          defaultValue={selectedStatOption}
+          //   defaultValue={selectedStatOption}
           onChange={filterPokemonByStatHandler}
           options={statOptions}
           width="500px"
+          //   value={(typeFilterInEffect || isFilterBySearchActive === true) && ''}
+          value={typeFilterInEffect && ''}
         />
       </div>
       <div className="search-container">
@@ -121,6 +142,7 @@ const OptionsFilters = ({
           type="text"
           className="search-pokemon"
           onChange={filterPokemonBySearchHandler}
+          value={searchInputValue}
         />
       </div>
     </StyledOptionsFilters>
@@ -138,7 +160,9 @@ const StyledOptionsFilters = styled.div`
   flex-wrap: wrap;
 
   .sprite-change-container,
-  .dark-mode-change-container {
+  .dark-mode-change-container,
+  .type-filter-container,
+  .stat-filter-container {
     .container {
       position: relative;
       height: 100px;
@@ -152,6 +176,17 @@ const StyledOptionsFilters = styled.div`
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+      }
+
+      .stat-icon {
+        height: 70px;
+        width: 70px;
+      }
+
+      .type-symbol,
+      .reset-icon {
+        height: 80px;
+        width: 80px;
       }
     }
   }
@@ -239,7 +274,7 @@ const StyledOptionsFilters = styled.div`
     margin: 2rem;
     width: 150px;
 
-    @media (max-width: 400px) {
+    @media (max-width: 500px) {
       margin: 1rem 2rem;
       width: 120px;
     }
