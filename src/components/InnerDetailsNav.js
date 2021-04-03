@@ -71,6 +71,9 @@ const StyledInnerDetailsNav = styled.div`
     list-style: none;
     color: white;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 
     button {
       background: none;
@@ -78,9 +81,15 @@ const StyledInnerDetailsNav = styled.div`
       margin-right: 1rem;
       color: white;
       font-size: 1rem;
+      transition: all 0.5s ease;
+      border-bottom: 1px solid rgba(255, 255, 255, 0);
+
+      &:hover {
+        border-bottom: 1px solid white;
+      }
 
       li {
-        margin-right: 1rem;
+        margin: 1rem;
         cursor: pointer;
       }
     }
