@@ -65,7 +65,17 @@ const InnerDetailsNav = () => {
 
 // Styled components
 const StyledInnerDetailsNav = styled.div`
-  margin: 1rem 0rem;
+  padding: 0.5rem 0rem;
+  background: #00000054;
+  width: 105%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: -3rem;
+
+  @media (max-width: 1200px) {
+    justify-content: center;
+  }
 
   ul {
     list-style: none;
@@ -74,18 +84,19 @@ const StyledInnerDetailsNav = styled.div`
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    width: 70%;
 
     button {
       background: none;
       border: none;
-      margin-right: 1rem;
+      /* margin-right: 1rem; */
       color: white;
       font-size: 1rem;
       transition: all 0.5s ease;
-      border-bottom: 1px solid rgba(255, 255, 255, 0);
+      border-bottom: 4px solid rgba(255, 255, 255, 0);
 
       &:hover {
-        border-bottom: 1px solid white;
+        border-bottom: 4px solid white;
       }
 
       li {

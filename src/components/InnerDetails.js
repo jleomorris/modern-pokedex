@@ -345,8 +345,7 @@ const StyledInnerDetails = styled.div`
     justify-content: center;
     align-items: flex-end;
     position: relative;
-    padding: 3rem;
-    padding-top: 0rem;
+    padding-right: 3rem;
 
     @media (max-width: 1200px) {
       align-items: center;
@@ -373,7 +372,7 @@ const StyledInnerDetails = styled.div`
     flex-direction: column;
     padding-right: 3rem;
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1600px) {
       align-items: center;
       padding-right: unset;
     }
@@ -484,9 +483,9 @@ const StyledInnerDetails = styled.div`
     margin: 1rem 0rem;
     text-align: right;
 
-    @media (max-width: 1500px) {
+    @media (max-width: 1200px) {
       text-align: center;
-      width: 100%;
+      width: 90%;
     }
 
     p {
