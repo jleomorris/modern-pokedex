@@ -121,8 +121,7 @@ const InnerDetails = ({
     history.push('/pokemon');
   };
 
-  const responsiveCardFlipHandler = (e) => {
-    // e.preventDefault();
+  const responsiveCardFlipHandler = () => {
     setisResponsiveCardFlipped((prev) => !prev);
   };
 
@@ -351,7 +350,7 @@ const StyledInnerDetails = styled.div`
 
     @media (max-width: 1200px) {
       align-items: center;
-      padding-top: 4rem;
+      /* padding-top: 4rem; */
     }
 
     .background-image {
@@ -387,7 +386,7 @@ const StyledInnerDetails = styled.div`
     margin-top: 2rem;
 
     @media (max-width: 800px) {
-      font-size: 6rem;
+      font-size: 5rem;
     }
 
     @media (max-width: 400px) {
@@ -461,6 +460,7 @@ const StyledInnerDetails = styled.div`
     outline: none;
     cursor: pointer;
     z-index: 4;
+    background: rgba(256, 256, 256, 0);
 
     @media (max-width: 1500px) {
       top: 95px;
@@ -472,7 +472,6 @@ const StyledInnerDetails = styled.div`
 
     img {
       height: 50px;
-      background: black;
 
       @media (max-width: 400px) {
         height: 35px;
@@ -487,6 +486,7 @@ const StyledInnerDetails = styled.div`
 
     @media (max-width: 1500px) {
       text-align: center;
+      width: 100%;
     }
 
     p {
