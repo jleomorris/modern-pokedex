@@ -491,6 +491,7 @@ const StyledInnerDetails = styled.div`
 
     p {
       font-size: 2rem;
+      margin-bottom: 4rem;
 
       @media (max-width: 400px) {
         font-size: 1.5rem;

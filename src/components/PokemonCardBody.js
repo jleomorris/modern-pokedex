@@ -17,6 +17,7 @@ import {
   convertToTypeBackground,
   convertTypeToColor,
   removeNonAscii,
+  evolvesFrom,
 } from '../util';
 
 const PokemonCardBody = ({
@@ -99,8 +100,21 @@ const PokemonCardBody = ({
             <p>Click card to flip</p>
           </div>
           <div className="inner-content">
+            {evolvesFrom(selectedPokemon[0].name) !== 'none' ? (
+              <p className="evolves-from-message">{`Evolves from ${
+                evolvesFrom(selectedPokemon[0].name).name
+              }`}</p>
+            ) : (
+              <p className="evolves-from-message">Basic Pokemon</p>
+            )}
             <div className="title-health-type-container">
-              <h2 className="pokemon-card-title">{selectedPokemon[0].name}</h2>
+              <h2
+                className={`pokemon-card-title ${
+                  evolvesFrom(selectedPokemon[0].name) !== 'none' ? 'ml-5' : ''
+                }`}
+              >
+                {selectedPokemon[0].name}
+              </h2>
               <div className="health-type-container">
                 <p className="hp">{selectedPokemon[0].stats[0].base_stat} HP</p>
                 {selectedPokemon[0].types.map((type) => (
@@ -112,35 +126,18 @@ const PokemonCardBody = ({
             </div>
             <div className="card-upper">
               <div className="background-image-container">
+                {evolvesFrom(selectedPokemon[0].name) !== 'none' ? (
+                  <div className="evolves-from-container">
+                    <p>{evolvesFrom(selectedPokemon[0].name).stage}</p>
+                    <DynamicSprite
+                      id={evolvesFrom(selectedPokemon[0].name).id}
+                      type="official"
+                    />
+                  </div>
+                ) : (
+                  ''
+                )}
                 {convertToTypeBackground(selectedPokemon[0].types[0].type.name)}
-                {/* {convertNameToSpriteAnimation(selectedPokemon[0].name)} */}
-                {/* {!isBlackAndWhiteAnimatedSelected && (
-                  <img
-                    className={`${
-                      isDreamWorldSelected
-                        ? 'pokemon-card-image-dream-world'
-                        : ''
-                    } ${
-                      isOfficialSelected ? 'pokemon-card-image-official' : ''
-                    } ${
-                      isDefaultSelected ? 'pokemon-card-image-default' : ''
-                    } ${isShinySelected ? 'pokemon-card-image-shiny' : ''}`}
-                    src={
-                      isDreamWorldSelected
-                        ? selectedPokemon[0].sprites.other.dream_world
-                            .front_default
-                        : '' || isOfficialSelected
-                        ? Object.values(selectedPokemon[0].sprites.other)[1]
-                            .front_default
-                        : '' || isDefaultSelected
-                        ? selectedPokemon[0].sprites.front_default
-                        : '' || isShinySelected
-                        ? selectedPokemon[0].sprites.front_shiny
-                        : ''
-                    }
-                    alt={selectedPokemon[0].name}
-                  />
-                )} */}
                 {isDreamWorldSelected && (
                   <DynamicSprite
                     id={selectedPokemon[0].id}
@@ -292,6 +289,12 @@ const StyledPokemonCardBody = styled.div`
         margin: 1rem;
       }
 
+      .evolves-from-message {
+        width: 85%;
+        margin: 0 auto;
+        font-weight: 600;
+      }
+
       .id-container {
         position: absolute;
         bottom: 5px;
@@ -335,18 +338,17 @@ const StyledPokemonCardBody = styled.div`
       border-top: 2px solid yellow;
       width: 85%;
       margin: 0 auto;
-      margin-top: 1rem;
+      /* margin-top: 1rem; */
 
       .pokemon-card-title {
         color: black;
         text-transform: capitalize;
         font-size: 2rem;
-        margin-left: 3rem;
+        margin-top: 0rem;
 
         @media (max-width: 400px) {
           font-size: 1.5rem;
-          margin-left: 2rem;
-          /* margin-top: 1rem; */
+          margin-left: 4rem;
         }
       }
     }
@@ -363,8 +365,11 @@ const StyledPokemonCardBody = styled.div`
         align-self: center;
         color: red;
 
-        @media (max-width: 400px) {
+        @media (max-width: 800px) {
           font-size: 1.5rem;
+        }
+        @media (max-width: 400px) {
+          font-size: 1rem;
         }
       }
 
@@ -416,6 +421,51 @@ const StyledPokemonCardBody = styled.div`
 
       @media (max-width: 400px) {
         border: 6px solid #ffff7a;
+      }
+
+      .evolves-from-container {
+        background: #ada996; /* fallback for old browsers */
+        background: linear-gradient(
+          to right,
+          #eaeaea,
+          #dbdbdb,
+          #f2f2f2,
+          #ada996
+        );
+        position: absolute;
+        top: -35px;
+        left: -25px;
+        height: 70px;
+        width: 70px;
+        z-index: 1;
+
+        @media (max-width: 400px) {
+          top: -15px;
+          height: 50px;
+          width: 50px;
+          left: -20px;
+        }
+
+        p {
+          width: 100%;
+          position: absolute;
+          top: -18px;
+          left: 50%;
+          transform: translateX(-50%);
+          text-align: center;
+          text-transform: uppercase;
+          font-weight: 600;
+
+          @media (max-width: 400px) {
+            top: -12px;
+            font-size: 0.8rem;
+          }
+        }
+
+        img {
+          height: 70px;
+          width: 70px;
+        }
       }
 
       .genus-height-weight-container {

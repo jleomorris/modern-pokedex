@@ -16,6 +16,7 @@ import {
   convertToTypeBackground,
   convertTypeToColor,
   removeNonAscii,
+  evolvesFrom,
 } from '../util';
 
 const PokemonCard = ({
@@ -77,8 +78,21 @@ const PokemonCard = ({
             <p>Click card to flip</p>
           </div>
           <div className="inner-content">
+            {evolvesFrom(selectedPokemon[0].name) !== 'none' ? (
+              <p className="evolves-from-message">{`Evolves from ${
+                evolvesFrom(selectedPokemon[0].name).name
+              }`}</p>
+            ) : (
+              <p className="evolves-from-message">Basic Pokemon</p>
+            )}
             <div className="title-health-type-container">
-              <h2 className="pokemon-card-title">{selectedPokemon[0].name}</h2>
+              <h2
+                className={`pokemon-card-title ${
+                  evolvesFrom(selectedPokemon[0].name) !== 'none' ? 'ml-4' : ''
+                }`}
+              >
+                {selectedPokemon[0].name}
+              </h2>
               <div className="health-type-container">
                 <p className="hp">{selectedPokemon[0].stats[0].base_stat} HP</p>
                 {selectedPokemon[0].types.map((type) => (
@@ -90,6 +104,17 @@ const PokemonCard = ({
             </div>
             <div className="card-upper">
               <div className="background-image-container">
+                {evolvesFrom(selectedPokemon[0].name) !== 'none' ? (
+                  <div className="evolves-from-container">
+                    <p>{evolvesFrom(selectedPokemon[0].name).stage}</p>
+                    <DynamicSprite
+                      id={evolvesFrom(selectedPokemon[0].name).id}
+                      type="official"
+                    />
+                  </div>
+                ) : (
+                  ''
+                )}
                 {convertToTypeBackground(selectedPokemon[0].types[0].type.name)}
                 {/* {convertNameToSpriteAnimation(selectedPokemon[0].name)} */}
                 {isDreamWorldSelected && (
@@ -241,6 +266,12 @@ const StyledPokemonCard = styled.div`
       height: 94%;
       position: relative;
 
+      .evolves-from-message {
+        width: 85%;
+        margin: 0 auto;
+        font-weight: 600;
+      }
+
       .id-container {
         position: absolute;
         bottom: 5px;
@@ -282,12 +313,12 @@ const StyledPokemonCard = styled.div`
       border-top: 2px solid yellow;
       width: 85%;
       margin: 0 auto;
-      margin-top: 1rem;
+      /* margin-top: 1rem; */
 
       .pokemon-card-title {
         text-transform: capitalize;
         font-size: 2rem;
-        margin-left: 3rem;
+        /* margin-left: 3rem; */
         margin-top: 0rem;
       }
     }
@@ -337,6 +368,39 @@ const StyledPokemonCard = styled.div`
       width: 100%;
       border: 12px solid #ffff7a;
       box-shadow: 10px 10px 20px black;
+
+      .evolves-from-container {
+        background: #ada996; /* fallback for old browsers */
+        background: linear-gradient(
+          to right,
+          #eaeaea,
+          #dbdbdb,
+          #f2f2f2,
+          #ada996
+        );
+        position: absolute;
+        top: -35px;
+        left: -25px;
+        height: 70px;
+        width: 70px;
+        z-index: 1;
+
+        p {
+          width: 100%;
+          position: absolute;
+          top: -18px;
+          left: 50%;
+          transform: translateX(-50%);
+          text-align: center;
+          text-transform: uppercase;
+          font-weight: 600;
+        }
+
+        img {
+          height: 70px;
+          width: 70px;
+        }
+      }
 
       .genus-height-weight-container {
         background: #ffff7a;

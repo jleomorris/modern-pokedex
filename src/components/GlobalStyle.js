@@ -27,8 +27,16 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
-  .mt-1{
+  .mt-1 {
       margin-top: 1rem;
+  }
+
+  .ml-4 {
+    margin-left: 4rem;
+  }
+
+  .ml-5 {
+    margin-left: 5rem;
   }
   
   // Media Queries
