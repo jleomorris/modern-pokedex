@@ -30,6 +30,7 @@ const PokemonCardBody = ({
   isShinyAnimatedSelected,
   isBlackAndWhiteAnimatedSelected,
   is3dSelected,
+  ownMovesRedBlue,
 }) => {
   // Redux
   const pokemonData = useSelector((state) => state.pokemon.pokemonData);
@@ -190,11 +191,12 @@ const PokemonCardBody = ({
             </div>
             <div className="card-lower">
               <div className="move-container">
-                {selectedPokemon[0].moves.map((move) => (
-                  <div className="move" key={move.move.name}>
-                    <p className="move-title">{move.move.name}</p>
-                  </div>
-                ))}
+                {ownMovesRedBlue &&
+                  ownMovesRedBlue.map((move) => (
+                    <div className="move" key={move.move.name}>
+                      <p className="move-title">{move.move.name}</p>
+                    </div>
+                  ))}
               </div>
               <div className="card-description">
                 <p>

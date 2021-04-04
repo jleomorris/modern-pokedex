@@ -38,6 +38,7 @@ const PokemonDetails = ({
   const [windowWidth, setWindowWidth] = useState();
   const [onMobile, setOnMobile] = useState(false);
   const [isMainCardFlipped, setIsMainCardFlipped] = useState(false);
+  const [ownMovesRedBlue, setOwnMovesRedBlue] = useState('');
   // Styled component variables
   const theme = {
     background: convertTypeToColor(selectedPokemon[0].types[0].type.name),
@@ -126,6 +127,7 @@ const PokemonDetails = ({
                   isBlackAndWhiteAnimatedSelected
                 }
                 is3dSelected={is3dSelected}
+                ownMovesRedBlue={ownMovesRedBlue}
               />
               <div className="card-back" key="back">
                 {/* <button onClick={mainCardFlipHandler} type="button"> */}
@@ -152,6 +154,8 @@ const PokemonDetails = ({
             is3dSelected={is3dSelected}
             onMobile={onMobile}
             spriteSelectionHandler={spriteSelectionHandler}
+            setOwnMovesRedBlue={setOwnMovesRedBlue}
+            ownMovesRedBlue={ownMovesRedBlue}
           />
         </StyledPokemonDetails>
       </DetailsShadow>

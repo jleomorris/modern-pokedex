@@ -6,7 +6,7 @@ import axios from 'axios';
 // Util
 import { convertToTypeImage, convertDamageClassToImage } from '../util';
 
-const Moves = ({ selectedPokemon }) => {
+const Moves = ({ selectedPokemon, setOwnMovesRedBlue }) => {
   // State
   const [ownMoves, setOwnMoves] = useState();
   const [canLearn, setCanLearn] = useState();
@@ -15,6 +15,11 @@ const Moves = ({ selectedPokemon }) => {
   const [fullMachineMoveData, setFullMachineMoveData] = useState();
   const [redBlueLevelUpMoves, setRedBlueLevelUpMoves] = useState(null);
   const [redBlueMachineMoves, setRedBlueMachineMoves] = useState(null);
+
+  // Set own moves in Pokemon details to be sent to pokemon card main and body
+  useEffect(() => {
+    setOwnMovesRedBlue(redBlueLevelUpMoves);
+  }, [redBlueLevelUpMoves]);
 
   // Set up own moves and learnable moves
   useEffect(() => {

@@ -51,6 +51,8 @@ const InnerDetails = ({
   is3dSelected,
   onMobile,
   spriteSelectionHandler,
+  ownMovesRedBlue,
+  setOwnMovesRedBlue,
 }) => {
   // React Router
   const history = useHistory();
@@ -87,11 +89,6 @@ const InnerDetails = ({
 
     if (selectedPokemon.length > 0) {
       for (let i = 0; i < selectedPokemon[0].abilities.length; i += 1) {
-        // console.log(
-        //   'abilities url',
-        //   selectedPokemon[0].abilities[0].ability.url
-        // );
-
         const eachAbilitiesData = await axios.get(
           selectedPokemon[0].abilities[i].ability.url
         );
@@ -207,6 +204,7 @@ const InnerDetails = ({
               isShinyAnimatedSelected={isShinyAnimatedSelected}
               isBlackAndWhiteAnimatedSelected={isBlackAndWhiteAnimatedSelected}
               is3dSelected={is3dSelected}
+              ownMovesRedBlue={ownMovesRedBlue}
             />
             <div
               className="card-back"
@@ -275,7 +273,11 @@ const InnerDetails = ({
           pokemonData={pokemonData}
           selectedPokemon={selectedPokemon}
         />
-        <Moves ownMoves={ownMoves} selectedPokemon={selectedPokemon} />
+        <Moves
+          ownMoves={ownMoves}
+          selectedPokemon={selectedPokemon}
+          setOwnMovesRedBlue={setOwnMovesRedBlue}
+        />
         <ScrollToTop />
       </div>
     </StyledInnerDetails>
