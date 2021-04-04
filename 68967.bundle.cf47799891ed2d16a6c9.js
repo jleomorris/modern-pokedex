@@ -1,1 +1,0 @@
-(self.webpackChunkdefault_react_template=self.webpackChunkdefault_react_template||[]).push([[68967],{368967:(e,t,a)=>{"use strict";a.r(t),a.d(t,{default:()=>c});const c=a.p+"bd4493a2738ad871c1e99fcd2b25443d.gif"}}]);
