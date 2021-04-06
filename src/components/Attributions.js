@@ -67,20 +67,15 @@ const StyledAttributions = styled.div`
     position: absolute;
     top: 40px;
     right: 40px;
-    width: 600px;
+    width: 40%;
     filter: drop-shadow(2px 4px 6px black);
     z-index: 0;
-  }
 
-  /* h1 {
-    font-size: 10rem;
-    text-transform: uppercase;
-    letter-spacing: 1rem;
-    color: #000000b3;
-    margin: 2rem;
-    z-index: 1;
-    align-self: flex-start;
-  } */
+    @media (max-width: 500px) {
+      top: 100px;
+      right: 15px;
+    }
+  }
 
   h1 {
     font-size: 5rem;
@@ -108,37 +103,25 @@ const StyledAttributions = styled.div`
     padding: 4rem;
     border-radius: 2rem;
     margin: 4rem 0rem;
+    width: 90%;
+
+    @media (max-width: 500px) {
+      font-size: 1rem;
+    }
 
     li {
       line-height: 4rem;
+      word-break: break-all;
+
+      @media (max-width: 500px) {
+        line-height: 2rem;
+      }
 
       .asset {
         font-weight: 900;
       }
     }
   }
-  /* position: absolute;
-  bottom: 100px;
-  right: 100px;
-  background: #fffffff2;
-  padding: 1rem;
-  border-radius: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  cursor: pointer;
-
-  .attributions-container {
-    margin: 1rem;
-    transition: all 5s ease;
-
-    p {
-      margin: 1rem 0rem;
-      font-size: 1rem;
-      font-weight: 600;
-    }
-  } */
 `;
 
 export default Attributions;

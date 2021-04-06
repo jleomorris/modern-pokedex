@@ -1,5 +1,6 @@
 import React from 'react';
 // Images
+import noType from './img/sprites/official/0.png';
 import fireType from './img/pokemon_type_symbols/fire.png';
 import bugType from './img/pokemon_type_symbols/bug.png';
 import darkType from './img/pokemon_type_symbols/dark.png';
@@ -151,8 +152,8 @@ export const reactSelectSpriteOptions = [
 ];
 
 export const reactSelectDarkModeOptions = [
-  { value: 'dark mode on', label: 'On' },
   { value: 'dark mode off', label: 'Off' },
+  { value: 'dark mode on', label: 'On' },
 ];
 
 export const convertMaxStatToIcon = (maxStat) => {
@@ -206,7 +207,14 @@ export const convertMaxStatToIcon = (maxStat) => {
         />
       );
     default:
-      return maxStat;
+      return (
+        <img
+          className="type-symbol"
+          src={noType}
+          alt="no type"
+          title="no type"
+        />
+      );
   }
 };
 
@@ -577,7 +585,9 @@ export const convertToTypeImage = (type) => {
         <img className="type-symbol" src={waterType} alt={type} title="water" />
       );
     default:
-      return type;
+      return (
+        <img className="type-symbol" src={noType} alt={type} title="no type" />
+      );
   }
 };
 export const convertToTypeBackground = (type) => {
@@ -703,10 +713,159 @@ export const convertTypeToColor = (type) => {
 };
 
 export const resolveUndefined = (a, b) => {
-  // debugger;
-
   if (a === undefined) {
     return a;
   }
   return b;
+};
+
+export const evolvesFrom = (pokemon) => {
+  switch (pokemon) {
+    case 'ivysaur':
+      return { name: 'bulbasaur', id: 1, stage: 'stage 1' };
+    case 'venusaur':
+      return { name: 'ivysaur', id: 2, stage: 'stage 2' };
+    case 'charmeleon':
+      return { name: 'charmander', id: 4, stage: 'stage 1' };
+    case 'charizard':
+      return { name: 'charmeleon', id: 5, stage: 'stage 2' };
+    case 'wartortle':
+      return { name: 'squirtle', id: 7, stage: 'stage 1' };
+    case 'blastoise':
+      return { name: 'wartortle', id: 8, stage: 'stage 2' };
+    case 'metapod':
+      return { name: 'caterpie', id: 10, stage: 'stage 1' };
+    case 'butterfree':
+      return { name: 'metapod', id: 11, stage: 'stage 2' };
+    case 'kakuna':
+      return { name: 'weedle', id: 13, stage: 'stage 1' };
+    case 'beedrill':
+      return { name: 'kakuna', id: 14, stage: 'stage 2' };
+    case 'pidgeotto':
+      return { name: 'pidgey', id: 16, stage: 'stage 1' };
+    case 'pidgeot':
+      return { name: 'pidgeotto', id: 17, stage: 'stage 2' };
+    case 'raticate':
+      return { name: 'rattata', id: 19, stage: 'stage 1' };
+    case 'fearow':
+      return { name: 'spearow', id: 21, stage: 'stage 1' };
+    case 'arbok':
+      return { name: 'evans', id: 23, stage: 'stage 1' };
+    case 'raichu':
+      return { name: 'pikachu', id: 25, stage: 'stage 1' };
+    case 'sandslash':
+      return { name: 'sandshrew', id: 27, stage: 'stage 1' };
+    case 'nidorina':
+      return { name: 'nidoran-f', id: 29, stage: 'stage 1' };
+    case 'nidoqueen':
+      return { name: 'nidorina', id: 30, stage: 'stage 2' };
+    case 'nidorino':
+      return { name: 'nidoran-m', id: 32, stage: 'stage 1' };
+    case 'nidoking':
+      return { name: 'nidorino', id: 33, stage: 'stage 2' };
+    case 'clefable':
+      return { name: 'clefairy', id: 35, stage: 'stage 1' };
+    case 'ninetales':
+      return { name: 'vulpix', id: 37, stage: 'stage 1' };
+    case 'wigglytuff':
+      return { name: 'jigglypuff', id: 39, stage: 'stage 1' };
+    case 'golbat':
+      return { name: 'zubat', id: 41, stage: 'stage 1' };
+    case 'gloom':
+      return { name: 'oddish', id: 43, stage: 'stage 1' };
+    case 'vileplume':
+      return { name: 'gloom', id: 44, stage: 'stage 2' };
+    case 'parasect':
+      return { name: 'paras', id: 46, stage: 'stage 1' };
+    case 'venomoth':
+      return { name: 'venonat', id: 48, stage: 'stage 1' };
+    case 'dugtrio':
+      return { name: 'diglett', id: 50, stage: 'stage 1' };
+    case 'persian':
+      return { name: 'meowth', id: 52, stage: 'stage 1' };
+    case 'golduck':
+      return { name: 'psyduck', id: 54, stage: 'stage 1' };
+    case 'primeape':
+      return { name: 'mankey', id: 56, stage: 'stage 1' };
+    case 'arcanine':
+      return { name: 'growlithe', id: 58, stage: 'stage 1' };
+    case 'poliwhirl':
+      return { name: 'poliwag', id: 60, stage: 'stage 1' };
+    case 'poliwrath':
+      return { name: 'poliwhirl', id: 61, stage: 'stage 2' };
+    case 'kadabra':
+      return { name: 'abra', id: 63, stage: 'stage 1' };
+    case 'alakazam':
+      return { name: 'kadabra', id: 64, stage: 'stage 2' };
+    case 'machoke':
+      return { name: 'machop', id: 66, stage: 'stage 1' };
+    case 'machamp':
+      return { name: 'machoke', id: 67, stage: 'stage 2' };
+    case 'weepinbell':
+      return { name: 'bellsprout', id: 69, stage: 'stage 1' };
+    case 'victreebel':
+      return { name: 'weepinbell', id: 70, stage: 'stage 2' };
+    case 'tentacruel':
+      return { name: 'tentacool', id: 72, stage: 'stage 1' };
+    case 'graveler':
+      return { name: 'geodude', id: 74, stage: 'stage 1' };
+    case 'golem':
+      return { name: 'graveler', id: 75, stage: 'stage 2' };
+    case 'rapidash':
+      return { name: 'ponyta', id: 77, stage: 'stage 1' };
+    case 'slowbro':
+      return { name: 'slowpoke', id: 79, stage: 'stage 1' };
+    case 'magneton':
+      return { name: 'magnemite', id: 81, stage: 'stage 1' };
+    case 'dodrio':
+      return { name: 'doduo', id: 84, stage: 'stage 1' };
+    case 'dewgong':
+      return { name: 'seel', id: 86, stage: 'stage 1' };
+    case 'muk':
+      return { name: 'grimer', id: 88, stage: 'stage 1' };
+    case 'cloyster':
+      return { name: 'shellder', id: 90, stage: 'stage 1' };
+    case 'haunter':
+      return { name: 'gastly', id: 92, stage: 'stage 1' };
+    case 'gengar':
+      return { name: 'haunter', id: 93, stage: 'stage 2' };
+    case 'hypno':
+      return { name: 'drowzee', id: 96, stage: 'stage 1' };
+    case 'kingler':
+      return { name: 'krabby', id: 98, stage: 'stage 1' };
+    case 'electrode':
+      return { name: 'voltorb', id: 101, stage: 'stage 1' };
+    case 'exeggutor':
+      return { name: 'exeggcute', id: 102, stage: 'stage 1' };
+    case 'marowak':
+      return { name: 'cubone', id: 104, stage: 'stage 1' };
+    case 'weezing':
+      return { name: 'koffing', id: 109, stage: 'stage 1' };
+    case 'rhydon':
+      return { name: 'rhyhorn', id: 111, stage: 'stage 1' };
+    case 'seadra':
+      return { name: 'horsea', id: 116, stage: 'stage 1' };
+    case 'seaking':
+      return { name: 'goldeen', id: 118, stage: 'stage 1' };
+    case 'starmie':
+      return { name: 'staryu', id: 120, stage: 'stage 1' };
+    case 'gyarados':
+      return { name: 'magikarp', id: 129, stage: 'stage 1' };
+    case 'vaporeon':
+      return { name: 'eevee', id: 133, stage: 'stage 1' };
+    case 'jolteon':
+      return { name: 'eevee', id: 133, stage: 'stage 1' };
+    case 'flareon':
+      return { name: 'eevee', id: 133, stage: 'stage 1' };
+    case 'omastar':
+      return { name: 'omanyte', id: 138, stage: 'stage 1' };
+    case 'kabutops':
+      return { name: 'kabuto', id: 140, stage: 'stage 1' };
+    case 'dragonair':
+      return { name: 'dratini', id: 147, stage: 'stage 1' };
+    case 'dragonite':
+      return { name: 'dragonair', id: 148, stage: 'stage 2' };
+    default:
+      return 'none';
+  }
 };
