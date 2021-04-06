@@ -12,7 +12,7 @@ import 'regenerator-runtime/runtime';
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename="/modern-pokedex">
       <App />
     </BrowserRouter>
   </Provider>,
