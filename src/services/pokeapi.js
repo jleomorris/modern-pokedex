@@ -11,4 +11,4 @@ const typeDetails = 'type/';
 export const generationDetailsUrl = () => `${baseUrl}${generationDetails}`;
 export const pokemonDetailsUrl = (id) => `${baseUrl}${pokemonDetails}${id}`;
 export const pokemonDetailsUrl2 = (id) => `${baseUrl}${pokemonDetails2}${id}`;
-export const typeDetailsUrl = (id) => `${baseUrl}${typeDetails}${id}`;
+export const typeDetailsUrl = (id) => `${baseUrl}${typeDetails}${id}/`;
