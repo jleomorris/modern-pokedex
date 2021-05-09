@@ -141,6 +141,8 @@ const StyledTile = styled(motion.div)`
     height: 100%;
     width: 100%;
     /* z-index: -2; */
+    filter: blur(1px);
+    z-index: -1;
 
     img {
       z-index: -1;
@@ -286,11 +288,12 @@ const StyledTile = styled(motion.div)`
 
   .id {
     position: absolute;
-    bottom: -15px;
+    bottom: 5px;
     background: white;
     left: 50%;
     transform: translateX(-50%);
-    padding: 1rem 2rem;
+    padding: 0.5rem 1.5rem;
+    opacity: 0.8;
     border-radius: 2rem;
     box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.2);
     z-index: 2;
