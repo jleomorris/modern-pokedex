@@ -268,7 +268,7 @@ const Pokemon = () => {
 
 // Styled components
 const StyledPokemon = styled.div`
-  padding: 6rem 0rem;
+  padding: 3rem 0rem;
   min-height: 100vh;
   position: relative;
 
