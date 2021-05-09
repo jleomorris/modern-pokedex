@@ -105,7 +105,7 @@ const OptionsFilters = ({
             <DynamicSprite id={0} type="official" customClass="reset-icon" />
           )}
         </div>
-        <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>Element</p>
+        <p className={`${isDarkModeActive ? 'dark-mode-font' : ''}`}>Type</p>
         <Select
           //   defaultValue={selectedTypeOption}
           style={{ zIndex: '3' }}
