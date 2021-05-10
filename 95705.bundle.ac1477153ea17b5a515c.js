@@ -1,0 +1,1 @@
+(self.webpackChunkdefault_react_template=self.webpackChunkdefault_react_template||[]).push([[95705],{995705:(e,t,c)=>{"use strict";c.r(t),c.d(t,{default:()=>a});const a=c.p+"2515c8b014f54c11c6bbdbbee5c7862c.svg"}}]);
