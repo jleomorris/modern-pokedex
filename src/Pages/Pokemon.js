@@ -254,11 +254,11 @@ const Pokemon = () => {
           is3dSelected={is3dSelected}
           isDarkModeActive={isDarkModeActive}
         />
-        {filteredData &&
+        {/* {filteredData &&
           !isFilterBySearchActive &&
           !isFilterByTypeActive &&
           !isFilterByStatActive &&
-          filteredData.length === 0 && <LoadingModal />}
+          filteredData.length === 0 && <LoadingModal />} */}
         {/* <LoadingModal /> */}
       </StyledPokemon>
       <Footer />
