@@ -2,7 +2,7 @@ import axios from 'axios';
 import { pokemonDetailsUrl, pokemonDetailsUrl2 } from '../services/pokeapi';
 
 const initialState = {
-  pokemonData: [],
+  pokemonData: '',
   pokemonLoaded: 0,
 };
 
@@ -12,7 +12,7 @@ const pokemonReducer = (state = initialState, action) => {
     case 'FETCH_GEN1':
       return {
         ...state,
-        pokemonData: action.payload.pokemonData,
+        pokemonData: [...state.pokemonData, action.payload.pokemonData],
       };
     case 'LOAD_POKEMON':
       return {
@@ -36,8 +36,15 @@ export const loadGen1Data = () => async (dispatch) => {
     // }
     const pokemonData = await axios.get(pokemonDetailsUrl(i));
     const pokemonData2 = await axios.get(pokemonDetailsUrl2(i));
-    allPokemonData.push(pokemonData.data);
-    allPokemonData2.push(pokemonData2.data);
+    // allPokemonData.push(pokemonData.data);
+    // allPokemonData2.push(pokemonData2.data);
+
+    console.log('pokemonReducer.pokemonData', pokemonData.data);
+    console.log('pokemonReducer.pokemonData2', pokemonData2.data);
+
+    const mergedData = { ...pokemonData.data, ...pokemonData2.data };
+
+    console.log('pokemonReducer.mergedData', mergedData);
 
     dispatch({
       type: 'LOAD_POKEMON',
@@ -45,17 +52,6 @@ export const loadGen1Data = () => async (dispatch) => {
         numberLoaded: allPokemonData2.length + allPokemonData.length,
       },
     });
-  }
-
-  await Promise.all(allPokemonData).then(() => {
-    // Merge both requested sets of pokemon data into one
-    const mergedData = allPokemonData.map((pokemon, i) => ({
-      ...pokemon,
-      ...allPokemonData2[i],
-    }));
-
-    console.log('mergedData', mergedData);
-    console.log(mergedData[0]);
 
     dispatch({
       type: 'FETCH_GEN1',
@@ -63,7 +59,25 @@ export const loadGen1Data = () => async (dispatch) => {
         pokemonData: mergedData,
       },
     });
-  });
+  }
+
+  //   await Promise.all(allPokemonData).then(() => {
+  //     // Merge both requested sets of pokemon data into one
+  //     const mergedData = allPokemonData.map((pokemon, i) => ({
+  //       ...pokemon,
+  //       ...allPokemonData2[i],
+  //     }));
+
+  //     console.log('mergedData', mergedData);
+  //     console.log(mergedData[0]);
+
+  //     dispatch({
+  //       type: 'FETCH_GEN1',
+  //       payload: {
+  //         pokemonData: mergedData,
+  //       },
+  //     });
+  //   });
 };
 
 export default pokemonReducer;
